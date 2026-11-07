@@ -7,7 +7,7 @@ import {renderCrossingAngles} from '../dist/crossing-angles-ui.mjs';
 const close=(a,b,message)=>assert.ok(Math.abs(a-b)<1e-9,`${message}: ${a} vs ${b}`);
 const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const initial=createCrossingAngles();
-assert.deepEqual(initial,{page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0});
+assert.deepEqual(initial,{page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0});
 for(let a=15;a<180;a+=15)for(let r=0;r<360;r+=30)for(const pair of ['opposite','adjacent']){
  const work={...initial,angle:a,rotation:r,pair},g=crossingAnglesModel(work).geometry;
  assert.deepEqual(g.sectors.map(s=>s.measure),[a,180-a,a,180-a]);
@@ -363,3 +363,220 @@ for(const [view,step] of configurations){
  assert.ok(!heard.includes('Triangle corners distinguishes gathering'),'adult note not spoken');
 }
 console.log('Triangle Corners: finite ray mathematics, actual SVG readback, symbolic/null invariance, strict actions, retained settings and current Hear passed.');
+
+// Polygon expectations derive from the actual boundary, independently of scene sectors.
+const poly={...createCrossingAngles(),page:'triangle',triView:'polygons'};
+const polygon=(w,c=null)=>crossingAnglesModel(w,c).polygon;
+const signedArea=ps=>ps.reduce((a,p,i)=>a+cross(p,ps[(i+1)%ps.length]),0)/2;
+const edgeFacts=ps=>ps.map((p,i)=>{
+ const incoming=sub(p,ps[(i+ps.length-1)%ps.length]),outgoing=sub(ps[(i+1)%ps.length],p);
+ // Screen y is inverted, so a mathematical left turn has negative screen cross.
+ const exterior=Math.atan2(-cross(incoming,outgoing),dot(incoming,outgoing))*180/Math.PI;
+ return {incoming,outgoing,exterior,interior:180-exterior,length:Math.hypot(...outgoing)};
+});
+const polyPointClose=(a,b,message)=>{close(a[0],b[0],`${message} x`);close(a[1],b[1],`${message} y`);};
+function verifyPolygonGeometry(w,c=null){
+ const g=polygon(w,c),ps=g.vertices,n=ps.length,edges=edgeFacts(ps),area=Math.abs(signedArea(ps));
+ assert.equal(crossingAnglesModel(w,c).triangle,null,'polygon has an explicit projection, not triangle geometry');
+ assert.equal(g.n,n);assert.ok(area>0);assert.ok(edges.every(e=>e.exterior>0&&e.exterior<180));
+ close(edges.reduce((s,e)=>s+e.exterior,0),360,'convex lap from actual edge bearings');
+ close(edges.reduce((s,e)=>s+e.interior,0),(n-2)*180,'actual polygon corner total');
+ close(Math.max(...ps.map(p=>Math.hypot(...sub(p,[320,280])))),g.size==='small'?120:160,'uniform radius');
+ polyPointClose(ps.reduce((sum,p)=>sum.map((v,d)=>v+p[d]/n),[0,0]),[320,280],'arithmetic centroid');
+ for(let j=0;j<n;j++){
+  close(edges[j].interior+edges[j].exterior,180,'adjacent half turn');
+  assert.ok(cross(sub(ps[(j+1)%n],ps[j]),sub(ps[(j+2)%n],ps[(j+1)%n]))<0,'strict convexity');
+ }
+ if(g.regular){for(const e of edges){close(e.length,edges[0].length,'regular equal sides');close(e.interior,(n-2)*180/n,'regular equal corners');}}
+ else if(g.mode==='free'){
+  assert.ok(Math.max(...edges.map(e=>e.interior))-Math.min(...edges.map(e=>e.interior))>1,'stretch makes corners unequal');
+  if(n===4)for(const e of edges)close(e.length,edges[0].length,'stretched quadrilateral has equal sides');
+ }
+ assert.ok(!JSON.stringify(g).includes('"measure"'),'no measured angle field in polygon projection');
+ return {g,ps,edges,area};
+}
+for(let n=3;n<=12;n++)for(const kind of ['regular','stretched'])for(const size of ['small','large'])for(let rotation=0;rotation<360;rotation+=30)for(let a=0;a<n;a++){
+ const w={...poly,polySides:n,polyKind:kind,polySize:size,rotation,polyCorner:a},base=verifyPolygonGeometry(w),ps=base.ps;
+ const raw=Array.from({length:n},(_,i)=>[(kind==='regular'?1:1.6)*Math.cos((90+360*i/n)*Math.PI/180),Math.sin((90+360*i/n)*Math.PI/180)]),expectedVertices=expectedPoly(raw,rotation,size==='small'?120:160);
+ ps.forEach((p,i)=>polyPointClose(p,expectedVertices[i],'finite independently expected raw-to-screen projection'));
+ for(let k=0;k<=n-3;k++){
+  const g=polygon({...w,polyDraw:k}),complete=k===n-3,expected=complete?n-2:k;
+  assert.equal(g.triangles.length,expected);assert.equal(g.diagonals.length,k);assert.equal(g.remainder===null,complete);
+  let sum=0;
+  for(let j=0;j<expected;j++){
+   const triangle=g.triangles[j],indices=[a,(a+j+1)%n,(a+j+2)%n];assert.deepEqual(triangle.indices,indices);
+   assert.deepEqual(triangle.points,indices.map(i=>ps[i]));const area=Math.abs(signedArea(triangle.points));assert.ok(area>0);sum+=area;
+   const angles=edgeFacts(triangle.points).map(e=>e.interior);close(angles.reduce((v,b)=>v+b,0),180,'fan piece is one triangle');
+  }
+  if(complete){close(sum,base.area,'fan triangles exactly fill boundary');
+   // Triangle angles at each original vertex partition its polygon angle.
+   for(let vertex=0;vertex<n;vertex++){
+    let angle=0;for(const t of g.triangles){const j=t.indices.indexOf(vertex);if(j>=0)angle+=edgeFacts(t.points)[j].interior;}
+    close(angle,base.edges[vertex].interior,'fan partitions original corner');
+   }
+  }else {assert.equal(g.remainder.points.length,n-k);assert.ok(Math.abs(signedArea(g.remainder.points))>0);close(sum+Math.abs(signedArea(g.remainder.points)),base.area,'partial pieces partition polygon');}
+ }
+ const corner=polygon({...w,polyView:'corner'}),s=corner.interior;
+ close(s.sweep,base.edges[a].interior,'selected sector matches actual inside angle');assert.equal(s.right,kind==='regular'&&n===4);
+ const start=polygon({...w,polyView:'walk'});
+ for(let j=0;j<=n;j++){
+  const g=polygon({...w,polyView:'walk',polyWalk:j}),i=(a+j)%n,e=base.edges[i],V=ps[i];
+  assert.ok(g.current.includes(`${i+1} of ${n}`));assert.equal(g.points.length,0,'no walking point-text label');
+  assert.equal(!!g.exterior,j>0);assert.equal(!!g.extension,j>0);
+  const incoming=e.incoming.map(v=>v/Math.hypot(...e.incoming)),out=e.outgoing.map(v=>v/Math.hypot(...e.outgoing)),p=[-incoming[1],incoming[0]],q=[-out[1],out[0]],rho=Math.min(24,.35*Math.min(Math.hypot(...e.incoming),Math.hypot(...e.outgoing))),M=V.map((v,d)=>v+(rho+8)*p[d]);
+  polyPointClose(g.marker.center,M,'offset marker from actual incoming edge');polyPointClose(g.marker.leader.start,V,'leader identifies current vertex');polyPointClose(g.marker.leader.end,M,'leader reaches offset marker');
+  polyPointClose(g.marker.heading.start,M.map((v,d)=>v-7*out[d]),'marker tail');polyPointClose(g.marker.heading.end,M.map((v,d)=>v+7*out[d]),'marker tip');
+  for(const [z,sign] of [[1,1],[2,-1]])polyPointClose(g.marker.arrow[z],M.map((v,d)=>v+2*out[d]+sign*4*q[d]),'marker arrow branch');
+  for(const point of [g.marker.center,g.marker.heading.start,g.marker.heading.end,...g.marker.arrow]){assert.ok(Math.hypot(...sub(point,[320,280]))<=200+1e-9);assert.ok(dot(sub(point,V),p)>=rho+1-1e-9,'glyph stays beyond incoming line');}
+  if(j>0){close(g.exterior.sweep,e.exterior,'exterior follows actual bearings');polyPointClose(g.extension.end,V.map((v,d)=>v+30*incoming[d]),'incoming continuation');polyPointClose(g.outgoing.end,V.map((v,d)=>v+Math.min(30,e.length)*out[d]),'outgoing ray stops by next corner');}
+  if(j===n){assert.deepEqual(g.marker,start.marker,'full lap returns marker and heading');assert.ok(g.text.includes('does not mean we turned 0°'));}
+ }
+}
+for(let width=1;width<=12;width++)for(let height=1;height<=12;height++){
+ const c=captureCrossingPanel({originalWidth:13-width,originalHeight:13-height,width,height},'Synthetic polygon panel');
+ for(let corner=0;corner<4;corner++){
+  const w={...poly,triMode:'panel',polyPanelCorner:corner},g=verifyPolygonGeometry(w,c).g;
+  assert.equal(g.regular,width===height);assert.equal(g.equalCorners,true);assert.equal(g.n,4);assert.deepEqual(g.context,{caseTitle:c.caseTitle,width,height});
+  const edges=edgeFacts(g.vertices);for(const e of edges)close(e.interior,90,'copied rectangle right corner');close(edges[0].length/edges[1].length,width/height,'actual copied aspect ratio');
+  const split=polygon({...w,polyPanelDraw:1},c);assert.equal(split.triangles.length,2);close(split.triangles.reduce((s,t)=>s+Math.abs(signedArea(t.points)),0),Math.abs(signedArea(g.vertices)),'panel fan area');
+  assert.equal(polygon({...w,polyView:'corner'},c).interior.right,true);
+ }
+}
+// Reducers validate the complete coupled state before changing any channel.
+const polyActions=[['poly-sides',7],['poly-kind','stretched'],['poly-size','small'],['poly-view','walk'],['poly-corner',2],['poly-draw',1],['poly-walk',3],['poly-prompt',4]];
+for(const [action,value] of polyActions){const changed=changeCrossingAngles(poly,action,value);assert.notEqual(changed,poly);assert.equal(changeCrossingAngles(changed,action,value),changed);for(const w of [initial,{...poly,page:'learn'},{...poly,triView:'gather'},{...poly,triView:'reason'},{...poly,triView:'outside'}])assert.equal(changeCrossingAngles(w,action,value),w,'polygon action owns only polygon view');}
+for(const [action,value] of [['tri-a',45],['tri-b',45],['tri-size','small'],['tri-gather',1],['tri-proof',1],['tri-prompt',1]])assert.equal(changeCrossingAngles(poly,action,value),poly,'triangle-specific actions rejected in polygon view');
+for(const [key,bad] of [['polySides',13],['polyCorner',5],['polyDraw',3],['polyWalk',6],['polyPanelCorner',4],['polyPanelDraw',2],['polyPanelWalk',5],['polyPrompt',6],['polyKind','other'],['polySize','other'],['polyView','other']]){const w={...poly,[key]:bad};assert.equal(crossingAnglesModel(w),null);assert.equal(changeCrossingAngles(w,'turn'),w);}
+for(const action of ['poly-sides','poly-corner','poly-draw','poly-walk','poly-prompt'])for(const v of ['1',true,false,1.5,NaN,Infinity,null,{},[],-1,99])assert.equal(changeCrossingAngles(poly,action,v),poly);
+const held={...poly,polySides:12,polyCorner:8,polyDraw:7,polyWalk:10,polyPanelCorner:2,polyPanelDraw:1,polyPanelWalk:3};
+assert.deepEqual(changeCrossingAngles(held,'poly-sides',7),{...held,polySides:7,polyCorner:0,polyDraw:0,polyWalk:0});
+assert.deepEqual(changeCrossingAngles(held,'poly-corner',9),{...held,polyCorner:9,polyDraw:0,polyWalk:0});
+const heldPanel={...held,triMode:'panel'};
+assert.deepEqual(changeCrossingAngles(heldPanel,'poly-corner',1),{...heldPanel,polyPanelCorner:1,polyPanelDraw:0,polyPanelWalk:0});
+for(const [action,value] of [['poly-sides',3],['poly-kind','stretched'],['poly-size','small']])assert.equal(changeCrossingAngles(heldPanel,action,value),heldPanel);
+for(const [action,value,key] of [['tri-mode','panel','triMode'],['tri-view','gather','triView'],['poly-view','walk','polyView'],['poly-kind','stretched','polyKind'],['poly-size','small','polySize'],['page','build','page']])assert.deepEqual(changeCrossingAngles(held,action,value),{...held,[key]:value});
+assert.equal(changeCrossingAngles(held,'poly-sides',12),held);assert.equal(changeCrossingAngles(held,'poly-corner',8),held);
+for(const [n,k,triangles,pieces] of [[3,0,1,1],[4,0,0,1],[4,1,2,2],[5,0,0,1],[5,1,1,2],[5,2,3,3],[12,8,8,9],[12,9,10,10]]){
+ const g=polygon({...poly,polySides:n,polyDraw:k});assert.equal(g.triangles.length,triangles);
+ if(k<n-3){assert.ok(g.text.includes(`${pieces} piece${pieces===1?'':'s'} so far`));assert.ok(g.text.includes(`${triangles} completed triangle${triangles===1?'':'s'}`));assert.ok(g.text.includes(`one ${n-k}-sided piece`));assert.deepEqual(g.equations,[]);}else {assert.ok(g.text.includes(n===3?'already one triangle':`${n-2} triangles`));assert.ok(g.equations.includes(`All corners together: ${(n-2)*180}°`));}
+}
+for(let n=3;n<=12;n++){
+ const T=(n-2)*180,g=polygon({...poly,polySides:n,polyView:'corner'});
+ assert.ok(g.equations[0].includes(`${T}°÷${n}`));assert.equal(g.equations[0].includes('='),T%n===0);
+ const lap=polygon({...poly,polySides:n,polyView:'walk',polyWalk:n});assert.ok(lap.perTurn.startsWith(`Each turn: 360°÷${n}`));assert.equal(lap.perTurn.includes('='),360%n===0);
+ if([7,11].includes(n)){assert.ok(g.fractionNote.includes('no rounded value is shown'));assert.ok(lap.fractionNote.includes(`360°÷${n} is the exact size of one turn`));}
+}
+// Factor inactive channels: each may change independently, including coupled
+// free ranges, without leaking through the whole HTML or current Hear.
+const inactiveChanges=[{triA:45},{triB:75},{triSize:'small'},{triGather:2},{triProof:1},{triPrompt:5},{angle:105},{pair:'adjacent'},{prompt:4},{card:6},{step:2},{twoMode:'panel'},{twoSpacing:'far'},{twoLean:10},{twoPair:'co-interior'},{twoMove:3},{twoPrompt:5}];
+const polyConfigurations=[['split',0],['split',1],['corner',0],['walk',0],['walk',2],['walk',4]];
+for(const [width,height] of [[1,12],[12,1],[4,4]]){
+ const context=captureCrossingPanel({originalWidth:9,originalHeight:7,width,height},'Copied polygon source');
+ for(const [view,step] of polyConfigurations)for(const corner of [0,2])for(let prompt=0;prompt<6;prompt++){
+  const w={...poly,triMode:'panel',polyView:view,polyPanelCorner:corner,polyPanelDraw:view==='split'?step:0,polyPanelWalk:view==='walk'?step:0,polyPrompt:prompt,rotation:210};
+  const g=polygon(w,context),html=renderCrossingAngles(w,context),hear=crossingAnglesNarration(w,context);
+  for(const delta of [...inactiveChanges,{polySides:3,polyCorner:2,polyDraw:0,polyWalk:3},{polySides:12,polyCorner:11,polyDraw:9,polyWalk:12},{polyKind:'stretched'},{polySize:'small'}]){
+   assert.deepEqual(polygon({...w,...delta},context),g);assert.equal(renderCrossingAngles({...w,...delta},context),html);assert.equal(crossingAnglesNarration({...w,...delta},context),hear);
+  }
+  for(const delta of [{originalWidth:1},{originalHeight:12}]){const c=captureCrossingPanel({...context,...delta},context.caseTitle);assert.deepEqual(polygon(w,c),g);assert.equal(renderCrossingAngles(w,c),html);assert.equal(crossingAnglesNarration(w,c),hear);}
+ }
+}
+for(const view of ['split','corner','walk'])for(let polyPrompt=0;polyPrompt<6;polyPrompt++){
+ const w={...held,polyView:view,polyPrompt,rotation:120},g=polygon(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+ for(const delta of [...inactiveChanges,{polyPanelCorner:3},{polyPanelDraw:1},{polyPanelWalk:4}]){assert.deepEqual(polygon({...w,...delta}),g);assert.equal(renderCrossingAngles({...w,...delta}),html);assert.equal(crossingAnglesNarration({...w,...delta}),hear);}
+ for(const c of [null,captureCrossingPanel({originalWidth:12,originalHeight:1,width:1,height:12},'Unrelated copied source'),captureCrossingPanel({originalWidth:1,originalHeight:12,width:12,height:1},'Another source')]){assert.deepEqual(polygon(w,c),g);assert.equal(renderCrossingAngles(w,c),html);assert.equal(crossingAnglesNarration(w,c),hear);}
+}
+const missingPoly='Your waiting panel could not be copied. Choose Free frame, or go back to Copy Frame.';
+for(const view of ['split','corner','walk'])for(const delta of [{},...inactiveChanges,{polySides:12,polyCorner:11,polyDraw:9,polyWalk:12,polyPanelCorner:3,polyPanelDraw:1,polyPanelWalk:4,polyPrompt:5,rotation:330}]){
+ const w={...poly,triMode:'panel',polyView:view,...delta};assert.deepEqual(polygon(w),{mode:'panel',missing:true});
+ assert.equal(crossingAnglesNarration(w),`${crossingCopy.title}. Polygon frames. ${missingPoly} ${crossingCopy.lifetime} Back to Copy Frame.`);
+ const html=renderCrossingAngles(w),region=html.match(/<div data-crossing-angles-polygon-region>([\s\S]*?)<\/div>/)[1];assert.equal(region,`<p>${missingPoly}</p>`);
+ assert.ok(html.includes(`data-crossing-angles-action="poly-view" data-crossing-angles-value="${view}" aria-pressed="true"`));
+}
+// Keep SVG descriptions, speech/aria attributes and text in this check. Only
+// the actual coordinate/style attributes and source title are excluded.
+for(const w of [
+ {...poly,polyKind:'stretched',polyView:'corner'},
+ {...poly,polyKind:'stretched',polySides:11,polyView:'walk',polyWalk:4},
+ ...[7,11].flatMap(polySides=>['corner','walk'].map(polyView=>({...poly,polySides,polyView,polyWalk:polySides}))),
+ {...poly,triMode:'panel',polyView:'walk',polyPanelWalk:3},
+ ...['corner','walk'].map(polyView=>({...poly,triMode:'panel',polyView,polyPanelWalk:4}))
+]){
+ const c=captureCrossingPanel({originalWidth:3,originalHeight:7,width:1,height:12},'Synthetic panel source'),g=polygon(w,c),html=renderCrossingAngles(w,c),hear=crossingAnglesNarration(w,c);
+ const meaningful=html.replace(/\s(?:d|points|x|y|x1|y1|x2|y2|cx|cy|data-ca-x|data-ca-y|style)="[^"]*"/g,'');
+ assert.ok(!/\d+\.\d+\s*(?:°|degrees\b)/.test(meaningful+' '+hear),'no approximate angle text in any generated text channel');
+ assert.ok(!/a_\{|e_\{/.test(meaningful));
+ if(g.mode==='panel'&&g.view==='walk'&&g.walk===3)assert.equal(g.perTurn,'3×90°=270° accumulated');
+ const active=meaningful.match(/<div data-crossing-angles-polygon-region>([\s\S]*?)<\/section>/)?.[1]||meaningful;
+ if(g.mode==='panel'||!g.regular)for(const match of (active+' '+hear).matchAll(/(\d+)\s*°/g))assert.ok([0,90,180,360,g.total,g.rotation,...(g.mode==='panel'?[g.walk*90]:[])].includes(Number(match[1])),'symbolic source uses only explicit degree facts');
+ const ordered=[`${crossingCopy.title}. Polygon frames.`,g.source,g.definition,g.naming,g.chosen,...(g.current?[g.current]:[]),...(g.counter?[g.counter]:[]),g.text,...g.equations,...(g.perTurn?[g.perTurn]:[]),...(g.fractionNote?[g.fractionNote]:[]),g.prompt.title,g.prompt.text,'Ideal straight-sided polygons',crossingCopy.lifetime,'Back to Copy Frame.'];let at=-1;for(const part of ordered){const next=hear.indexOf(part,at+1);assert.ok(next>at,`Hear order: ${part}`);at=next;}
+ assert.ok(!hear.includes('Separate worked example'));assert.ok(!hear.includes('a at A; b'));
+}
+// Actual SVG readback at representative extremes: independent expected vertices,
+// rays and marker, then the drawing's numeric path endpoints and arrow branches.
+function expectedPoly(raw,rotation,radius){
+ const centroid=[0,1].map(d=>raw.reduce((s,p)=>s+p[d],0)/raw.length),ps=raw.map(p=>p.map((v,d)=>v-centroid[d])),factor=radius/Math.max(...ps.map(p=>Math.hypot(...p))),r=rotation*Math.PI/180;
+ return ps.map(([x,y])=>[320+factor*(x*Math.cos(r)-y*Math.sin(r)),280-factor*(x*Math.sin(r)+y*Math.cos(r))]);
+}
+for(const w of [
+ {...poly,polySides:3,polyCorner:2,polySize:'small',rotation:330},
+ {...poly,polySides:12,polyCorner:11,polyDraw:9,rotation:210},
+ {...poly,polySides:11,polyCorner:7,polyKind:'stretched',polyView:'corner',rotation:90},
+ {...poly,polySides:4,polyView:'corner'},
+ ...[0,1,4].map(polyPanelWalk=>({...poly,triMode:'panel',polyView:'walk',polyPanelCorner:3,polyPanelWalk,rotation:300})),
+ {...poly,triMode:'panel',polyView:'corner',polyPanelCorner:2,rotation:30},
+ {...poly,triMode:'panel',polyView:'split',polyPanelDraw:1}
+]){
+ const c=captureCrossingPanel({originalWidth:8,originalHeight:3,width:1,height:12},'Thin SVG rectangle'),g=polygon(w,c),html=renderCrossingAngles(w,c),n=g.n;
+ const raw=g.mode==='panel'?[[0,0],[1,0],[1,12],[0,12]]:Array.from({length:n},(_,i)=>[(g.kind==='regular'?1:1.6)*Math.cos((90+360*i/n)*Math.PI/180),Math.sin((90+360*i/n)*Math.PI/180)]),expected=expectedPoly(raw,w.rotation,g.size==='small'?120:160);
+ const outline=nums(html.match(/<polygon data-polygon-outline points="([^"]+)"/)[1]);outline.forEach((v,i)=>almost(v,expected.flat()[i],'SVG independently projected polygon vertex'));
+ const lineById=id=>{const m=html.match(new RegExp(`<line data-polygon-line="${id}"[^>]*x1="([^"]+)" y1="([^"]+)" x2="([^"]+)" y2="([^"]+)"`));return m?.slice(1).map(Number);};
+ for(let d=0;d<g.diagonals.length;d++){const values=lineById(`diagonal-${d}`);[...expected[g.corner],...expected[(g.corner+d+2)%n]].forEach((v,i)=>almost(values[i],v,'SVG fan diagonal endpoints'));}
+ const sector=g.interior||g.exterior;
+ if(sector){const values=nums(html.match(/data-polygon-sector="[^"]+"[^>]*d="([^"]+)"/)[1]),i=g.view==='walk'?(g.corner+g.walk)%n:g.corner,e=edgeFacts(expected)[i],incoming=e.incoming,bearing=Math.atan2(-incoming[1],incoming[0])*180/Math.PI,start=g.interior?bearing+e.exterior:bearing,sweep=g.interior?e.interior:e.exterior;
+  const first=polar(expected[i],start,sector.radius/(sector.right?Math.sqrt(2):1)),last=polar(expected[i],start+sweep,sector.radius/(sector.right?Math.sqrt(2):1));
+  pointClose(values.slice(0,2),expected[i],'SVG selected sector at correct original corner');pointClose(values.slice(2,4),first,'SVG selected sector incoming boundary');pointClose(values.slice(-2),last,'SVG selected sector outgoing boundary');
+  if(!sector.right){assert.equal(values[8],0,'exterior and interior use positive minor turn');assert.equal(values[7],0);}
+ }
+ if(g.marker){const i=(g.corner+g.walk)%n,e=edgeFacts(expected)[i],incoming=e.incoming.map(v=>v/Math.hypot(...e.incoming)),out=e.outgoing.map(v=>v/Math.hypot(...e.outgoing)),p=[-incoming[1],incoming[0]],q=[-out[1],out[0]],rho=Math.min(24,.35*Math.min(Math.hypot(...e.incoming),Math.hypot(...e.outgoing))),M=expected[i].map((v,d)=>v+(rho+8)*p[d]);
+  const heading=lineById('marker-heading'),leader=lineById('marker-leader');[...expected[i],...M].forEach((v,j)=>almost(leader[j],v,'SVG marker leader'));
+  [...M.map((v,d)=>v-7*out[d]),...M.map((v,d)=>v+7*out[d])].forEach((v,j)=>almost(heading[j],v,'SVG marker heading'));
+  const arrow=nums(html.match(/data-polygon-arrow d="([^"]+)"/)[1]),expectedArrow=[...M.map((v,d)=>v+2*out[d]+4*q[d]),...M.map((v,d)=>v+7*out[d]),...M.map((v,d)=>v+2*out[d]-4*q[d])];arrow.forEach((v,j)=>almost(v,expectedArrow[j],'SVG arrow actual branch'));
+ }
+}
+console.log('Polygon Frames: finite convex/fan/turn geometry, actual SVG, exact arithmetic, active-channel invariance, strict reducer ownership and current Hear passed.');
+
+// Read the enlarged heading itself; derive its expected direction from the
+// independent projected polygon edge, never a repeated direction attribute.
+const directionCases=[
+ [{...poly,polySides:5,polyCorner:2,rotation:30},null],
+ [{...poly,polySides:12,polyCorner:11,polySize:'small',rotation:330},null],
+ [{...poly,polySides:7,polyKind:'stretched',polyCorner:6,rotation:90},null],
+ [{...poly,polySides:11,polyKind:'stretched',polyCorner:3,rotation:210},null],
+ ...[[1,12,30,3],[12,1,300,0],[4,4,90,2]].map(([width,height,rotation,polyPanelCorner])=>[
+  {...poly,triMode:'panel',rotation,polyPanelCorner},captureCrossingPanel({originalWidth:8,originalHeight:3,width,height},'Direction reference panel')
+ ])
+];
+for(const [base,context] of directionCases){
+ const n=base.triMode==='panel'?4:base.polySides,a=base.triMode==='panel'?base.polyPanelCorner:base.polyCorner;
+ const raw=context?[[0,0],[context.width,0],[context.width,context.height],[0,context.height]]:Array.from({length:n},(_,i)=>[(base.polyKind==='regular'?1:1.6)*Math.cos((90+360*i/n)*Math.PI/180),Math.sin((90+360*i/n)*Math.PI/180)]);
+ const expected=expectedPoly(raw,base.rotation,base.polySize==='small'?120:160);
+ let startingInset;
+ for(const step of [0,1,n]){
+  const work={...base,polyView:'walk',...(context?{polyPanelWalk:step}:{polyWalk:step})},html=renderCrossingAngles(work,context);
+  const insets=[...html.matchAll(/<svg\b([^>]*\bdata-polygon-direction-inset\b[^>]*)>([\s\S]*?)<\/svg>/g)];assert.equal(insets.length,1,'one enlarged heading for the current walking stop');
+  const [,attributes,svg]=insets[0];assert.ok(/viewBox="0 0 64 64"/.test(attributes));assert.ok(/\bwidth="64"/.test(attributes));assert.ok(/\bheight="64"/.test(attributes));
+  assert.ok(!/\btransform=/.test(attributes+svg),'inset has direct inspectable drawing coordinates');
+  const i=(a+step)%n,edge=sub(expected[(i+1)%n],expected[i]),d=edge.map(v=>v/Math.hypot(...edge)),q=[-d[1],d[0]];
+  const line=svg.match(/<line\b[^>]*\bdata-polygon-direction-heading\b[^>]*>/)?.[0];assert.ok(line,'actual inset shaft exists');
+  const drawn=['x1','y1','x2','y2'].map(key=>Number(line.match(new RegExp(`\\b${key}="([^"]+)"`))[1]));
+  const shaft=[32-20*d[0],32-20*d[1],32+20*d[0],32+20*d[1]];drawn.forEach((value,j)=>almost(value,shaft[j],'enlarged shaft follows outgoing boundary edge'));
+  almost(Math.hypot(drawn[2]-drawn[0],drawn[3]-drawn[1]),40,'readable forty-unit inset shaft');assert.ok(dot(sub(drawn.slice(2),drawn.slice(0,2)),edge)>0,'enlarged arrow points along the next side');
+  const path=svg.match(/<path\b[^>]*\bdata-polygon-direction-arrow\b[^>]*>/)?.[0];assert.ok(path,'actual inset arrowhead exists');
+  const arrow=nums(path.match(/\bd="([^"]+)"/)[1]),head=[32+8*d[0]+8*q[0],32+8*d[1]+8*q[1],32+20*d[0],32+20*d[1],32+8*d[0]-8*q[0],32+8*d[1]-8*q[1]];
+  assert.equal(arrow.length,6);arrow.forEach((value,j)=>almost(value,head[j],'enlarged arrowhead branches'));
+  if(step===0)startingInset=svg;else if(step===n)assert.equal(svg,startingInset,'full lap restores enlarged starting direction');
+ }
+}
+for(const work of [initial,{...initial,page:'learn'},{...initial,page:'parallel'},...['gather','reason','outside'].map(triView=>({...poly,triView})),...['split','corner'].map(polyView=>({...poly,polyView})),{...poly,triMode:'panel',polyView:'walk'}])assert.ok(!renderCrossingAngles(work).includes('data-polygon-direction-inset'),'enlarged heading absent outside readable Walk');
+console.log('Polygon Frames enlarged heading: actual SVG coordinates follow independent outgoing edges at start, turn and completed lap; absent outside readable Walk.');
