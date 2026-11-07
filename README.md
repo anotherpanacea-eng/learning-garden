@@ -6,6 +6,8 @@
 
 **Triangle Corners** extends that game with corner gathering, a parallel-line explanation of the triangle sum, and one adjacent exterior angle. Return to a symbolic triangle cut from the waiting panel. See independently reviewed [spec417](docs/specs/417-triangle-corners.md); [PR500](https://github.com/anotherpanacea-eng/learning-garden/pull/500) owns implementation review and publication status. The same Crossing Angles checks cover this visit-local exploration.
 
+**Polygon Frames** is the next view in Triangle Corners: split convex frames, compare a total with one corner, and walk the outside turns. The copied rectangle supplies a useful equal-angle contrast even when it is not regular. See independently reviewed [spec418](docs/specs/418-polygon-frames.md). Implementation is in progress, not yet live; it uses the same temporary-work boundary and existing checks.
+
 
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 

@@ -1,6 +1,6 @@
 # 418 · Polygon Frames
 
-Status: proposed finite specification, independent review required before code. Continues admitted LG-1 / LG-G1; operational branch custody1622. This selects the convex-polygon bridge from182, following Triangle Corners417.
+Status: independently BUILD-READY atd5c8f1a667fb020db192eec52d95709be5804914 after six lenses, complete mathematics/teaching/copy/visual-plan review and focused repair closure. Implementation and qualification are in progress; not yet published. Continues admitted LG-1 / LG-G1; operational branch custody1622. This selects the convex-polygon bridge from182, following Triangle Corners417.
 
 ## Purpose and boundary
 
