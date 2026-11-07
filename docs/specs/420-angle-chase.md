@@ -1,0 +1,150 @@
+# 420 · Angle Chase
+
+Status: proposed finite contract; independent six-lens and complete mathematics/copy/visual-plan review before code. Continues admitted LG-1 / LG-G1, operational custody1624, after415–419. Selects the Chase Board opportunity in182; it does not commission that whole proposal.
+
+## Purpose, story and boundary
+
+A sixth page **Find angles** inside Crossing Angles turns its guided explanations into number-and-reason investigations. Contextual h1 **Angle Chase** keeps #crossing-angles-title and the existing Copy Frame entry/Back. Opening: **The workshop needs notes on a batch of sketches. Find angles from the marked facts, then carry a fact to the next angle.** Model banner: **An invented diagram, not to scale. Use the stated facts, not the drawing’s size.** This is paper reasoning, not structural advice or measurement.
+
+Five families, three variants each, two or three unknowns per sketch. Every unknown, sketch and existing activity stays open. No forced successful step, timer, score, currency, medal, placement, mastery, age/grade assignment, first-try inference or learner record. Checks describe a number and one named mathematical relationship on this finite source. They do not grade an original proof or every possible solution method. A child can explain another method to an adult.
+
+M5-III/IV, M7-III/IV and supporting M1-II are partial candidates under49/120. Act III ch3's paper-plan investigation and Act IV ch1's checking-a-ledger job supply purpose; no town re-breaking, chapter completion or safe-building verdict. New application: a differently oriented sketch and the rectangle contrast. Return invitation: **Back in Copy Frame, find a right corner on your waiting rectangle. Its actual diagonal angles are not the invented numbers on these cards.** The numerical cards ignore the captured context completely: no fake integer diagonal angle derived from width/height. Equations in an unknown such as3x+20, polygon chains, perimeter/length deduction, converse parallel proofs, missing-parallel-premise response tasks, actual ruler/protractor work and broad independent fluency remain explicit missing increments. Existing415–419 pages and their local work retain behavior.
+
+No host/index/route/callback/storage changes: the same seven-function child context and five-field frozen source remain. Only this spec, README/roadmap, existing crossing-angles content/core/UI/CSS and existing two suites. Original mathematics/copy; no upstream code/prose/assets imported.
+
+## Exact finite sources and schematic geometry
+
+The keys below are exact integer arithmetic; never calculate a key from a learner draft or from SVG measurements. Variant order is stable. The diagrams are deliberately not to scale, but incidence, straight continuations, parallel arrows, right corners and the actual named regions must be true. The stated angle data admit real geometric configurations. Render no computed numerical measurement of the schematic vectors.
+
+Raw coordinates use mathematical y upward; project uniformly, invert y for screen, then rotate about the stated center. One plot640×560, center(320,280). Rotating the whole sketch changes no givens, labels' identities, answers, reasons, drafts or support. No independent normalization of parts.
+
+| Family / cases | Mathematical schematic, center and scale | Given variants → unknown keys |
+| --- | --- | --- |
+| Across or beside? /0–2 | O=(0,0); A,B,C,D at radius3 on directions0°,55°,180°,235°. A–O–C and B–O–D are straight. CenterO, scale52. Given a=∠AOB; x=∠BOC; y=∠DOA, each smaller sector. | a43→x137,y137; a68→x112,y112; a117→x63,y63 |
+| Around the hub /3–5 | O=(0,0); A,E,B,C at radius3 on0°,60°,115°,240°. C–O–E straight. Given p=∠AOB spans y=∠AOE plus z=∠EOB; q=∠BOC. x is the sector from OC through360° to OA. CenterO, scale52. Outer given-p arc radius96 drawing units distinguishes its span from inner y/z arcs radius28. | (p105,q135)→x120,y60,z45; (115,120)→x125,y55,z60; (125,140)→x95,y85,z40 |
+| Inside, then outside /6–8 | Triangle A=(0,0),B=(4,0),C=(1.5,3),D=(6,0). A–B–D straight, B between A/D. Given a=∠BAC,c=∠ACB. x=∠ABC; y=∠CBD, outside adjacent to x. Center(3,1.5), scale45. | (a37,c68)→x75,y105; (42,61)→x77,y103; (29,84)→x67,y113 |
+| Between parallel lines /9–11 | A=(−2,1),P=(0,1),B=(2,1); C=(−2,−1),Q=(1,−1),D=(3,−1). A–P–B ∥ C–Q–D, with matching parallel arrows. R=(−1,3),P,Q,S=(2,−3) collinear in that order. Given a=∠BPQ. x=∠DQS, y=∠CQP, z=∠PQD. Center(.5,0), scale45. | a35→x35,y35,z145; a52→x52,y52,z128; a68→x68,y68,z112 |
+| Rectangle corners /12–14 | Fictional rectangle A=(0,0),B=(4,0),C=(4,3),D=(0,3), diagonalAC. All four whole corners marked right; AB∥DC,AD∥BC stated. No dimensions. Given a=∠BAC. x=∠CAD,y=∠ACD,z=∠ACB. Center(2,1.5), scale60. | a25→x65,y25,z65; a37→x53,y37,z53; a58→x32,y58,z32 |
+
+Ray extent and actual plot positions are the table's endpoints, not arbitrary decorative segments. Draw inner angle-region arcs radius28 unless a thin triangle corner requires a smaller radius to stay between its sides; never move a center/alter a ray to fit a tag. Known rectangle right squares at the actual four corners use a side-aware leg cap min(12, one quarter of each adjacent drawn side). Hub p's outer arc must visibly span y+z, not masquerade as z alone. Polygon/triangle winding and lower/right sectors use vector directions, not a universal anticlockwise small-angle assumption. At every whole-sketch rotation all endpoints/arcs remain within the plot.
+
+Point labels are ordinary16px HTML near endpoints with leaders when necessary. Given-angle labels start at(100,65),(540,65); unknown native button labels x/y/z start at(100,490),(320,520),(540,490), omit unused ones. Thin dotted leaders identify the actual corresponding sector, distinct from its rays. Unknown buttons are44×44 minimum; wrap name/value/shown onto separate lines when needed instead of making a wide unbroken label; their leader targets are sector bisectors at radius40 (hub p uses its outer arc). Keep labels/buttons contained and distinct after measured arrangement; move tags, never mathematical geometry. Current unknown is highlighted by outline and its name, not color alone. Every unknown has an equivalent native **Choose an angle** select outside the plot; tapping small geometry is never required. No scaled SVG text, meaningful clipped guide, sideways scroll, proximity grading or animation.
+
+## Relations, reason choices and complete teaching copy
+
+Question: **Find {name}. Which relationship explains this step?** For the first angle show **Use the marked facts. You can choose another angle at any time.** Each target highlights the relevant marked sectors. Reasons name a relationship between those marked sectors, not an assertion that no longer multi-rule argument could exist. Other original explanations are discussed with an adult, not machine-graded.
+
+Rule labels:
+
+- line: **Angles on a straight line total180°.**
+- point: **Angles all the way around a point total360°.**
+- opposite: **Vertically opposite angles at the same crossing match.**
+- triangle: **The three inside angles of a triangle total180°.**
+- parts: **Parts of a marked angle add to its whole.**
+- exterior: **An outside triangle angle equals the two far inside angles.**
+- corresponding: **Corresponding angles on parallel lines match.**
+- alternate: **Alternate interior angles on parallel lines match.**
+- cointerior: **Co-interior angles on parallel lines total180°.**
+- corner: **A rectangle corner is90°.**
+- insufficient: **These marked facts do not determine the angle.**
+
+Ordinary spacing is required in shipped copy. Every target offers exactly the three rule IDs below. Rotate their authored order by(caseIndex+targetIndex)%3, preserving it throughout that sketch. Accepted alternatives are explicitly permitted; never reject a listed sufficient alternate relation just to enforce the suggested chain. A reason's specific explanation uses the named regions and source facts below. A relation can be used before a predecessor is entered: finding that predecessor mentally is legitimate. Do not pretend it came from a learner's draft.
+
+| Family,target | Offered IDs; accepted IDs | Accepted relationship and full solution meaning | Hint (no current answer) |
+| --- | --- | --- | --- |
+| Crossing x | line,opposite,point; line | A–O–C is straight. a+x=180°, so x=180°−a. | **Which two marked angles fill the half turn on A–O–C?** |
+| Crossing y | opposite,line,triangle; opposite and line | x,y are opposite: y=x. Alternatively B–O–D is straight: a+y=180°, so y=180°−a. | **Look across the crossing from x, or use the straight line B–O–D.** |
+| Hub x | point,line,triangle; point | p,q,x fill one whole turn: x=360°−p−q. p already includes y+z; do not subtract those again. | **The outer p arc includes y and z. Which three marked parts fill one whole turn?** |
+| Hub y | line,opposite,triangle; line | C–O–E is straight: x+y=180°, so y=180°−x. | **C–O–E is straight. Which two marked parts fill its half turn?** |
+| Hub z | parts,line,opposite; parts and line | y+z=p, so z=p−y. Alternatively z+q=180° on E–O–C, so z=180°−q. | **The whole p contains y and z. There is also a straight line E–O–C.** |
+| Triangle x | triangle,opposite,point; triangle | a+c+x=180°, so x=180°−a−c. | **Use all three inside corners of ABC.** |
+| Triangle y | line,exterior,opposite; line and exterior | x+y=180° on A–B–D, so y=180°−x. Alternatively y=a+c, the two far inside angles. | **y is outside beside x. You can also add the two far inside angles.** |
+| Parallel x | corresponding,alternate,cointerior; corresponding | a,x are in corresponding positions; marked parallel rails make x=a. | **Find the matching parallel arrows. Trace the same position at P and Q.** |
+| Parallel y | opposite,alternate,triangle; opposite and alternate | x,y are opposite at Q, so y=x. Alternatively a,y are alternate interior angles on marked parallel rails, so y=a. | **y is opposite x at Q, and alternate to a between the marked parallel rails.** |
+| Parallel z | line,cointerior,opposite; line and cointerior | y+z=180° on C–Q–D, so z=180°−y. Alternatively a+z=180° as co-interior angles between parallel rails. | **y and z share the upper half turn at Q. Also compare a and z inside the rails.** |
+| Rectangle x | corner,point,insufficient; corner | a+x=90° at A, so x=90°−a. | **The two marked parts at A share one right corner, not a whole turn.** |
+| Rectangle y | triangle,alternate,opposite; triangle and alternate | x+90°+y=180° in ADC, so y=180°−90°−x. Alternatively AB∥DC makes y=a by alternate angles. | **Triangle ADC has a right corner at D. The opposite rectangle sides are parallel too.** |
+| Rectangle z | corner,alternate,opposite; corner and alternate | y+z=90° at C, so z=90°−y. Alternatively AD∥BC makes z=x by alternate angles. | **At C, the diagonal splits one right corner. You can also trace AD∥BC.** |
+
+For a numerically accepted check, show the current value and selected accepted relationship. State equations with symbols and the known givens/previously available labels; do not print an unrevealed predecessor's numerical key merely to fill a worked arithmetic line. For **Show this solution**, explicitly show the needed predecessor values as provided mathematical working, not as that predecessor being answered by the learner; a sentence **This working may show a value used by another angle. It does not fill your answers.** marks that transfer. Solutions may use an earlier true key; they never use the earlier learner draft.
+
+Wrong-rule feedback must explain its missing condition for these marked regions: opposite requires two marked regions across the same crossing; point requires marked parts covering the whole turn; line requires marked parts covering one straight half turn; triangle requires the named inside corners of a closed triangle; alternate/corresponding/co-interior require parallel premises and the named positions (outside x at Q is not an alternate-interior or co-interior partner of a); insufficient is wrong at rectangle x because the marked right corner and a do determine its remainder. Do not say an accepted alternate method is wrong. Do not use generic disapproval, a red failure animation or a penalty.
+
+Complete feedback templates, generated from the current finite source only:
+
+- blank: **Enter a whole-number angle, then check when you’re ready.** No reason verdict yet.
+- number fits, reason absent: **The number fits these facts. Choose a reason when you’re ready.**
+- number fits, reason does not: **The number fits. This relationship does not explain the marked parts. {specific missing condition}**
+- reason fits, number does not: **That relationship fits here. Check the calculation using {symbolic relation}.** Do not immediately print the current numeric key.
+- neither fits: **Let’s look at the marked facts again. {specific missing condition} A hint or a different worked sketch can help.**
+- number and reason fit: **{name}={value}°. {selected accepted relationship}** No automatic navigation.
+- shown: **Shown solution: {name}={value}°. {worked arithmetic and named reason}. This is provided help; your answer is kept separately.**
+
+At every time, **Hint / A different worked sketch / Show this solution** are separate optional buttons, no escalating failure requirement. Hints above contain no current numeric key. Opening the example marks support separately and does not change responses. Reveal never fills/replaces a learner draft or selected reason. **Previous angle / Next angle** and the angle select are always available except natural endpoint disabling; end focus moves to the still-enabled opposite button. A correct number with an unfinished reason can already be a useful mathematical fact. Label it on the diagram only after explicit numeric check; say **The number fits; its reason is still open.** A wrong draft is never a given. Shown values are marked **shown** even after later answering; no claim of independence.
+
+## Separate worked sketches
+
+One different example per family: crossing a50→x130,y130; hub p110,q130→x120,y60,z50; triangle a40,c65→x75,y105; parallel a40→x40,y40,z140; rectangle a30→x60,y30,z60. These givens differ from every practice variant. Same schematic incidence and rule meanings; no practice answers/settings/context enter the example builder.
+
+Example heading **A different worked sketch**, notice **These numbers belong to another sketch. Your answers are kept.** Step0 shows only its givens; step1 reveals x with its canonical arithmetic/reason; step2 reveals y; step3 reveals z where present. Canonical routes are the first accepted relation in the table. Each visible step carries all earlier revealed material. **Previous example step / Next example step** disable at0/N with enabled-opposite focus; counter **Example step N of{2 or3}**. No answer or Check controls here. **Back to your sketch** returns to the exact held target/drafts/reasons/support and focuses its number display. No forced finish; other pages/Back remain open. Do not show the practice case selector inside Example, and refuse solve-only actions there.
+
+## Visit-local work and reducer
+
+Append only `chase`; no persisted schema or writer. Case order is the table order0..14, targets x,y or x,y,z. Default:
+
+```
+chase: {
+ case:0, view:'solve',
+ boards:[ // exactly15, one board per authored case; freshly created objects
+  {target:0,rotation:0,exampleStep:0,
+   answers:[ // exactly target count2 or3 for that case
+    {draft:'',reason:null,checked:false,hint:false,exampleSeen:false,solution:false}
+   ]}
+ ]
+}
+```
+
+Initial boards contain all required answers, not one placeholder. All board objects/answer arrays are distinct. Whole-work validation rejects arrays as objects, missing structures, boxed/string stand-ins for numbers/booleans, nonfinite/fractional/out-of-range values, invalid enums and reason IDs not offered for that exact case/target. `case` integer0..14; view solve/example; each board target0..N−1, rotation0..330 multiple30, exampleStep0..N; draft a string of0..3 ASCII digits; reason null or an offered ID; all flags actual booleans. A blank draft is not zero; parse only an explicitly nonempty digit string. Numeric drafts may exceed360 up to999 but are not valid angle answers; Check gives **Use a whole-number angle from0° to360°.** Do not silently clamp. This temporary state is cleared on existing reload/owner/book/route/import/reset boundaries, so this is not a saved migration/validation contract.
+
+Only on page chase: case switch (integer) in Solve changes only selected case, preserving every board; same case returns identical work. A native case select **Choose a sketch** lists family/variant labels; **Another sketch** cycles0..14, with **Each sketch keeps its own work during this visit.** The chosen target, pose and example progress live per board. A Solve-only **Start this sketch again** button explicitly resets only the active board to its defaults, preserving the selected case and other14 boards; its zero-argument action is chase-restart and returns identity when already at defaults. This makes a completed sketch replayable without clearing other work. No adaptive level inference;15 renewable authored variants are not unlimited generation or full coverage.
+
+Solve-only actions: chase-target integer0..N−1; chase-rotation integer as above; chase-digit one ASCII digit string appended up to3 digits; zero-argument chase-backspace/clear; chase-reason offered ID; zero-argument chase-check/hint/solution/example. Editing the draft or reason clears only that answer's checked flag; same-value actions are identity. Clear/backspace on blank and a fourth digit are identity. Check sets checked true, with derived current feedback; repeating it unchanged is identity. Hint/solution set their own flags true, do not change answers/checks/other help; repeated requests identity. Example sets view example and current answer exampleSeen true; retains that board's exampleStep. Example-only chase-example-step integer0..N and zero-argument chase-return. Return sets view solve. Zero-argument actions refuse an actual supplied value. Every other old-page action, including shared rotation, is refused on Chase; chase actions are refused elsewhere. Page navigation is unchanged and retains all15 boards. Immutable updates; no mutation of the catalogue or current objects.
+
+Results are derived from the immutable authored key and current explicit check. There is no last-result ledger, timestamp, retry count, event log or auto-marking a predecessor. Other verified numeric labels remain true after revising one draft: they belong to the unchanged source, not that draft. On the board a target displays its name alone unless its own explicit check numerically matches, or its solution is open. Prefer the **shown** label when solution is true. Reason incompleteness is separately visible in the active feedback. Never reuse an unchecked/wrong draft as a later mathematical given or generate feedback from it. All targets stay open, including later ones before predecessors.
+
+When every target has either a matching number+reason check or a shown solution, derived local caption: **This sketch has a value and a reason at every marked angle. Shown solutions are help. Pick another sketch or change one.** No stored completion flag or celebration film; this is one paper sketch, not chapter/learning completion.
+
+## Input, projection and narration
+
+Touch-first number pad: native buttons0–9 in three columns, then Backspace/Clear; all44px minimum. A native readonly text input **Angle {name}, your answer in degrees** displays the draft, inputmode none, no mobile keyboard required. Readonly avoids destroying/reopening the iPad keyboard on each guarded render. It still supports scoped physical-keyboard digit/Backspace/Delete/Enter handling while focused: Enter explicitly checks, never advances. Do not attach game number shortcuts globally. Its current control must pass the same live/owner/root/work guards before preventDefault, sound stops, work changes, speech or render. No free prose, speech recognition or telemetry.
+
+The existing host already registers input in its binding guard. Extend the child guard/binder to include the readonly input and its scoped keydown, plus buttons/selects; no new host callback. New numeric select tokens must match a whole integer string before conversion: refuse empty/e-notation/fractional/malformed option values and restore actual selection. Case/target/example-step/rotation actions carry numbers; digit/reason carry strings; the zero-argument list carries no value. Preserve chosen reason, typed draft, target, feedback and open help through normal page/pose/resize changes. Native button/select focus survives render; keyboard entry retains focus on the number display, so there is no mouse dependency. Retired/detached/reparented/hide-unhide/changed exact route/owner/book/work controls and Hear are inert before every effect. Stage resize keeps structural connected/current-root guards, not ctx.live on an unregistered stage.
+
+Add active `chase` projection and null on other pages, with explicit Chase branches first in renderer/header/model-note/Hear; no old straightTurn/learn-card/original-frame fallthrough. The wrapper passes only selected case, that board's target/rotation/answers, view and example progress to the solve builder. The solve builder does not receive the enclosing work,15-board array, older fields or context. Example builder receives only family and exampleStep, not practice variants/answers/target/rotation/help or context. Example region/Hear invariant across those practice changes; outer selected case/page controls excluded where applicable. Solve is invariant across other14 boards, older page fields, frozen copy and original dimensions. Other pages ignore all Chase work. Factor deltas; no Cartesian product of unrelated settings.
+
+No hidden current answers in DOM, title/description, aria, dataset or Hear. Source keys are public authored mathematics, not a security secret, but the visible encounter should not spoil them. Use unknown names until their own explicit numeric match or reveal, and only visible source facts/current feedback/opened support in projections. In solutions, predecessor values are explicitly provided working, not learner responses. In Example, only steps already revealed appear. Do not prohibit a number merely because it happens to equal a visible given, another checked result, a coordinate or an example value; inspect role and visibility, not raw digit presence. No debug expected-answer/measure attributes. SVG descriptions name the same currently visible facts and regions without filling unknowns.
+
+Normal Hear: **Angle Chase**; opening; model banner; family/variant; visible givens and incidence/parallel/right facts; current target/counter; its current draft (or **blank**), selected reason (or **no reason chosen**); current explicit-check feedback; currently open hint/solution, and help-used note; return invitation; lifetime; Back. Read other diagram targets only as currently shown names/checked/provided values, never unsubmitted hidden keys. Example Hear starts **A different worked sketch**, notice, givens, Example step counter and only its revealed working, then Back to your sketch/lifetime/Back. No practice response, adult note, hidden help, old teaching or inactive state. Adult note: **These finite number-and-reason checks do not grade an original proof, diagnose a level or establish learning. Another valid method can be discussed with an adult. A provided value is help; a draft is not a mathematical fact. The diagrams are not measurements or building instructions.**
+
+## Upstream and hard prerequisites
+
+Refreshed2026-11-07: Jane c681f6bf2f2adf2aa032f765983a4691774cfba5, LESSONS blob4d6add1b23c32ed6167c2358d763db05474e23d9; Marble04962c78ccb8bd52b236512d3362405bace98d2a, topics bloba1d3bf978d95f9240b7b43f1dd09a7f61541630a, dependencies blobc65f65131ac90d7f1cb0791aa35e1ed97e3e7c1f. Refreshed remote metadata matched the retrieved full files; actual descriptions and incoming hard edges read against the bundled graph. Jane teaching-first, separate worked example and voluntary support studied; its grades, mastery, bosses, KV and reward system not adopted.182's angle-chase opportunity adapted; actual previous415–419 teaching reused, without treating their examples as independent fluency. Original text/geometry/code, no copied research prose/license expansion.
+
+| Actual target | Incoming hard prerequisites | Bounded encounter and remaining gap |
+| --- | --- | --- |
+| mt_tedML_iu4Y · multi-step point/line/opposite-angle reasoning | mt_oqziWKry-L; mt_QDTO3GAgcq | number+relationship chains with support/source distinction; full independent reasoning and equations missing |
+| mt_QDTO3GAgcq · recognize point/line/opposite and find unknowns | mt_89riIKwGYp; mt_e4V6hvcuEJ; mt_oqziWKry-L | schematic region/straightness/whole-turn recap and finite deduction; actual measurement, notation breadth and independent fluency missing |
+| mt_oqziWKry-L · point360,line180,opposite equal | mt_e4V6hvcuEJ; mt_qUGMyMYn9m | explicit wholes and contrasts; degree/turn understanding supported, not certified |
+| mt_H_pNJ3ZI_S · corresponding/alternate/co-interior on parallel lines | mt_tedML_iu4Y | marked-premise deductions with alternate reasons; missing-premise/converse tasks and breadth missing |
+| mt_cdMlC7EpTJ · unknown triangle/quadrilateral/regular-polygon angles | mt_e4V6hvcuEJ; mt_liIW336odh; mt_oqziWKry-L | triangle/exterior and rectangle examples only; polygon/shape-property breadth missing |
+| mt_KFKUR_gBg_ · rectangle properties deducing lengths/angles | mt_Xt1cRqaBOW | split right-corner angle reasoning only; lengths/perimeter/classification remain separate |
+
+No prerequisite gate or recursive coverage claim.49 §5: teaching named whole/relationship plus separate step-revealed example; contrasts line/point/opposite, inside/outside, whole-p/parts-yz, marked parallel premise/appearance, number/reason and draft/provided fact; supported hints/example/reveal; new numerical variant/orientation/rectangle context; purposeful return to existing angle explanations and actual rectangle right corners. This is the next reasoning bridge, not an assertion that all182 lessons or any full topic are covered.
+
+## Verification and delivery
+
+Independently recompute all15 keys, accepted alternative relations and example arithmetic; check geometric existence of the stated numeric data and actual schematic incidences. Verify exact endpoint collinearity/parallel/right flags, sector-ray identities (especially hub outerp, triangle exterior, parallel x outside/y alternate/z co-interior), drawing transforms and fixed tag/guide bounds at all rotations. Parse actual SVG rays/arcs/parallel marks and actual HTML labels/buttons against independently expected positions, not echoed data. Check visible target values/aria/Hear in every support/check/blank/wrong/missing-reason state without answer-spoiling fields; worked sketches contain only their own visible steps. Wrong predecessor drafts must not change later keys or become givens, later targets remain reachable, accepted alternate reasons really work, support never fills answers, revising one target preserves other drafts/true checked labels. Validate every nested field/action boundary, noops/identities, independent board retention, old-page invariance and source isolation. No source spelling/count goldens or permanent extra verifier framework.
+
+Actual-app browser retains415–419 journeys and adds one complete tablet Chase visit across five families and all15 variants, draft/reason partial checks, correct alternatives, wrong predecessor then later target, hints/separate examples/reveal without filling drafts, revision, retained other sketch/page work, no automatic navigation, keyboard+touch controls, current Hear, and actual Copy Frame return. Snapshot actual in-memory learner state/all storage around actions and actual Notes exports before/after whole visit, ignoring only exportedAt. Notes leaves/clears local visit; do not export between answer moves. Isolate legitimate voice-preference writes. Extend every real route/owner/chooser/import/reset/reload clearing stimulus to dirty/check Chase, and removed/reparented/hide-unhide/exact-route controls/keypad/readonly input/Hear before effects. Live820→320→820 retains original bound controls. Focused phone/tablet hub spanning arc, outside angle, rotated parallel/rectangle, labels/correct-numeric-unfinished-reason/shown state,44px targets/16px text; not repeated whole journeys at each width. Root inspects each diagram and interaction family. Chromium/string checks are not physical iPad/Safari, audible speech, VoiceOver or learning qualification.
+
+Affected suites while editing; once stable on current main, full source runner once and complete touched browser suite. Independent other-vendor exact-head implementation clearance after repairs. Ready/release own custody, merge commit, clean authorized-account tracked-dist-only deployment; all hosted asset bytes and Home/touched smoke. One canonical PR record linked once from roadmap; no copied count ledgers. Phonics owner audio/rights hold and private household material stay separate.
