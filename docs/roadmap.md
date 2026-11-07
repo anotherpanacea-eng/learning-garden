@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Shared Turn412 · two parts of an angle
 
-[Shared Turn412](specs/412-shared-turn.md) selects the adjacent half/full-turn sum bridge from182 inside Hinge Bench. Build two parts of one turn, cover a measure, keep an ungraded own idea beside an explicit reference, and contrast a complete partition with a gap. The complete finite specification is authored for independent review; implementation has not begun. It preserves the parent's local settings and writes no learner record. Protractor measurement, triangles and parallel-line work remain separate.
+[Shared Turn412](specs/412-shared-turn.md) selects the adjacent half/full-turn sum bridge from182 inside Hinge Bench. Build two parts of one turn, cover a measure, keep an ungraded own idea beside an explicit reference, and contrast a complete partition with a gap. The finite specification and mathematics are independently cleared. The bounded implementation is in [PR495](https://github.com/anotherpanacea-eng/learning-garden/pull/495); its [release record](https://github.com/anotherpanacea-eng/learning-garden/pull/495#issuecomment-6705160407) owns publication status. It preserves the parent's local settings and writes no learner record. Protractor measurement, triangles and parallel-line work remain separate.
 
 ## Magpie Pictures411 · sayings, pictures and context
 
