@@ -31,7 +31,7 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     "proposed": "My proposed post",
     "empty": "Choose a height to draw your proposed post.",
     "diagram": "Both pictures use the same length scale. The sloping outlines compare shapes; a proposed slope is not a measured sunlight direction.",
-    "grownup": "This is an ideal geometry model, not a measured yard or construction advice. A fitting proposal is not evidence of independent mastery. Ratio checks can add existing help notes for shown multiplication, but the proposals themselves are not saved.",
+    "grownup": "This is an ideal geometry model, not a measured yard or construction advice. A fitting proposal is not evidence of independent mastery. Ratio checks and the worked example can add existing help notes for shown multiplication, but the proposals themselves are not saved.",
     "refusal": "That view could not be prepared safely. Your earlier proposal is unchanged. Retry, download your notes, or go back.",
     "sessionOnly": "The pictures can still work during this visit. These help notes are not saved on this device. Ask a grown-up to download your notes if you want to keep them.",
     "diagramEmpty": "Both pictures use the same length scale. Your post appears after you choose a height.",
@@ -129,6 +129,17 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
       "title": "Check in the same order",
       "text": "Height/shadow: 3/4 and 4.5/6 are equal. Cross-products: 3 × 6 = 18 and 4.5 × 4 = 18 square metres. This height fits the example model."
     }
-  ]
+  ],
+  "templates": {
+    "height": "Height: {height} m.",
+    "shadow": "Shadow length: {shadow} m.",
+    "givenAria": "Given reference: height {height} m, shadow {shadow} m.",
+    "proposalAria": "My proposed post: height {height} m, given shadow {shadow} m. This height is a proposal.",
+    "emptyAria": "Target shadow: {shadow} m. No proposed height is drawn.",
+    "ratio": "Height/shadow: {height}/{shadow} = {ratio}.",
+    "product": "{left} × {right} = {product} square metres.",
+    "waiting": "Your proposal waits: {height} m.",
+    "step": "Step {number} of 4."
+  }
 }
 ```
