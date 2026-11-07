@@ -1,6 +1,6 @@
 # 414 · Leaf Exchange
 
-Status: proposed under admitted LG-1 / LG-G1; awaiting independent specification and finite science/mathematics review.
+Status: independently BUILD-READY at8af63988 under admitted LG-1 / LG-G1; implementation and qualification in [PR497](https://github.com/anotherpanacea-eng/learning-garden/pull/497).
 
 ## Need, story and boundary
 

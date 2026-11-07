@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Leaf Exchange414 · zero net can hide two totals
 
-[Leaf Exchange414](specs/414-leaf-exchange.md) is the next proposed S2-IV / M1-IV / M4-III bridge inside Living Layers. Combine selected photosynthesis and respiration gas accounts, compare separate totals with signed net change, and revisit a copied kept Diffusion Tray model in a new context. The complete finite specification is awaiting independent review; runtime is not built. It adds no measured rate, external leaf-flux prediction, learner record or whole-course claim.
+[Leaf Exchange414](specs/414-leaf-exchange.md) is the next proposed S2-IV / M1-IV / M4-III bridge inside Living Layers. Combine selected photosynthesis and respiration gas accounts, compare separate totals with signed net change, and revisit a copied kept Diffusion Tray model in a new context. The complete finite specification and science/mathematics are independently BUILD-READY at8af63988. The bounded implementation is in [PR497](https://github.com/anotherpanacea-eng/learning-garden/pull/497); its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/497#issuecomment-6706224290) owns implementation acceptance and publication status. It adds no measured rate, external leaf-flux prediction, learner record or whole-course claim.
 
 ## Pollen Path413 · a visitor carries pollen
 
