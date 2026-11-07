@@ -1,6 +1,6 @@
 # 425 · Join the Pieces
 
-Status: independently BUILD-READY at `6414a16b1019b040911c10ce8db746c7d88690bd`, after six lenses and focused Claude mathematical/teaching repair closure; implementation underway. Baseline main `5d783d8df158e69a5aab543b634d664c4b31933a`. Existing LG-1 / LG-G1; operational Fleet1630. This commissions a new material operation, not the whole of proposal197.
+Status: independently BUILD-READY at `6414a16b1019b040911c10ce8db746c7d88690bd`, after six lenses and focused Claude mathematical/teaching repair closure; implemented in [PR508](https://github.com/anotherpanacea-eng/learning-garden/pull/508). Its canonical PR release record owns final implementation clearance and publication status. Baseline main `5d783d8df158e69a5aab543b634d664c4b31933a`. Existing LG-1 / LG-G1; operational Fleet1630. This commissions a new material operation, not the whole of proposal197.
 
 ## The gap and story job
 
