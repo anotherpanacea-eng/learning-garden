@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Magpie Pictures411 · sayings, pictures and context
 
-[Magpie Pictures411](specs/411-magpie-pictures.md) selects the first English-only slice of265 inside Riddles: six playful party sayings, separate own pictures and prepared context readings, then paired literal/figurative sorting contexts. The complete finite specification and original image descriptions are authored for independent review; implementation has not begun. Current riddle words/order/help remain their own saved work. This is a bounded E2/E3 bridge, not a language grader or the full idiom/metaphor/allusion programme.
+[Magpie Pictures411](specs/411-magpie-pictures.md) selects the first English-only slice of265 inside Riddles: six playful party sayings, separate own pictures and prepared context readings, then paired literal/figurative sorting contexts. The finite language and original image plan are independently cleared. [PR494](https://github.com/anotherpanacea-eng/learning-garden/pull/494) implements the illustrated encounter; review and deployment status are recorded with the PR. [Release record](https://github.com/anotherpanacea-eng/learning-garden/pull/494#issuecomment-6704728389). Current riddle words/order/help remain their own saved work. This is a bounded E2/E3 bridge, not a language grader or the full idiom/metaphor/allusion programme.
 
 ## Spinner Table410 · equal stops, unequal shares
 
