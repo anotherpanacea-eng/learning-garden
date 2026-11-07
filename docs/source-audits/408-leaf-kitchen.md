@@ -1,6 +1,6 @@
 #408 · Leaf Kitchen science and model boundary
 
-Read2026-11-07. This is an original educational explanation, not copied teaching prose or figure adaptation. All finite copy/diagram contracts are in [the packet](../content/408-leaf-kitchen-text.md); [spec408](../specs/408-leaf-kitchen.md) defines scope. Complete independent science/model review remains pending.
+Read2026-11-07. This is an original educational explanation, not copied teaching prose or figure adaptation. All finite copy/diagram contracts are in [the packet](../content/408-leaf-kitchen-text.md); [spec408](../specs/408-leaf-kitchen.md) defines scope. Complete independent science/model review and six-lens specification repair closure are BUILD-READY at16b9efca.
 
 - [OpenStax Biology2e §8.1](https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis): overall material/energy/product roles; chloroplast/chlorophyll; glucose is formed through multiple steps, not the immediate product of one simple reaction. Read full section, not search excerpts. No images, figures or text copied. Original qualitative diagrams do not trace oxygen atoms or molecule quantities.
 - [OpenStax Biology2e §8.3](https://openstax.org/books/biology-2e/pages/8-3-using-light-energy-to-make-organic-molecules): carbohydrate formation/energy storage and plant cellular respiration; do not teach misleading “dark reactions occur only at night,” reproduce biochemical details or claim all plant gas exchange follows a single arrow.

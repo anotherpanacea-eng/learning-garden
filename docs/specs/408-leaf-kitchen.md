@@ -1,6 +1,6 @@
 #408 · Leaf Kitchen: materials, energy and food
 
-Status: proposed; independent six-lens specification and complete finite science/model review precede code. Existing LG-1 / LG-G1. A bounded S2-IV bridge under149/160, inside existing Living Layers; no new destination, course-completion claim or learner record.
+Status: independently BUILD-READY at16b9efca after six-lens specification, complete finite science/model review and focused repair closure. Implementation in progress. Existing LG-1 / LG-G1. A bounded S2-IV bridge under149/160, inside existing Living Layers; no new destination, course-completion claim or learner record.
 
 ## Missing concept and story job
 
