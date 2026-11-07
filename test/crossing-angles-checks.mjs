@@ -834,16 +834,18 @@ const chaseFamilies=[
  {givens:[[105,135],[115,120],[125,140]],keys:[[120,60,45],[125,55,60],[95,85,40]],offered:[['point','opposite','triangle'],['line','opposite','triangle'],['parts','line','opposite']],accepted:[['point'],['line'],['parts','line']],example:[110,132,118,62,48]},
  {givens:[[37,68],[42,61],[29,84]],keys:[[75,105],[77,103],[67,113]],offered:[['triangle','opposite','point'],['line','exterior','opposite']],accepted:[['triangle'],['line','exterior']],example:[40,64,76,104]},
  {givens:[[35],[52],[68]],keys:[[35,35,145],[52,52,128],[68,68,112]],offered:[['corresponding','alternate','cointerior'],['opposite','alternate','triangle'],['line','cointerior','opposite']],accepted:[['corresponding'],['opposite','alternate'],['line','cointerior']],example:[40,40,40,140]},
- {givens:[[25],[37],[58]],keys:[[65,25,65],[53,37,53],[32,58,32]],offered:[['corner','point','insufficient'],['triangle','alternate','opposite'],['corner','alternate','opposite']],accepted:[['corner'],['triangle','alternate'],['corner','alternate']],example:[30,60,30,60]}
+ {givens:[[25],[37],[58]],keys:[[65,25,65],[53,37,53],[32,58,32]],offered:[['corner','point','insufficient'],['triangle','alternate','opposite'],['corner','alternate','opposite']],accepted:[['corner'],['triangle','alternate'],['corner','alternate']],example:[30,60,30,60]},
+ {givens:[[5],[6],[8]],keys:[[108,72],[120,60],[135,45]],offered:[['regular','line','point'],['line','equalOutside','opposite']],accepted:[['regular','line'],['line','equalOutside']],example:[10,144,36]},
+ {givens:[[80,110,95],[95,100,85],[105,80,70]],keys:[[75,105],[80,100],[105,75]],offered:[['quad','regular','line'],['line','quadOutside','equalOutside']],accepted:[['quad','line'],['line','quadOutside']],example:[85,115,65,95,85]}
 ];
 const chasePacket=chaseFamilies.flatMap((f,family)=>f.keys.map((keys,variant)=>({family,variant,keys,givens:f.givens[variant],offered:f.offered,accepted:f.accepted})));
 const chaseAnswer=()=>({draft:'',reason:null,checked:false,hint:false,exampleSeen:false,solution:false});
 const chaseBoard=n=>({target:0,rotation:0,exampleStep:0,answers:Array.from({length:n},chaseAnswer)});
 assert.deepEqual(initialChase,{case:0,view:'solve',boards:chasePacket.map(p=>chaseBoard(p.keys.length))});
 const chaseFresh=createCrossingAngles().chase;
-for(let i=0;i<15;i++){
+for(let i=0;i<chasePacket.length;i++){
  assert.notEqual(initialChase.boards[i],chaseFresh.boards[i]);assert.notEqual(initialChase.boards[i].answers,chaseFresh.boards[i].answers);
- for(let j=0;j<15;j++)if(i!==j){assert.notEqual(initialChase.boards[i],initialChase.boards[j]);assert.notEqual(initialChase.boards[i].answers,initialChase.boards[j].answers);}
+ for(let j=0;j<chasePacket.length;j++)if(i!==j){assert.notEqual(initialChase.boards[i],initialChase.boards[j]);assert.notEqual(initialChase.boards[i].answers,initialChase.boards[j].answers);}
  for(const a of initialChase.boards[i].answers){assert.equal(initialChase.boards.flatMap(b=>b.answers).filter(b=>b===a).length,1);assert.ok(!chaseFresh.boards.flatMap(b=>b.answers).includes(a));}
 }
 const chaseStart=(caseIndex=0)=>changeCrossingAngles(changeCrossingAngles(createCrossingAngles(),'page','chase'),'chase-case',caseIndex);
@@ -861,6 +863,8 @@ for(const [i,p] of chasePacket.entries()){
  if(p.family===2)assert.deepEqual(k,[180-a-b,a+b]);
  if(p.family===3)assert.deepEqual(k,[a,a,180-a]);
  if(p.family===4)assert.deepEqual(k,[90-a,a,90-a]);
+ if(p.family===5)assert.deepEqual(k,[(a-2)*180/a,360/a]);
+ if(p.family===6){assert.deepEqual(k,[360-a-b-p.givens[2],a+b+p.givens[2]-180]);assert.ok([...p.givens,k[0]].every(v=>v>0&&v<180),'four positive convex corners sum to one turn');}
  assert.ok(k.every(v=>v>0&&v<180),'finite data admits positive geometric sectors');
  let w=chaseStart(i);const before=structuredClone(w);freezeTree(w);
  for(let t=0;t<k.length;t++){
@@ -896,23 +900,27 @@ for(const [i,p] of chasePacket.entries()){
 }
 const insufficient=chaseApply(chaseStart(12),['chase-reason','insufficient'],['chase-check']);
 assert.match(chaseText(insufficient),/The marked right corner and angle a do determine x\. Try a whole-number angle/);
-for(const family of chaseFamilies){const exampleKeys=family.example.slice(family===chaseFamilies[1]||family===chaseFamilies[2]?2:1);assert.ok(exampleKeys.every(n=>!family.keys.flat().includes(n)),'worked targets are disjoint from own practice packet');}
+for(const family of chaseFamilies){const exampleKeys=family.example.slice(family===chaseFamilies[6]?3:family===chaseFamilies[1]||family===chaseFamilies[2]?2:1);assert.ok(exampleKeys.every(n=>!family.keys.flat().includes(n)),'worked targets are disjoint from own practice packet');}
+// The two new examples use the same mathematical totals with independent facts.
+assert.deepEqual(chaseFamilies[5].example.slice(1),[(10-2)*180/10,360/10]);
+assert.deepEqual(chaseFamilies[6].example.slice(3),[360-85-115-65,85+115+65-180]);
 // Leading zeros remain in the draft, while values follow integer arithmetic.
 {const w=chaseApply(chaseWrite(chaseApply(chaseStart(3),['chase-target',2]),'045','parts'),['chase-check']);assert.equal(chaseHeld(w).answers[2].draft,'045');assert.match(chaseText(w),/z=45°/);assert.ok(!chaseText(w).includes('z=045°'));}
 // A wrong predecessor remains a response, never a source fact for a later key.
-for(const [i,t,r] of [[0,1,'opposite'],[3,1,'line'],[3,2,'parts'],[6,1,'line'],[9,1,'opposite'],[9,2,'line'],[12,1,'triangle'],[12,2,'corner']]){
- let w=chaseApply(chaseWrite(chaseStart(i),1),['chase-check'],['chase-target',t]);
+for(const [i,t,r] of [[0,1,'opposite'],[3,1,'line'],[3,2,'parts'],[6,1,'line'],[9,1,'opposite'],[9,2,'line'],[12,1,'triangle'],[12,2,'corner'],...[15,16,17,18,19,20].flatMap(i=>[[i,0,'line'],[i,1,'line']])]){
+ const predecessor=i>=15?1-t:0;
+ let w=chaseApply(chaseWrite(changeCrossingAngles(chaseStart(i),'chase-target',predecessor),1),['chase-check'],['chase-target',t]);
  const wrong=chaseApply(chaseWrite(w,0,r),['chase-check']);assert.match(chaseText(wrong),/and the value you used for [xyz]/,'predecessor note follows the selected method');
- w=chaseApply(chaseWrite(w,chasePacket[i].keys[t],r),['chase-check']);assert.match(chaseText(w),new RegExp(`${'xyz'[t]}=${chasePacket[i].keys[t]}°`));assert.equal(chaseHeld(w).answers[0].draft,'1');assert.equal(chaseHeld(w).answers[0].checked,true);
+ w=chaseApply(chaseWrite(w,chasePacket[i].keys[t],r),['chase-check']);assert.match(chaseText(w),new RegExp(`${'xyz'[t]}=${chasePacket[i].keys[t]}°`));assert.equal(chaseHeld(w).answers[predecessor].draft,'1');assert.equal(chaseHeld(w).answers[predecessor].checked,true);
 }
 // Every nested field is validated, including inactive boards and answers.
 function rejectChase(chase){const bad={...createCrossingAngles(),page:'chase',chase};assert.equal(crossingAnglesModel(bad),null);assert.equal(crossingAnglesNarration(bad),'');assert.equal(changeCrossingAngles(bad,'page','build'),bad);}
 const validChase=chaseStart().chase;
 for(const bad of [null,[],{},'solve',Object('solve')])rejectChase(bad);
-for(const value of [-1,15,1.5,'1',Object(1),true,NaN,Infinity,null])rejectChase({...validChase,case:value});
+for(const value of [-1,chasePacket.length,1.5,'1',Object(1),true,NaN,Infinity,null])rejectChase({...validChase,case:value});
 for(const value of ['bad',null,['solve'],Object('solve'),true])rejectChase({...validChase,view:value});
 for(const value of [null,{},[],validChase.boards.slice(1),[...validChase.boards,validChase.boards[0]]])rejectChase({...validChase,boards:value});
-for(const boardIndex of [0,14]){
+for(const boardIndex of [0,14,15,16,17,18,19,20]){
  const mutateBoard=delta=>({...validChase,boards:validChase.boards.map((b,i)=>i===boardIndex?{...b,...delta}:b)});
  const n=chasePacket[boardIndex].keys.length;
  for(const [field,values] of [['target',[-1,n,.5,'0',Object(0),null,true,NaN,Infinity]],['rotation',[-30,360,15,30.1,'30',Object(30),null,true,NaN,Infinity]],['exampleStep',[-1,n+1,.5,'0',Object(0),null,true,NaN,Infinity]],['answers',[null,{},[],validChase.boards[boardIndex].answers.slice(1),[...validChase.boards[boardIndex].answers,chaseAnswer()]]]])for(const value of values)rejectChase(mutateBoard({[field]:value}));
@@ -923,13 +931,13 @@ for(const boardIndex of [0,14]){
 }
 for(const [i,p] of chasePacket.entries())for(let t=0;t<p.keys.length;t++){
  const w=chaseApply(chaseStart(i),['chase-target',t]);
- for(const id of ['line','point','opposite','triangle','parts','exterior','corresponding','alternate','cointerior','corner','insufficient'])if(!p.offered[t].includes(id)){
+ for(const id of ['line','point','opposite','triangle','parts','exterior','corresponding','alternate','cointerior','corner','insufficient','regular','equalOutside','quad','quadOutside'])if(!p.offered[t].includes(id)){
   assert.equal(changeCrossingAngles(w,'chase-reason',id),w);rejectChase(chaseWith(w,{}, {reason:id}).chase);
  }
  const reasonOrder=p.offered[t].map((_,j)=>p.offered[t][(j+(i+t)%3)%3]);
  assert.deepEqual(chaseProjection(w).active.reasons.map(r=>r.id),reasonOrder,'stable authored order rotates by case and target');
 }
-for(const [action,badValues] of [['chase-case',[-1,15,.5,'1',Object(1),true,null,NaN]],['chase-target',[-1,2,.5,'1',Object(1),true,null,NaN]],['chase-rotation',[-30,360,15,.5,'30',Object(30),true,null,NaN]],['chase-digit',['','12','a','１',1,Object('1'),true,null]],['chase-reason',['bad',1,['line'],Object('line'),true,null]]]){
+for(const [action,badValues] of [['chase-case',[-1,chasePacket.length,.5,'1',Object(1),true,null,NaN]],['chase-target',[-1,2,.5,'1',Object(1),true,null,NaN]],['chase-rotation',[-30,360,15,.5,'30',Object(30),true,null,NaN]],['chase-digit',['','12','a','１',1,Object('1'),true,null]],['chase-reason',['bad',1,['line'],Object('line'),true,null]]]){
  const w=chaseStart();for(const value of badValues)assert.equal(changeCrossingAngles(w,action,value),w,`${action} rejects malformed value`);
 }
 const chaseZero=['chase-backspace','chase-clear','chase-check','chase-hint','chase-solution','chase-example','chase-restart'];
@@ -953,12 +961,12 @@ for(const page of ['build','learn','parallel','triangle','matching']){
 // All per-case work survives case/page movement; restart clears only its board.
 {
  let w=chaseStart();
- for(let i=0;i<15;i++)w=chaseApply(w,['chase-case',i],['chase-target',chasePacket[i].keys.length-1],['chase-rotation',30*(i%12)],['chase-digit',String(i%10)],['chase-hint'],['chase-example'],['chase-example-step',1],['chase-return']);
+ for(let i=0;i<chasePacket.length;i++)w=chaseApply(w,['chase-case',i],['chase-target',chasePacket[i].keys.length-1],['chase-rotation',30*(i%12)],['chase-digit',String(i%10)],['chase-hint'],['chase-example'],['chase-example-step',1],['chase-return']);
  const held=structuredClone(w.chase.boards);
- for(let i=0;i<15;i++){w=changeCrossingAngles(w,'chase-case',i);assert.deepEqual(chaseHeld(w),held[i]);}
+ for(let i=0;i<chasePacket.length;i++){w=changeCrossingAngles(w,'chase-case',i);assert.deepEqual(chaseHeld(w),held[i]);}
  for(const page of ['build','learn','parallel','triangle','matching','chase']){w=changeCrossingAngles(w,'page',page);assert.deepEqual(w.chase.boards,held);}
  w=changeCrossingAngles(w,'chase-case',7);const reset=changeCrossingAngles(w,'chase-restart');assert.equal(reset.chase.case,7);assert.deepEqual(chaseHeld(reset),chaseBoard(2));assert.equal(changeCrossingAngles(reset,'chase-restart'),reset);
- for(let i=0;i<15;i++)if(i!==7){assert.equal(reset.chase.boards[i],w.chase.boards[i]);assert.deepEqual(reset.chase.boards[i],held[i]);}
+ for(let i=0;i<chasePacket.length;i++)if(i!==7){assert.equal(reset.chase.boards[i],w.chase.boards[i]);assert.deepEqual(reset.chase.boards[i],held[i]);}
 }
 // Explicitly printed values form a finite union, not transitive inference.
 for(const [i,n,provided] of [[0,1,[1]],[3,1,[0,1]],[3,2,[2]],[6,1,[1]],[9,2,[2]],[12,2,[1,2]]]){
@@ -972,11 +980,38 @@ for(const [i,n,provided] of [[0,1,[1]],[3,1,[0,1]],[3,2,[2]],[6,1,[1]],[9,2,[2]]
  assert.ok(chaseHeld(w).answers.every(a=>a.draft===''&&a.reason===null&&!a.checked));
  const union=chaseApply(w,['chase-target',0],['chase-solution']);assert.deepEqual(chaseProjection(union).targets.map((t,j)=>t.shown?j:null).filter(v=>v!==null),[...new Set([0,...provided])].sort());
 }
+// Every appended solution provides only its own target; inverse line routes
+// never promote a predecessor draft or a logically inferable value into help.
+for(let i=15;i<chasePacket.length;i++)for(const target of [0,1]){
+ const start=changeCrossingAngles(chaseStart(i),'chase-target',target),shown=changeCrossingAngles(start,'chase-solution'),m=chaseProjection(shown);
+ assert.deepEqual(m.targets.map(t=>t.shown),[target===0,target===1]);
+ assert.deepEqual(chaseHeld(shown).answers.map(a=>[a.draft,a.reason,a.checked]),[['',null,false],['',null,false]]);
+ assert.ok(!new RegExp(`${'xy'[1-target]}\\s*=\\s*\\d+°`).test(m.active.solution),'solution never prints the other unknown as a provided value');
+ const dirty=chaseApply(shown,['chase-digit','9'],['chase-hint'],['chase-example'],['chase-example-step',2],['chase-return'],['chase-rotation',330]);
+ const reset=changeCrossingAngles(dirty,'chase-restart');assert.deepEqual(chaseHeld(reset),chaseBoard(2));
+ for(let j=0;j<chasePacket.length;j++)if(j!==i)assert.equal(reset.chase.boards[j],dirty.chase.boards[j],'restart preserves every other board');
+}
+// Side counts remain source counts in facts/description/Hear, while only the
+// three quadrilateral givens become positioned degree tags.
+for(const {index,n} of [{index:15,n:5},{index:16,n:6},{index:17,n:8},{index:15,n:10}]){
+ const w=n===10?chaseApply(chaseStart(index),['chase-example']):chaseStart(index),m=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+ assert.equal(m.family,'regular');assert.deepEqual(m.geometry.givens,[]);
+ for(const text of [m.geometry.facts.join(' '),m.geometry.description,hear]){assert.ok(text.includes(`${n} sides`));assert.ok(!/n\s*=\s*\d+°/.test(text));assert.ok(!/Given\s*\./.test(text));}
+ assert.ok(!/class="[^"]*ca-chase-given/.test(html),'no floating count or angle-given tag');
+ if(n!==10)assert.equal(m.variantLabel,`Regular polygon · ${n} sides`);
+}
+for(const index of [18,19,20])for(const example of [false,true]){
+ const w=example?chaseApply(chaseStart(index),['chase-example']):chaseStart(index),m=chaseProjection(w),html=renderCrossingAngles(w);
+ assert.equal(m.family,'quadrilateral');assert.deepEqual(m.geometry.givens.map(g=>[g.name,g.value]),['a','b','c'].map((name,j)=>[name,(example?[85,115,65]:chasePacket[index].givens)[j]]));
+ assert.deepEqual(m.geometry.givens.map(g=>g.position),[[100,65],[320,65],[540,65]]);
+ const tags=[...html.matchAll(/<span\b[^>]*class="[^"]*ca-chase-given[^>]*>([^<]*)<\/span>/g)].map(x=>x[1]);
+ assert.deepEqual(tags,m.geometry.givens.map(g=>g.label),'only the three known degree tags are rendered');
+}
 // Deliberately different valid inactive work has no active-page projection.
 const chaseOldDeltas=[{angle:165},{rotation:330},{pair:'adjacent'},{prompt:5},{card:3},{step:2},{twoMode:'panel'},{twoSpacing:'far'},{twoLean:10},{twoPair:'alternate'},{twoMove:4},{twoPrompt:5},{triMode:'panel'},{triView:'outside'},{triA:45,triB:75},{triSize:'small'},{triGather:2},{triProof:2},{triPrompt:5},{polySides:8},{polyKind:'stretched'},{polySize:'small'},{polyView:'walk'},{polyCorner:3},{polyDraw:2},{polyWalk:3},{polyPrompt:5},{polyPanelCorner:2},{polyPanelDraw:1},{polyPanelWalk:3},{matching:{...createCrossingAngles().matching,case:'aaa',view:'letters',prompt:5}}];
 const chaseContexts=[null,captureCrossingPanel({originalWidth:9,originalHeight:7,width:1,height:12},'Synthetic tall source'),captureCrossingPanel({originalWidth:2,originalHeight:11,width:12,height:1},'Synthetic wide source')];
 function chaseInvariant(w,changes){const m=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);for(const [v,c] of changes){assert.deepEqual(chaseProjection(v,c),m);assert.equal(renderCrossingAngles(v,c),html);assert.equal(crossingAnglesNarration(v,c),hear);}}
-for(const i of [0,3,6,9,12]){
+for(const i of [0,3,6,9,12,15,16,17,18,19,20]){
  const w=chaseApply(chaseStart(i),['chase-hint']);
  const inactive=w.chase.boards.map((b,j)=>j===i?b:{...b,target:chasePacket[j].keys.length-1,rotation:330,exampleStep:1,answers:b.answers.map((a,t)=>({...a,draft:'999',reason:chasePacket[j].offered[t][0],checked:true,hint:true,exampleSeen:true,solution:true}))});
  chaseInvariant(w,[...chaseOldDeltas.map(d=>[{...w,...d},null]),...chaseContexts.map(c=>[w,c]),[{...w,chase:{...w.chase,boards:inactive}},null]]);
@@ -987,9 +1022,10 @@ for(const old of [initial,panelWork,parallel,triangle,poly,matchWork()]){
 }
 // Examples reveal only their finite step; all practice state is excluded.
 for(const [f,family] of chaseFamilies.entries()){
- const n=family.keys[0].length,exampleGivens=family.example.slice(0,f===1||f===2?2:1),exampleKeys=family.example.slice(exampleGivens.length);
+ const n=family.keys[0].length,sourceCount=f===6?3:f===1||f===2?2:1,exampleSource=family.example.slice(0,sourceCount),exampleGivens=f===5?[]:exampleSource,exampleKeys=family.example.slice(sourceCount);
  for(let step=0;step<=n;step++){
   const w=chaseApply(chaseStart(f*3),['chase-example'],['chase-example-step',step]),m=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+  if(f>=5){for(let t=step;t<n;t++)assert.ok(!new RegExp(`${'xy'[t]}\\s*=\\s*\\d+°`).test(m.working.join(' ')),'unrevealed example unknown has no numeric assignment in working');}
   assert.equal(m.view,'example');assert.equal(m.active,null);assert.equal(m.working.length,step);assert.deepEqual(m.targets.map(t=>t.value),exampleKeys.map((k,j)=>j<step?k:null));
   assert.deepEqual(m.geometry.givens.map(g=>g.value),exampleGivens);assert.ok(hear.startsWith('A different worked sketch'));
   assert.ok(!html.includes('data-crossing-angles-action="chase-check"'));assert.ok(!html.includes('data-crossing-angles-action="chase-case"'));assert.ok(!html.includes('data-crossing-angles-action="chase-digit"'));
@@ -1036,6 +1072,16 @@ const chaseSchematics=[
  {points:{A:[-2,1],P:[0,1],B:[2,1],C:[-2,-1],Q:[1,-1],D:[3,-1],R:[-1,3],S:[2,-3]},center:[.5,0],scale:45,lines:['AB','CD','RS'],regions:{a:'PQB',x:'QSD',y:'QPC',z:'QDP'}},
  {points:{A:[0,0],B:[4,0],C:[4,3],D:[0,3]},center:[2,1.5],scale:60,lines:['AB','BC','CD','DA','AC'],regions:{a:'ABC',x:'ACD',y:'CDA',z:'CAB'}}
 ];
+// Polygon fixtures use the stipulated radius and vertices independently of the
+// runtime plans. Internal vertices supply outline edges but have no point labels.
+function regularChaseSketch(n){
+ const vertices=Array.from({length:n},(_,i)=>{const a=(90+360*i/n)*Math.PI/180;return [3*Math.cos(a),3*Math.sin(a)];});
+ const A=vertices[0],C=vertices[n-1],incoming=sub(A,C),length=Math.hypot(...incoming);
+ const points={...Object.fromEntries(vertices.map((p,i)=>[`V${i}`,p])),A,B:vertices[1],C,D:A.map((v,i)=>v+.75*incoming[i]/length)};
+ return {points,labels:[...'ABCD'],center:[0,0],scale:46,lines:[...vertices.map((_,i)=>[`V${i}`,`V${(i+1)%n}`]),['A','D']],regions:{x:'ABC',y:'ADB'}};
+}
+const quadChaseSketch=(()=>{const A=[0,0],B=[4,0],C=[3,3],D=[-1,2],v=sub(D,C),length=Math.hypot(...v);return {points:{A,B,C,D,E:D.map((n,i)=>n+.75*v[i]/length)},center:[1.5,1.25],scale:46,lines:['AB','BC','CD','DA','DE'],regions:{a:'ABD',b:'BCA',c:'CDB',x:'DAC',y:'DEA'}};})();
+const chaseGeometryFixtures=[...chaseSchematics.map((s,f)=>({s,f,work:()=>chaseStart(f*3)})),...[5,6,8].map((n,j)=>({s:regularChaseSketch(n),f:5,work:()=>chaseStart(15+j)})),...[18,19,20].map(i=>({s:quadChaseSketch,f:6,work:()=>chaseStart(i)})),{s:regularChaseSketch(10),f:5,work:()=>chaseApply(chaseStart(15),['chase-example'])},{s:quadChaseSketch,f:6,work:()=>chaseApply(chaseStart(18),['chase-example'])}];
 function chaseProject(p,s,rotation){const [x,y]=p.map((v,i)=>(v-s.center[i])*s.scale),r=rotation*Math.PI/180;return [320+x*Math.cos(r)-y*Math.sin(r),280-x*Math.sin(r)-y*Math.cos(r)];}
 const chaseAttr=(s,k)=>s.match(new RegExp(`(?:^|\\s)${k}="([^"]*)"`))?.[1];
 const chaseSvgTag=(html,tag,key,value)=>{const matches=[...html.matchAll(new RegExp(`<${tag}\\b([^>]+)>`,'g'))].filter(m=>chaseAttr(m[1],key)===String(value));assert.equal(matches.length,1,`${key}=${value} has exactly one actual SVG element`);return matches[0][1];};
@@ -1047,25 +1093,38 @@ function chaseExpectedArc(s,region,rotation,name){
  const at=(angle,r)=>[center[0]+r*Math.cos(angle),center[1]-r*Math.sin(angle)];
  return {center,start,sweep,radius,first:at(start,radius),last:at(start+sweep,radius),leader:at(start+sweep/2,name==='p'?96:40)};
 }
-for(const [f,s] of chaseSchematics.entries())for(let rotation=0;rotation<360;rotation+=30){
- const w=chaseApply(chaseStart(f*3),['chase-rotation',rotation]),m=chaseProjection(w),g=m.geometry,html=renderCrossingAngles(w);
- assert.deepEqual(g.points.map(p=>p.name).sort(),Object.keys(s.points).sort());
- for(const [name,raw] of Object.entries(s.points)){
+for(const {f,s,work} of chaseGeometryFixtures)for(let rotation=0;rotation<360;rotation+=30){
+ // Examples use their fixed zero pose, regardless of held practice rotation.
+ if(work().chase.view==='example'&&rotation!==0)continue;
+ const w=chaseApply(work(),['chase-rotation',rotation]),m=chaseProjection(w),g=m.geometry,html=renderCrossingAngles(w);
+ const visibleNames=s.labels||Object.keys(s.points);
+ assert.deepEqual(g.points.map(p=>p.name).sort(),[...visibleNames].sort());
+ for(const name of visibleNames){const raw=s.points[name];
   const expected=chaseProject(raw,s,rotation),point=g.points.find(p=>p.name===name);chaseNear(point.point,expected,'single common projection of actual raw point');
   assert.ok(point.point.every((v,i)=>v>=0&&v<=[640,560][i]),'rotated endpoint in plot');
   const label=[...html.matchAll(/<span\b([^>]*data-crossing-angles-label="[^"]+"[^>]*)>([^<]*)<\/span>/g)].find(x=>chaseAttr(x[1],'data-crossing-angles-label')===name);assert.ok(label,'actual HTML point label');assert.equal(label[2],name);
   const labelPosition=chaseSvgPoint(label[1],['data-ca-x','data-ca-y']);assert.ok(Math.hypot(...sub(labelPosition,expected))>=44,'point name is displaced from its own vertex');assert.ok(labelPosition.every((v,i)=>Number.isFinite(v)&&v>=0&&v<=[640,560][i]),'point name anchor remains in plot'); // Actual text-box/arc clearance is checked in the browser, not by copying a layout formula.
+  if(f===6){const own=Math.hypot(...sub(labelPosition,expected));for(const other of visibleNames.filter(n=>n!==name))assert.ok(Math.hypot(...sub(labelPosition,chaseProject(s.points[other],s,rotation)))>own+.01,'quadrilateral point name is nearest its own vertex');}
  }
  assert.equal(g.segments.length,s.lines.length);
  s.lines.forEach(([a,b],i)=>{
   const start=chaseProject(s.points[a],s,rotation),end=chaseProject(s.points[b],s,rotation);chaseNear(g.segments[i].start,start,'segment source endpoint');chaseNear(g.segments[i].end,end,'segment terminal endpoint');
+  for(const p of [start,end])assert.ok(p.every((v,j)=>v>=0&&v<=[640,560][j]),'every outline/extension endpoint remains in plot');
   const actual=chaseSvgTag(html,'line','data-chase-line',i);chaseNear(chaseSvgPoint(actual,['x1','y1']),start,'actual SVG line source');chaseNear(chaseSvgPoint(actual,['x2','y2']),end,'actual SVG line end');
  });
  for(const [name,region] of Object.entries(s.regions)){
   const e=chaseExpectedArc(s,region,rotation,name),sector=g.sectors.find(a=>a.name===name);assert.ok(sector);chaseNear(sector.center,e.center,'true sector vertex');close(sector.sweep,e.sweep*180/Math.PI,'correct named sector sweep');close(sector.radius,e.radius,'arc radius');chaseNear(sector.arcStart,e.first,'arc starts on first named ray');chaseNear(sector.arcEnd,e.last,'arc ends on second named ray');chaseNear(sector.leader,e.leader,'connector sector bisector');
-  if('xyz'.includes(name)){const button=chaseSvgTag(html,'button','data-crossing-angles-chase-target',name);chaseNear(chaseSvgPoint(button,['data-chase-leader-x','data-chase-leader-y']),e.leader,'actual HTML target connector source');}
+  if('xyz'.includes(name)){const button=chaseSvgTag(html,w.chase.view==='example'?'div':'button','data-crossing-angles-chase-target',name);chaseNear(chaseSvgPoint(button,['data-chase-leader-x','data-chase-leader-y']),e.leader,'actual HTML target connector source');}
   const actual=chaseSvgTag(html,'path','data-chase-sector',name),path=chaseAttr(actual,'d'),values=nums(path);assert.equal(values.length,9);chaseNear(values.slice(0,2),e.first,'actual SVG arc first ray');chaseNear(values.slice(2,4),[e.radius,e.radius],'actual SVG radius');assert.deepEqual(values.slice(4,7),[0,e.sweep>Math.PI?1:0,0]);chaseNear(values.slice(7),e.last,'actual SVG arc second ray');
   for(let a=0;a<=20;a++){const angle=e.start+e.sweep*a/20,p=[e.center[0]+e.radius*Math.cos(angle),e.center[1]-e.radius*Math.sin(angle)];assert.ok(p[0]>=0&&p[0]<=640&&p[1]>=0&&p[1]<=560,'entire swept arc lies in plot');}
+ }
+ if(f>=5){
+  const [before,at,after]=f===5?['C','A','D']:['C','D','E'];
+  close(cross(sub(s.points[before],s.points[at]),sub(s.points[after],s.points[at])),0,'inside and outside share a straight extended side');
+  assert.ok(dot(sub(s.points[before],s.points[at]),sub(s.points[after],s.points[at]))<0,'extension ends on opposite side of actual vertex');
+  const x=g.sectors.find(a=>a.name==='x'),y=g.sectors.find(a=>a.name==='y');close(x.sweep+y.sweep,180,'adjacent interior and positive outside angle form a half turn');
+  if(f===5){close(x.sweep,(s.lines.length-3)*180/(s.lines.length-1),'regular schematic has independently determined interior angle');close(y.sweep,360/(s.lines.length-1),'regular schematic outside turn');}
+  if(w.chase.view==='solve')for(const target of [0,1])assert.deepEqual(chaseProjection(changeCrossingAngles(w,'chase-target',target)).geometry.sectors.filter(a=>a.selected).map(a=>a.name).sort(),Object.keys(s.regions).sort(),'both targets emphasize all relevant sectors');
  }
  assert.equal(g.rightMarks.length,f===4?4:0);assert.equal(g.parallelMarks.length,f===3?2:f===4?6:0);
  if(f===4)for(const [j,name] of [...'ABCD'].entries()){
@@ -1100,11 +1159,12 @@ const chaseMissingCondition={opposite:/not across the same crossing/,point:/do n
 for(const [i,p] of chasePacket.entries())for(let t=0;t<p.keys.length;t++){
  const w=changeCrossingAngles(chaseStart(i),'chase-target',t);
  for(const id of p.offered[t].filter(r=>!p.accepted[t].includes(r))){
-  assert.ok(chaseMissingCondition[id]);
-  for(const value of [0,p.keys[t]])assert.match(chaseProjection(chaseApply(chaseWrite(w,value,id),['chase-check'])).active.feedback,chaseMissingCondition[id],`case ${i}, ${'xyz'[t]} rejected ${id} explains its actual absent condition`);
+  const missing=p.family===5&&id==='point'?/half turn at A.*different points/:p.family===5&&id==='opposite'?/beside each other at A, not across a crossing/:p.family===6&&id==='regular'?/inside corners are unequal.*Share equally only when/:p.family===6&&id==='equalOutside'?/outside turns are not all equal.*four equal shares do not find y/:chaseMissingCondition[id];
+  assert.ok(missing);
+  for(const value of [0,p.keys[t]])assert.match(chaseProjection(chaseApply(chaseWrite(w,value,id),['chase-check'])).active.feedback,missing,`case ${i}, ${'xyz'[t]} rejected ${id} explains its actual absent condition`);
  }
  for(const id of p.accepted[t]){
-  const usesPredecessor=(p.family===0&&t===1&&id==='opposite')||(p.family===1&&(t===1||t===2&&id==='parts'))||(p.family===2&&t===1&&id==='line')||(p.family===3&&(t===1&&id==='opposite'||t===2&&id==='line'))||(p.family===4&&(t===1&&id==='triangle'||t===2));
+  const usesPredecessor=(p.family===0&&t===1&&id==='opposite')||(p.family===1&&(t===1||t===2&&id==='parts'))||(p.family===2&&t===1&&id==='line')||(p.family===3&&(t===1&&id==='opposite'||t===2&&id==='line'))||(p.family===4&&(t===1&&id==='triangle'||t===2))||(p.family>=5&&id==='line');
   const feedback=chaseProjection(chaseApply(chaseWrite(w,0,id),['chase-check'])).active.feedback;
   assert.equal(/and the value you used for [xyz]/.test(feedback),usesPredecessor,'method-specific predecessor note is independent of response history');
  }
