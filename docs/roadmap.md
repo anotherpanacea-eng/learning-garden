@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Polygon Frames418 · a total, a corner and a lap
 
-[Polygon Frames418](specs/418-polygon-frames.md) proposes the next M5-III/IV and M7-II bridge from182, as another view in Triangle Corners. Split convex frames into triangles, distinguish totals from equal shares, compare regular/stretched frames and the actual copied rectangle, then follow the positive exterior turns around one lap. Non-square rectangles retain their equal-angle facts: irregular does not imply unequal corners. The finite specification is independently BUILD-READY atd5c8f1a6. Implementation and qualification are in progress; not yet published. Independent unknown-angle fluency, nonconvex polygons and congruence remain separate.
+[Polygon Frames418](specs/418-polygon-frames.md) proposes the next M5-III/IV and M7-II bridge from182, as another view in Triangle Corners. Split convex frames into triangles, distinguish totals from equal shares, compare regular/stretched frames and the actual copied rectangle, then follow the positive exterior turns around one lap. Non-square rectangles retain their equal-angle facts: irregular does not imply unequal corners. The finite specification is independently BUILD-READY atd5c8f1a6. [PR501](https://github.com/anotherpanacea-eng/learning-garden/pull/501) contains the implementation; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/501#issuecomment-6709053952) owns acceptance and publication status. Independent unknown-angle fluency, nonconvex polygons and congruence remain separate.
 
 ## Triangle Corners417 · from one example to every triangle
 
