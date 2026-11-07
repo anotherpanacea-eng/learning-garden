@@ -172,7 +172,7 @@ import {destinationNotes} from './notebook-sections.mjs';
 import {initializeExplorerState,prepareProgressImport,MAX_IMPORT_BYTES} from './progress-transfer.mjs';
 import {progressTransferPanel} from './progress-transfer-ui.mjs';
 import {wordGardenPage,bindWordGarden} from './word-garden-ui.mjs';
-import {riddlesPage,riddlesEntry,bindRiddles} from './riddles-ui.mjs';
+import {riddlesPage,riddlesEntry,bindRiddles,resetMagpiePicturesVisit} from './riddles-ui.mjs';
 import {connectionPairsShown} from './learning-connections.mjs';
 import {connectionPanel,bindConnections} from './learning-connections-ui.mjs';
 import {bindSpiral,livingHubRooms} from './living-spiral-ui.mjs';
@@ -255,7 +255,7 @@ function touchActiveRooms(route){
  // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
  if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(stored)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
 }
-keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root],[data-qb-root],[data-cs-root],[data-dt-root],[data-ll-root],[data-lens-root],[data-rc-root],[data-pd-root],[data-cw-root],[data-rm-root],[data-cl-root],[data-stw-root]')?'':location.hash);
+keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root],[data-qb-root],[data-cs-root],[data-dt-root],[data-ll-root],[data-lens-root],[data-rc-root],[data-pd-root],[data-cw-root],[data-rm-root],[data-cl-root],[data-stw-root],[data-magpie-root]')?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/fair','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#science/lens','#living/layers','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash)||!!actFourRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
@@ -468,6 +468,7 @@ function render(){
   if(root!=='science'||slug!=='evidence'||choosingExplorer)resetEvidenceShelf();
   if(root!=='numbers'||slug!=='seeds'||choosingExplorer)resetSeedTurn();
   if(hash!=='#numbers/seeds'||choosingExplorer)resetSeedVisitBenches();
+  if(hash!=='#riddles'||choosingExplorer)resetMagpiePicturesVisit();
   if(root!=='field'||choosingExplorer)resetFieldKitTurn();
   if(root!=='numbers'||slug!=='path')resetWillowVoice();
   if(root!=='archive'||slug!=='labels'||choosingExplorer)resetLabelTurn();
@@ -919,7 +920,7 @@ function render(){
   else if(root==='french')html=frenchLanding(state);
   else if(root==='paris')html=parisLanding(state)+travelersArchiveEntry();
   else if(root==='words')html=wordGardenPage(state)+letterpressEntry()+stainedMapEntry()+endingsShelfEntry()+pipsCopyEntry()+wordListShelfEntry()+longWordEntry()+beatBenchEntry();
-  else if(root==='riddles')html=riddlesPage(state);
+  else if(root==='riddles')html=riddlesPage(state,{owner:explorerStore.active.id,child:hash==='#riddles'});
   else if(root==='facts')html=factsPage(state,slug);
   else if(root==='orchard'){
     if(rowsBench)html=rowsPage(state,explorerStore.active.id);
@@ -982,7 +983,7 @@ function render(){
 
   if(!choosingExplorer){const townChapter=root==='workshop'&&slug==='coins'?'market':root==='cafe'&&slug==='batches'?'birthday':root==='loft'&&!slug?'show':null;if(townChapter)html+=actTwoReturn(state,townChapter);}
   if(!choosingExplorer&&root==='cafe'&&!slug)html+=keeperInvitation(state,{blocked:keeperFilmBlocked()});
-  main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer&&hash!=='#cafe'&&!main.querySelector('[data-cl-root],[data-stw-root]'))offerHowto(main,location.hash);
+  main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer&&hash!=='#cafe'&&!main.querySelector('[data-cl-root],[data-stw-root],[data-magpie-root]'))offerHowto(main,location.hash);
   bindEgyptPhotoFallback(main);
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
   updateStorageNotice();bind();
@@ -1160,7 +1161,7 @@ function bind(){
  bindOrchard(state,{save,render,focus:focusElement});
  bindForage(state,{save,render,focus:focusElement,exposeFacts:pairs=>exposeStoryFacts({facts:pairs})});
  bindWordGarden(state,{save,render,focus:focusElement});
- bindRiddles(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
+ bindRiddles(state,{notebook:()=>state,isActive:()=>!choosingExplorer,stopSpeech,stopSound:stopBell,save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
  bindLoft(state,{save,render,focus:focusElement});
  bindRehearsalEntry(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,render});
  bindWorkshop(state,{save,render,navigate,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id});
