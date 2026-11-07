@@ -1,6 +1,6 @@
 # 421 · Polygon Chase
 
-Status: proposed addendum to [420](420-angle-chase.md), awaiting independent specification and complete finite mathematics/copy/visual-plan review before code. Continues admitted LG-1 / LG-G1, operational custody1625.
+Status: finite addendum to [420](420-angle-chase.md), independently BUILD-READY at475494ff after six-lens, complete finite mathematics/copy/visual-plan review and focused repair closure. [PR504](https://github.com/anotherpanacea-eng/learning-garden/pull/504) owns implementation review and publication status. Continues admitted LG-1 / LG-G1, operational custody1625.
 
 ## Purpose and scope
 
