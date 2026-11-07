@@ -109,7 +109,7 @@ Two stable tray buttons **Words used literally here** / **Words used figurativel
 | cake-food | A real cake is on the café table. Dot points at one slice: “Please pass a piece of cake.” | literal; Dot asks for an actual slice of food; `cake-slice` (original simple cake plate) |
 | cake-task | Dot solved a riddle quickly and said it felt easy: “That riddle was a piece of cake.” | figurative; the phrase describes an easy task here, not dessert; `easy-riddle` |
 | cat-animal | Pip's cat climbed into an open paper bag. Dot asks Pip to widen the opening so the cat can walk out: “Let the cat out of the bag.” | literal; an actual cat is leaving an actual open bag; `cat-bag` |
-| cat-news | Pip announced the surprise song before Ember arrived. Bramble had meant the news to wait: “Pip let the cat out of the bag.” | figurative; Pip revealed the surprise; `song-news` |
+| cat-news | Pip announced the surprise song to Ember before the party began. Bramble had meant the news to wait: “Pip let the cat out of the bag.” | figurative; Pip revealed the surprise; `song-news` |
 | ice-object | A large ice piece sits in a lemonade bowl. Dot asks Pip to crack it with a wooden spoon: “Break the ice.” | literal; Dot means an actual frozen piece; `ice-bowl` |
 | ice-talk | New guests sit quietly. Dot begins a friendly name game so everyone can talk: “Let's break the ice.” | figurative; Dot means starting conversation; `greeting` |
 
