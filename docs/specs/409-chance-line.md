@@ -8,7 +8,7 @@ Inside existing Seed Stall `#numbers/seeds`, offer **Compare chances on a line**
 
 ## Complete finite material
 
-All text, pictures and code are original. The same model rule stays visible on Build and in its narration: **These are make-believe counters. Each pictured position has the same chance on one draw. Put the counter back before another draw.** Equal-position selection is a stated virtual rule, not evidence about real seeds or physical fairness. Sun and moon are marks, not weather forecasts. No draws occur in this child.
+All text, pictures and code are original. The same model rule stays visible on Build and in its narration: **These are make-believe counters. Each pictured position has the same chance on every draw, regardless of earlier results. Put the counter back before another draw.** Equal-position selection is a stated virtual rule, not evidence about real seeds or physical fairness. Sun and moon are marks, not weather forecasts. No draws occur in this child.
 
 Eight fixed bags, in this order (id: sun, moon; reference Sun probability; line index out of12):
 
@@ -23,18 +23,18 @@ Eight fixed bags, in this order (id: sun, moon; reference Sun probability; line 
 | dozen-half | 6 | 6 | 6/12 = 1/2 | 6 |
 | dozen-most | 9 | 3 | 9/12 = 3/4 | 9 |
 
-Initial bag quarter, own pin absent, reference hidden. Every bag displays all its countable positions with sun/moon symbol plus text summary. All bags ask for Sun. A select starts **Choose a point**, then13 positions from0/12 through12/12; labels include reduced fractions and endpoints. Changing to a real option explicitly places an ungraded own pin; placeholder is not an answer and cannot erase work. Separate **Clear my pin** does that. No default midpoint, drag requirement or13 cramped touch targets. Each bag retains its own pin/reference during the room visit. A bag change keeps other proposals; no correctness scoring, no auto-reveal. **Show reference / Hide reference** toggles a separate reference pin, count fraction, reduced fraction and likelihood word. Own pin stays unmodified even if unexpected. No success/failure color or anatomical-style paths. Both pins remain individually legible at equal positions and endpoints: separate rows/shapes and text labels outside bounded diagram. HTML text16px, no shrunk SVG lettering. Line anchors0 impossible,1/2 even chance,1 certain; other positions have ticks. **These examples fit the twelfths marks. Other chances can fall between the marks.**
+Initial bag quarter, own pin absent, reference hidden. Every bag displays all its countable positions with sun/moon symbol plus text summary. All bags ask for Sun. A select starts **Choose a point**, then13 positions from0/12 through12/12; labels include reduced fractions and endpoints. Changing to a real option explicitly places an ungraded own pin; placeholder is not an answer and cannot erase work. Separate **Clear my pin** does that. No default midpoint, drag requirement or13 cramped touch targets. Each bag retains its own pin/reference during the room visit. A bag change keeps other proposals; no correctness scoring, no auto-reveal. **Show reference / Hide reference** toggles a separate reference pin, count fraction, reduced fraction only when different, and likelihood word. Endpoints reduce to 0 or 1, not 0/1 or 1/1; gcd(0,n) = n. Own pin stays unmodified even if unexpected. No success/failure color or anatomical-style paths. Both pins remain individually legible at equal positions and endpoints: separate rows/shapes and text labels outside bounded diagram. HTML text16px, no shrunk SVG lettering. Line anchors0 impossible,1/2 even chance,1 certain; other positions have ticks. **These examples fit the twelfths marks. Other chances can fall between the marks.**
 
 Three freely reachable pages: **Place a chance**, **See why**, **Try questions**. Page and bag navigation have bounded Previous/Next; no forced order or unlock. Back to Seed Stall always visible. Current page heading and a short action instruction lead each page. No long stacked lesson.
 
 See why has four freely turned pictures, using original counters and a0–1 line, with these exact mathematical ideas (wording may be split into short equivalent sentences):
 
-1. Count the whole: four equal-chance positions, one Sun. Sun has1/4 chance; three Moons stay in the denominator. A fraction names a share of one whole. One of four counters is one quarter of the set; two of four is two quarters. The denominator counts every counter, including the other mark. Zero means impossible; one means certain. Half is an even chance. Below half is unlikely, above half is likely for the named event, with endpoints named separately.
+1. Count the whole: four equal-chance positions, one Sun. Sun has1/4 chance; The denominator counts all four positions, Moons included. A fraction names a share of one whole. One of four counters is one quarter of the set; two of four is two quarters. The denominator counts every counter, including the other mark. Zero means impossible; one means certain. Half is an even chance. Below half is unlikely, above half is likely for the named event, with endpoints named separately.
 2. Compare shares:3Sun+1Moon versus6Sun+6Moon;3/4 >6/12 =1/2, despite6 >3. Draw both references on the same0–1 line and show both bags. Chance uses a share, not the Sun count alone. A larger coordinate is more likely.
 3. Same chance, different bags:2Sun+2Moon and6Sun+6Moon both have Sun chance1/2. Draw coincident references with separate rows and show both bags. Equivalent fractions describe the same point, not identical bags.
 4. More likely is not promised:3Sun+1Moon gives Sun3/4, Moon1/4. Either mark can appear next. Putting a drawn counter back restores the same four-position bag. A short run need not follow the proportions; neither a catch-up rule nor a streak changes this model's next-draw chance. Actual draws remain in Seed Stall.
 
-Four three-choice questions in fixed order. Supported, ungraded, visit-local, no independent-attempt or mastery record. Choices stay fixed across redraws. Selecting/revising displays its specific explanation; no lockout or penalty. Optional **Show explanation** displays the fitting answer/reason; exposed help stays local and does not grade a prior answer. All four remain selectable through Previous/Next. Fitting positions1,2,3,2. Complete choices and feedback:
+Four three-choice questions in fixed order. Supported, ungraded, visit-local, no independent-attempt or mastery record. Choices stay fixed across redraws. Selecting/revising displays its specific explanation; no lockout or penalty. Optional **Show explanation** displays the fitting answer/reason; exposed help stays local and does not grade a prior answer. All four remain selectable through Previous/Next. Fitting positions 1, 2, 3, 2 (one-based), hence core keys 0, 1, 2, 1. Complete choices and feedback (runtime strings use normal word/number spacing, for example “Still 3/4”, “3 Sun + 1 Moon”, and “6/12 = 1/2”):
 
 Q1 **One Sun and three Moons. What is the chance of Sun?**
 1. **1/4** — One Sun is one of all four equal-chance positions.
@@ -55,8 +55,8 @@ Q3 **A Sun was drawn from3Sun+1Moon and put back. What is Sun's chance next?**
 Explanation:Still3/4. Returning the counter leaves three Suns among four positions.
 
 Q4 **What can a3/4 chance of Sun tell us about the next draw?**
-1. **Sun is certain** — Moon still has one of four positions, so Sun is not certain.
-2. **Sun is more likely, but Moon can appear** — Sun has three positions and Moon has one. Both remain possible.
+1. **Sun is certain** — Sun has a chance below 1, so it is not certain; Moon keeps a 1/4 chance.
+2. **Sun is more likely, but Moon can appear** — Sun's 3/4 is greater than Moon's 1/4. Both remain possible.
 3. **Random means we cannot compare their chances** — The next mark is uncertain, but the equal-position rule lets us compare shares.
 Explanation:Sun is more likely, but Moon remains possible. A chance is not a promise.
 
