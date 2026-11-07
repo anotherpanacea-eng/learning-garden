@@ -14,6 +14,9 @@ All new words original. The full seven scenes of **The Second Knock** remain exa
 - Chooser: Sentence {i} of {N}; Previous sentence / Next sentence; Put back; Waiting sentence; Chosen tray: {label}.
 - Source pager: Story part {i} of {N}; Previous story part / Next story part; Whole story.
 - Summary empty: No sentences chosen for this summary yet.
+- Waiting group heading: Waiting sentences.
+- Different-check summary: Some sentences fit another tray for this brief.
+- Feedback disclosure: Compare these sentences.
 - Waiting empty: No sentences waiting.
 - Incomplete check: Some parts are still waiting. You can keep this version or keep arranging.
 - Placement: Sentence moved to {label}.
@@ -30,6 +33,7 @@ All new words original. The full seven scenes of **The Second Knock** remain exa
 
 ## Field map for the three frozen tasks
 
+- source.title: the job heading below. Canonical source.key uses K for every K/E strip; the accepted lists still allow both.
 - source.reader: “For someone who needs a short account of this story.”
 - source.prompt: shared Prompt above. source.teach: one string, “A short account keeps the important events and their connections for a reader.” No miniature or comparison text in this array.
 - source.hint: shared Help hint above. source.example: the separate example help string below.
@@ -53,10 +57,10 @@ Teaching progression, one elected part at a time:
 1. A summary is a short account that keeps the important events and how they connect. For this reader, keep the chair problem, Mina's change and the result.
 2. Blue describes the chair, but taking out its color does not lose that connection. Taking out the change of chair does.
 3. Keep thoughts as thoughts when they matter: “Mina thought the chair would tip” would report a belief. It would not establish that it tipped. Our little story does not state that belief, so we cannot add it to this account.
-4. An objective summary keeps the story's account separate from our judgments. Objective does not mean that people have no feelings. It means keeping what the story establishes separate from our own judgments about it. A different reader's question can make a different detail important.
+4. An objective summary keeps the story's account separate from our judgments. Objective does not mean that people have no feelings. A different reader's question can make a different detail important.
 
 Four comparison cards (show separately; these are reference examples, not the child's result):
-1. **A short account** — “Mina found that a meeting chair was unsteady, replaced it, and had a steady seat ready for the visitors.” Notice: This keeps problem, change and result. It leaves out color and the doorway.
+1. **A short account** — “Mina found that a meeting chair was unsteady and replaced it; everyone had a steady seat ready.” Notice: This keeps problem, change and result. It leaves out color and the doorway.
 2. **Every little step** — “Mina carried a blue chair to the meeting, reached the doorway, saw its leg wobble, put it aside, went to the next room, brought a steady chair and had a seat ready when the visitors arrived.” Notice: The events fit, but this reader does not need every movement or the color to follow the change.
 3. **A reader's review** — “Mina is wonderful, and this is the best chair story ever.” Notice: This gives a reader's judgment. It does not tell what happened with the chair.
 4. **Too much left out** — “Mina had a chair.” Notice: It is short, but loses the problem, the replacement and the result. Shorter is not always a better summary.
@@ -74,12 +78,12 @@ Destinations display order K,E,O,U. Required keep sentences2,6,8; optional3; oth
 |1 / review|I found the repeated knocking pattern exciting.|O|a3,b3|That reports a reader's response to the repeated pattern, not an event in the delivery.|
 |2 / delay|Leena waited with a photograph at the library's shut courtyard door while Rowan looked for a caller at the other entrance.|K|a1,a2,b2|This joins the waiting delivery to the wrong entrance. Without it, the reader loses why they missed each other.|
 |3 / purpose|The photograph was for the library's collection.|K/E|a1|This purpose is supported context. For this brief you may keep it or leave it as extra detail.|
-|4 / worry|When no one answered her knock at the library's courtyard door, Leena wondered whether they had forgotten her.|E|a2|This is Leena's uncertain thought. This brief can explain the delayed delivery without it; the next reader asks specifically about her worry.|
+|4 / worry|When no one answered her knock at the library's courtyard door, Leena wondered whether they had forgotten her.|E|a2|This is Leena's uncertain thought. This brief can explain the delayed delivery without it; another brief asks specifically about her worry.|
 |5 / motive|Rowan deliberately kept Leena waiting because he disliked her.|U|b1,b2,b3,together|The story shows what Rowan was doing and where he looked. It does not establish this hostile motive.|
 |6 / signal|After Leena knocked in a repeated pattern, Rowan followed the sound to the courtyard door.|K|a3,b3|This tells what changed. It connects the missed delivery with their meeting.|
 |7 / rain|The first spots of rain darkened the stone.|E|a2|The rain is in the story. This brief can follow the delayed meeting without that small detail.|
 |8 / outcome|They put the photograph beside the recording sheet and wrote a sign for the courtyard door before visitors arrived.|K|together|This keeps the shared outcome. A short account still needs how this delivery ended.|
-|9 / refusal|Leena left the photograph on the step and went home.|U|together|The final scene shows Leena and Rowan setting the photograph beside the recording sheet together; she did not leave it on the step.|
+|9 / refusal|Leena left the photograph on the step and went home.|U|together|The final story part shows Leena and Rowan setting the photograph beside the recording sheet together; she did not leave it on the step.|
 
 The final claim goes against the ending. The identical attributed worry sentence is extra in this brief but important in the next brief; this makes the reader-purpose contrast concrete.
 
@@ -95,9 +99,9 @@ Destinations display order U,K,E,O. Required keep2,5,8; optional1. Same complete
 |2 / worry|When no one answered her knock at the library's courtyard door, Leena wondered whether they had forgotten her.|K|a2|This reports Leena's uncertainty. The reader asked what she feared; it does not say she really was forgotten.|
 |3 / fact|The library staff had forgotten Leena and her photograph.|U|a2,a3,together|“Perhaps” gives Leena's thought, not a narrator's confirmation that the staff forgot her.|
 |4 / praise|I find Leena's decision interesting.|O|a2,a3|This reports a reader's response, not the brief account of her uncertainty and decision.|
-|5 / frame|After knocking again, she saw an empty frame inside, suggesting someone had made room for the photograph, and decided to wait longer.|K|a3|This keeps what Leena noticed and the decision that followed.|
+|5 / frame|After knocking again, she saw an empty frame inside, suggesting someone had made room for her photograph, and decided to wait longer.|K|a3|This keeps what Leena noticed and the decision that followed.|
 |6 / boards|Leena carried the photograph flat between two boards.|E|a1|This is supported, but this reader can follow her thought and the meeting without the packing detail.|
-|7 / unseen|Leena saw Rowan wearing headphones through the courtyard glass.|U|a3,b1,b3|The reader learns about Rowan's headphones. The scene only says Leena saw part of a wall and an empty frame; it does not say she saw him wearing them.|
+|7 / unseen|Leena saw Rowan wearing headphones through the courtyard glass.|U|a3,b1,b3|The story tells us about Rowan's headphones. Leena's story part only says she saw part of a wall and an empty frame; it does not say she saw him wearing them.|
 |8 / meeting|Rowan opened the courtyard door; he and Leena set the photograph beside the recording sheet and wrote a clear sign together.|K|b3,together|This keeps the eventual meeting and shared outcome; her worry was not the story's ending.|
 
 ## Job3 · summary-lantern · The Lantern List
@@ -119,8 +123,8 @@ Destinations display order E,O,U,K. Required keep2,5,7; optional4.
 |2 / guess|Ivo arrived with lanterns and thought the cord might be missing.|K|l1|This gives the apparent problem as Ivo's uncertain thought, not an established loss.|
 |3 / lost|Suri had lost the cord in the rain.|U|l1,l2,l3|Ivo's guess does not establish a lost cord. Suri had put it in the cupboard to keep it dry.|
 |4 / storage|Suri had stored the cord in a cupboard to keep it dry.|K/E|l2|This supported context can stay or be left as extra; the sentence about checking the supplies still tells how the problem was resolved.|
-|5 / check|Suri showed him the cord, and they checked that the lantern supplies were ready.|K|l3|This connects the apparent problem with what they discovered together.|
-|6 / no-outcome|The lanterns were still in their box when supper arrived.|U|l4|The final paragraph says they hung the lanterns before supper; they were no longer in the box.|
+|5 / check|Suri showed him the cord, and they checked the list: the lantern supplies were ready.|K|l3|This connects the apparent problem with what they discovered together.|
+|6 / no-outcome|The lanterns were still in their box when supper arrived.|U|l4|The final story part says they hung the lanterns before supper; they were no longer in the box.|
 |7 / ready|They hung the lanterns before supper and left the list with a note saying where spare items were stored.|K|l4|This keeps the finished preparations and the information they left for others.|
 |8 / favorite|I like the cupboard scene.|O|l2,l3|That is a reader's judgment, not the account of getting the lanterns ready.|
 
