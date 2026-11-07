@@ -2,6 +2,9 @@
 
 **Crossing Angles** is an optional paper model inside Copy Frame (`#workshop/copy-frame`). Turn two straight strips, compare opposite and neighboring angles, follow the shared-neighbor explanation, and revisit their crossings using the dimensions of your waiting panel. The comparison lasts only for this visit and creates no learner record. See [spec415](docs/specs/415-crossing-angles.md). Check with `node test/crossing-angles-checks.mjs` and `python3 test/crossing-angles-browser.py`; [PR498](https://github.com/anotherpanacea-eng/learning-garden/pull/498) owns review and publication status.
 
+**Two Crossings** adds a parallel-line view inside that same game. Compare corresponding, alternate-interior and co-interior angles; slide a tracing without turning it; lean a line to test the condition; then apply the relations to the dimensions of your waiting Copy Frame panel. It uses the existing source/browser checks and no new saved record. See [spec416](docs/specs/416-parallel-lines.md); publication status belongs to its release PR.
+
+
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
 [Try After the Storm](https://after-the-storm-learning.anotherpanacea.workers.dev/).
