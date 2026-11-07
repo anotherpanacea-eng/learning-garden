@@ -1,7 +1,7 @@
 // Independent integer geometry checks for original, synthetic paper plans.
 import assert from 'node:assert/strict';
-import {defaultSquarePensDraft,validSquarePensDraft,changeSquarePensDraft,nextSquarePensInvitation,squarePensModel,squarePensReference,squarePensContrast,squarePensPairs,missingSquareModel,nextMissingSquareInvitation} from '../dist/square-pens-core.mjs';
-import {renderSquarePensMissing} from '../dist/square-pens-ui.mjs';
+import {defaultSquarePensDraft,validSquarePensDraft,changeSquarePensDraft,nextSquarePensInvitation,squarePensModel,squarePensReference,squarePensContrast,squarePensPairs,missingSquareModel,nextMissingSquareInvitation,gridDistanceModel,nextGridDistanceInvitation} from '../dist/square-pens-core.mjs';
+import {renderSquarePensMissing,renderSquarePensGrid} from '../dist/square-pens-ui.mjs';
 let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(x,m)=>{assert.ok(x,m);n++;};
 const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],sq=(a,b)=>dot(sub(a,b),sub(a,b));
 function twiceArea(ps){let sum=0;for(let i=0;i<ps.length;i++){const p=ps[i],q=ps[(i+1)%ps.length];sum+=p[0]*q[1]-q[0]*p[1];}return Math.abs(sum);}
@@ -18,7 +18,7 @@ function endpoint(polygons,L,label){
  for(let i=0;i<polygons.length;i++)for(let j=i+1;j<polygons.length;j++)ok(disjointInteriors(polygons[i],polygons[j]),label+' has no overlapping interiors');
  eq(polygons.reduce((total,p)=>total+twiceArea(p),0),2*L*L,label+' exactly fills the frame');
 }
-const initial=defaultSquarePensDraft();eq(initial,{a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false,missingC:5,missingA:3,missingStep:0,missingTurn:0,missingIndex:0},'initial paper plan');
+const initial=defaultSquarePensDraft();eq(initial,{a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false,missingC:5,missingA:3,missingStep:0,missingTurn:0,missingIndex:0,gridAx:1,gridAy:1,gridBx:4,gridBy:5,gridPoint:'B',gridStep:0,gridElbow:0,gridTrace:0,gridIndex:0},'initial paper plan');
 const whole=[];
 for(let a=1;a<=12;a++)for(let b=1;b<=12;b++)for(let turn=0;turn<4;turn++){
  const d={...initial,a,b,turn},m=squarePensModel(d),L=a+b,expectedN=a*a+b*b,label=`${a},${b},turn${turn}`;
@@ -146,4 +146,102 @@ for(let c=2;c<=17;c++)for(let a=1;a<=12&&a<c;a++)for(let step=0;step<3;step++)fo
  if(step===0)ok(!html.includes('data-sp-missing-area-label')&&!html.includes('Other square’s area:'),label+' comparison does not insert subtraction result');
  else ok(html.includes(`${c*c} − ${a*a} = ${N} square units`),label+' elected subtraction uses the exact known areas');
 }
-console.log(`Square Pens: ${n} checks passed (144 Build pairs and 126 inverse-side pairs, four rotations, exact areas and bounded drawing geometry).`);
+// Across the plan: independently authored rows, then aggregate finite-domain properties.
+const gridRows=[
+ [1,1,4,5,3,4,7,25,'5'],
+ [10,9,4,1,6,8,14,100,'10'],
+ [2,8,7,8,5,0,5,25,'5'],
+ [6,6,6,6,0,0,0,0,'0'],
+ [3,3,5,6,2,3,5,13,'√13'],
+ [0,0,12,12,12,12,24,288,'√288'],
+ [1,1,9,10,8,9,17,145,'√145'],
+];
+const gridDraft=(ax,ay,bx,by,extra={})=>({...initial,page:'grid',gridAx:ax,gridAy:ay,gridBx:bx,gridBy:by,...extra});
+for(const [ax,ay,bx,by,h,v,L,N,distance] of gridRows){
+ const m=gridDistanceModel(gridDraft(ax,ay,bx,by));
+ eq([m.h,m.v,m.L,m.N,m.distance],[h,v,L,N,distance],'independent grid invitation/reference values');
+}
+let gridNext=gridDraft(7,9,2,3,{gridStep:2,gridTrace:4,gridPoint:'A',gridElbow:1});
+for(let i=1;i<=6;i++){
+ const before=gridNext;gridNext=nextGridDistanceInvitation(before);const row=gridRows[i%6];
+ eq(gridNext,{...before,gridAx:row[0],gridAy:row[1],gridBx:row[2],gridBy:row[3],gridIndex:i%6,gridStep:0,gridTrace:0},'grid invitation advances before applying and preserves other material');
+}
+const heldGrid={...finished,page:'grid',gridAx:0,gridAy:0,gridBx:12,gridBy:12,gridStep:2,gridTrace:24,gridElbow:1,gridPoint:'A',gridIndex:5};
+eq(changeSquarePensDraft(heldGrid,{gridBx:1,gridBy:1,gridStep:2,gridTrace:24}),{...heldGrid,gridBx:1,gridBy:1,gridStep:0,gridTrace:0},'coordinate reset precedes dependent trace validation and wins over valid explicit reveals');
+eq(changeSquarePensDraft(heldGrid,{gridElbow:0,gridTrace:24}),{...heldGrid,gridElbow:0,gridTrace:0},'other corner resets trace while retaining elected stage');
+eq(changeSquarePensDraft(heldGrid,{gridPoint:'B'}),{...heldGrid,gridPoint:'B'},'point selection retains endpoints and reveals');
+eq(changeSquarePensDraft(heldGrid,{page:'why'}),{...heldGrid,page:'why'},'page change preserves grid material');
+for(const patch of [{gridAx:-1},{gridAy:13},{gridBx:2.5},{gridBy:'3'},{gridPoint:'C'},{gridStep:3},{gridElbow:2},{gridIndex:6},{gridTrace:-1},{gridTrace:25},{gridTrace:1.5},{gridAx:1,gridStep:3},{gridAx:1,gridTrace:-1},{gridElbow:0,gridTrace:25}]){
+ eq(changeSquarePensDraft(heldGrid,patch),null,'fixed domains checked even when resets could hide invalid explicit values');
+ eq(validSquarePensDraft({...heldGrid,...patch}),false,'invalid grid full draft refused');
+ eq(gridDistanceModel({...heldGrid,...patch}),null,'invalid grid model refused');
+}
+eq(changeSquarePensDraft(initial,{gridTrace:8}),null,'trace cannot exceed the unchanged edge route');
+eq(changeSquarePensDraft(initial,{gridTrace:7}),{...initial,gridTrace:7},'trace reaches its exact edge bound');
+// Each property is one aggregated check, with exact coordinate diagnostics on failure.
+let gridCases=0;
+for(let ax=0;ax<=12;ax++)for(let ay=0;ay<=12;ay++)for(let bx=0;bx<=12;bx++)for(let by=0;by<=12;by++){
+ const h=Math.abs(bx-ax),v=Math.abs(by-ay),N=(bx-ax)**2+(by-ay)**2,L=h+v,roots=Array.from({length:18},(_,i)=>i).filter(i=>i*i<=N),k=roots.at(-1),label=`grid (${ax},${ay}) to (${bx},${by})`;
+ for(let elbow=0;elbow<=1;elbow++){
+  const d=gridDraft(ax,ay,bx,by,{gridElbow:elbow,gridTrace:L}),m=gridDistanceModel(d),E=elbow?[ax,by]:[bx,ay];
+  assert.deepEqual([m.A,m.B,m.E,m.h,m.v,m.H,m.V,m.N,m.L,m.kind],[[ax,ay],[bx,by],E,h,v,h*h,v*v,N,L,h&&v?'triangle':L?'axis':'same'],label+' exact geometry');
+  assert.deepEqual([m.k,m.u,m.K,m.U,m.exact,m.distance],[k,k+1,k*k,(k+1)**2,N===k*k,N===k*k?String(k):`√${N}`],label+' independent root enumeration');
+  const path=[[ax,ay]];
+  const append=(axis,target)=>{while(path.at(-1)[axis]!==target){const p=[...path.at(-1)];p[axis]+=p[axis]<target?1:-1;path.push(p);}};
+  if(elbow){append(1,by);append(0,bx);}else{append(0,bx);append(1,by);}
+  assert.deepEqual(m.segments,path.slice(1).map((p,i)=>({from:path[i],to:p})),label+' ordered unit intervals');
+  assert.equal(m.segments.length,L,label+' intervals, not endpoint dots');
+  assert.equal(sq(m.A,m.B),N,label+' endpoint square distance');
+  if(h&&v){assert.ok(dot(sub(m.A,E),sub(m.B,E))===0,label+' perpendicular corner');assert.ok(L*L>N&&L*L===N+2*h*v,label+' strict route inequality');}
+  else assert.equal(L*L,N,label+' degenerate distance equality');
+  const reverse=gridDistanceModel(gridDraft(bx,by,ax,ay,{gridElbow:1-elbow}));
+  assert.deepEqual(reverse.segments,m.segments.toReversed().map(s=>({from:s.to,to:s.from})),label+' reverse ordered route');
+  const shifted=gridDistanceModel(gridDraft(ax-Math.min(ax,bx),ay-Math.min(ay,by),bx-Math.min(ax,bx),by-Math.min(ay,by),{gridElbow:elbow}));
+  for(const other of [reverse,shifted,gridDistanceModel({...d,gridElbow:1-elbow})])assert.deepEqual([other.h,other.v,other.L,other.N,other.distance],[h,v,L,N,m.distance],label+' reflection/translation/elbow invariants');
+ }
+ gridCases++;
+}
+eq(gridCases,28561,'all point pairs with both elbows: exact geometry, integer roots, interval ordering and invariances');
+let gridPairCases=0;
+for(let h=0;h<=12;h++)for(let v=0;v<=12;v++)for(let step=0;step<=2;step++){
+ const d=gridDraft(0,0,h,v,{gridStep:step}),N=h*h+v*v;
+ let k=0;for(let root=0;root<=17;root++)if(root*root<=N)k=root;
+ const shown=h&&v&&step>=1?[[h,h],[v,v]]:[];
+ if(h&&v&&step===2){shown.push([k,k]);if(k*k!==N)shown.push([k+1,k+1]);}
+ const expected=[...new Set(shown.filter(p=>p.every(x=>x>=1&&x<=12)).map(p=>p.join(',')))].sort();
+ assert.deepEqual(squarePensPairs(d).map(p=>p.join(',')).sort(),expected,`grid qualification h${h},v${v},step${step}`);gridPairCases++;
+}
+eq(gridPairCases,507,'169 difference classes at three stages qualify only shown eligible products');
+eq(pairs({page:'grid',gridAx:1,gridAy:1,gridBx:9,gridBy:10,gridStep:1}),['8,8','9,9'],'root-only 12-square absent before distance');
+eq(pairs({page:'grid',gridAx:1,gridAy:1,gridBx:9,gridBy:10,gridStep:2}),['12,12','8,8','9,9'],'root-only 12-square newly qualified at distance');
+// Bounded production-render probes: all invitation shapes, root-only 12-square,
+// singular intervals and the other axis direction. Semantic surfaces, not raw numerals.
+let gridRenderCases=0;
+for(const row of [...gridRows,[1,2,2,3],[4,8,4,7]])for(let elbow=0;elbow<=1;elbow++)for(let step=0;step<=2;step++){
+ const d=gridDraft(...row.slice(0,4),{gridStep:step,gridElbow:elbow,gridTrace:1}),L=Math.abs(row[2]-row[0])+Math.abs(row[3]-row[1]);
+ d.gridTrace=Math.min(1,L);
+ const m=gridDistanceModel(d),html=renderSquarePensGrid(d),child=html.replace(/<details class="sp-grid-adult">[\s\S]*?<\/details>/g,''),label=`render grid ${row.slice(0,4)}, elbow${elbow},step${step}`,shown=[];
+ for(const match of child.matchAll(/(\d+) × (\d+) = (\d+)/g)){
+  const [x,y,z]=match.slice(1).map(Number);assert.equal(x*y,z,label+' written product');shown.push([x,y]);
+ }
+ for(const match of child.matchAll(/data-sp-square-side="(\d+)" data-sp-square-area="(\d+)"/g)){
+  const [side,area]=match.slice(1).map(Number);assert.equal(side*side,area,label+' pictured area');shown.push([side,side]);
+ }
+ const eligible=[...new Set(shown.filter(p=>p.every(x=>x>=1&&x<=12)).map(p=>p.join(',')))].sort();
+ assert.deepEqual(eligible,squarePensPairs(d).map(p=>p.join(',')).sort(),label+' actual written/pictured products equal preflight facts');
+ assert.equal(child.includes('data-sp-grid-areas'),m.kind==='triangle'&&step>=1,label+' area stage');
+ assert.equal(child.includes('data-sp-grid-length'),step===2,label+' distance stage');
+ assert.equal(child.includes('data-sp-grid-right-corner'),m.kind==='triangle',label+' no degenerate right angle');
+ assert.equal([...child.matchAll(/data-sp-grid-interval="/g)].length,L,label+' one drawn edge interval per unit');
+ assert.equal([...child.matchAll(/data-sp-grid-highlighted="true"/g)].length,d.gridTrace,label+' retained trace prefix');
+ assert.equal(child.includes('data-sp-grid-trace-count'),step===0,label+' trace controls/counter only at counting');
+ assert.ok(child.includes(`A: (${m.ax}, ${m.ay})`)&&child.includes(`B: (${m.bx}, ${m.by})`),label+' complete ordered positions');
+ assert.ok(child.includes(`${Math.max(m.ax,m.bx)} − ${Math.min(m.ax,m.bx)} = ${m.h} ${m.h===1?'unit':'units'}`)&&child.includes(`${Math.max(m.ay,m.by)} − ${Math.min(m.ay,m.by)} = ${m.v} ${m.v===1?'unit':'units'}`)&&child.includes(`${m.h} + ${m.v} = ${L} ${L===1?'unit':'units'}`),label+' nonnegative differences and edge sum on every branch');
+ if(step<2)assert.ok(!/√|strictly between|lies between|straight distance is \d|Straight distance: \d|positive number whose square/.test(child),label+' no early root or numeric straight distance');
+ if(step===0)assert.ok(!/\d+ × \d+|square units?|Distance²|data-sp-square-side/.test(child),label+' no early area/products in text, SVG or aria');
+ if(m.kind!=='triangle')assert.equal(shown.length,0,label+' no degenerate multiplication');
+ assert.ok(child.includes('Your other triangle plans are kept.')&&!child.includes('Your pieces wait: a='),label+' no Build hints');
+ gridRenderCases++;
+}
+eq(gridRenderCases,54,'bounded actual grid renders preserve reveals, products, unit geometry, degenerate branches and coordinate copy');
+console.log(`Square Pens: ${n} checks passed (144 Build pairs and 126 inverse-side pairs, four rotations; 28,561 coordinate pairs with both elbows and 507 grid qualification cases).`);

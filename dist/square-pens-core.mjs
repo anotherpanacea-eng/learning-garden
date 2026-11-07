@@ -1,19 +1,44 @@
-import {squarePensInvitations,missingSquareInvitations} from './square-pens-content.mjs';
+import {squarePensInvitations,missingSquareInvitations,gridDistanceInvitations} from './square-pens-content.mjs';
 const integer=(n,lo,hi)=>Number.isInteger(n)&&n>=lo&&n<=hi;
-const keys=['a','b','turn','move','page','markedSide','lengthOpen','invitationIndex','whyStep','compare','missingC','missingA','missingStep','missingTurn','missingIndex'];
+const keys=['a','b','turn','move','page','markedSide','lengthOpen','invitationIndex','whyStep','compare','missingC','missingA','missingStep','missingTurn','missingIndex','gridAx','gridAy','gridBx','gridBy','gridPoint','gridStep','gridElbow','gridTrace','gridIndex'];
+const gridKeys=['gridAx','gridAy','gridBx','gridBy','gridPoint','gridStep','gridElbow','gridTrace','gridIndex'];
+const coordinateKeys=gridKeys.slice(0,4);
+const validGridValue=(k,v)=>coordinateKeys.includes(k)?integer(v,0,12):k==='gridPoint'?['A','B'].includes(v):integer(v,0,k==='gridTrace'?24:k==='gridIndex'?5:k==='gridStep'?2:1);
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k);
-export function defaultSquarePensDraft(){return {a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false,missingC:5,missingA:3,missingStep:0,missingTurn:0,missingIndex:0};}
-export function validSquarePensDraft(d){return !!d&&typeof d==='object'&&!Array.isArray(d)&&Object.keys(d).length===keys.length&&keys.every(k=>own(d,k))&&integer(d.a,1,12)&&integer(d.b,1,12)&&integer(d.turn,0,3)&&integer(d.move,0,3)&&['build','why','corner','missing'].includes(d.page)&&[null,'a','b','c'].includes(d.markedSide)&&typeof d.lengthOpen==='boolean'&&integer(d.invitationIndex,0,5)&&integer(d.whyStep,0,5)&&typeof d.compare==='boolean'&&integer(d.missingC,2,17)&&integer(d.missingA,1,12)&&d.missingA<d.missingC&&integer(d.missingStep,0,2)&&integer(d.missingTurn,0,3)&&integer(d.missingIndex,0,5);}
+export function defaultSquarePensDraft(){return {a:3,b:4,turn:0,move:0,page:'build',markedSide:null,lengthOpen:false,invitationIndex:0,whyStep:0,compare:false,missingC:5,missingA:3,missingStep:0,missingTurn:0,missingIndex:0,gridAx:1,gridAy:1,gridBx:4,gridBy:5,gridPoint:'B',gridStep:0,gridElbow:0,gridTrace:0,gridIndex:0};}
+export function validSquarePensDraft(d){return !!d&&typeof d==='object'&&!Array.isArray(d)&&Object.keys(d).length===keys.length&&keys.every(k=>own(d,k))&&integer(d.a,1,12)&&integer(d.b,1,12)&&integer(d.turn,0,3)&&integer(d.move,0,3)&&['build','why','corner','missing','grid'].includes(d.page)&&[null,'a','b','c'].includes(d.markedSide)&&typeof d.lengthOpen==='boolean'&&integer(d.invitationIndex,0,5)&&integer(d.whyStep,0,5)&&typeof d.compare==='boolean'&&integer(d.missingC,2,17)&&integer(d.missingA,1,12)&&d.missingA<d.missingC&&integer(d.missingStep,0,2)&&integer(d.missingTurn,0,3)&&integer(d.missingIndex,0,5)&&gridKeys.every(k=>validGridValue(k,d[k]))&&d.gridTrace<=Math.abs(d.gridBx-d.gridAx)+Math.abs(d.gridBy-d.gridAy);}
 // Proposals are detached. Reject unknown/out-of-domain keys before changing any material.
 export function changeSquarePensDraft(d,patch){
  if(!validSquarePensDraft(d)||!patch||typeof patch!=='object'||Array.isArray(patch)||Object.keys(patch).some(k=>!keys.includes(k)))return null;
- const next={...d,...patch};if(!validSquarePensDraft(next))return null;
+ if(gridKeys.some(k=>own(patch,k)&&!validGridValue(k,patch[k])))return null;
+ const next={...d,...patch};
+ if(coordinateKeys.some(k=>next[k]!==d[k])){next.gridStep=0;next.gridTrace=0;}
+ if(next.gridElbow!==d.gridElbow)next.gridTrace=0;
+ if(!validSquarePensDraft(next))return null;
  if(next.a!==d.a||next.b!==d.b){next.move=0;next.markedSide=null;}
  if(next.missingC!==d.missingC||next.missingA!==d.missingA)next.missingStep=0;
  return next;
 }
 export function nextSquarePensInvitation(d){if(!validSquarePensDraft(d))return null;const invitationIndex=(d.invitationIndex+1)%squarePensInvitations.length,[a,b]=squarePensInvitations[invitationIndex];return {...d,a,b,move:0,markedSide:null,invitationIndex};}
 export function nextMissingSquareInvitation(d){if(!validSquarePensDraft(d))return null;const missingIndex=(d.missingIndex+1)%missingSquareInvitations.length,[missingC,missingA]=missingSquareInvitations[missingIndex];return {...d,missingC,missingA,missingStep:0,missingIndex};}
+export function nextGridDistanceInvitation(d){
+ if(!validSquarePensDraft(d))return null;
+ const gridIndex=(d.gridIndex+1)%gridDistanceInvitations.length,[gridAx,gridAy,gridBx,gridBy]=gridDistanceInvitations[gridIndex];
+ return {...d,gridAx,gridAy,gridBx,gridBy,gridIndex,gridStep:0,gridTrace:0};
+}
+// Route intervals and root decisions use integers, independently of SVG projection.
+export function gridDistanceModel(d){
+ if(!validSquarePensDraft(d))return null;
+ const {gridAx:ax,gridAy:ay,gridBx:bx,gridBy:by}=d,A=[ax,ay],B=[bx,by],E=d.gridElbow===0?[bx,ay]:[ax,by];
+ const h=Math.abs(bx-ax),v=Math.abs(by-ay),L=h+v,N=h*h+v*v,segments=[];
+ for(const [from,to] of [[A,E],[E,B]]){
+  let [x,y]=from;const dx=Math.sign(to[0]-x),dy=Math.sign(to[1]-y);
+  while(x!==to[0]||y!==to[1]){const next=[x+dx,y+dy];segments.push({from:[x,y],to:next});[x,y]=next;}
+ }
+ let k=0;while((k+1)*(k+1)<=N)k++;
+ const u=k+1,exact=k*k===N;
+ return {A,B,E,ax,ay,bx,by,h,v,H:h*h,V:v*v,L,N,k,u,K:k*k,U:u*u,exact,distance:exact?String(k):`√${N}`,kind:h&&v?'triangle':L?'axis':'same',segments,trace:d.gridTrace,step:d.gridStep,elbow:d.gridElbow};
+}
 // Area/root decisions are exact integers. The square root below positions drawing points only.
 export function missingSquareModel(d){
  if(!validSquarePensDraft(d))return null;
@@ -46,7 +71,8 @@ export function squarePensContrast(){return {points:[[0,0],[3,0],[-11/6,Math.sqr
 export function squarePensPairs(d){
  if(!validSquarePensDraft(d))return [];
  const m=d.page==='missing'?null:squarePensModel(d),pairs=[],add=(a,b)=>pairs.push([a,b]);
- if(d.page==='missing'){const missing=missingSquareModel(d);add(missing.c,missing.c);add(missing.a,missing.a);if(d.missingStep===2){add(missing.k,missing.k);if(!missing.exact)add(missing.u,missing.u);}}
+ if(d.page==='grid'){const grid=gridDistanceModel(d);if(grid.kind==='triangle'&&grid.step>=1){add(grid.h,grid.h);add(grid.v,grid.v);if(grid.step===2){add(grid.k,grid.k);if(!grid.exact)add(grid.u,grid.u);}}}
+ else if(d.page==='missing'){const missing=missingSquareModel(d);add(missing.c,missing.c);add(missing.a,missing.a);if(d.missingStep===2){add(missing.k,missing.k);if(!missing.exact)add(missing.u,missing.u);}}
  else if(d.page==='corner'){add(3,3);add(4,4);add(6,6);}
  else if(d.page==='why'){
   if(d.whyStep>=4){add(3,3);add(4,4);}

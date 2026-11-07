@@ -1,4 +1,4 @@
-"""Square Pens396 actual-app journey plus labelled live-object fault probes.
+"""Square Pens396/397/400 actual-app journey plus labelled live-object fault probes.
 All notebooks invented. The ordinary journey uses unchanged production modules.
 Only the separate arithmetic probe captures objects/observes the DOM insertion
 sink; it never replaces a qualification predicate or forces a false result.
@@ -40,6 +40,23 @@ def layout(p):
  bad=p.locator('[data-square-pens-root] button,[data-square-pens-root] a').evaluate_all('xs=>xs.filter(x=>x.checkVisibility()&&(x.getBoundingClientRect().width<43.9||x.getBoundingClientRect().height<43.9||parseFloat(getComputedStyle(x).fontSize)<16)).map(x=>x.textContent)')
  ok(not bad,'touch target44px/text16px: '+str(bad))
 
+def set_grid_points(p,A,B):
+ for point,pair in [('A',A),('B',B)]:
+  action(p,'gp-'+point)
+  for axis,value in zip('xy',pair):
+   # Read literal position rather than using the distance model as an oracle.
+   now=int(p.locator('[data-sp-grid-controls] output').nth('xy'.index(axis)).inner_text().split()[0])
+   for _ in range(abs(value-now)):action(p,'g'+axis+('-more' if value>now else '-less'))
+
+def grid_literal(p,A,B):
+ text=p.locator('[data-sp-grid-controls]').inner_text()
+ ok(f'A: ({A[0]}, {A[1]})' in text and f'B: ({B[0]}, {B[1]})' in text,'both literal coordinate positions remain visible')
+
+def retired_anchor(p,anchor):
+ result=anchor.evaluate("e=>{document.querySelector('main').append(e);const click=new MouseEvent('click',{bubbles:true,cancelable:true});e.dispatchEvent(click);return{prevented:click.defaultPrevented,hash:location.hash}}")
+ ok(result=={'prevented':True,'hash':'#workshop/copy-frame'},'retired actual anchor cancels default navigation after Return and a later bind')
+ anchor.evaluate('e=>e.remove()')
+
 def main():
  seed=json.loads(subprocess.check_output(['node','--input-type=module','-e',"import{freshState}from './dist/core.mjs';import{initializeExplorerState}from './dist/progress-transfer.mjs';const s=initializeExplorerState(freshState());s.garden.welcomeFilmSeen=true;s.syntheticOther={body:'z'.repeat(524288),opaque:'invented'};console.log(JSON.stringify(s));"],cwd=ROOT,text=True))
  class Quiet(http.server.SimpleHTTPRequestHandler):
@@ -63,7 +80,10 @@ def main():
       response=route.fetch();s=response.text();a=s.index("  if(hash==='#workshop/copy-frame'){");b=s.index("  if(hash==='#post/lost-and-found'){",a);part=s[a:b]
       needle='canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok';assert needle in part
       wrapper='canExport:candidate=>{window.squareReportCalls=(window.squareReportCalls||0)+1;const result=prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok;window.squareReportResult=result;return result;}'
-      route.fulfill(response=response,body=s[:a]+part.replace(needle,wrapper)+s[b:])
+      modified=s[:a]+part.replace(needle,wrapper)+s[b:]
+      exposure='function exposeStoryFacts(node,except,target=state,qualifyPendingBramble=false,normalize=true){'
+      assert exposure in modified
+      route.fulfill(response=response,body=modified.replace(exposure,exposure+'window.squareExposureCalls=(window.squareExposureCalls||[]);window.squareExposureCalls.push({pairs:node.facts,normalize});',1))
      c.route('**/app.mjs',trace)
     p=c.new_page();p.set_default_timeout(15000);p.on('pageerror',lambda e:errors.append(str(e)))
     p.goto(base+'#workshop/copy-frame',wait_until='networkidle');p.locator('#explorer-header').wait_for()
@@ -117,8 +137,50 @@ def main():
    action(p,'page-missing');p.locator('[data-sp-action=ma-more]').focus();p.keyboard.press('Enter')
    ok(p.locator('.sp-missing-dimensions output').nth(1).inner_text()=='4 units','keyboard edits inverse known side')
    action(p,'build')
+   #400: one full grid journey, then bounded varied material and responsive samples.
+   build_snapshot=p.locator('[data-square-pens-root]').inner_html()
+   action(p,'page-missing');missing_snapshot=p.locator('[data-sp-missing-step]').inner_text();action(p,'page-grid');layout(p)
+   ok(p.locator('#sp-task').evaluate('e=>e.getBoundingClientRect().top>=-1&&e.getBoundingClientRect().top<100') and p.locator('[data-sp-grid-figure]').bounding_box()['y']<250,'grid entry brings its task and map into view instead of leaving the map below the menus')
+   p.screenshot(path=str(OUT/'square-pens-grid-entry-viewport.png'))
+   grid_literal(p,[1,1],[4,5])
+   p.locator('[data-sp-action=gp-A]').evaluate("e=>{e.dataset.spAction='a-more';e.click();e.dataset.spAction='gp-A'}")
+   grid_literal(p,[1,1],[4,5])
+   ok(p.locator('[data-sp-grid-interval]').count()==7,'default edge route has seven unit segments, not endpoint dots')
+   ok(not p.locator('[data-sp-grid-areas],[data-sp-grid-length],[data-sp-grid-distance],[data-sp-square-side]').count(),'count step contains no square or distance disclosures')
+   ok(p.locator('[data-sp-grid]').evaluate("r=>{const n=r.cloneNode(true);n.querySelectorAll('details').forEach(x=>x.remove());return !/[×√]|square units/.test(n.textContent+' '+[...n.querySelectorAll('[aria-label]')].map(x=>x.getAttribute('aria-label')).join(' '))}"),'count text and aria withhold numerical products, square areas and roots')
+   action(p,'grid-trace-next');ok(p.locator('[data-sp-grid-highlighted=true]').count()==1,'one manual interval is highlighted');ok('1 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'manual trace advances one interval')
+   action(p,'grid-trace-back');ok('0 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'manual trace can move back')
+   action(p,'grid-trace-all');ok('7 of 7' in p.locator('[data-sp-grid-trace-count]').inner_text(),'whole trace highlights the complete edge route')
+   p.screenshot(path=str(OUT/'square-pens-820-grid.png'),full_page=True)
+   action(p,'grid-step-1')
+   ok(p.locator('[data-sp-grid-highlighted=true]').count()==7,'highlighted prefix persists on later steps')
+   ok(p.locator('[data-sp-square-side]').evaluate_all('xs=>xs.map(x=>[x.dataset.spSquareSide,x.dataset.spSquareArea])')==[['3','9'],['4','16']],'pictured known squares expose exactly the elected leg areas')
+   ok('3 × 3 = 9' in p.locator('[data-sp-grid-areas]').inner_text() and '4 × 4 = 16' in p.locator('[data-sp-grid-areas]').inner_text(),'coordinate differences become the two known square areas')
+   ok(not p.locator('[data-sp-grid-length],[data-sp-grid-distance],[data-sp-grid-trace-count]').count(),'squares step withholds root and trace counter')
+   action(p,'grid-step-2');ok('5 units' in p.locator('[data-sp-grid-distance]').inner_text(),'distance uses length units rather than25 square units')
+   old_route=p.locator('[data-sp-grid-interval]').evaluate_all('xs=>xs.map(x=>[x.getAttribute("x1"),x.getAttribute("y1"),x.getAttribute("x2"),x.getAttribute("y2")])')
+   action(p,'grid-other')
+   ok(old_route!=p.locator('[data-sp-grid-interval]').evaluate_all('xs=>xs.map(x=>[x.getAttribute("x1"),x.getAttribute("y1"),x.getAttribute("x2"),x.getAttribute("y2")])') and '5 units' in p.locator('[data-sp-grid-distance]').inner_text(),'other elbow changes route while retaining elected distance')
+   for A,B,L,d,kind in [([10,9],[4,1],14,'10','triangle'),([2,8],[7,8],5,'5','axis'),([6,6],[6,6],0,'0','same'),([3,3],[5,6],5,'√13','triangle'),([0,0],[12,12],24,'√288','triangle'),([1,1],[4,5],7,'5','triangle')]:
+    action(p,'grid-another');grid_literal(p,A,B)
+    ok(p.locator('[data-sp-grid-kind]').get_attribute('data-sp-grid-kind')==kind and p.locator('[data-sp-grid-interval]').count()==L,'invitation has independently expected geometry and interval count')
+    ok(not p.locator('[data-sp-grid-areas],[data-sp-grid-length],[data-sp-grid-distance]').count(),'new invitation resets disclosure')
+    action(p,'grid-step-2');ok(d+' units' in p.locator('[data-sp-grid-length]').inner_text(),'invitation straight distance is exact')
+    if kind!='triangle':ok(not p.locator('[data-sp-square-side],[data-sp-grid-right-corner]').count(),'degenerate material has no square pictures or right corner')
+   set_grid_points(p,[1,1],[9,10]);grid_literal(p,[1,1],[9,10])
+   action(p,'gx-more');grid_literal(p,[1,1],[10,10]);action(p,'gx-less')
+   action(p,'gp-A');p.locator('[data-sp-action=gx-more]').focus();p.keyboard.press('Enter');grid_literal(p,[2,1],[9,10])
+   p.locator('[data-sp-action=gx-less]').tap();grid_literal(p,[1,1],[9,10])
+   action(p,'page-why');action(p,'why-5');action(p,'page-grid');grid_literal(p,[1,1],[9,10])
+   action(p,'page-missing');ok(p.locator('[data-sp-missing-step]').inner_text()==missing_snapshot,'grid preserves missing-square material and elected stage')
+   action(p,'build');ok(p.locator('[data-square-pens-root]').inner_html()==build_snapshot,'grid preserves exact Build material and disclosures')
+   p.locator('[data-sp-action=a-more]').evaluate("e=>{e.dataset.spAction='gx-more';e.click();e.dataset.spAction='a-more'}")
+   ok(p.locator('[data-square-pens-root]').inner_html()==build_snapshot,'synthetic grid coordinate action refuses on Build')
+   # Keep a real footer anchor across Back and another binding; buttons cannot prove default-link safety.
+   old_anchor=p.locator('footer a[href="#learn/math/equality"]').element_handle()
    action(p,'return');ok(parent(p)==saved_parent,'return preserves Copy Frame panel, geometry and worked frame')
    ok(p.evaluate('document.activeElement.hasAttribute("data-square-pens-entry")'),'parent entry receives Return focus')
+   enter(p);retired_anchor(p,old_anchor);action(p,'return')
    ok(unrelated(book(p))==unrelated(before),'all non-helper notebook roots remain exact')
    p.goto(base+'#notes');p.locator('#download').wait_for()
    with p.expect_download()as d:p.locator('#download').click()
@@ -128,8 +190,9 @@ def main():
    p.goto(base+'#workshop/copy-frame');p.locator('[data-square-pens-entry]').wait_for();enter(p);ok(dimensions(p)==[3,4],'import starts fresh local material without changing imported notes')
    old=p.locator('[data-sp-action=a-more]').element_handle();action(p,'a-more');old.evaluate('e=>e.click()');ok(dimensions(p)==[4,4],'detached old control cannot change a newer material');p.reload(wait_until='networkidle');ready_parent(p);enter(p);ok(dimensions(p)==[3,4],'reload resets only local paper material')
    p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator('[data-square-pens-entry]').wait_for();enter(p);ok(dimensions(p)==[3,4],'second explorer receives separate local material')
+   reset_anchor=p.locator('footer a[href="#learn/math/equality"]').element_handle()
    p.goto(base+'#notes');p.locator('#reset').click();p.locator('#confirm-reset').click();p.wait_for_function('location.hash==="#home"')
-   p.goto(base+'#workshop/copy-frame');p.locator('[data-square-pens-entry]').wait_for();enter(p);ok(dimensions(p)==[3,4],'actual reset clears paper material')
+   p.goto(base+'#workshop/copy-frame');p.locator('[data-square-pens-entry]').wait_for();enter(p);ok(dimensions(p)==[3,4],'actual reset clears paper material');retired_anchor(p,reset_anchor)
    # Focused phone/landscape samples, not whole-journey repetition.
    for width,height in [(320,1000),(1024,768)]:
     cc,q=setup(width,height);enter(q);set_dimensions(q,12,1)
@@ -142,6 +205,12 @@ def main():
      for page in ['why','corner','missing']:
       action(q,'page-'+page);layout(q);q.screenshot(path=str(OUT/f'square-pens-{width}-{page}.png'),full_page=True)
      action(q,'page-build')
+    action(q,'page-grid');set_grid_points(q,[0,0],[12,12]);action(q,'grid-step-2');layout(q)
+    grid_literal(q,[0,0],[12,12])
+    text_sizes=q.locator('[data-sp-grid-figure] svg text').evaluate_all('xs=>xs.map(x=>parseFloat(getComputedStyle(x).fontSize)*x.getScreenCTM().a)')
+    ok(all(n>=15.9 for n in text_sizes),'grid SVG labels render at least16px')
+    q.screenshot(path=str(OUT/f'square-pens-{width}-grid.png'),full_page=True)
+    action(q,'page-build')
     node=q.locator('[data-sp-action=a-less]');node.evaluate('e=>{const p=e.parentNode;e.remove();p.append(e);e.click()}');ok(dimensions(q)==[12,1],'removed/reinserted control is inert')
    # Saving-off remains usable and reports arithmetic help as session-only.
    cc,q=setup();q.goto(base+'#notes');q.locator('#remember').click();q.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();q.goto(base+'#workshop/copy-frame');q.locator('[data-square-pens-entry]').wait_for();enter(q)
@@ -186,6 +255,28 @@ def main():
    if q.locator('[data-sp-action=retry]').count():action(q,'retry')
    ok(q.locator('[data-sp-missing-step="0"]').count()==1,'retry keeps newer inverse inputs and reset step')
    action(q,'build');ok(dimensions(q)==[2,3] and not q.locator('[data-sp-empty-label]').count() and 'side c' in q.locator('[aria-pressed=true]').inner_text(),'refused inverse edits leave Build material and mark intact')
+   #400 live qualification: 12×12 first appears as the root bracket for h8/v9.
+   action(q,'page-grid');set_grid_points(q,[1,1],[9,10]);action(q,'grid-step-1')
+   ok('8 × 8 = 64' in q.locator('[data-sp-grid-areas]').inner_text() and '9 × 9 = 81' in q.locator('[data-sp-grid-areas]').inner_text() and not q.locator('[data-sp-grid-length]').count(),'8/9 areas precede the root bracket')
+   q.evaluate('''()=>{const s=squareHarness.book;s.broad.drafts.gridWaiting={question:{fact:[12,12]},attempts:[]};window.squarePremature=false;window.squareExposureCalls=[];const main=document.querySelector('main'),d=Object.getOwnPropertyDescriptor(Element.prototype,'innerHTML');Object.defineProperty(main,'innerHTML',{configurable:true,get(){return d.get.call(this)},set(value){if(value.includes('data-sp-grid-length')&&!s.broad.drafts.gridWaiting.knownFact)squarePremature=true;d.set.call(this,value)}});}''')
+   action(q,'grid-step-2')
+   ok(q.evaluate('squareHarness.book.broad.drafts.gridWaiting.knownFact===true&&squareHarness.book.broad.drafts.gridWaiting.attempts.length===0&&!squarePremature&&squareExposureCalls.some(x=>x.normalize===false&&x.pairs.some(p=>p[0]===12&&p[1]===12))'),'actual normalize=false helper qualifies newly pending12×12 before root diagram insertion')
+   ok('12 × 12 = 144' in q.locator('[data-sp-grid-length]').inner_text() and '√145 units' in q.locator('[data-sp-grid-distance]').inner_text(),'actual root bracket is12/13 for√145')
+   q.evaluate('''()=>{squareHarness.book.broad.drafts.gridWaiting={question:{fact:[12,12]},attempts:[]};squarePremature=false;squareHarness.ctx.render();}''')
+   ok(q.evaluate('squareHarness.book.broad.drafts.gridWaiting.knownFact===true&&!squarePremature'),'new matching pending task requalifies even after this stage was shown')
+   action(q,'grid-step-0')
+   q.evaluate('''()=>{const s=squareHarness.book;s.broad.drafts.refusedGrid={question:{fact:[12,12]},attempts:[]};s.syntheticByteBoundary='';const candidate=structuredClone(s);squareHarness.ctx.exposeFacts([[8,8],[9,9],[12,12]],candidate);const bytes=new TextEncoder().encode(JSON.stringify(candidate,null,2)).length;s.syntheticByteBoundary='x'.repeat(5*1024*1024-bytes-100);window.squareReportCalls=0;}''')
+   raw=q.evaluate('JSON.stringify(squareHarness.book)');action(q,'grid-step-2')
+   ok(q.locator('.sp-refusal').count()==1 and not q.locator('[data-sp-grid-figure],[data-sp-grid-areas],[data-sp-grid-length],[data-sp-grid-distance],[data-sp-grid-trace-count],.sp-dimensions').count(),'real grid refusal withholds map, counts, products, roots and Build inputs')
+   grid_literal(q,[1,1],[9,10])
+   ok(q.locator('.sp-status').inner_text()=='' and q.evaluate('JSON.stringify(squareHarness.book)')==raw and q.evaluate('squareReportCalls>0&&squareReportResult===false'),'real Notes refusal preserves every book root and discloses no computed status')
+   old_retry=q.locator('[data-sp-action=retry]').element_handle()
+   action(q,'gp-A');action(q,'gx-more');action(q,'grid-step-1');grid_literal(q,[2,1],[9,10])
+   old_retry.evaluate('e=>e.click()');grid_literal(q,[2,1],[9,10])
+   q.evaluate('delete squareHarness.book.syntheticByteBoundary')
+   if q.locator('[data-sp-action=retry]').count():action(q,'retry')
+   grid_literal(q,[2,1],[9,10]);ok(q.locator('[data-sp-grid-areas]').count()==1 and not q.locator('[data-sp-grid-length]').count(),'new point/coordinate/stage choices supersede obsolete Retry')
+   action(q,'build');ok(dimensions(q)==[2,3] and 'side c' in q.locator('[aria-pressed=true]').inner_text(),'grid refusal preserves other Build plan')
    ok(not errors,'no JavaScript errors: '+str(errors))
    for c in contexts:c.close()
    browser.close()

@@ -1,6 +1,6 @@
 # 400 · Across the plan: a straight distance between two points
 
-Status: proposed; independent six-lens specification and finite mathematics review before code. LG-G1, M5-III/V with an M4-III/IV return. This extends Square Pens396/397 inside Copy Frame, not206's whole Survey Shed. Pip is comparing two drawn connections on a paper plan for the library garden. It is invented geometry, not a real route, flood forecast, building instruction or safe journey. No act contribution or learning completion is inferred.
+Status: independent six-lens specification and complete finite mathematics review cleared at baeb57c3 after repairs; bounded implementation built; the owning PR’s canonical record owns implementation review and publication status. LG-G1, M5-III/V with an M4-III/IV return. This extends Square Pens396/397 inside Copy Frame, not206's whole Survey Shed. Pip is comparing two drawn connections on a paper plan for the library garden. It is invented geometry, not a real route, flood forecast, building instruction or safe journey. No act contribution or learning completion is inferred.
 
 ## Teaching purpose and ownership
 
