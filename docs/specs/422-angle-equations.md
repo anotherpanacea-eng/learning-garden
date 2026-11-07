@@ -1,6 +1,6 @@
 # 422 · Angle facts become equations
 
-Status: proposed finite addendum to [420](420-angle-chase.md) and [421](421-polygon-chase.md); independent specification and complete mathematics/copy/visual-plan review before implementation. Continues admitted LG-1 / LG-G1, operational custody1627.
+Status: finite addendum to [420](420-angle-chase.md) and [421](421-polygon-chase.md), independently BUILD-READY atce877298 after six-lens and complete mathematics/copy/visual-plan repair closure. [PR505](https://github.com/anotherpanacea-eng/learning-garden/pull/505) owns implementation review and publication status. Continues admitted LG-1 / LG-G1, operational custody1627.
 
 ## Purpose and boundary
 
