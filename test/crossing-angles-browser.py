@@ -1,4 +1,4 @@
-"""Crossing Angles415/416/417/418/419/420/421 in the actual application, with invented notebooks only.
+"""Crossing Angles415/416/417/418/419/420/421/422 in the actual application, with invented notebooks only.
 
 One complete tablet visit and focused phone/label/lifetime probes. The sole app
 instrumentation exposes a read-only getter at its real initialization marker.
@@ -1090,6 +1090,7 @@ def chase_scene(p,family):
         const name=target.dataset.crossingAnglesChaseTarget,b=target.getBoundingClientRect();
         if(Math.abs(b.width-60)>.2||Math.abs(b.height-68)>.2||b.top<pb.bottom+3.5||b.left<pb.left-.5||b.right>pb.right+.5)bad.push('target box '+name);
         for(const child of target.querySelectorAll('span')){const r=child.getBoundingClientRect();if(r.left<b.left-.5||r.right>b.right+.5||r.top<b.top-.5||r.bottom>b.bottom+.5||child.scrollWidth>child.clientWidth+1)bad.push('target text '+name);}
+        if(name==='t'&&family.startsWith('equation')){if(target.hasAttribute('data-chase-leader-x')||target.hasAttribute('data-chase-leader-y')||overlay.querySelector('[data-chase-connector="t"]')||svg.querySelector('[data-chase-sector="t"]'))bad.push('scalar has angle geometry');continue;}
         const vertex=family==='triangle'?'B':family==='parallel'?'Q':family==='rectangle'?(name==='x'?'A':'C'):family==='regular'?'A':family==='quadrilateral'?'D':'O';
         const label=plot.querySelector('[data-crossing-angles-label="'+vertex+'"]'),leader=svg.querySelector('[data-ca-leader="'+label.dataset.caLabel+'"]'),center=point(leader,'x1','y1');
         const arc=svg.querySelector('[data-chase-sector="'+name+'"]'),middle=arc.getPointAtLength(arc.getTotalLength()/2),dx=middle.x-center[0],dy=middle.y-center[1],len=Math.hypot(dx,dy),raw=[center[0]+40*dx/len,center[1]+40*dy/len];
@@ -1264,18 +1265,18 @@ def chase_focused(browser,base):
     h.unchanged(p,before,'focused Chase layouts');p.context.close()
 
 
-def chase_guards(browser,base):
+def chase_guards(browser,base,guard_case=20,route_case=17):
     print('Angle Chase: retired clicks/selects/readonly keyboard and Hear inert before all effects',flush=True)
     for mode in ['detached','hidden','ancestor','reparented']:
-        p=setup(browser,base);enter(p);old=[p.locator(sel('rotation')).element_handle(),p.locator(R+' [data-speak]').element_handle()];act(p,'page','chase');act(p,'chase-case',20)
+        p=setup(browser,base);enter(p);old=[p.locator(sel('rotation')).element_handle(),p.locator(R+' [data-speak]').element_handle()];act(p,'page','chase');act(p,'chase-case',guard_case)
         case=p.locator('#crossing-angles-chase-case').element_handle();target=p.locator('#crossing-angles-chase-target').element_handle();case.evaluate('e=>e.value="1"');target.evaluate('e=>e.value="1"')
-        entry=p.locator(CI).element_handle();handles=[case,target,chase_target(p,'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(sel('chase-reason','line')).element_handle(),p.locator(sel('chase-check')).element_handle(),p.locator(sel('chase-hint')).element_handle(),p.locator(sel('chase-solution')).element_handle(),p.locator(sel('chase-example')).element_handle(),p.locator(R+' [data-speak]').element_handle(),entry]
+        entry=p.locator(CI).element_handle();handles=[case,target,chase_target(p,'x' if guard_case>=21 else 'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(sel('chase-reason','line')).element_handle(),p.locator(sel('chase-check')).element_handle(),p.locator(sel('chase-hint')).element_handle(),p.locator(sel('chase-solution')).element_handle(),p.locator(sel('chase-example')).element_handle(),p.locator(R+' [data-speak]').element_handle(),entry]
         for e in handles:retire(e,mode)
         before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
         for e in old+handles[:-1]:h.dispatch(e,'change' if e.evaluate('e=>e.tagName')=='SELECT' else 'click')
         entry.evaluate('e=>e.dispatchEvent(new KeyboardEvent("keydown",{key:"1",bubbles:true,cancelable:true}))')
         h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'retired Chase '+mode+' controls/keyboard/Hear cannot render or speak');h.unchanged(p,before,'retired Chase '+mode);p.context.close()
-    p=setup(browser,base);enter(p);act(p,'page','chase');act(p,'chase-case',17);entry=p.locator(CI).element_handle();controls=[chase_target(p,'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+    p=setup(browser,base);enter(p);act(p,'page','chase');act(p,'chase-case',route_case);entry=p.locator(CI).element_handle();controls=[chase_target(p,'x' if route_case>=21 else 'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
     before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length');p.evaluate('history.replaceState(null,"","#workshop/copy-frame/")')
     entry.evaluate('e=>e.dispatchEvent(new KeyboardEvent("keydown",{key:"1",bubbles:true,cancelable:true}))')
     for e in controls:h.dispatch(e)
@@ -1291,16 +1292,116 @@ def chase_dirty(p,before):
     for case in range(15,21):
         act(p,'chase-case',case,before);act(p,'chase-target',1,before);chase_entry(p,9,before);act(p,'chase-reason','line',before);act(p,'chase-check',before=before);act(p,'chase-hint',before=before);act(p,'chase-solution',before=before);act(p,'chase-rotation',before=before);act(p,'chase-example',before=before);act(p,'chase-example-step',1,before);act(p,'chase-return',before=before)
 
+    for case in range(21,27):
+        act(p,'chase-case',case,before);act(p,'chase-target',1,before);chase_entry(p,9,before);act(p,'chase-reason','substitute',before);act(p,'chase-check',before=before);act(p,'chase-hint',before=before);act(p,'chase-solution',before=before);act(p,'chase-rotation',before=before);act(p,'chase-example',before=before);act(p,'chase-example-step',1,before);act(p,'chase-return',before=before)
+
 
 def chase_reset(p,before):
     act(p,'page','chase',before)
     h.ok(p.locator('#crossing-angles-chase-case').input_value()=='0','fresh visit resets selected Chase case and solve view')
-    for case in [0,3,12,14,15,16,17,18,19,20]:
+    for case in [0,3,12,14,15,16,17,18,19,20,21,22,23,24,25,26]:
         act(p,'chase-case',case,before)
         h.ok(p.locator('#crossing-angles-chase-target').input_value()=='0' and p.locator(CI).input_value()=='' and p.locator(sel('chase-reason')+'[aria-pressed=true]').count()==0,'clearing resets cached Chase answer/target/reason '+str(case))
         h.ok('Not checked yet' in chase_feedback(p) and p.locator('.ca-chase-hint,.ca-chase-solution,.ca-chase-help-note').count()==0,'clearing resets feedback and explicit/derived help '+str(case))
         h.ok(p.locator(sel('chase-rotation')).get_attribute('data-crossing-angles-value')=='30' and all('°' not in s for s in p.locator('.ca-chase-target-band [data-crossing-angles-chase-target]').all_inner_texts()),'clearing resets pose and every provided label '+str(case))
     act(p,'chase-example',before=before);h.ok('givens only' in p.locator('.ca-chase-counter').inner_text(),'clearing resets held example progress');act(p,'chase-return',before=before);act(p,'chase-case',0,before)
+
+
+# Independent scalar/angle expectations. Legacy Chase cases above stay unchanged.
+EQUATION_CASES=[(21,'equationLine',30,110,'line','3t+20+70=180'),(22,'equationLine',35,85,'line','2t+15+95=180'),(23,'equationLine',26,116,'line','4t+12+64=180'),(24,'equationOpposite',30,100,'opposite','3t+10=t+70'),(25,'equationOpposite',22,96,'opposite','4t+8=2t+52'),(26,'equationOpposite',27,140,'opposite','5t+5=2t+86')]
+
+
+def equation_units(p,t=None,x=None):
+    number=chase_target(p,'t');angle=chase_target(p,'x')
+    # Examples use noninteractive cells, retaining the same target identity.
+    if not number.count():number=p.locator('[data-crossing-angles-chase-target="t"]');angle=p.locator('[data-crossing-angles-chase-target="x"]')
+    h.ok('°' not in number.inner_text() and 'degrees' not in (number.get_attribute('aria-label') or ''),'t stays a plain number in visible/accessibility labels')
+    if t is not None:h.ok(re.search(r'\b'+str(t)+r'\b',number.inner_text()) is not None,'t value has correct numeric meaning')
+    if x is not None:h.ok(str(x)+'°' in angle.inner_text(),'x value retains its angle unit')
+    else:h.ok('°' not in angle.inner_text(),'unrevealed x remains unknown')
+    h.ok(number.get_attribute('data-chase-leader-x') is None and number.get_attribute('data-chase-leader-y') is None,'scalar target has no angular coordinates')
+    h.ok(p.locator('[data-chase-connector="t"],[data-chase-sector="t"],.ca-chase-given').count()==0 and p.locator('[data-chase-connector="x"]').count()==1,'no scalar arc, source tags or duplicate angular connector')
+
+
+def equation_example(p,family,before):
+    draft=p.locator(CI).input_value();act(p,'chase-example',before=before)
+    while not p.locator('[data-chase-example-nav=previous]').is_disabled():
+        p.locator('[data-chase-example-nav=previous]').click();h.unchanged(p,before,'equation example previous')
+    equation_units(p);h.ok(all('°' not in s and not re.search(r'\d',s) for s in p.locator('.ca-chase-target-band [data-crossing-angles-chase-target]').all_inner_texts()),'example zero has names only')
+    expected=(60,130) if family=='equationLine' else (44,144)
+    p.locator('[data-chase-example-nav=next]').click();h.unchanged(p,before,'equation example number')
+    equation_units(p,t=expected[0]);h.ok('°' not in p.locator('[data-crossing-angles-chase-target="x"]').inner_text(),'example number step does not expose angle')
+    p.locator('[data-chase-example-nav=next]').click();h.unchanged(p,before,'equation example angle');equation_units(p,*expected)
+    hear(p,before,includes=['A different worked sketch'],excludes=['Your number for t:','Your angle x in degrees:'])
+    chase_scene(p,family)
+    act(p,'chase-return',before=before);h.ok(p.locator(CI).input_value()==draft,'example keeps waiting scalar/angle draft')
+
+
+def equation_journey(browser,base):
+    print('Angle Equations: six sources, offered equations, units, truthful help and actual Notes exports',flush=True)
+    p=setup(browser,base);exported=h.notes(p,'equation-notes-before');p.evaluate('location.hash='+json.dumps(ROUTE));ready(p)
+    source=frame(p);before=h.snapshot(p);enter(p,before);act(p,'page','chase',before)
+    h.ok(p.locator('#crossing-angles-chase-case option').count()==27,'old and new sketches coexist')
+    for case,family,t,x,reason,equation in EQUATION_CASES:
+        act(p,'chase-case',case,before);act(p,'chase-restart',before=before)
+        equation_units(p);h.ok('degrees' not in p.locator(CI).get_attribute('aria-label') and 'number' in p.locator(CI).get_attribute('aria-label'),'scalar input is named as a number')
+        h.ok(p.locator('[aria-label="Find a quantity"]').count()==1 and 'Next question' in p.locator('[data-chase-target-nav=next]').inner_text(),'question region and navigation do not call t an angle')
+        h.ok(equation in re.sub(r'\s+','',p.locator(sel('chase-reason',reason)).inner_text()),'offered geometric equation uses its own coefficient packet')
+        act(p,'chase-check',before=before);h.ok('whole number for t' in chase_feedback(p) and 'angle' not in chase_feedback(p),'blank t feedback names the number')
+        chase_entry(p,999,before);act(p,'chase-check',before=before);h.ok('360' in chase_feedback(p) and '°' not in chase_feedback(p),'scalar entry-limit feedback has no angle unit')
+        chase_entry(p,t,before);act(p,'chase-check',before=before);h.ok('Choose an equation' in chase_feedback(p),'correct number still needs an equation choice')
+        act(p,'chase-reason','point',before);act(p,'chase-check',before=before);h.ok('does not explain' in chase_feedback(p),'number match does not validate an incorrect geometric equation')
+        act(p,'chase-reason',reason,before);act(p,'chase-check',before=before);equation_units(p,t=t)
+        act(p,'chase-target',1,before);chase_entry(p,x,before);act(p,'chase-reason','substitute',before);act(p,'chase-check',before=before);equation_units(p,t,x)
+        h.ok('degrees' in p.locator(CI).get_attribute('aria-label') and 'checked or shown value' in p.locator('.ca-chase-caption').inner_text(),'angle question and truthful value caption')
+        if case in [21,24]:equation_example(p,family,before)
+        # A wrong earlier number remains a draft; later keys are source-owned.
+        act(p,'chase-restart',before=before);chase_entry(p,1,before);act(p,'chase-reason',reason,before);act(p,'chase-check',before=before)
+        act(p,'chase-target',1,before);chase_entry(p,x,before);act(p,'chase-reason','line' if family=='equationLine' else 'opposite',before);act(p,'chase-check',before=before)
+        equation_units(p,x=x);h.ok(not re.search(r'\d',chase_target(p,'t').inner_text()),'wrong t is neither a given nor a later angle key')
+        act(p,'chase-restart',before=before);act(p,'chase-solution',before=before);equation_units(p,t=t)
+        h.ok(p.locator(CI).input_value()=='' and '°' not in chase_target(p,'x').inner_text(),'direct t help does not fill a draft or expose x')
+        act(p,'chase-restart',before=before);act(p,'chase-target',1,before);chase_entry(p,9,before);act(p,'chase-solution',before=before);equation_units(p,t,x)
+        h.ok(p.locator(CI).input_value()=='9' and 'shown' in chase_target(p,'t').inner_text(),'angle solution marks the provided number as help without entering it')
+        h.ok('checked or shown value' in p.locator('.ca-chase-caption').inner_text() and 'reason for every' not in p.locator('.ca-chase-caption').inner_text(),'showing x alone claims available values, not reasoning for t')
+        act(p,'chase-target',0,before);act(p,'chase-hint',before=before)
+        h.ok(p.locator(CI).input_value()=='' and p.locator(sel('chase-reason')+'[aria-pressed=true]').count()==0 and 'this question' in p.locator('.ca-chase-help-note').inner_text(),'provided t preserves empty answer/reason and scalar hint wording')
+        hear(p,before,includes=['Your number for t: blank'],excludes=['t = '+str(t)+'°'])
+    # Scoped keyboard keeps plain-number drafts while labels normalize the number.
+    act(p,'chase-case',21,before);act(p,'chase-reason','line',before);p.locator(CI).focus();p.keyboard.press('Delete')
+    for digit in '030':p.keyboard.press(digit);h.unchanged(p,before,'scalar keyboard digit')
+    p.keyboard.press('Enter');h.focus(p,CI,'scalar keyboard Check retains input focus');h.unchanged(p,before,'scalar keyboard Check')
+    h.ok(p.locator(CI).input_value()=='030','scalar draft keeps leading zero');equation_units(p,t=30,x=110)
+    hear(p,before,includes=['Your number for t: 030','3t + 20 + 70 equals 180'],excludes=['t = 30°','t equals 30°'])
+    act(p,'chase-rotation',before=before);act(p,'page','matching',before);act(p,'page','chase',before)
+    h.ok(p.locator(CI).input_value()=='030','other pages retain the waiting scalar draft')
+    back(p,before);h.ok(frame(p)==source,'equation visit preserves actual Copy Frame source');enter(p,before)
+    h.ok(p.locator(CI).input_value()=='030','Back/re-entry retains the scalar visit');back(p,before)
+    after=h.notes(p,'equation-notes-after');h.ok({k:v for k,v in after.items() if k!='exportedAt'}=={k:v for k,v in exported.items() if k!='exportedAt'},'actual Notes exports unchanged across complete equation visit');p.context.close()
+
+
+def equation_focused(browser,base):
+    print('Angle Equations: two unique diagrams, scalar control resize and revealed example layouts',flush=True)
+    p=setup(browser,base);before=h.snapshot(p);enter(p,before);act(p,'page','chase',before)
+    for case,family,t,x,reason,_ in [EQUATION_CASES[0],EQUATION_CASES[3]]:
+        act(p,'chase-case',case,before);act(p,'chase-target',1,before);original=chase_target(p,'t').element_handle()
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');chase_scene(p,family)
+        original.click();h.ok(p.locator('#crossing-angles-chase-target').input_value()=='0','original scalar button performs a change after resize');h.unchanged(p,before,'scalar target resize')
+        chase_entry(p,t,before);act(p,'chase-reason',reason,before);act(p,'chase-check',before=before);act(p,'chase-target',1,before);act(p,'chase-solution',before=before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+            for _ in range(12):chase_scene(p,family);equation_units(p,t,x);act(p,'chase-rotation',before=before)
+            capture(p,'equation-'+family+'-'+str(width))
+        act(p,'chase-example',before=before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+            while not p.locator('[data-chase-example-nav=previous]').is_disabled():p.locator('[data-chase-example-nav=previous]').click();h.unchanged(p,before,'example previous')
+            chase_scene(p,family)
+            while not p.locator('[data-chase-example-nav=next]').is_disabled():p.locator('[data-chase-example-nav=next]').click();h.unchanged(p,before,'example next');chase_scene(p,family)
+            capture(p,'equation-example-'+family+'-'+str(width))
+        act(p,'chase-return',before=before)
+    p.context.close()
 
 
 def main():
@@ -1313,7 +1414,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base);polygon_journey(browser,base);polygon_focused(browser,base);polygon_guards(browser,base);matching_journey(browser,base);matching_focused(browser,base);matching_guards(browser,base);chase_journey(browser,base);chase_focused(browser,base);chase_guards(browser,base)
+                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base);polygon_journey(browser,base);polygon_focused(browser,base);polygon_guards(browser,base);matching_journey(browser,base);matching_focused(browser,base);matching_guards(browser,base);chase_journey(browser,base);chase_focused(browser,base);chase_guards(browser,base);equation_journey(browser,base);equation_focused(browser,base);chase_guards(browser,base,26,21)
                 h.ok(not h.errors,'no browser/HTTP errors: '+str(h.errors))
                 result={'status':'passed','checks':h.checks,'artifacts':str(OUT)}
                 (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result),flush=True)

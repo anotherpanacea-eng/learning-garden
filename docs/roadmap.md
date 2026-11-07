@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Angle Equations422 · the number and the angle
 
-[422](specs/422-angle-equations.md) is the next proposed LG-G1 bridge: choose an equation from an angle fact, solve for a number, then substitute to find an angle. Six finite cases reuse Angle Chase while distinguishing plain numbers from degrees and explicitly shown help from entered work. The existing Equality Desk supplies a conceptual return; no record transfer or new saved engine is proposed. Independent specification and complete mathematics/copy/visual-plan review precede implementation. Broader algebra, fractional cases and independent proof remain missing.
+[422](specs/422-angle-equations.md) is the next proposed LG-G1 bridge: choose an equation from an angle fact, solve for a number, then substitute to find an angle. Six finite cases reuse Angle Chase while distinguishing plain numbers from degrees and explicitly shown help from entered work. The existing Equality Desk supplies a conceptual return; no record transfer or new saved engine is proposed. Its finite specification is independently BUILD-READY atce877298 after six-lens and complete mathematics/copy/visual-plan repair closure. Implementation is underway; final review, qualification and publication remain pending. Broader algebra, fractional cases and independent proof remain missing.
 
 ## Polygon Chase421 · equal shares or missing corners?
 
