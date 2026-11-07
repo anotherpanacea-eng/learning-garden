@@ -39,10 +39,10 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     "edit": "Change my arrangement",
     "hear": "Hear this page",
     "returnTitle": "Return to the seedlings",
-    "returnText": "The seedling pictures show stem length and other pictured features. They do not measure how much sugar a plant makes. What else would an investigation need?",
-    "returnLink": "Open the growing shelf",
+    "returnText": "The invented seedling pictures show pictured stem lengths and other features. They supply no sugar measurement. What else would an investigation need?",
+    "returnLink": "Leave for the growing shelf",
     "grownupTitle": "For grown-ups: what this model can show",
-    "grownup": "This is a qualitative role model, not a molecular mechanism, gas-exchange balance, rate model or practical test. Card placement and question choices stay in this visit and create no learning record. The existing Living Layers guide and its saved versions are unchanged. General plant knowledge is separate from measurements of a particular seedling.",
+    "grownup": "This is a qualitative role model, not a molecular mechanism, gas-exchange balance, rate model or practical test. Card placement and question choices stay in this visit and create no learning record. The existing Living Layers guide and its saved versions are unchanged. General plant knowledge is separate from invented pictured stem lengths or measurements from a real investigation.",
     "visitNote": "This arrangement waits while you explore this model. Leaving the room or reloading starts a fresh model visit.",
     "materialArrow": "Materials used in photosynthesis",
     "energyArrow": "Light energy into the process",
@@ -52,11 +52,13 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     "leafLabel": "A green leaf",
     "rootsLabel": "Roots",
     "airLabel": "Air",
-    "diagramCaption": "A diagram of roles, not a view inside a leaf. Solid paths show named materials; the separate dashed ray shows light energy. Line widths and card sizes do not show quantities.",
+    "diagramCaption": "A diagram of roles, not a view inside a leaf. Solid paths show substances; the separate dashed ray shows light energy. Line widths and card sizes do not show quantities.",
     "newArrangement": "Start a new empty arrangement",
     "nextTitle": "Go on to molecule counts",
     "nextText": "A Leaf’s Two Accounts lets you build molecule summaries and check atom counts. It offers a more detailed representation of these ideas. In Body Clues, choose A leaf’s two accounts.",
-    "nextLink": "Open Body Clues for A Leaf’s Two Accounts"
+    "nextLink": "Leave for Body Clues",
+    "leaveTitle": "Leave this room",
+    "leaveWarning": "Leaving clears this model and any Living Layers guide you have not kept. To keep working on that guide, use Back to Living Layers first."
   },
   "cards": [
     {
@@ -93,7 +95,7 @@ Original authored copy and diagram contract; no upstream text or images copied. 
   "roles": [
     {
       "id": "materials",
-      "label": "Materials used"
+      "label": "Materials used to make food"
     },
     {
       "id": "energy",
@@ -190,7 +192,7 @@ Original authored copy and diagram contract; no upstream text or images copied. 
           "id": "choice-1",
           "label": "Light is a soil mineral that is taken up with water through roots.",
           "outcome": "different",
-          "feedback": "Mineral nutrients and water are materials taken up by roots. Light reaches green parts as an energy source."
+          "feedback": "Mineral nutrients and water are substances taken up by roots. Light supplies energy; it is not a substance."
         },
         {
           "id": "choice-2",
@@ -232,17 +234,17 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     },
     {
       "id": "measurement",
-      "prompt": "Does one stem-length picture tell us how much sugar that plant made?",
+      "prompt": "In the invented seedling pictures, does a longer stem show which plant made more sugar?",
       "choices": [
         {
           "id": "choice-1",
-          "label": "Yes. The pictured stem length alone gives the exact quantity of sugar made.",
+          "label": "Yes. The longer pictured stem shows that plant made more sugar.",
           "outcome": "different",
-          "feedback": "Stem length and sugar production are different quantities. Our seedling picture supplies no sugar measurement."
+          "feedback": "Stem length and sugar production are different quantities. Our invented seedling pictures supply no sugar measurement."
         },
         {
           "id": "choice-2",
-          "label": "No. This model explains a process; the picture supplies no sugar measurement.",
+          "label": "No. Pictured stem length does not measure how much sugar the plant made.",
           "outcome": "fits",
           "feedback": "A general explanation of photosynthesis does not turn stem length into a sugar measurement. Another investigation would need suitable evidence."
         },
