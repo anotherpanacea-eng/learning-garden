@@ -24,3 +24,22 @@ Review every French line the diff adds or changes, and any unchanged French line
 6. Anything too hard for the stated level that a simpler line would fix.
 
 Format: a Markdown table with columns: File | Exact quoted line | Problem | Suggested fix | Severity (high = wrong or misleading; medium = unnatural; low = polish) | Confidence. Then a short list of changed lines you checked closely and would keep as written. End with an overall verdict for the changed French: usable as written, usable with the listed fixes, or needs rework. Do not invent lines that are not in the files; quote exactly.
+
+
+## Repaired-text panel · 2026-11-07
+
+Source revision: `7aaf69ee21f6925d14098ef8b2a243d1f94d9156`, complete `dist/french-story-data.mjs`, not a sampled diff. The exact module body follows this instruction in each Gemini/Claude inline request; it is recoverable from that immutable revision instead of duplicated in this record. The Git blob is recorded in the resolution. No other-provider reports were included.
+
+### Common Gemini/Claude language instruction
+
+```text
+Independent COMPLETE French language/content review of exact public PR462 head 7aaf69ee21f6925d14098ef8b2a243d1f94d9156. Complete dist/french-story-data.mjs follows. No other reviewers' findings are provided; make an independent judgment. No edits or external actions, no tools, terminal, filesystem, web or plugins. Read all9stories,27French passage variants and English meanings, vocabulary,18questions(all choices/orderings/keys/hints/explanations) and metadata. Judge standard metropolitan French grammar/idiom, gloss accuracy, beginner reading load with adult support, contextual sufficiency in every variant, answer uniqueness and ordering, and educational claims. Reading load is not an age or placement. Return actual review not a plan: CLEAR exact head if no P1/P2, otherwise concrete priority, quoted line, minimal correction. OptionalP3 separate. State full scope/limits. Text review only, not runtime/device/learning qualification.
+```
+
+### Claude implementation instruction
+
+After its independent inline-language verdict, Claude was asked to read the public repository diff against main and `docs/reviews/462-french-panel/resolution.md`, using read-only tools, and return a separate implementation verdict naming the exact head. It was forbidden to edit files or take external actions. The complete language instruction above applied before this source review.
+
+### OpenAI independent reviewer instruction
+
+A fresh reviewer context was given the exact head and complete source module, told not to read prior reports or other-provider findings, and asked to read all nine stories/27 variants and their meanings, vocabulary, all questions/choices/orderings/keys/hints/explanations and metadata. The review criteria were standard France French for an English-reading beginner with adult support, without age placement; grammar, idiom, gloss accuracy, sufficiency in every variant, unique fitting answer/order, reading load and claims. It was instructed to report complete scope, exact head, CLEAR if no P1/P2, otherwise severity/quote/minimal correction, with optional P3 separate. It had no edit or external-action authority. The report records the independently verified head.
