@@ -1,3 +1,4 @@
+import {makeCharacterStudy} from './chapter-character-content.mjs';
 // Original reading-map material with short attributed book excerpts; no learner data.
 const source={
  "v": 1,
@@ -391,4 +392,4 @@ export const chapterCopy={
  "scope": "This map records choices and help, not chapters read or independent understanding. Your explanation is spoken or on paper and read by a person.",
  "return": "Come back after another chapter. Would you keep this connection, add one, or change the words you use to explain it?"
 };
-export function chapterSource(){return structuredClone(source);}
+export function chapterSource(){const current=structuredClone(source);current.characterStudy=makeCharacterStudy();return current;}
