@@ -53,6 +53,31 @@ export function writingRevisionDestinationLabel(s,headingId){
  }catch{return null;}
 }
 
+// Optional frozen summary study does not change ordinary source or saved-work validity.
+export function writingSummaryStudy(s){
+ const unavailable={status:'unavailable'};
+ try{
+  if(!object(s)||!own(s,'bench')||s.bench!=='summary')return {status:'absent'};
+  if(!plain(s)||!['kind','parts','choices','key','summary'].every(k=>own(s,k))||!validWritingSource(s)||s.kind!=='sort'||!plain(s.summary)||!dense(s.parts,1,12)||!dense(s.choices,1,12)||![...s.parts,...s.choices].every(p=>plain(p)&&own(p,'id')&&own(p,'text')))return unavailable;
+  const packet=s.summary,fields=['v','keepId','accepted','brief','returnPrompt','demo','comparisons'];
+  if(!fields.every(k=>own(packet,k))||packet.v!==1||!id(packet.keepId)||!s.choices.some(h=>own(h,'id')&&h.id===packet.keepId)||!plain(packet.accepted)||!display(packet.brief,1500)||!display(packet.returnPrompt,1500))return unavailable;
+  const ps=s.parts.map(p=>p.id),cs=s.choices.filter(c=>own(c,'id')).map(c=>c.id),accepted=packet.accepted;
+  if(s.parts.some(p=>!own(p,'id'))||!plain(s.key)||Object.keys(accepted).length!==ps.length||!ps.every(k=>own(accepted,k)&&dense(accepted[k],1,4)&&accepted[k].every(x=>id(x)&&cs.includes(x))&&new Set(accepted[k]).size===accepted[k].length&&own(s.key,k)&&accepted[k].includes(s.key[k])))return unavailable;
+  const d=packet.demo;
+  if(!plain(d)||!['title','brief','story','steps'].every(k=>own(d,k))||!display(d.title,160)||!display(d.brief,4000)||!display(d.story,4000)||!dense(d.steps,1,4)||!d.steps.every(x=>display(x,1500)))return unavailable;
+  if(!dense(packet.comparisons,1,4)||!packet.comparisons.every(c=>plain(c)&&['title','text','notice'].every(k=>own(c,k))&&display(c.title,160)&&display(c.text,4000)&&display(c.notice,4000)))return unavailable;
+  if(!own(s,'feedback')||!plain(s.feedback)||!own(s.feedback,'different')||!plain(s.feedback.different)||!ps.every(k=>own(s.feedback.different,k)&&display(s.feedback.different[k],4000)))return unavailable;
+  return {status:'ready',study:packet};
+ }catch{return unavailable;}
+}
+export function writingSummaryPreview(s,w){
+ try{
+  const study=writingSummaryStudy(s);if(study.status!=='ready'||!validWritingWork(s,w))return null;
+  const keep=s.choices.find(h=>h.id===study.study.keepId),group=h=>({id:h.id,text:h.text,parts:s.parts.filter(p=>placed(w,p.id)===h.id)});
+  return {keep:group(keep),other:s.choices.filter(h=>h.id!==keep.id).map(group),waiting:s.parts.filter(p=>!placed(w,p.id))};
+ }catch{return null;}
+}
+
 // Optional source-local references are derived without changing the frozen raw source.
 const dense=(xs,min,max)=>Array.isArray(xs)&&xs.length>=min&&xs.length<=max&&Array.from({length:xs.length},(_,i)=>own(xs,i)).every(Boolean);
 const display=(x,max)=>typeof x==='string'&&x.trim().length>0&&Array.from(x).length<=max;
@@ -122,10 +147,21 @@ function initialWork(s){
  return s.kind==='tap'?{taps:[]}:s.kind==='sort'?{placements:Object.fromEntries(s.parts.map(x=>[x.id,null]))}:s.kind==='order'?{order:s.parts.map(x=>x.id)}:s.kind==='break'?{boundary:null}:{choice:null};
 }
 const fail=error=>({ok:false,error});
+// Compare notebook fields as well as JSON: a probe adding an undefined field is still changed.
+function intact(a,b){
+ if(Object.is(a,b))return true;
+ if(a===null||b===null||typeof a!=='object'||typeof b!=='object'||Object.getPrototypeOf(a)!==Object.getPrototypeOf(b)||!same(a,b))return false;
+ const keys=Reflect.ownKeys(a);return keys.length===Reflect.ownKeys(b).length&&keys.every(k=>own(b,k)&&intact(a[k],b[k]));
+}
 function change(state,mutate,options={}){
  try{
-  const next=clone(state),result=mutate(next);if(!result.ok||result.changed===false)return result;
-  if(!recoveryFitsProgressLimits(next)||options.canExport&&!options.canExport(next))return fail('unexportable');
+  const before=clone(state),liveDesk=state.writingDesk,next=clone(state),result=mutate(next);if(!result.ok||result.changed===false)return result;
+  if(!recoveryFitsProgressLimits(next))return fail('unexportable');
+  if(options.canExport){
+   const probe=clone(next);
+   if(options.canExport(probe)!==true||!intact(probe,next)||state.writingDesk!==liveDesk||!intact(state,before))return fail('unexportable');
+  }
+  if(!recoveryFitsProgressLimits(next))return fail('unexportable');
   state.writingDesk=next.writingDesk;return result;
  }catch{return fail('unexportable');}
 }
@@ -144,7 +180,11 @@ export function openWritingTask(state,taskId,options){return change(state,next=>
  }
  r.currentId=taskId;return {ok:true};
  },options);}
-export function nextWritingTask(state,options){const at=writingTasks.findIndex(x=>x.id===state?.writingDesk?.currentId);return openWritingTask(state,writingTasks[(at+1)%writingTasks.length].id,options);}
+export function nextWritingTask(state,options){
+ const summary=writingView(state).record?.source.bench==='summary',tasks=writingTasks.filter(t=>(t.bench==='summary')===summary);
+ if(!tasks.length)return fail('selection');
+ const at=tasks.findIndex(x=>x.id===state?.writingDesk?.currentId);return openWritingTask(state,tasks[(at+1)%tasks.length].id,options);
+}
 export function setWritingMaterial(state,action,options){return edit(state,r=>{
  const s=r.source,w=r.work;if(!object(action))return fail('material');
  if(s.kind==='tap'){
@@ -173,6 +213,8 @@ export function showWritingHelp(state,kind,options){return edit(state,r=>{
  },options);}
 export function writingResult(s,w){
  if(!validWritingWork(s,w))return null;
+ const summary=s.bench==='summary'?writingSummaryStudy(s):null;
+ if(summary&&summary.status!=='ready')return null;
  let outcome='different',feedback=[];
  if(s.kind==='tap'){
   outcome=!w.taps.length?'incomplete':w.taps.length===s.key.length&&s.key.every(k=>w.taps.includes(k))?'fit':'different';
@@ -180,8 +222,9 @@ export function writingResult(s,w){
   if(s.key.some(k=>!w.taps.includes(k)))feedback.push(s.feedback.missing);
  }else if(s.kind==='sort'){
   const pending=s.parts.filter(x=>!placed(w,x.id));
-  outcome=pending.length?'incomplete':s.parts.every(x=>placed(w,x.id)===s.key[x.id])?'fit':'different';
-  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&selected!==s.key[part.id])feedback.push(['research','revision'].includes(s.bench)?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
+  const fits=p=>summary?summary.study.accepted[p.id].includes(placed(w,p.id)):placed(w,p.id)===s.key[p.id];
+  outcome=pending.length?'incomplete':s.parts.every(fits)?'fit':'different';
+  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&!fits(part))feedback.push(summary?`${part.text} ${s.feedback.different[part.id]}`:['research','revision'].includes(s.bench)?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
  }else if(s.kind==='order')outcome=same(w.order,s.key)?'fit':'different';
  else{const picked=s.kind==='break'?w.boundary:w.choice;outcome=picked===null?'incomplete':picked===s.key?'fit':'different';if(outcome==='different'&&own(s.feedback.different,picked))feedback.push(s.feedback.different[picked]);}
  if(outcome==='fit')feedback.unshift(s.feedback.fit);
@@ -191,7 +234,8 @@ export function writingResult(s,w){
  return {outcome,feedback};
 }
 export function checkWritingTask(state,options){return edit(state,r=>{
- const result=writingResult(r.source,r.work),c={work:clone(r.work),help:clone(r.help),...result,supported:true,guided:true};
+ const result=writingResult(r.source,r.work);if(!result)return fail('unavailable');
+ const c={work:clone(r.work),help:clone(r.help),...result,supported:true,guided:true};
  r.checks.push(c);if(r.checks.length>24)r.checks.splice(1,r.checks.length-24);r.count=Math.min(1000000,r.count+1);return {ok:true,check:clone(c)};
  },options);}
 export function keepWritingTask(state,options){return edit(state,r=>{
@@ -216,7 +260,7 @@ export function writingPreview(s,w){
  if(s.kind==='tap'&&s.bench==='research')return [{heading:'Selected source cards',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join('\n\n')||'No source cards are selected yet.',noteIds:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.id)}];
  if(s.kind==='tap')return [{heading:'Text to read',text:s.parts.map(p=>p.text).join('')},{heading:'Tapped words',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join(', ')||'No words tapped yet.'}];
  if(s.kind==='choice'&&own(s,'preview'))return [{heading:'Text to read',text:w.choice===null?s.parts.map(p=>p.text).join(' '):s.preview[w.choice],...(['research','point-quote'].includes(s.bench)?{noteIds:w.choice===null?[]:[w.choice]}:{})}];
- if(s.kind==='sort'){const block=(heading,ps)=>({heading,text:ps.map(p=>p.text).join(' '),...(s.bench==='research'?{noteIds:ps.map(p=>p.id)}:{})});return [...s.choices.map(h=>block(h.text,s.parts.filter(p=>placed(w,p.id)===h.id))),block(s.bench==='research'?'Waiting notes':'Waiting strips',s.parts.filter(p=>!placed(w,p.id)))];}
+ if(s.kind==='sort'){const block=(heading,ps)=>({heading,text:ps.map(p=>p.text).join(' '),...(['research','summary'].includes(s.bench)?{noteIds:ps.map(p=>p.id)}:{})});return [...s.choices.map(h=>block(h.text,s.parts.filter(p=>placed(w,p.id)===h.id))),block(s.bench==='summary'?'Waiting sentences':s.bench==='research'?'Waiting notes':'Waiting strips',s.parts.filter(p=>!placed(w,p.id)))];}
  if(s.kind==='order')return w.order.map(k=>({heading:'',text:s.parts.find(p=>p.id===k).text}));
  if(s.kind==='break'){
   const at=w.boundary===null?-1:s.parts.findIndex(p=>p.id===w.boundary);

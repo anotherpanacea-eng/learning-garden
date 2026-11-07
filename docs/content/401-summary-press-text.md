@@ -26,6 +26,7 @@ All new words original. The full seven scenes of **The Second Knock** remain exa
 - Fit: These choices fit this reader's brief. The prepared sentences keep the important connections without adding a reader's judgment. Another brief may need different details.
 - General: Compare the sentence with this reader's brief and the complete story.
 - Help hint: Who is involved? What gets in the way, what changes and how does it end? If a sentence says someone thinks something, keep who thinks it.
+- Same-family familiarity: You have opened another summary brief.
 - Support notice: The story and sentence wording are provided. Try your own words aloud or on paper with someone who can listen.
 - Return: Reopen another brief. Which detail matters now? Then tell someone a short account of a different whole story. Ask whether they can follow what changed and how it ended.
 - Packet unavailable: This earlier draft has no usable summary guide here. Its sentences, story references and kept versions stay unchanged in Notes. You can still arrange and keep it.
