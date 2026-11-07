@@ -1,6 +1,6 @@
 #403 · Sentence Spotlight: complete finite material
 
-Status: proposed for independent grammar and specification review. All activity words below are original. No learner data.
+Status: independently cleared at b848c755 after grammar and specification repairs. All activity words below are original. No learner data.
 
 The shared copy, six-step lesson, separate Niko miniature, six constructive briefs and two contrast questions are the full first release. Preview rendering follows spec403, including labelled blanks and preservation of historical punctuation. No inflected form is generated.
 

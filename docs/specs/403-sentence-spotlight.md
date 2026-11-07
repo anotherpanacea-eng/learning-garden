@@ -1,6 +1,6 @@
 #403 · Sentence Spotlight
 
-Status: proposed for independent six-lens specification and complete finite grammar review. Selects a bounded274 voice bridge under admitted LG-1 / LG-G1. Not yet built or published.
+Status: independently BUILD-READY at b848c755 after six-lens specification and complete finite grammar review. Selects a bounded274 voice bridge under admitted LG-1 / LG-G1. The bounded implementation and native qualification are built; exact-head implementation review and publication are pending.
 
 ## Problem and curricular place
 
