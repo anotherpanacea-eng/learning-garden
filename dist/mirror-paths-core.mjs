@@ -61,7 +61,7 @@ function geometry(m) {
     hit: { ...H }, normal: n, tangent: t, normalEnd: point(n, 185),
     mirrorStart: point(t, -160), mirrorEnd: point(t, 160), lamp: point(source, 150),
     guide: m.incidence === 0 ? point(source, 150) : point(reference, 135),
-    incoming: { start: point(source, 150), end: { ...H }, tip: point(source, 105),
+    incoming: { start: point(source, 150), end: { ...H }, tip: point(source, 90),
       direction: { x: -source.x, y: -source.y } },
     reference: outgoing(reference, 125), proposal: m.angle === null ? null : outgoing(unit(m.normalHeading + m.angle), 145),
     rightAngle: [corner, { x: corner.x + 18 * t.x, y: corner.y + 18 * t.y }, point(t, 18)],

@@ -42,6 +42,9 @@ def act(p, action, key=None):
     if key:q.focus();p.keyboard.press(key)
     else:q.click()
     focus_ok(p)
+    if action in ['add','clear']:
+        target='cw' if action=='add' else 'undo'
+        ok(p.evaluate("document.activeElement.getAttribute('data-mirror-action')")==target, 'exact '+action+' focus destination '+target+' after '+str(key or 'click'))
 
 def choose(p, ident):
     q=p.locator('[data-mirror-start="'+ident+'"]')
@@ -71,7 +74,7 @@ def geometry(p, ident, angle=None, turn=0, reference=False, example=False, frame
     incoming=tuple(-x for x in lamp)
     reflected=tuple(incoming[i]-2*dot(incoming,n)*n[i] for i in range(2))
     b=board(p,example)
-    data=b.evaluate('''e=>({lines:Object.fromEntries([...e.querySelectorAll("line[data-mirror-line]")].map(x=>[x.dataset.mirrorLine,["x1","y1","x2","y2"].map(k=>Number(x.getAttribute(k)))])),arrows:Object.fromEntries([...e.querySelectorAll("polygon[data-mirror-arrow]")].map(x=>[x.dataset.mirrorArrow,[...x.points].map(p=>[p.x,p.y])])),markers:Object.fromEntries(['lamp','hit','target'].map(k=>{const x=e.querySelector('[data-mirror-'+k+']');return [k,!x?null:x.tagName==='circle'?[x.cx.baseVal.value,x.cy.baseVal.value]:[...x.points].reduce((a,p)=>[a[0]+p.x/x.points.length,a[1]+p.y/x.points.length],[0,0])]})),matrix:(()=>{let m=e.getScreenCTM();return [m.a,m.b,m.c,m.d]})()})''')
+    data=b.evaluate('''e=>({lines:Object.fromEntries([...e.querySelectorAll("line[data-mirror-line]")].map(x=>[x.dataset.mirrorLine,["x1","y1","x2","y2"].map(k=>Number(x.getAttribute(k)))])),arrows:Object.fromEntries([...e.querySelectorAll("polygon[data-mirror-arrow]")].map(x=>[x.dataset.mirrorArrow,[...x.points].map(p=>[p.x,p.y])])),strokes:Object.fromEntries([...e.querySelectorAll('line[data-mirror-line]')].map(x=>[x.dataset.mirrorLine,parseFloat(getComputedStyle(x).strokeWidth)])),markers:Object.fromEntries(['lamp','hit','target'].map(k=>{const x=e.querySelector('[data-mirror-'+k+']');return [k,!x?null:x.tagName==='circle'?[x.cx.baseVal.value,x.cy.baseVal.value]:[...x.points].reduce((a,p)=>[a[0]+p.x/x.points.length,a[1]+p.y/x.points.length],[0,0])]})),matrix:(()=>{let m=e.getScreenCTM();return [m.a,m.b,m.c,m.d]})()})''')
     lines=data['lines'];arrows=data['arrows']
     ok(near(data['markers']['hit'],H) and near(data['markers']['lamp'],point(lamp)), 'actual hit and lamp markers match source geometry')
     if theta and not example:
@@ -86,7 +89,7 @@ def geometry(p, ident, angle=None, turn=0, reference=False, example=False, frame
         mv=[lines['mirror'][i+2]-lines['mirror'][i] for i in range(2)]
         nv=[lines['normal'][i+2]-lines['normal'][i] for i in range(2)]
         ok(abs(dot(mv,nv))<.05,'actual mirror and normal perpendicular')
-    expected={'incoming':(lamp,incoming,105)}
+    expected={'incoming':(lamp,incoming,90)}
     if angle is not None:
         proposal=direction(phi+angle)
         ok(near(lines.get('proposal',[]),list(H)+point(proposal)), 'proposal endpoints preserve chosen signed angle '+str({'expected':angle,'actual':state(p,example),'line':lines.get('proposal')}))
@@ -102,7 +105,15 @@ def geometry(p, ident, angle=None, turn=0, reference=False, example=False, frame
         a=arrows.get(name,[])
         ok(len(a)==3 and near(a[0],point(position,radius)),name+' arrow tip is first polygon point at specified distance')
         wing=[(a[1][i]+a[2][i])/2 for i in range(2)]
-        ok(dot([a[0][i]-wing[i] for i in range(2)],travel)>0,name+' arrow travels in correct direction')
+        length=dot([a[0][i]-wing[i] for i in range(2)],travel)
+        ok(abs(length-13)<.035,name+' arrow travels correctly with13 model-unit length')
+        transverse=(-travel[1],travel[0])
+        widths=[dot([vertex[i]-wing[i] for i in range(2)],transverse) for vertex in a[1:]]
+        ok(widths[0]*widths[1]<0 and all(abs(abs(w)-10)<.035 for w in widths),name+' head wings extend10 model-units on both sides')
+        ok(min(abs(w) for w in widths)-data['strokes'][name]/2>=5-.035,name+' head exceeds actual line halfstroke by at least5 model-units')
+    if ident=='return' and angle==0 and reference:
+        intervals=sorted((min(dot([vertex[i]-H[i] for i in range(2)],n) for vertex in arrows[name]),max(dot([vertex[i]-H[i] for i in range(2)],n) for vertex in arrows[name]),name) for name in ['incoming','reference','proposal'])
+        ok([x[2] for x in intervals]==['incoming','reference','proposal'] and all(left[1]<right[0] for left,right in zip(intervals,intervals[1:])), 'head-on Compare actual polygon radial projections are disjoint: '+str(intervals))
     m=data['matrix']
     ok(abs(math.hypot(m[0],m[1])-math.hypot(m[2],m[3]))<.001,'responsive SVG uses uniform x/y scale')
     ok(b.get_attribute('aria-label').startswith('Mirror path board'),'accessible board name identifies model')
@@ -165,6 +176,8 @@ def journey(browser,base):
                 angle=-CASES[ident][1]*CASES[ident][2]
                 tap(p,ident,angle);geometry(p,ident,angle)
                 act(p,'compare');saved=state(p)
+                if ident=='return':
+                    geometry(p,ident,0,reference=True);layout(p,'head-on-compare-820')
                 act(p,'guide');ok(state(p)==saved,'angle-guide toggle retains proposal and open reference')
                 for turn in [1,2,3,0]:
                     act(p,'rotate');geometry(p,ident,angle,turn,True)
@@ -277,6 +290,8 @@ def responsive_and_unseen(browser,base):
     for width in [320,1024]:
         c,p=setup(browser,base,width)
         try:
+            if width==320:
+                choose(p,'return');act(p,'add');act(p,'compare');geometry(p,'return',0,reference=True);layout(p,'head-on-compare-320')
             choose(p,'slanted');tap(p,'slanted',-60);geometry(p,'slanted',-60)
             act(p,'rotate');tap(p,'slanted',-45,1);act(p,'compare');geometry(p,'slanted',-45,1,True)
             layout(p,'build-'+str(width));act(p,'example')

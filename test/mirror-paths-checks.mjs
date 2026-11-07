@@ -31,7 +31,7 @@ for (const c of mirrorCases) {
     near(distance(g.rightAngle[0], g.rightAngle[1]), 18);
     near(distance(g.rightAngle[1], g.rightAngle[2]), 18);
     near(distance(g.guide, g.hit), c.incidence === 0 ? 150 : 135);
-    near(distance(g.incoming.tip, g.hit), 105);
+    near(distance(g.incoming.tip, g.hit), 90);
     near(distance(g.reference.tip, g.hit), 125);
     assert.ok(dot(g.incoming.direction, minus(g.hit, g.incoming.start)) > 0);
     assert.ok(dot(g.incoming.direction, g.normal) < 0);
