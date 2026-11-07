@@ -1,6 +1,6 @@
 # 413 · Pollen Path
 
-Status: proposed under admitted LG-1 / LG-G1; awaiting independent specification review. Selects the first pollination model of proposed150 Bee Meadow, not its full programme.
+Status: independently BUILD-READY at5789f57e under admitted LG-1 / LG-G1; implementation and qualification in [PR496](https://github.com/anotherpanacea-eng/learning-garden/pull/496). Selects the first pollination model of proposed150 Bee Meadow, not its full programme.
 
 ## Purpose and story
 
