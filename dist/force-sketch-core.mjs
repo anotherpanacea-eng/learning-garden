@@ -62,7 +62,7 @@ export function forceSketchModel(w){if(!validForceSketch(w))return null;const s=
 }
 export function forceSketchNarration(w){const m=forceSketchModel(w);if(!m)return '';const a=m.work;
  if(w.page==='teaching'){const t=forceTeaching[w.teachingStep];return [forceCopy.model,t.title,t.text,...t.arrows.map(forceWords),...(t.pair?[forceCopy.pairWarning,forceWords(t.pair.force),forceWords(t.pair.partner)]:[])].join(' ');}
- const text=[forceCopy.model,m.scene.title,m.scene.story,m.scene.clues,`Chosen object: ${m.body.name}.`,w.page==='motion'?forceCopy.motionPrompt:forceCopy.hint];
+ const text=[forceCopy.model,m.scene.title,m.scene.story,m.scene.clues,`Chosen object: ${m.body.name}.`,w.page==='motion'?forceCopy.motionPrompt:w.page==='compare'?`Compare your arrows with the forces described for ${m.body.name}.`:forceCopy.hint];
  if(w.page==='build'||w.page==='compare')text.push(...(m.arrows.length?m.arrows.map(p=>`Your drawing: ${p.force.agent} → ${p.force.receiver}, ${p.amount} N ${p.direction}.`):[forceCopy.empty]));
  if(w.page==='compare'){if(a.compared)text.push(...m.comparison,m.netText);if(a.referenceShown)text.push('Model reference.',...m.reference.map(forceWords));if(a.pairExpanded&&a.pairShown)text.push(forceCopy.pairWarning,forceWords(m.pair.force),forceWords(m.pair.partner),forceCopy.pairExplanation);}
  if(w.page==='motion'){text.push(...m.choices.map(c=>c.label));if(a.prediction!==null)text.push(`Your prediction: ${m.choices.find(c=>c.id===a.prediction).label}`);if(a.predictionChecked)text.push(m.predictionFeedback);if(a.motionShown)text.push(m.motion);}
