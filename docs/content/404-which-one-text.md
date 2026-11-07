@@ -7,8 +7,8 @@ Status: proposed for independent grammar, meaning and specification review. All 
   "copy": {
     "label": "Which One?",
     "joins": "Joining words",
-    "details": "Which one?",
-    "opening": "Move a detail to another noun. What does the sentence describe now?",
+    "details": "Which One?",
+    "opening": "Give the detail to a noun, then try the other one. What does the sentence describe now?",
     "scene": "Our imagined scene",
     "sceneNotice": "The picture and scene facts stay the same when you change the words.",
     "purpose": "For this reader",
@@ -23,7 +23,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
     "noUndo": "No move to undo in this scene.",
     "noDetail": "No detail is attached.",
     "pointsTo": "In this version, the detail describes",
-    "separateMeaning": "The base sentence names the two things and their positions. It does not add the movable detail to either noun.",
+    "separateMeaning": "The base sentence names the two figures and where they are. It does not attach the movable detail to either noun.",
     "previousScene": "Previous scene",
     "nextScene": "Next scene",
     "sceneCount": "Scene",
@@ -36,22 +36,26 @@ Status: proposed for independent grammar, meaning and specification review. All 
     "previousModel": "Previous model part",
     "nextModel": "Next model part",
     "hear": "Hear this version",
-    "visit": "Your trials wait while you try other scenes or joining words here. Leaving Sentence Bridges or changing explorer clears this visit. Nothing here is added to Notes.",
+    "visit": "Your Which One? trials wait while you try its other scenes or switch to Joining words. Leaving Sentence Bridges or changing explorer clears this visit. Nothing here is added to Notes.",
     "returnPrompt": "Try both places for the detail. Then ask someone to draw what each version describes. If a real message could mean two things, ask the writer or make it clearer.",
-    "grownup": "This is a finite model of relative-clause attachment in prepared sentences, with an explicit link showing the structure being tried. It is not a parser or a rule that every clause must refer to the nearest noun. English can be ambiguous; readers may need a clearer sentence. These selected identifying clauses use no paired commas. Both that and which can introduce identifying clauses about things; some style guides prefer that. We do not grade that choice here. Who is used for people in one case, and that for the pictured animals. No general pronoun rule, comma course, independent reading or writing level is assessed. All figures, facts and messages are made up. Original sentences stay aloud or on paper with a person.",
-    "leftWaiting": "Choose which noun the detail describes.",
-    "bothNotice": "Both descriptions can agree with this scene. They still give information about different things."
+    "grownup": "This is a finite model of relative-clause attachment in prepared sentences, with an explicit link showing the structure being tried. It is not a parser or a rule that every clause must refer to the nearest noun. Real sentences, even short ones, can sometimes be read more than one way. These clauses use the no-comma form; here the nouns already tell the figures apart, so the clauses add detail rather than choosing among same-kind figures. Both “that” and “which” can introduce restrictive clauses about things; some style guides prefer “that.” We do not grade that choice here. “Who” is used with people in one case, and “that” with the pictured animals. No general pronoun rule, comma course, independent reading or writing level is assessed. All figures, facts and messages are made up. Original sentences stay aloud or on paper with a person.",
+    "leftWaiting": "Choose a noun for the detail to describe.",
+    "modes": "Sentence Bridges modes",
+    "attachedAnnouncement": "Detail attached to {noun}. Sentence and meaning updated.",
+    "removedAnnouncement": "Detail removed. The base sentence is showing.",
+    "undoAnnouncement": "Last detail move undone.",
+    "sceneAnnouncement": "{title}. Your trial is here."
   },
   "teach": [
     "A relative clause adds detail about a noun. In “The duck that was splashing stood beside the swan,” “that was splashing” gives detail about the duck.",
-    "In our prepared versions, we put the detail just after the noun we want it to describe. The link on the board shows the attachment we are trying. A longer real sentence can be ambiguous.",
+    "In our prepared versions, we put the detail just after the noun we want it to describe. The link on the board shows the attachment we are trying. Real sentences, even short ones, can sometimes be read more than one way.",
     "“The duck stood beside the swan that was splashing” gives the splashing detail to the swan in this version. Moving the same words can change who or what is described.",
     "The sentence can be grammatical but disagree with the scene, or tell the reader about a different thing. Read the picture facts and the request as well as the words."
   ],
   "model": [
     {
       "title": "Two birds",
-      "text": "Our separate model has a duck beside a swan. The swan is splashing; the duck is standing still. Start with: “The duck stood beside the swan.”"
+      "text": "Our separate model has a duck beside a swan. The swan was splashing; the duck was standing still. Start with: “The duck stood beside the swan.”"
     },
     {
       "title": "A detail for the duck",
@@ -63,7 +67,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
     },
     {
       "title": "Take it out",
-      "text": "“The duck stood beside the swan.” Removing the detail does not say neither bird was splashing. It simply leaves that information out. Ask a person what each version would lead them to picture."
+      "text": "“The duck stood beside the swan.” Removing the detail does not say that no bird was splashing. It simply leaves that information out. Ask a person what each version would lead them to picture."
     }
   ],
   "cases": [
@@ -71,7 +75,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
       "id": "parcel",
       "title": "The star label",
       "context": "A parcel with a star label rests beside a crate with a plain label. The crate has no star label.",
-      "purpose": "Describe the parcel’s label for the courier.",
+      "purpose": "Describe the parcel’s label for the delivery driver.",
       "clause": "that has a star label",
       "entities": [
         {
@@ -265,7 +269,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
       "id": "spoon",
       "title": "A spoon for supper",
       "context": "A kitten with empty paws sits beside a bunny carrying a spoon.",
-      "purpose": "Tell the café helper which animal is carrying the spoon.",
+      "purpose": "Tell the café helper what the bunny is carrying.",
       "clause": "that is carrying a spoon",
       "entities": [
         {
@@ -329,7 +333,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
           ],
           "meaning": "This version describes the kitten as carrying a spoon.",
           "sceneNote": "The kitten has empty paws in our scene; the bunny carries the spoon.",
-          "purposeNote": "It names an animal, but not the spoon carrier shown here."
+          "purposeNote": "This tells the helper about the kitten instead of the bunny."
         },
         "bunny": {
           "tokens": [
@@ -354,7 +358,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
           ],
           "meaning": "This version describes the bunny as carrying a spoon.",
           "sceneNote": "That agrees with the bunny in our scene.",
-          "purposeNote": "It gives the spoon detail to the animal shown carrying it."
+          "purposeNote": "The detail is about the bunny, as the helper requested."
         }
       }
     },
@@ -451,7 +455,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
           ],
           "meaning": "This version gives the circle-tag detail to the stool.",
           "sceneNote": "The stool has a triangle tag in our scene.",
-          "purposeNote": "It describes a tag on the stool instead of the basket."
+          "purposeNote": "It describes a tag on the stool instead of the basket’s tag."
         }
       }
     },
@@ -523,7 +527,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
           ],
           "meaning": "This version gives the painted-moon detail to the lantern.",
           "sceneNote": "Our lantern has a painted star. The boat has the moon.",
-          "purposeNote": "This describes the lantern’s mark rather than the boat’s mark."
+          "purposeNote": "This describes a mark on the lantern rather than the boat’s mark."
         },
         "boat": {
           "tokens": [
@@ -619,7 +623,7 @@ Status: proposed for independent grammar, meaning and specification review. All 
             }
           ],
           "meaning": "This version says the book shows a bridge.",
-          "sceneNote": "Both the book and the map show a bridge, so this detail agrees with the scene.",
+          "sceneNote": "Our book shows a bridge, so this agrees with the scene. The map shows one too.",
           "purposeNote": "This version adds the requested information about the book."
         },
         "map": {
