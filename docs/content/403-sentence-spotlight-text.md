@@ -2,8 +2,9 @@
 
 Status: proposed for independent grammar and specification review. All activity words below are original. No learner data.
 
-The shared copy, six-step lesson, separate Niko miniature, six constructive briefs and two contrast questions are the full first release. The planned UI renders slots in stored order, joins chosen phrase text with spaces, capitalizes the first Unicode letter for sentence display and appends one period. Phrase-bank labels keep their authored case. A missing slot is a labelled blank, never a word silently supplied from the key. No inflected form is generated.
+The shared copy, six-step lesson, separate Niko miniature, six constructive briefs and two contrast questions are the full first release. Preview rendering follows spec403, including labelled blanks and preservation of historical punctuation. No inflected form is generated.
 
+```json
 {
   "copy": {
     "label": "Sentence Spotlight",
@@ -49,7 +50,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
     "original": "Niko delivered the lanterns.",
     "steps": [
       "Find Niko, who delivered, and the lanterns, which were delivered.",
-      "Start with the lanterns: The lanterns.",
+      "Start with the lanterns: “The lanterns.”",
       "Keep the past time and agree with the plural lanterns: “were delivered.”",
       "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
     ],
@@ -145,7 +146,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
-            "Start with the lanterns: The lanterns.",
+            "Start with the lanterns: “The lanterns.”",
             "Keep the past time and agree with the plural lanterns: “were delivered.”",
             "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
@@ -242,7 +243,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
-            "Start with the lanterns: The lanterns.",
+            "Start with the lanterns: “The lanterns.”",
             "Keep the past time and agree with the plural lanterns: “were delivered.”",
             "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
@@ -339,7 +340,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
-            "Start with the lanterns: The lanterns.",
+            "Start with the lanterns: “The lanterns.”",
             "Keep the past time and agree with the plural lanterns: “were delivered.”",
             "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
@@ -436,7 +437,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
-            "Start with the lanterns: The lanterns.",
+            "Start with the lanterns: “The lanterns.”",
             "Keep the past time and agree with the plural lanterns: “were delivered.”",
             "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
@@ -533,7 +534,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
-            "Start with the lanterns: The lanterns.",
+            "Start with the lanterns: “The lanterns.”",
             "Keep the past time and agree with the plural lanterns: “were delivered.”",
             "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
@@ -630,7 +631,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
-            "Start with the lanterns: The lanterns.",
+            "Start with the lanterns: “The lanterns.”",
             "Keep the past time and agree with the plural lanterns: “were delivered.”",
             "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
@@ -729,7 +730,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "fit": "The “by” phrase names Pip. The passive wording does not prove the event happened and does not hide the named doer.",
         "different": {
           "proved": "A grammatical statement can still be untrue. Evidence is separate from its form.",
-          "hidden": "By Pip explicitly names the doer. Passive does not always leave the doer out."
+          "hidden": "“By Pip” explicitly names the doer. Passive does not always leave the doer out."
         },
         "general": "Compare the exact sentence with the question. Grammar does not settle what really happened."
       },
