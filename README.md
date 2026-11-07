@@ -649,3 +649,9 @@ At English → Two Threads (`#learn/english`), change a complete story’s readi
 Open `#workshop/join-pieces` (also linked from Common Cuts). Cut two fixed ribbon lengths into equal-sized pieces, then move pieces from either source into a combined length. Undo returns a piece; Return all preserves your cuts. Original lengths, available pieces, partial construction and supplied reference stay distinct. Five open jobs include totals beyond one whole; a separate quarter example explains why the piece size stays the same. Work is transient and is not saved in Notes.
 
 Checks: `node test/join-pieces-checks.mjs` and `python3 test/join-pieces-browser.py`. The [specification](docs/specs/425-join-the-pieces.md) records the scope and remaining application/revisit gaps.
+
+### Find the Other Length426
+
+At `#workshop/join-pieces`, choose **Find the other length** to work backwards from a total and one known part. Recut A to match the total’s pieces, set the known length aside, then check the remainder by joining. Both ribbon modes keep separate temporary work while the table stays open. A fresh missing-part card uses supplied quantities, not a record of earlier seams.
+
+Checks: `node test/missing-ribbon-checks.mjs` and `python3 test/missing-ribbon-browser.py`; also run the parent joining-table browser suite when changing the shared host. The [specification](docs/specs/426-find-the-other-length.md) preserves the broader197 gaps.
