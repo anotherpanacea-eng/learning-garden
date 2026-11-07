@@ -1,0 +1,77 @@
+#408 · Leaf Kitchen: materials, energy and food
+
+Status: proposed; independent six-lens specification and complete finite science/model review precede code. Existing LG-1 / LG-G1. A bounded S2-IV bridge under149/160, inside existing Living Layers; no new destination, course-completion claim or learner record.
+
+## Missing concept and story job
+
+Plant Study41 compares invented seedling features. Cell Studio374 shows selected parts; Living Layers376 connects a leaf cell to a plant; Feeding Board links food relationships. None gives a manipulable explanation of how a green leaf uses materials and light energy to make food.149(g) proposes Leaf Kitchen but does not commission every Orchard Year bench. This selects its qualitative role/word-equation slice, not the orchard calendar, willow history, molecular mechanism, rate experiment or full149 programme.
+
+The town collection wants a model for the next visitor. A child arranges six illustrated cards, compares their own explanation with a separate scientific reference, turns five teaching pictures, tries four supported questions and returns to the same waiting Living Layers guide. Fits ActIV collection/explanation work and a later ActV public guide; no chapter contribution, score or film. The collection/people are fiction; the general biology is sourced. No personal body/health task or real plant-care prescription.
+
+49§5: teach material versus energy, food-making versus food-using, and process explanation versus measurement; show one step per tap with a green-leaf example; supported card construction and four question contrasts; a new visitor-facing explanation in the arrangement; return to the seedling question. Every page/help/choice is open. The arrangement is an exploratory explanation, not a diagnosis or independent proficiency observation. Unexpected placements remain editable; comparison never silently corrects them.
+
+## Finite source and scientific boundary
+
+[Complete finite packet](../content/408-leaf-kitchen-text.md) owns all authored science, controls, feedback and diagram labels. [Source audit](../source-audits/408-leaf-kitchen.md) owns current sources and limits. Original prose and original vector diagrams only; no textbook/RHS image, teaching text or upstream asset copied.
+
+Six cards: carbon-dioxide, water, light, minerals, glucose, oxygen. Five roles: materials, energy, nutrients, food, gas. Reference: carbon dioxide/water→materials; light→energy; mineral nutrients→other mineral needs; glucose→food; oxygen→gas released by photosynthesis. Cards are kinds, not one-molecule tokens or quantities. Multiple cards can share a role; none is forced into an empty slot. Glucose is a sugar plants can form from photosynthesis; the word equation summarizes the overall process rather than identifying its immediate intermediate or all reactions. No symbol equation, atom counting, stoichiometry, carbon/oxygen atom tracing, energy amount, mass percentage or growth forecast.
+
+Light energy is a separate dashed ray, not a material arrow or a substance turned into sugar. Chlorophyll in chloroplasts captures light; it is not a consumed card. Mineral nutrients have a separate root role: essential to growth/working plant parts, not food from soil or a direct raw material in the basic word equation. No claim that minerals are unimportant or that light/water alone always suffice. This is a rooted green-plant example, not all organisms/plant cells. Living plant cells respire in light and darkness; no night-only switch or claim that every plant process stops in the dark. Night teaching removes the light ray and daytime photosynthesis reference, not the plant's life or stored food. It is not a simulation of gas balance or a detailed day/night chemical mechanism.
+
+A learner arrangement does not drive a fake growth or gas-output animation. It is explicitly a draft explanation. The reference and teaching separately explain biology. Existing seedling length is not used to calculate sugar; the return explicitly separates explanation from measurement. No observation or recommendation is fabricated from a guide, selected cell or question.
+
+## Local interaction contract
+
+New `dist/leaf-kitchen-content.mjs` exports `leafKitchenCopy`, `leafKitchenCards`, `leafKitchenRoles`, `leafKitchenReference`, `leafKitchenTeaching`, `leafKitchenInvitations` matching the packet. `dist/leaf-kitchen-core.mjs` owns pure local operations; `dist/leaf-kitchen-ui.mjs` owns the child view/binding. Register all three with existing child-copy review, adultBlocks/quotations empty. Add styles to existing living-layers.css; no app/index/style-loader change or new saved root.
+
+`createLeafKitchen()` returns a fresh local object:
+
+```
+{placements:{'carbon-dioxide':null,water:null,light:null,minerals:null,glucose:null,oxygen:null},
+ selected:null,page:'build',reference:false,step:0,invitation:0,choice:null}
+```
+
+`changeLeafKitchen(work,action,value)` returns a new local work object or null for invalid action/value, never mutating its argument, book or source. Only bounded enum checks needed; no descriptor registry, generic validator framework, historical-schema or truth-on-load gate. Actions: select a known card; place selected card in a known role; remove selected card to null; page build/compare/learn/questions; show-reference (compare only); teaching step0..4; question0..3 (resets choice); answer an id of the current question; new-arrangement (explicitly returns a fresh empty work object). Invalid/disabled/hidden controls do nothing. Page/help navigation preserves placements and current selection. Question changes preserve the board. Fitting positions1,2,3,2, including the evidence-specific overcautious alternative in measurement. Outcomes/feedback are local supported practice only; no first/latest assessment history or new fact exposure.
+
+`leafKitchenModel(work)` is a pure getter. It supplies current arrangement, selected card, page and current teaching/question/feedback. Reference roles/word equation are renderable only on compare after explicit Show reference; never in hidden DOM, accessible labels or narration before that request. Learn is a separate freely chosen worked reference, one picture at a time; requesting it never overwrites the construction. Model getters do not create/expose notebook work. No automatic timer, drag requirement, score, prerequisite lock or adaptation algorithm.
+
+Four pages:
+- **Arrange:** task/selection/tray/role controls before a bounded diagram; choose card then role, return one card to tray, or explicitly start another empty arrangement. Selected/unplaced states have words and aria-pressed, not color alone. Each role lists all current cards. The current draft notice stays visible.
+- **Compare:** same current arrangement beside a reference placeholder. Show reference explicitly reveals the five role assignments, overall word equation and qualification. An Edit control returns to the unchanged construction. Showing the reference never marks the construction correct or changes placements.
+- **Learn:** five finite pictures with previous/next and step title/caption. Materials→energy→sugars→oxygen→night. Controls/caption stay before the bounded picture. There is no auto animation, so reduced motion is naturally supported.
+- **Questions:** one current prompt and its three choices, selected feedback if any, then Another question cycling0..3. All are open supported practice. Questions do not consume/clear the construction. The night question and measurement question distinguish the two main misleading inferences.
+
+## Diagram, touch and read-aloud
+
+Original vector art is a qualitative illustration. On reference/material pictures, show roots and a green leaf: material paths from air/roots, a separate dashed light-energy ray, food remaining/made in plant, oxygen out for the selected process, mineral root path separate from the word equation. Do not trace an oxygen atom from CO2, imply that an arrow is a measured rate, or draw sugar coming from soil. Night picture has stored food/living cells with no light ray; do not display a daytime gas-output reference as its result. The pupil's board labels all paths as their arrangement. SVG is decorative/aria-hidden; the equivalent HTML role lists and captions carry all meanings. Icons never replace labels. A generic sugar symbol is a labeled icon, not a claim that a leaf produces a cube or an observed molecule.
+
+At320/820, ≥16px body/control labels, ≥44px targets, visible keyboard focus, native buttons, no horizontal overflow. Main task/selection/actions precede diagrams bounded to≤300px high; role buttons wrap to one column on narrow screens. Comparison uses two columns only when readable, otherwise stacked. No whole long-page journey repeated at every width: one tablet journey plus narrow sample and relevant geometry checks.
+
+Hear is built from the CURRENT visible model page: title/task; current chosen/unplaced card labels and own roles on Arrange; own roles plus reference only if explicitly shown on Compare; current teaching title/text/caption on Learn; current question/choices and selected feedback on Questions. Include the model notice. Do not speak other pages, hidden reference, later question feedback, offscreen teaching steps or original parent content. Recompute on each active Hear action; stop speech/sound on page/model/owner/route changes and Back. The finite labels name materials and energy in words; no raw chemical-symbol narration.
+
+## Parent integration and no-write boundary
+
+Host remains `#living/layers`, with a Leaf Kitchen entry in the Living Layers header or adjacent open invitation. It can open beside any current guide; it does not claim a heart guide is a leaf. No source or correct-order gate. `living-layers-ui.mjs` dispatches its child page/binder while a visit-local kitchen mode is active; no app dispatch or current global context plumbing changes. Existing app already passes notebook/owner/isActive/render/focus/stopSpeech/stopSound. Reset Living Layers retires the kitchen too.
+
+Opening captures the actual parent visit/frame (screen, active/card/slot/source/work references, saved raw source/work when applicable, chooser, camera/turn/current/folds/status). It changes no parent field or notebook. Back returns that exact frame and focuses the entry, preserving even incomplete/unexpected and unsaved parent arrangements. This model's choices wait on local page switches and Back/reopen of that same frame. A changed parent frame starts a fresh model visit; leaving the room, reload, import/reset or owner/book change retires the local child. Display the finite visit note; never promise Notes recovery of an unsaved local model. Existing kept guides remain in Notes exactly.
+
+Opening/Back/editing/teaching/questions/Hear produce NO notebook, storage, source, response, support, exposure, arithmetic, original-prose, course or story writes. Do not call save merely to enter or use this explanatory model. Baseline whole-book equality after actual parent entry must hold through all child actions and Back, including saving off, refused Notes capacity, storage failure and unreadable parent guide roots. Child still opens as an explanatory model when the parent's saved guide collection cannot be read. Existing parent-room entry behavior is not attributed to the model or learning.
+
+Parent and child controls bind actual book/owner/route/current session/frame/root. Retire controls on detach/reinsert, root replacement, leaving/returning route, import/reset, owner/book change and parent source/work change; old controls cannot open/close/change a later child or resume a retired frame. An inactive/hidden parent cannot mutate its waiting work during the child visit, including a reattached old parent root. Use a local binding token and retirement observer like existing explanatory children, not a new shared lifecycle framework. Parent handlers must check the child-inactive condition and current binding token; new entry must also retire on actual node/root detachment. Define lifecycle ownership in these two UI modules only.
+
+## Curriculum and upstream study
+
+Refreshed2026-11-07: Jane `c681f6bf2f2adf2aa032f765983a4691774cfba5` LESSONS.md, Marble `04962c78ccb8bd52b236512d3362405bace98d2a` topics/dependencies; vendored graph agrees. Study Jane's compact teaching/guided/practice encounter and current app's reversible construction/reference/return; no Jane/Marble prose/code copied, no bosses/grades/mastery inherited. General biology comes from current primary educational sources, not the taxonomy's evidence wording. Existing notices remain; no atlas repin or coverage increase.
+
+Partial candidate `mt_zM5vu31jgl` Photosynthesis, S2-IV, with a later S3 producers/energy return. Hard prerequisite crosswalk49§8:
+- `mt_fhqBH9scsU` Plant Cells vs Animal Cells: enough chloroplast/green-leaf context is explained inline and Cell Studio374/Living Layers376 are optional returns. This is not the full cell comparison course.
+- `mt_lutxvMlkwS` What Plants Need to Thrive: inline materials/energy/minerals recap; Plant Study41 offers observations of pictured light conditions. This unit does not complete growing conditions, planting or a real investigation.
+The current graph also exports a soft `mt_6Wx--Du8j3` Deep-Sea Life Without Sunlight edge whose reason describes photosynthesis as the contrast needed for chemosynthesis. Preserve/report the edge as exported rather than silently reversing it; chemosynthesis is a later optional contrast, not a hidden entry requirement or content here. No new hard prerequisite is inferred from a broader149/174 proposal.
+
+## Verification and release
+
+Before code: six independent specification lenses plus complete finite science/model/diagram review. Check every card/role, overall word equation, five teaching pictures/texts, all four questions/choices/feedback, day/night/material-energy distinctions, source limits and prerequisite crosswalk. A correct shape or source test does not replace science review or establish learning.
+
+Source: independent expected six-card reference, all actions/invalid actions, unfinished/unexpected placements, no input mutation/getter writes, selected page/reference/narration rules and question positions. Avoid exhaustive placement permutations or a saved-model schema that has no reader. No permanent packet-sync/hash manifest. Root may one-off compare runtime to the reviewed packet.
+
+Native actual Living Layers: open beside an unsaved unexpected guide; construct/revise/compare/help/question cycles/Back preserve parent frame and whole book; reference absent before explicit request; actual current narration; opaque parent root, saving off/failure and oversized Notes do not block no-write exploration; real owner switch/route away-return/import/reset; old/reattached/hidden parent and child controls; focus, labels and narrow geometry. Existing Living Layers source/native regressions because parent rendering/binding changes. Full source runner once stable and integrated with current main, affected reruns after bounded repairs, exact-head independent Claude implementation clearance, ready/released custody, merge commit, clean tracked-dist deploy/all-asset match, Home+touched smoke and one canonical PR receipt. LG-1 remains build; PR462/Gemini and phonics owner holds unchanged.
