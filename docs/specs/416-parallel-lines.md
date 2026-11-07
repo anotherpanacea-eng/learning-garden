@@ -40,7 +40,7 @@ A gray dashed **tracing** copies four local ray portions at O, not the full scen
 
 At N=4, its rail direction lines up with the second rail exactly when the rails are parallel; its transversal portions always stay collinear with the original transversal. This is optional support, not a measurement or third source crossing. Caption **The gray tracing copies the directions at O. It slides without turning. At the last position, compare its line direction with the second line.** Add state sentence **The directions line up: the lines are parallel.** / **The second line leans: the traced line direction does not line up.** only at N=4. A partial position makes neither claim. Moves are positions, not time; no autoplay or required animation.
 
-Use the following complete relation templates in visible HTML and Hear. Substitute a/e/g/h with the current positive integer measures; names are literal angle letters. Do not add a signed difference to these sentences.
+Use the following complete relation templates in visible HTML and Hear. Capital placeholders A/E/G/H/S mean the current positive integer measures or their sum. Lowercase a/e/g/h stay literal angle names. Do not add a signed difference to these sentences.
 
 | pair/condition | exact free relation text |
 | --- | --- |
