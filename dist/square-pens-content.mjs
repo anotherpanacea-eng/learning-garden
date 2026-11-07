@@ -27,3 +27,22 @@ export const missingSquareCopy=Object.freeze({
  positive:'We choose the positive length.',
  contrast:'Add the two small square areas to find the long-side area. Subtract one small square area from the long-side area to find the other.',
 });
+
+// Original two-position plans; the cursor advances before choosing its next row.
+export const gridDistanceInvitations=Object.freeze([[1,1,4,5],[10,9,4,1],[2,8,7,8],[6,6,6,6],[3,3,5,6],[0,0,12,12]].map(Object.freeze));
+export const acrossPlanCopy=Object.freeze({
+ title:'Across the plan',
+ intro:'Pip is comparing two connections on a paper plan for the library garden. How does a straight segment compare with following the grid edges?',
+ reminder:'A coordinate pair gives a position: x across first, then y up from zero. To measure between two positions, count the intervals between them.',
+ steps:Object.freeze(['Count intervals','Compare squares','Find the distance']),
+ unitKey:'One grid interval is 1 length unit.',
+ coincident:'A and B share this position.',
+ kept:'Your other triangle plans are kept.',
+ return:'When there is room, move both points the same amount. What stays the same, and why?',
+ returnTriangle:'Keep the endpoints and try the other corner. What changes in the route, and what stays the same?',
+ model:'This is a made-up paper plan, not a real path to walk.',
+ squareCorner:'The turn on the grid edges makes a square corner. The straight segment is across from that corner.',
+ squares:'This is a right triangle. Build shows why the square on its long side has the area of the two short-side squares together. Use the horizontal and vertical changes as its short sides.',
+ shorter:'Both direction changes are positive. Going around the corner is longer than the straight segment.',
+ adult:'This open paper model connects coordinate differences with the right-triangle square-area relationship. The complete plan is invented; it cannot tell anyone which real route is usable or safe. Coordinates are positions, while h and v are lengths between coordinates. For h,v>0, the edge route has length h+v and its square exceeds h²+v² by 2hv, so it is longer than the positive straight distance. When one difference is zero the distances are equal; when both are zero both are 0. The displayed counts, diagrams and roots are support, not an independent answer or course result. This first grid stays in nonnegative whole-number coordinates; it does not teach every quadrant, scale, radical simplification or surveying method. No new construction or reading response is saved.',
+});
