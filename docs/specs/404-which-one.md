@@ -1,6 +1,6 @@
 #404 · Which One? A movable detail in Sentence Bridges
 
-Status: proposed for independent specification and complete finite grammar/meaning review. Admitted LG-1 / LG-G1, E2-II/IV and E3-II return under269. Not built or published.
+Status: independently BUILD-READY at c1f90374 after six-lens specification and complete finite grammar/meaning review. Admitted LG-1 / LG-G1, E2-II/IV and E3-II return under269. The bounded implementation and native journey are built; exact-head implementation review and release acceptance are pending.
 
 ## Purpose and boundary
 

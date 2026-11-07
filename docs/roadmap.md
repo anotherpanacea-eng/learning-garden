@@ -14,7 +14,7 @@ The next English candidate is **Summary Press inside Writing Table**: select and
 
 ## Which One?404 · a detail changes its noun
 
-The next proposed E2-IV/E3-II return is [Which One?404](specs/404-which-one.md), inside the existing Sentence Bridges visit. Move a relative-clause detail between two nouns, inspect the pictured attachment and compare the sentence with fixed scene facts and a reader’s request. The [complete finite packet](content/404-which-one-text.md) and [source boundary](source-audits/404-which-one.md) are in independent specification and grammar review. The original joining-word mode stays separate. No runtime build, saved learning record or publication is claimed.
+The next proposed E2-IV/E3-II return is [Which One?404](specs/404-which-one.md), inside the existing Sentence Bridges visit. Move a relative-clause detail between two nouns, inspect the pictured attachment and compare the sentence with fixed scene facts and a reader’s request. The [complete finite packet](content/404-which-one-text.md) and [source boundary](source-audits/404-which-one.md) are independently cleared at c1f90374. The bounded implementation and native journey are built; the [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/486#issuecomment-6701927301) owns exact-head implementation clearance and publication status. The original joining-word mode stays separate; no saved learning record is added.
 
 ## The Chapter Map399 · connections through a longer book
 

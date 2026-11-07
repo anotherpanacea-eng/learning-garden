@@ -1,6 +1,6 @@
 #404 · Which One? Complete finite scene and language packet
 
-Status: proposed for independent grammar, meaning and specification review. All pictures will be original schematics; all words below are original. The source scene remains fixed under all sentence trials. Tokens are complete authored sentence segments, not a grammar generator.
+Status: independently BUILD-READY at c1f90374 after grammar, meaning and specification repairs; one established grown-up disclosure label is added in implementation. All pictures will be original schematics; all words below are original. The source scene remains fixed under all sentence trials. Tokens are complete authored sentence segments, not a grammar generator.
 
 ```json
 {
@@ -44,7 +44,8 @@ Status: proposed for independent grammar, meaning and specification review. All 
     "attachedAnnouncement": "Detail attached to {noun}. Sentence and meaning updated.",
     "removedAnnouncement": "Detail removed. The base sentence is showing.",
     "undoAnnouncement": "Last detail move undone.",
-    "sceneAnnouncement": "{title}. Your trial is here."
+    "sceneAnnouncement": "{title}. Your trial is here.",
+    "grownupLabel": "For grown-ups"
   },
   "teach": [
     "A relative clause adds detail about a noun. In “The duck that was splashing stood beside the swan,” “that was splashing” gives detail about the duck.",
