@@ -1,6 +1,6 @@
 #402 · A character case inside The Chapter Map
 
-Status: proposed. Independent six-lens specification and complete finite literary/source review are required before implementation. Parent272; LG-1/LG-G1, Fleet1591. From merged22f4157a. French Gemini and phonics/audio owner holds remain unchanged.
+Status: specification independently cleared at b05518aa after six-lens and complete finite literary/source review. The bounded implementation is authored; PR484’s canonical record owns independent implementation clearance and release status. Parent272; LG-1/LG-G1, Fleet1591. From merged22f4157a. French Gemini and phonics/audio owner holds remain unchanged.
 
 ## Why this next
 
