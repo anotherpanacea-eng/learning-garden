@@ -1,6 +1,6 @@
 # 426 · Find the Other Length
 
-Status: proposed for independent specification and finite mathematics/copy review. Baseline main `1d20558b6f56ad633c483f129ea113d1b188aa3d`; existing LG-1 / LG-G1, operational Fleet1631. This is a second operation in Join the Pieces425, not a new room or the whole of Joining Fractions197.
+Status: independently BUILD-READY at `cbe3e3baab6e71bae85a870d995cb6477f6cfec1` after six independent lenses and focused Claude mathematics/copy repair closure; implementation underway. Baseline main `1d20558b6f56ad633c483f129ea113d1b188aa3d`; existing LG-1 / LG-G1, operational Fleet1631. This is a second operation in Join the Pieces425, not a new room or the whole of Joining Fractions197.
 
 ## Why this next
 
