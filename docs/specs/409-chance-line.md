@@ -1,6 +1,6 @@
 # 409 · Chance Line
 
-Status: proposed bounded implementation; independent specification and finite mathematics review required before building. Serves admitted LG-1 / LG-G1. Parent: [202 Chance Window](202-chance-scale.md), selecting its numeric likelihood bridge rather than commissioning the whole pack.
+Status: bounded implementation built after independent specification and finite mathematics clearance at2240b6db. Implementation clearance and release status belong to PR492’s canonical receipt, linked from the roadmap. Serves admitted LG-1 / LG-G1. Parent: [202 Chance Window](202-chance-scale.md), selecting its numeric likelihood bridge rather than commissioning the whole pack.
 
 ## Purpose and boundary
 

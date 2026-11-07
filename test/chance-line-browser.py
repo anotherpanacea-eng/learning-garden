@@ -107,7 +107,7 @@ def bounds(p):
     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal overflow')
     bad=p.locator('[data-cl-root] button,[data-cl-root] select,[data-cl-root] summary,[data-cl-root] a').evaluate_all('''xs=>xs.filter(e=>e.checkVisibility()&&!e.disabled&&!e.closest('.speech-controls')&&(e.getBoundingClientRect().width<43.9||e.getBoundingClientRect().height<43.9||parseFloat(getComputedStyle(e).fontSize)<16)).map(e=>({label:e.textContent,width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))''')
     ok(not bad,'44px targets and16px controls: '+str(bad))
-    tiny=p.locator('[data-cl-root] svg text').evaluate_all('xs=>xs.filter(e=>e.checkVisibility()&&parseFloat(getComputedStyle(e).fontSize)*Math.abs(e.getScreenCTM().a)<15.9).map(e=>e.textContent)')
+    tiny=p.locator('.cl-anchors span,.cl-pin-label,.cl-bag-picture figcaption').evaluate_all('xs=>xs.filter(e=>e.checkVisibility()&&parseFloat(getComputedStyle(e).fontSize)<15.9).map(e=>e.textContent)')
     ok(not tiny,'effective diagram labels16px: '+str(tiny))
 
 
@@ -326,6 +326,25 @@ def parent_states_and_import(browser,base,report):
     ok(before['memory']['seedStall']==report['seedStall'],'import preserves actual saved seed record')
 
 
+def keyboard_bags(browser,base):
+    print('Chance Line: stable bag navigation and clear focus',flush=True)
+    p=setup(browser,base);enter(p);before=snapshot(p)
+    for start,direction,expected in [(1,'next',2),(2,'previous',1),(6,'next',7),(1,'previous',0)]:
+        p.locator('#cl-bag-select').focus();choose(p,start,before)
+        p.locator('[data-cl-action="bag"][data-cl-turn="'+direction+'"]').focus();p.keyboard.press('Enter')
+        ok(p.locator('#cl-bag-select').input_value()==str(expected),'keyboard bag changes to expected index')
+        target='#cl-bag-select' if expected in [0,7] else '[data-cl-action="bag"][data-cl-turn="'+direction+'"]'
+        ok(p.locator(target).evaluate('e=>e===document.activeElement'),'bag navigation retains useful keyboard focus')
+        unchanged(p,before,'keyboard bag turn')
+    pin(p,3,before);click(p,'clear',before=before)
+    ok(p.locator('#cl-point-select').evaluate('e=>e===document.activeElement'),'Clear returns focus to point selector')
+    # Explicitly synthetic source mutation: the failed child action recovers
+    # the current parent and moves focus to its entry without replaying.
+    p.evaluate('window.__chanceObservedState().seedStall.current=null')
+    before=snapshot(p);click(p,'reference');p.locator('[data-cl-entry]').wait_for();unchanged(p,before,'changed source recovery')
+    ok(p.locator('[data-cl-entry]').evaluate('e=>e===document.activeElement'),'changed source recovery focuses entry')
+
+
 def responsive(browser,base):
     print('Chance Line: focused320px layout and keyboard samples',flush=True)
     p=setup(browser,base,width=320);enter(p);bounds(p)
@@ -354,7 +373,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);pending(browser,base);lifecycle(browser,base);parent_states_and_import(browser,base,report);responsive(browser,base)
+                report=journey(browser,base);pending(browser,base);lifecycle(browser,base);parent_states_and_import(browser,base,report);responsive(browser,base);keyboard_bags(browser,base)
                 ok(not errors,'no page, console or HTTP errors: '+str(errors))
                 print(json.dumps({'status':'passed','checks':checks,'artifacts':str(OUT)}),flush=True)
             except Exception:

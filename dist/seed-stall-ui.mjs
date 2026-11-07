@@ -4,14 +4,14 @@ import {chanceCopy} from './chance-line-content.mjs';
 import {chanceLinePage,bindChanceLine} from './chance-line-ui.mjs';
 
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const freshTurn=(state=null,owner=null)=>({state,owner,count:3,choosing:false,pending:null,notice:'',chanceWork:null,chanceActive:false,chanceFrame:null,folds:null,restoreFolds:null});
+const freshTurn=(state=null,owner=null)=>({state,owner,count:3,choosing:false,pending:null,notice:'',chanceWork:null,chanceActive:false,chanceFrame:null,folds:null,restoreFolds:null,focusEntry:false});
 let turn=freshTurn(),binding=0;
 export function resetSeedTurn(){turn=freshTurn();binding++;}
 export function resetChanceVisit(){turn.chanceWork=null;turn.chanceActive=false;turn.chanceFrame=null;turn.folds=null;binding++;}
 function activeTurn(state,owner=null){if(turn.state!==state||turn.owner!==owner)turn=freshTurn(state,owner);return turn;}
 function parentFrame(){return {root:turn.state.seedStall,raw:JSON.stringify(turn.state.seedStall),display:JSON.stringify([turn.count,turn.choosing,turn.pending,turn.notice])};}
 const sameFrame=(a,b)=>!!a&&a.root===b.root&&a.raw===b.raw&&a.display===b.display;
-function retireChangedFrame(){if(!turn.chanceActive||sameFrame(turn.chanceFrame,parentFrame()))return false;turn.chanceActive=false;turn.chanceFrame=null;turn.choosing=false;turn.pending=null;turn.notice='Your Seed Stall changed. The current bag is shown here.';turn.folds=null;return true;}
+function retireChangedFrame(){if(!turn.chanceActive||sameFrame(turn.chanceFrame,parentFrame()))return false;turn.chanceActive=false;turn.chanceFrame=null;turn.choosing=false;turn.pending=null;turn.notice='Your Seed Stall changed. The current bag is shown here.';turn.folds=null;turn.focusEntry=true;return true;}
 // Local counterpart of Living Layers: removed controls cannot revive on reinsertion.
 function bindingGuard(root,valid){
  const controls=[root,...root.querySelectorAll('button,select,summary,a')],retired=new WeakSet(),chains=new Map();
@@ -67,6 +67,7 @@ export function bindSeed(state,ctx){
   bindChanceLine(turn.chanceWork,{live,change:next=>{turn.chanceWork=next;},render,focus,stopSpeech:ctx.stopSpeech,stopSound:ctx.stopSound,back:()=>{turn.chanceActive=false;turn.restoreFolds=turn.folds;turn.chanceFrame=null;redraw('[data-cl-entry]');}});return;
  }
  const scope=document.querySelector('[data-seed-root]');if(!scope)return;
+ if(turn.focusEntry&&contextLive()){turn.focusEntry=false;focus?.('[data-cl-entry]');}
  if(turn.restoreFolds){for(const node of scope.querySelectorAll('[data-seed-fold]'))node.open=!!turn.restoreFolds[node.dataset.seedFold];turn.restoreFolds=null;}
  const bound=parentFrame(),listenerLive=bindingGuard(scope,()=>contextLive()&&document.querySelector('[data-seed-root]')===scope);
  const live=b=>listenerLive(b)&&!turn.chanceActive&&sameFrame(bound,parentFrame());

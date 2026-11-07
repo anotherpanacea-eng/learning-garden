@@ -94,7 +94,7 @@ export function chanceLineNarration(work) {
     parts.push(chanceCopy.learnInstruction, `Picture ${work.lesson + 1} of ${chanceLessons.length}.`, model.lesson.title, model.lesson.text);
     for (const index of model.lesson.bags) {
       const bag = chanceBags[index], r = referenceFor(bag);
-      parts.push(`${bag.sun} Sun and ${bag.moon} Moon: reference ${r.raw}${r.raw === r.label ? '' : ` = ${r.label}`}, ${r.word}, on the 0–1 line.`);
+      parts.push(`${bag.sun} Sun and ${bag.moon} Moon: reference ${r.raw}${r.raw === r.label ? '' : ` = ${r.label}`} on the 0–1 line.`);
     }
     parts.push('Previous picture and Next picture move between pictures.');
   } else {
@@ -104,6 +104,6 @@ export function chanceLineNarration(work) {
     if (model.explanation !== null) parts.push(`Explanation: ${model.explanation}`);
     parts.push('Show explanation or Hide explanation changes the optional help. Previous question and Next question move between questions.');
   }
-  parts.push('Place a chance, See why, and Try questions are freely available. Previous page and Next page move between pages. Back to Seed Stall returns to your waiting experiment.', chanceCopy.lifetime);
+  parts.push('Place a chance, See why, and Try questions are freely available. Previous page and Next page move between pages. Back to Seed Stall returns to the Seed Stall you left.', chanceCopy.lifetime);
   return parts.join(' ');
 }
