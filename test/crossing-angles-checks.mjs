@@ -810,3 +810,18 @@ console.log('Matching Triangles: independent exact constructions and SVG guides,
 
 // The completed AAA construction labels its authored third angle at F.
 {const w=createCrossingAngles();w.page="matching";w.matching.case="aaa";w.matching.parts.step=2;const model=crossingAnglesModel(w).matching;assert.equal(model.geometry.labels.find(l=>l.name==="F").givenAngle,70);assert.match(renderCrossingAngles(w),/F · 70°/);w.matching.parts.step=1;assert.ok(!crossingAnglesModel(w).matching.geometry.labels.some(l=>l.givenAngle!==undefined));}
+
+// Enum validation must not accept arrays or boxed strings through property-key coercion.
+for(const invalidCase of [['sss'],Object('sss'),{toString:()=> 'sss'}]){
+ const w={...createCrossingAngles(),page:'matching'};
+ assert.equal(changeCrossingAngles(w,'match-case',invalidCase),w);
+ const invalid={...w,matching:{...w.matching,case:invalidCase}};
+ assert.equal(crossingAnglesModel(invalid),null);assert.equal(changeCrossingAngles(invalid,'page','build'),invalid);
+}
+// Figure descriptions label a family's reason separately from the displayed pair.
+for(const key of ['ssa','aaa'])for(const view of ['fit','letters']){
+ const w={...createCrossingAngles(),page:'matching'};w.matching.case=key;w.matching.view=view;
+ const g=crossingAnglesModel(w).matching,html=renderCrossingAngles(w);
+ const desc=html.match(/<desc id="crossing-angles-matching-diagram-description">([\s\S]*?)<\/desc>/)[1];
+ assert.ok(desc.includes('About the possible builds: '+g.text));assert.ok(desc.indexOf(g.currentPair)<desc.indexOf('About the possible builds:'));
+}

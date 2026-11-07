@@ -8,7 +8,7 @@ const pairs=['corresponding','alternate','co-interior'];
 const matchDefaults=()=>({step:0,rotation:120,flip:true,move:0,pair:0});
 const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
 const matchChannel=v=>object(v)&&integer(v.step,0,2)&&rotationValue(v.rotation)&&typeof v.flip==='boolean'&&integer(v.move,0,4)&&integer(v.pair,0,2);
-function validMatching(m){return object(m)&&['parts','panel'].includes(m.mode)&&['build','fit','letters'].includes(m.view)&&['explore','given'].includes(m.fit)&&Object.hasOwn(matchingCases,m.case)&&integer(m.prompt,0,5)&&matchChannel(m.parts)&&matchChannel(m.panel)&&integer(m.parts.variant,0,['ssa','aaa'].includes(m.case)?3:1);}
+function validMatching(m){return object(m)&&['parts','panel'].includes(m.mode)&&['build','fit','letters'].includes(m.view)&&['explore','given'].includes(m.fit)&&typeof m.case==='string'&&Object.hasOwn(matchingCases,m.case)&&integer(m.prompt,0,5)&&matchChannel(m.parts)&&matchChannel(m.panel)&&integer(m.parts.variant,0,['ssa','aaa'].includes(m.case)?3:1);}
 const spacings={near:120,middle:150,far:180};
 function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel','triangle','matching'].includes(work.page)&&validMatching(work.matching)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5)&&['free','panel'].includes(work.triMode)&&['gather','reason','outside','polygons'].includes(work.triView)&&triAngle(work.triA)&&triAngle(work.triB)&&work.triA+work.triB<=165&&['small','large'].includes(work.triSize)&&integer(work.triGather,0,2)&&integer(work.triProof,0,2)&&integer(work.triPrompt,0,5)&&integer(work.polySides,3,12)&&['regular','stretched'].includes(work.polyKind)&&['small','large'].includes(work.polySize)&&['split','corner','walk'].includes(work.polyView)&&integer(work.polyCorner,0,work.polySides-1)&&integer(work.polyDraw,0,work.polySides-3)&&integer(work.polyWalk,0,work.polySides)&&integer(work.polyPrompt,0,5)&&integer(work.polyPanelCorner,0,3)&&integer(work.polyPanelDraw,0,1)&&integer(work.polyPanelWalk,0,4);}
 export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0,matching:{mode:'parts',view:'build',fit:'explore',case:'sss',prompt:0,parts:{variant:0,...matchDefaults()},panel:matchDefaults()}};}
@@ -24,7 +24,7 @@ export function changeCrossingAngles(work,action,value){
   if(action==='match-view')return ['build','fit','letters'].includes(value)?outer('view',value):work;
   if(action==='match-prompt')return integer(value,0,5)?outer('prompt',value):work;
   if(channel==='parts'){
-   if(action==='match-case')return Object.hasOwn(matchingCases,value)&&m.case!==value?{...work,matching:{...m,case:value,parts:{variant:0,...matchDefaults()}}}:work;
+   if(action==='match-case')return typeof value==='string'&&Object.hasOwn(matchingCases,value)&&m.case!==value?{...work,matching:{...m,case:value,parts:{variant:0,...matchDefaults()}}}:work;
    if(action==='match-variant')return integer(value,0,['ssa','aaa'].includes(m.case)?3:1)?inner('variant',value):work;
   }
   if(action==='match-step'&&m.view==='build')return integer(value,0,2)?inner('step',value):work;
@@ -181,7 +181,7 @@ export function crossingAnglesNarration(work,context=null){
  const m=crossingAnglesModel(work,context);if(!m)return '';
  if(m.page==='matching'){
   const t=m.matching;if(t.missing)return `${matchingCopy.title}. ${matchingCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
-  return `${matchingCopy.title}. ${matchingCopy.instruction} ${matchingCopy.modes[t.mode]}. ${matchingCopy.views[t.view]}. ${t.source} ${t.givens.join('; ')}. ${t.chosen} ${t.counter}. ${t.legend} ${t.caption} ${t.poseNote} ${t.completedNotice} ${t.currentPair} ${t.reasonLabel} ${t.text} ${t.view==='letters'?`${t.definition} ${t.naming} ${t.notation}`:''} ${t.prompt.title}. ${t.prompt.text} ${matchingCopy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
+  return `${matchingCopy.title}. ${matchingCopy.instruction} ${matchingCopy.modes[t.mode]}. ${matchingCopy.views[t.view]}. ${t.source}. ${t.variantLabel?`${t.variantLabel}. `:''}${t.givens.join('; ')}. ${t.chosen} ${t.counter}. ${t.view==='fit'&&t.fit==='explore'?`Copy reflection: ${t.flip?'reflected':'unreflected'}. `:''}${t.legend} ${t.caption} ${t.poseNote} ${t.completedNotice} ${t.currentPair} ${t.reasonLabel} ${t.text} ${t.view==='letters'?`${t.definition} ${t.naming} ${t.notation}`:''} ${t.prompt.title}. ${t.prompt.text} ${matchingCopy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
  }
  if(m.page==='triangle'&&m.polygon){
   const p=m.polygon;

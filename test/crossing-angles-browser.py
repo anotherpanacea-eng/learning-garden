@@ -251,7 +251,13 @@ def reset_state(p):
     h.ok(p.locator(sel('match-mode','parts')).get_attribute('aria-pressed')=='true' and p.locator(sel('match-view','build')).get_attribute('aria-pressed')=='true','fresh visit resets matching mode/view')
     h.ok(p.locator('[data-crossing-angles-match-step=previous]').is_disabled(),'fresh visit resets matching parts step')
     act(p,'match-mode','panel',before);h.ok(p.locator('[data-crossing-angles-match-step=previous]').is_disabled(),'fresh visit resets matching panel step')
-    act(p,'match-mode','parts',before);act(p,'page','build',before)
+    for mode in ['parts','panel']:
+        act(p,'match-mode',mode,before);act(p,'match-view','fit',before)
+        h.ok(p.locator(sel('match-fit','explore')).get_attribute('aria-pressed')=='true' and 'Copy turn: 120°' in p.locator(R).inner_text() and 'Copy reflection: reflected' in p.locator(R).inner_text(),'fresh visit resets '+mode+' manual pose and fit')
+        h.ok(p.locator('[data-crossing-angles-match-slide=previous]').is_disabled(),'fresh visit resets '+mode+' slide')
+        act(p,'match-view','letters',before)
+        h.ok('Point pair 1 of 3' in p.locator(R).inner_text(),'fresh visit resets '+mode+' correspondence')
+    act(p,'match-mode','parts',before);act(p,'match-view','build',before);act(p,'page','build',before)
 
 
 def lifetime_setting(p):
@@ -265,7 +271,7 @@ def lifetime_setting(p):
     act(p,'tri-view','polygons',before);act(p,'tri-mode','free',before);act(p,'poly-sides',11,before);act(p,'poly-kind','stretched',before);act(p,'poly-size','small',before);act(p,'poly-prompt',5,before)
     act(p,'tri-mode','free',before);act(p,'poly-corner',1,before);act(p,'poly-corner',2,before);poly_step(p,'split',3,11,before);poly_step(p,'walk',4,11,before)
     act(p,'tri-mode','panel',before);act(p,'poly-corner',1,before);poly_step(p,'split',1,4,before);poly_step(p,'walk',2,4,before)
-    act(p,'page','matching',before);act(p,'match-case','ssa',before);act(p,'match-prompt',5,before);act(p,'match-step',2,before);act(p,'match-mode','panel',before);act(p,'match-step',1,before);act(p,'match-view','fit',before);act(p,'match-fit','given',before)
+    act(p,'page','matching',before);act(p,'match-case','ssa',before);act(p,'match-prompt',5,before);match_stage(p,2,before);act(p,'match-variant',before=before);act(p,'match-view','fit',before);act(p,'match-rotation',before=before);act(p,'match-flip',before=before);act(p,'match-move',1,before);act(p,'match-view','letters',before);act(p,'match-pair',before=before);act(p,'match-mode','panel',before);match_stage(p,1,before);act(p,'match-view','fit',before);act(p,'match-rotation',before=before);act(p,'match-flip',before=before);act(p,'match-move',1,before);act(p,'match-view','letters',before);act(p,'match-pair',before=before);act(p,'match-view','fit',before);act(p,'match-fit','given',before)
     act(p,'page','build',before)
 
 
