@@ -1,0 +1,75 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import * as core from '../dist/travelers-archive-core.mjs';
+import {travelersArchivePage} from '../dist/travelers-archive-ui.mjs';
+import {ARCHIVE_REPLY_FIELDS} from '../dist/travelers-archive-content.mjs';
+import {openCrossing,pickAnswer,sayAnswer,useFerrySupport} from '../dist/french-ferry-core.mjs';
+import {frenchFerryPage} from '../dist/french-ferry-ui.mjs';
+import {startFrenchRooms,revealFrenchRoomsData} from '../dist/french-rooms-core.mjs';
+import {frenchRoomsPage} from '../dist/french-rooms-ui.mjs';
+import {freshState} from '../dist/core.mjs';
+import {initializeExplorerState} from '../dist/progress-transfer.mjs';
+import {startVisit,storyDraft} from '../dist/garden-core.mjs';
+import {storyNodes} from '../dist/story-content.mjs';
+import {frenchStories} from '../dist/french-library.mjs';
+import {storyPage} from '../dist/garden-ui.mjs';
+let n=0;const ok=(x,m)=>{assert.ok(x,m);n++;},eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;};
+const s={};core.setArchiveQuestion(s,'photo-date');core.answerArchiveQuestion(s,'photo-date','not-alone');core.setArchiveReplyChoice(s,'limit','feelings');core.checkArchiveReply(s);core.keepArchiveReply(s);
+const bytes=JSON.stringify(s),saved=structuredClone(s);
+// Actually load a later edition: changed answer, retired question/source/choice ids, reordered sources.
+const content=readFileSync(new URL('../dist/travelers-archive-content.mjs',import.meta.url),'utf8');
+const moduleUrl=source=>'data:text/javascript;base64,'+Buffer.from(source).toString('base64');
+const laterContent=content.replace("answer:'not-alone'","answer:'exact'").replace("id:'photo-date'","id:'replacement-question'").replaceAll("'photo'","'new-photo'");
+assert.notEqual(laterContent,content);
+const coreText=readFileSync(new URL('../dist/travelers-archive-core.mjs',import.meta.url),'utf8');
+const newKey=await import(moduleUrl(coreText.replace("'./travelers-archive-content.mjs'",JSON.stringify(moduleUrl(content.replace("answer:'not-alone'","answer:'exact'"))))));
+ok(newKey.travelersArchive(saved),'changing only the answer key does not invalidate an earlier outcome');
+eq(saved.travelersArchive.checks[0].feedback.correct,true,'answer-key edit does not rewrite stored feedback');
+const later=await import(moduleUrl(coreText.replace("'./travelers-archive-content.mjs'",JSON.stringify(moduleUrl(laterContent)))));
+ok(later.travelersArchive(saved),'later edition opens existing checks and kept source snapshots');
+eq(JSON.stringify(saved),bytes,'loading does not change any saved bytes');
+eq(saved.travelersArchive.checks[0].feedback.correct,true,'earlier outcome is not recomputed using the replacement answer');
+ok(later.setArchivePage(saved,'reply'),'other pages stay editable');
+eq(saved.travelersArchive.checks,s.travelersArchive.checks,'new navigation preserves old checks');
+const retired=structuredClone(s),r=retired.travelersArchive;r.page='sources';r.question='retired-question';r.answers['retired-question']='retired-choice';r.support['retired-question']={help:true};r.sourcesExposed.push('retired-source');r.revealedTasks.push('retired-question');
+const before=JSON.stringify(retired),html=travelersArchivePage(retired);
+ok(html.includes('An earlier question is kept')&&html.includes('retired-choice'),'missing question is identified without displaying a different current question');
+ok(!html.includes('data-ta-answer='),'no current answer controls silently stand in for the retired question');
+eq(JSON.stringify(retired),before,'rendering preserves retired responses/support and exact state');
+r.page='place-dates';r.task='order';r.order=['retired-event','river-peak'];
+ok(travelersArchivePage(retired).includes('retired-event'),'retired date card is readable without crashing');
+ok(!travelersArchivePage(retired).includes('data-ta-order-check'),'retired date order cannot be graded against current cards');
+const oldChecks=structuredClone(r.checks),oldKept=structuredClone(r.kept);ok(core.setArchiveOrder(retired,[]),'explicit new order reopens a retired draft');eq(retired.travelersArchive.checks,oldChecks,'new order preserves earlier checks');eq(retired.travelersArchive.kept,oldKept,'new order preserves kept reply');
+const reply=structuredClone(s);core.setArchivePage(reply,'reply');const replyHtml=travelersArchivePage(reply);
+ok(replyHtml.includes('Saving again replaces your saved reply'),'replacement is disclosed beside Keep');
+ok(replyHtml.includes('aria-describedby="ta-kept-status"'),'Keep is linked to its replacement disclosure');
+ok(replyHtml.includes(ARCHIVE_REPLY_FIELDS[2].choices.find(c=>c.id==='feelings').label),'kept preview includes the limit choice');
+const yes={canExport:()=>true},ferry={};openCrossing(ferry,'morning',{voice:false},yes);const crossing=ferry.frenchFerry.crossings.morning;
+for(let i=0;i<4;i++){pickAnswer(ferry,'morning',crossing.source.steps[i].fit,yes);sayAnswer(ferry,'morning','not-now',yes);}
+sayAnswer(ferry,'morning','not-now',yes);
+const wrong=crossing.source.steps[4].choices.find(c=>c.id!==crossing.source.steps[4].fit).id;pickAnswer(ferry,'morning',wrong,yes);
+const ferryHtml=frenchFerryPage(ferry,'',[]);
+ok(!ferryHtml.includes('Hear her again and compare'),'no-voice feedback does not instruct an unavailable control');
+ok(ferryHtml.includes('cannot continue it')&&ferryHtml.includes("aria-describedby='bac-again-help'"),'restart consequence is available before the action');
+eq(crossing.source.feedback.fit5,'You heard her right.','frozen feedback source is unchanged');
+const contrast={};openCrossing(contrast,'morning',{voice:false},yes);const source=contrast.frenchFerry.crossings.morning.source;
+for(let i=0;i<4;i++){
+ const step=source.steps[i];if(step.kind==='to'||step.kind==='from'){
+  const wrong=source.cards.find(c=>c.kind===(step.kind==='to'?'from':'to'));pickAnswer(contrast,'morning',wrong.id,yes);
+  const feedback=frenchFerryPage(contrast,'',[]).match(/<p class='bac-feedback'>(.*?)<\/p>/)?.[1]||'';
+  ok(feedback.includes(step.kind==='to'?'That card tells where you are coming from.':'That card tells where you are going.'),'reading fallback retains the chosen card\u2019s question-word contrast');
+  useFerrySupport(contrast,'morning','meaning',yes);
+  ok(!frenchFerryPage(contrast,'',[]).match(/<p class='bac-feedback'>(.*?)<\/p>/)?.[1].includes('You can ask for'),'already-shown meaning is not offered through an absent control');
+ }
+ pickAnswer(contrast,'morning',step.fit,yes);sayAnswer(contrast,'morning','not-now',yes);
+}
+const rooms={};startFrenchRooms(rooms,'return',yes);revealFrenchRoomsData(rooms,yes);const roomHtml=frenchRoomsPage(rooms,'return');
+eq((roomHtml.match(/your first kept version stays/g)||[]).length,2,'both Keep controls disclose latest replacement and first retention');
+eq((roomHtml.match(/Both writing fields are kept together/g)||[]).length,2,'both Keep controls explain their actual snapshot scope');
+for(const pack of frenchStories.filter(p=>storyNodes[p.variants[1][1]].kind==='order')){
+ const state=initializeExplorerState(freshState()),visit=startVisit(state,'french',{destination:pack.destination,storyId:pack.id,variant:1});visit.node=visit.route[1];
+ const storyHtml=storyPage(state,storyDraft(state)),speech=storyHtml.match(/data-story-audio data-speak="([^"]*)"/);
+ ok(speech&&!speech[1].includes('Cards to put in order.'),'French ordering narration omits the English instruction');
+ ok(storyHtml.includes('data-speak-lang="fr"'),'French narration keeps the requested language');
+}
+console.log(`Paris clarity: ${n} checks passed`);

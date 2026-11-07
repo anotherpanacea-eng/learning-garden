@@ -377,7 +377,7 @@ console.log(JSON.stringify({base,apprentice,broken,unavailable,historical,maxImp
             for fault in ['quota','saving-off']:
                 _, fault_page=native.setup(browser,fixtures['base'],fault+'-fault')
                 if fault=='saving-off':
-                    h.go(fault_page,base,'#notes','#remember');fault_page.locator('#remember').uncheck()
+                    h.go(fault_page,base,'#notes','#remember');fault_page.locator('#remember').click();fault_page.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
                 if fault=='saving-off':
                     fault_page.evaluate('location.hash="#workshop/fair"');fault_page.locator('[data-qb-enter]').wait_for();h.click(fault_page,'[data-qb-enter]')
                 else:enter(fault_page,base)

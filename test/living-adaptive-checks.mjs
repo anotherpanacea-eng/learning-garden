@@ -1,3 +1,4 @@
+import {authoredScienceChoices} from '../dist/living-adaptive-content.mjs';
 import assert from 'node:assert/strict';
 import {freshState,restoreState} from '../dist/core.mjs';
 import {ensureCafe,nextGuest} from '../dist/cafe-core.mjs';
@@ -112,5 +113,27 @@ for(const damage of [s=>s.livingExploration.adaptive.version=99,s=>s.livingExplo
 {
  const map=new Map(),storage={get length(){return map.size;},key:i=>[...map.keys()][i]??null,getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,String(v)),removeItem:k=>map.delete(k)};
  const store=new ExplorerStore(storage),s=store.load();ensureCafe(s);startAdaptiveSpiral(s);openMath(s,true);chooseAdaptive(s,'math','input','17');store.save(s);const id=store.active.id,raw=JSON.stringify(s);const other=store.add({},s);check(other,'add explorer');check(!store.load().livingExploration,'separate explorer');const back=store.select(id,store.load());equal(JSON.stringify(back),raw,'switch returns exact pending work');const restored=new ExplorerStore(storage);equal(JSON.stringify(restored.load()),raw,'device reload exact');check(restored.setPersistence(false,restored.load()),'save off');check(![...map.keys()].some(k=>k.startsWith('number-garden-v1')),'saved records removed');check(restored.load().livingExploration,'memory remains with saving off');restored.clearActive();check(!restored.load().livingExploration,'clear current explorer');
+}
+
+// New visits save authored choice order; legacy visits retain the old order and help.
+{
+ const positions={1:new Set(),3:new Set()};
+ for(const depth of [1,3])for(const c of spiralCases){const s=fresh();setAdaptiveChoice(s,'science',depth);startAdaptiveSpiral(s);const r=currentSpiral(s);r.task.caseId=c.id;r.task.teaching.keys.science=`${c.id}:${depth}`;r.task.teaching.scienceChoices=authoredScienceChoices(r.task);const q=scienceQuestion(r.task);positions[depth].add(q.options.findIndex(o=>o.id===q.answer));check(validSpiralRound(r),'authored choices preserve valid task');equal(scienceQuestion(structuredClone(r.task)).options,q.options,'reload retains displayed order');}
+ for(const depth of [1,3])equal([...positions[depth]].sort(),[0,1,2],'new science questions span all positions at depth '+depth);
+ const s=fresh();setAdaptiveChoice(s,'science',3);startAdaptiveSpiral(s);const r=currentSpiral(s),choices=structuredClone(r.task.teaching.scienceChoices);check(choices.length===3,'new visit actually saves choices');r.task.teaching.scienceChoices.reverse();r.task.teaching.scienceChoices[0].text='An earlier saved clue <kept>';const raw=structuredClone(s);check(spiralState(s),'saved display wording and order remain readable');equal(scienceQuestion(r.task).options,r.task.teaching.scienceChoices,'source uses frozen choice text');equal(s,raw,'reading saved visit does not rewrite it');
+ delete r.task.teaching.scienceChoices;const legacy=structuredClone(s);check(validSpiralRound(r),'old visit without choices remains valid');equal(scienceQuestion(r.task).options.map(o=>o.id),['recheck','unchanged','no-need'],'legacy unanswered change question retains order');equal(s,legacy,'legacy reading does not add fields');
+ const bad=structuredClone(r);bad.task.teaching.scienceChoices=[{id:'unchanged',text:'Missing fitting choice'}];check(validSpiralRound(bad),'a changed choice list does not invalidate the visit');check(scienceQuestion(bad.task).options.some(o=>o.id==='recheck'),'only the unusable question falls back');
+ const retained=structuredClone(r);retained.task.teaching.scienceChoices=[...choices,{id:'earlier-option',text:'Earlier retained option'}];check(validSpiralRound(retained),'historical choice counts and ids remain readable');retained.science.detail='earlier-option';check(validSpiralRound(retained),'a retired selected option cannot strand the visit');check(!scienceQuestion(retained.task).options.some(o=>o.id==='earlier-option'),'retired option falls back for this question only');
+ r.task.teaching.scienceChoices=choices;r.task.teaching.scienceChoices.find(o=>o.id==='recheck').text='Earlier clue <img src=x onerror=alert(1)>';openNote(s,true);setAdaptivePage(s,'compare');const html=adaptivePage(s,'visit');check(html.includes('Earlier clue &lt;img src=x onerror=alert(1)&gt;')&&!html.includes('<img src=x'),'saved clue text is escaped in choices and help');
+}
+
+// Optional science display metadata cannot invalidate a whole multi-strand visit.
+for(const broken of [null,42,'old labels',[],[null],[{id:'recheck',text:42}],[{id:'recheck',text:'A'},{id:'recheck',text:'B'}],{unexpected:'raw'}]){
+ const s=fresh();setAdaptiveChoice(s,'science',3);startAdaptiveSpiral(s);answer(s,'science',true);setAdaptivePage(s,'compare');const r=currentSpiral(s);
+ r.science.detail='retired-response';r.science.first.value.detail='retired-response';r.science.attempts[0].value.detail='retired-response';r.task.teaching.scienceChoices=broken;
+ const reloaded=JSON.parse(JSON.stringify(s)),before=structuredClone(reloaded);check(spiralState(reloaded),'malformed labels do not strand the visit after JSON reload');
+ const question=scienceQuestion(currentSpiral(reloaded).task);equal(question.options.map(o=>o.id),['recheck','unchanged','no-need'],'damaged science question alone falls back');
+ check(adaptivePage(reloaded,'visit').includes('data-adapt-science-detail='),'visit renders without trusting malformed labels');equal(reloaded,before,'reads preserve all raw metadata and prior responses');
+ check(inspectAdaptive(reloaded,0),'unrelated habitat inspection remains usable');equal(currentSpiral(reloaded).task.teaching.scienceChoices,broken,'inspection preserves malformed display metadata');equal(currentSpiral(reloaded).science,before.livingExploration.current.science,'science response history is unchanged');equal(currentSpiral(reloaded).reading,before.livingExploration.current.reading,'reading strand remains intact');equal(currentSpiral(reloaded).math,before.livingExploration.current.math,'math strand remains intact');
 }
 console.log(`${checks} adaptive Living Garden content, evidence, compatibility and supply checks passed.`);

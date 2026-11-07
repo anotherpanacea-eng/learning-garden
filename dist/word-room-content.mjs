@@ -1,5 +1,6 @@
 // Original adult-read Prop Box projection of brief55; no recordings or pronunciation model.
 // Literal card and shared-text projection: docs/content/320-word-room-text.md.
+const ADULT_SUPPLIED_ROLE = 'adult-supplied';
 const collection = {
   "id": "theater-props",
   "revision": 1,
@@ -197,7 +198,7 @@ const collection = {
           "text": "The",
           "start": 0,
           "end": 3,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "cat",
@@ -215,13 +216,13 @@ const collection = {
           "text": "on",
           "start": 12,
           "end": 14,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "a",
           "start": 15,
           "end": 16,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "mat",
@@ -233,7 +234,7 @@ const collection = {
           "text": "A",
           "start": 22,
           "end": 23,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "bat",
@@ -245,19 +246,19 @@ const collection = {
           "text": "is",
           "start": 28,
           "end": 30,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "by",
           "start": 31,
           "end": 33,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "the",
           "start": 34,
           "end": 37,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "mat",
@@ -279,7 +280,7 @@ const collection = {
           "text": "A",
           "start": 0,
           "end": 1,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "pin",
@@ -291,19 +292,19 @@ const collection = {
           "text": "is",
           "start": 6,
           "end": 8,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "in",
           "start": 9,
           "end": 11,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "a",
           "start": 12,
           "end": 13,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "tin",
@@ -315,31 +316,31 @@ const collection = {
           "text": "A",
           "start": 19,
           "end": 20,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "toy",
           "start": 21,
           "end": 24,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "fish",
           "start": 25,
           "end": 29,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "has",
           "start": 30,
           "end": 33,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "a",
           "start": 34,
           "end": 35,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "fin",
@@ -351,7 +352,7 @@ const collection = {
           "text": "The",
           "start": 41,
           "end": 44,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "tin",
@@ -363,37 +364,37 @@ const collection = {
           "text": "and",
           "start": 49,
           "end": 52,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "the",
           "start": 53,
           "end": 56,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "fish",
           "start": 57,
           "end": 61,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "are",
           "start": 62,
           "end": 65,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "by",
           "start": 66,
           "end": 68,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "the",
           "start": 69,
           "end": 72,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "bin",
@@ -415,19 +416,19 @@ const collection = {
           "text": "A",
           "start": 0,
           "end": 1,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "puppet",
           "start": 2,
           "end": 8,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "can",
           "start": 9,
           "end": 12,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "hop",
@@ -439,7 +440,7 @@ const collection = {
           "text": "A",
           "start": 18,
           "end": 19,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "mop",
@@ -451,13 +452,13 @@ const collection = {
           "text": "and",
           "start": 24,
           "end": 27,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "a",
           "start": 28,
           "end": 29,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "top",
@@ -469,43 +470,43 @@ const collection = {
           "text": "wait",
           "start": 34,
           "end": 38,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "by",
           "start": 39,
           "end": 41,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "the",
           "start": 42,
           "end": 45,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "stage",
           "start": 46,
           "end": 51,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "A",
           "start": 53,
           "end": 54,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "bubble",
           "start": 55,
           "end": 61,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "goes",
           "start": 62,
           "end": 66,
-          "role": "adult-supplied"
+          "role": ADULT_SUPPLIED_ROLE
         },
         {
           "text": "pop",

@@ -520,7 +520,7 @@ def main():
 
                 # Saving off is deliberately separate from ordinary disk/transfer proof.
                 _, q = setup(browser, width, fixtures['ready'], f'save-off-{width}')
-                go(q, base, '#notes');q.locator('#remember').uncheck()
+                go(q, base, '#notes');q.locator('#remember').click();q.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
                 go(q, base, '#almanac/town');click(q, '[data-act-two-start]')
                 ok(story(q)['acts']['II']['started'], 'save-off session can start')
                 exported = download(q, base, f'save-off-{width}')

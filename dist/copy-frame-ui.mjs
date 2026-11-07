@@ -1,9 +1,11 @@
 import {copyFrameCases,copyFrameCase,copyFrameCopy as copy} from './copy-frame-content.mjs';
 import {createCopyFrame,copyFrameModel,changeCopySide,turnCopyFrame,resetCopyMaterial,copyFrameReading,copyFrameExample,copyFactorText,copyLength,copyArea} from './copy-frame-core.mjs';
 import {hearButton} from './play-media.mjs';
+import {squarePensEntry,openSquarePens,closeSquarePens,resetSquarePens,squarePensActive,squarePensPage,bindSquarePens} from './square-pens-ui.mjs';
+import {shadowYardEntry,openShadowYard,closeShadowYard,resetShadowYard,shadowYardActive,shadowYardPage,bindShadowYard} from './shadow-yard-ui.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visit=null;
-export function resetCopyFrame(){visit=null;}
+export function resetCopyFrame(){visit=null;resetSquarePens();resetShadowYard();}
 function current(notebook,owner){
  if(!visit||visit.notebook!==notebook||visit.owner!==owner)visit={notebook,owner,caseId:'small-panel',cases:new Map(),example:false,frame:0,pending:''};
  if(!visit.cases.has(visit.caseId))visit.cases.set(visit.caseId,{material:createCopyFrame(visit.caseId),tiles:false,read:false});
@@ -26,12 +28,24 @@ function liveBoard(v,entry){
  return `<h2 id="cframe-title" tabindex="-1" data-cframe-read>${esc(c.prompt)}</h2><p class="cframe-teaching" data-cframe-read>${copy.teaching}</p>${references(m)}<div class="cframe-workbench">${controls(m,entry)}${drawing(m,entry.tiles)}</div><div class="cframe-buttons">${button('compare','Compare measures')}${button('example','Show another example')}${hearButton('','Hear this copy')}</div>${entry.read?comparison(m,entry.material):''}`;
 }
 function exampleBoard(v){const m=copyFrameExample(v.frame);return `<h2 id="cframe-title" tabindex="-1" data-cframe-read>${copy.exampleTitle}</h2><p data-cframe-read>${copy.exampleNotice}</p><div class="cframe-buttons">${button('previous','Previous picture',v.frame===0)}${button('next','Next picture',v.frame===3)}${button('close','Return to my copy')}${hearButton('','Hear this example')}</div><p data-cframe-read>Worked example, picture ${m.displayIndex} of 4. ${esc(m.text)}</p>${references(m,true)}<div class="cframe-example-art">${drawing(m,true,true)}</div>`;}
-export function copyFramePage(notebook,owner){const v=current(notebook,owner),entry=v.cases.get(v.caseId);return `<section class="panel cframe-board" data-cframe-root data-cframe-view="${v.example?'example':'live'}"><div class="section-heading"><div><h1>${copy.title}</h1><p data-cframe-read>${copy.opening}</p></div><a class="pill" href="#workshop">Workshop</a></div><label class="cframe-selector">Choose a panel <select data-cframe-case>${copyFrameCases.map(c=>`<option value="${c.id}"${c.id===v.caseId?' selected':''}>${c.title}</option>`).join('')}</select></label>${v.example?exampleBoard(v):liveBoard(v,entry)}<p class="cframe-status" role="status" aria-live="polite" aria-atomic="true"></p><p class="cframe-visit">${copy.visit}</p><a class="pill" href="#workshop/hinge">Explore turns and right angles</a><a class="pill" href="#workshop/same-ground">Try the same area with a different fence</a><details><summary>For grown-ups</summary><p>${copy.grownup}</p></details></section>`;}
+export function copyFramePage(notebook,owner){if(shadowYardActive(notebook,owner))return shadowYardPage(notebook,owner);if(squarePensActive(notebook,owner))return squarePensPage(notebook,owner);const v=current(notebook,owner),entry=v.cases.get(v.caseId);return `<section class="panel cframe-board" data-cframe-root data-cframe-view="${v.example?'example':'live'}"><div class="section-heading"><div><h1>${copy.title}</h1><p data-cframe-read>${copy.opening}</p></div><a class="pill" href="#workshop">Workshop</a></div>${shadowYardEntry()}${squarePensEntry()}<label class="cframe-selector">Choose a panel <select data-cframe-case>${copyFrameCases.map(c=>`<option value="${c.id}"${c.id===v.caseId?' selected':''}>${c.title}</option>`).join('')}</select></label>${v.example?exampleBoard(v):liveBoard(v,entry)}<p class="cframe-status" role="status" aria-live="polite" aria-atomic="true"></p><p class="cframe-visit">${copy.visit}</p><a class="pill" href="#workshop/hinge">Explore turns and right angles</a><a class="pill" href="#workshop/same-ground">Try the same area with a different fence</a><details><summary>For grown-ups</summary><p>${copy.grownup}</p></details></section>`;}
 export function bindCopyFrame(notebook,ctx){
+ if(shadowYardActive(notebook,ctx.explorerId()))return bindShadowYard(notebook,{...ctx,onReturn:()=>{closeShadowYard();ctx.render();ctx.focus?.('[data-shadow-yard-entry]');}});
+ if(squarePensActive(notebook,ctx.explorerId()))return bindSquarePens(notebook,{...ctx,onReturn:()=>{closeSquarePens();ctx.render();ctx.focus?.('[data-square-pens-entry]');}});
  const root=document.querySelector('[data-cframe-root]');if(!root||!visit)return;
  const v=visit,owner=v.owner,id=v.caseId,entry=v.cases.get(id),material=entry.material,example=v.example,frame=v.frame;
  const live=()=>root.isConnected&&document.querySelector('[data-cframe-root]')===root&&location.hash==='#workshop/copy-frame'&&visit===v&&v.caseId===id&&v.cases.get(id)===entry&&entry.material===material&&v.example===example&&v.frame===frame&&(!ctx.isActive||ctx.isActive())&&ctx.notebook()===notebook&&ctx.explorerId()===owner;
  const stop=()=>{ctx.stopSpeech?.();ctx.stopSound?.();};
+ for(const [selector,canOpen,open,title] of [
+  ['[data-square-pens-entry]',()=>!shadowYardActive(notebook,owner),openSquarePens,'#square-pens-title'],
+  ['[data-shadow-yard-entry]',()=>!squarePensActive(notebook,owner),openShadowYard,'#shadow-yard-title']
+ ]){
+  const entryButton=root.querySelector(selector);if(!entryButton)continue;
+  let removed=false;const chain=[];for(let n=entryButton;n&&n!==document;n=n.parentNode)chain.push([n,n.parentNode]);
+  const audit=records=>{for(const record of records)for(const node of record.removedNodes)if(node===entryButton||node.contains?.(entryButton)||node===root||node.contains?.(root)){removed=true;observer.disconnect();}};
+  const observer=new MutationObserver(audit);observer.observe(root.parentNode,{childList:true,subtree:true});
+  entryButton.addEventListener('click',()=>{audit(observer.takeRecords());if(removed||!live()||!canOpen()||entryButton.disabled||!chain.every(([n,p])=>n.parentNode===p)||!root.contains(entryButton)||!entryButton.getClientRects().length||entryButton.closest('[hidden],[inert]')||getComputedStyle(entryButton).visibility==='hidden')return;stop();if(open(notebook,owner)){ctx.render();ctx.focus?.(title);}});
+ }
  if(v.pending)requestAnimationFrame(()=>requestAnimationFrame(()=>{if(live()){root.querySelector('.cframe-status').textContent=v.pending;v.pending='';}}));
  function redraw(selector='#cframe-title'){ctx.render();const candidate=document.querySelector(selector),node=candidate&&!candidate.disabled?candidate:document.querySelector('#cframe-title');if(node){node.focus({preventScroll:true});const box=node.getBoundingClientRect();if(box.top<0||box.bottom>innerHeight)node.scrollIntoView({block:'nearest'});}}
  const sizeMessage=(m,side='width')=>side==='height'?`Height is now ${copyLength(m.height)}. Width is ${copyLength(m.width)}.`:`Width is now ${copyLength(m.width)}. Height is ${copyLength(m.height)}.`;

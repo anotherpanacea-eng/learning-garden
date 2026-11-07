@@ -1,3 +1,5 @@
+@import url('./spinner-table.css');
+@import url('./chance-line.css');
 .seed-sheet{max-width:880px;margin:0 auto;padding:1.2rem 1rem 3rem}
 .seed-sheet h1{margin:.55rem 0}
 .seed-sheet p{line-height:1.5}
@@ -46,3 +48,5 @@
 .seed-draw-list{grid-template-columns:repeat(2,minmax(0,1fr))}
 .seed-history{overflow-x:auto}
 }
+
+.seed-chance-entry{margin:1rem 0;padding:1rem;border:2px solid #bba174;border-radius:16px;background:#f5ecd6}.seed-chance-entry h2{margin:0 0 .4rem}.seed-chance-entry p{margin:.4rem 0 .7rem}

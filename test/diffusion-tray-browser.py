@@ -340,7 +340,7 @@ console.log(JSON.stringify({base,historical,crowded:{id:'diffusion-run-64',sourc
             for fault in ['quota','saving-off']:
                 _,r=native.setup(browser,fixtures['base'],fault)
                 if fault=='saving-off':
-                    h.go(r,base,'#notes','#remember');r.locator('#remember').uncheck()
+                    h.go(r,base,'#notes','#remember');r.locator('#remember').click();r.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
                     r.evaluate('location.hash="#science/ice"');r.locator('[data-dt-enter]').wait_for();h.click(r,'[data-dt-enter]')
                 else:enter(r,base)
                 if fault=='quota':r.evaluate('''()=>{const native=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(String(k).startsWith('number-garden-v1:'))throw new DOMException('Invented quota fault','QuotaExceededError');return native.call(this,k,v);};}''')

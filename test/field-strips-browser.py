@@ -343,7 +343,7 @@ def speech_and_saving(browser,base,f):
     for key,count in [('columnsTaken',2),('rowsTaken',2)]:
         for _ in range(count):click(p,f'[data-field-move="{key}"][data-delta="1"]')
     compare(p);ok('could not save' in view(p).inner_text().lower(),'storage failure disclosed');report=download(p,base,'storage-failure');ok(next(x for x in report['fieldStrips']['observations'] if x['caseId']=='two-thirds-twice')['first']['wholeResult']=='matches','storage-failed memory remains downloadable');p.evaluate('()=>{Storage.prototype.setItem=window.originalFieldSet;}')
-    p=setup(browser,820,1180,f['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').uncheck();p.goto(base+'#studio/field-strips',wait_until='domcontentloaded');view(p).wait_for();choice=p.get_by_role('button',name='A part of two thirds',exact=True,include_hidden=True);open_fold(choice);choice.click()
+    p=setup(browser,820,1180,f['partial'],'save-off');go(p,base,'#notes','#remember');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.goto(base+'#studio/field-strips',wait_until='domcontentloaded');view(p).wait_for();choice=p.get_by_role('button',name='A part of two thirds',exact=True,include_hidden=True);open_fold(choice);choice.click()
     for key,count in [('columnsTaken',2),('rowsTaken',2)]:
         for _ in range(count):click(p,f'[data-field-move="{key}"][data-delta="1"]')
     compare(p);ok('Saved progress is off' in view(p).inner_text(),'save-off disclosed');report=download(p,base,'save-off');ok(next(x for x in report['fieldStrips']['observations'] if x['caseId']=='two-thirds-twice')['first']['wholeResult']=='matches','save-off memory remains downloadable')

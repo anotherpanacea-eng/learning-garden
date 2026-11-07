@@ -175,7 +175,7 @@ def saving_off(browser,base,seed):
  print('French questions: actual saving-off download',flush=True)
  c,p=setup(browser,base,seed)
  try:
-  p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#learn/french"');p.locator('[data-rooms-root]').wait_for()
+  p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#learn/french"');p.locator('[data-rooms-root]').wait_for()
   before=p.evaluate('JSON.stringify(Object.entries(localStorage).sort())');enter(p);ask(p,'colour');click(p,'keep')
   h.ok('download notes' in p.locator('#fq-status').inner_text().lower(),'Keep offers the honest conditional saving-off recovery message')
   h.ok(p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')==before,'saving-off inquiry/Keep writes no device progress')

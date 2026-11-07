@@ -142,7 +142,7 @@ def edges(browser,base):
  for mode in ['off','failure','refusal']:
   c,p=setup(browser,base,fixture())
   try:
-   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();p.evaluate('location.hash="#library/beat"');ready(p)
+   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.evaluate('location.hash="#library/beat"');ready(p)
    if mode=='failure':p.evaluate('beatFailStorage=true')
    if mode=='refusal':
     before=state(p);p.evaluate('beatRefuse=true');bench(p,'fer');eq(state(p),before,'refused first allocation leaves entire notebook exact');p.evaluate('beatRefuse=false')

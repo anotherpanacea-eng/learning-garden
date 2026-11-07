@@ -86,7 +86,7 @@ const assert=require('node:assert/strict'),path=require('node:path'),fs=require(
   const fakeReport=s=>JSON.stringify({title:'After the Storm: observations',exportedAt:new Date().toISOString(),note:'A small informal sample, not a grade or mastery assessment.',explorer:{avatar:'sky',color:'gold',symbol:'leaf'},recommendation:{reason:'Try another garden activity.'},...s},null,2);
   while(!prepareProgressImport(fakeReport(near)).ok)near.syntheticPadding=near.syntheticPadding.slice(0,-1024);
   near.syntheticPadding+='x'.repeat(Math.max(0,MAX_IMPORT_BYTES-new TextEncoder().encode(fakeReport(near)).length-300));
-  const nearPage=await setup();await visit(nearPage,'#notes');await nearPage.locator('#remember').uncheck();
+  const nearPage=await setup();await visit(nearPage,'#notes');await nearPage.locator('#remember').click();await nearPage.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();
   await nearPage.locator('#progress-file').setInputFiles({name:'synthetic-near-limit.json',mimeType:'application/json',buffer:Buffer.from(fakeReport(near))});
   await nearPage.locator('#progress-import-confirm').waitFor();await tap(nearPage,'#progress-import-confirm');
   ok((await nearPage.locator('#progress-import-status').innerText()).includes('separate explorer'),'save-off near-limit import succeeds in memory');

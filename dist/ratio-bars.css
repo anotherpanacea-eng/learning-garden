@@ -15,3 +15,6 @@ body:has([data-ratio-bars-view]) .header nav,body:has([data-ratio-bars-view])>fo
 @media(min-width:651px) and (max-width:949px){[data-ratio-bars-view]{--rb-unit:18px;--rb-gap:2px}[data-ratio-bars-view] .rb-block{flex-basis:18px;width:18px;height:26px}[data-ratio-bars-view] .rb-blocks{gap:2px}.rb-row{grid-template-columns:minmax(238px,1fr) minmax(0,1.3fr)}.rb-row-actions{min-width:0}.rb-row-actions button{flex:1;min-width:44px}}
 .rb-notes .rb-brace{box-sizing:border-box}
 @media(min-width:651px) and (max-width:949px){.rb-row>.rb-brace span{max-width:238px}}
+
+/* Keep optional teaching beside the title so the tablet board stays in view. */
+.rb-heading drawn-howto{margin:0}

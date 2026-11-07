@@ -51,7 +51,8 @@ assert.deepEqual(britishSpellings('<g data-lift-metre="0">'),[],'markup attribut
 assert.deepEqual(britishSpellings("import x from './shadow-theatre-core.mjs';"),[],'module path stays stable');
 
 const dist=new URL('../dist/',import.meta.url);
-const flags=readdirSync(dist).filter(f=>/\.(mjs|html)$/.test(f))
+// Original1831 literary source only: preserve Shelley’s spelling; modern lessons remain scanned.
+const flags=readdirSync(dist).filter(f=>/\.(mjs|html)$/.test(f)&&f!=='walton-letters-text.mjs')
   .flatMap(f=>britishSpellings(readFileSync(new URL(f,dist),'utf8'),`dist/${f}`));
 // Existing display miss outside PR #265's editable files. Keep it visible and bounded;
 // do not silently treat hyphenated prose as an identifier. Remove when that copy is fixed.

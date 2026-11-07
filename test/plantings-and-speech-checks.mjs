@@ -44,6 +44,18 @@ for(const [id,bad] of [['many-rectangles',{type:'array'}],['estimate-seeds',{typ
  const q=areas.find(a=>a.id==='geometry').checkin[0];const html2=renderModel(q,{},false,{mode:'checkin'});check(!html2.includes('aria-label="triangle'),'shape identification accessible description does not name its answer');
 }
 for(const [input,expected] of [['7 × 8 = __','7 times 8 equals blank'],['12 ÷ 3 − 1','12 divided by 3 minus 1'],['A 3-by-4 bed is 12 cm by 2 m.','A 3 by 4 bed is 12 centimeters by 2 meters.'],['Come explore with Pip.','Come explore with Pip.'],['Find 2/3 of the collection.','Find 2 thirds of the collection.'],['1/4 of the same whole','1 quarter of the same whole']])check(spoken(input)===expected,'English math speech '+input);
+{
+ const s=fresh();startOpenTask(s,'many-rectangles');s.plantings.openDraft.rectangles=[[3,8],[2,12]];s.plantings.openDraft.model={type:'array',rows:2,cols:12,item:'cup'};
+ const before=structuredClone(s),event=s.plantings.openDraft.event;
+ const page=openNumberTaskPage(s,'estimate-seeds');
+ assert.deepEqual(s,before);checks++;check(page.includes('data-open-replace="estimate-seeds"'),'different invitation offers an explicit replacement');
+ check(page.includes('#wonder/many-rectangles'),'waiting model has a return route');
+ openNumberTaskPage(s,'unavailable-invitation');assert.deepEqual(s,before);checks++;
+ openNumberTaskPage(s,'many-rectangles');check(s.plantings.openDraft.event===event,'returning to the same invitation retains its identity');
+ assert.deepEqual(s.plantings.openDraft.rectangles,[[3,8],[2,12]]);checks++;
+ startOpenTask(s,'estimate-seeds');check(s.plantings.openDraft.event!==event&&s.plantings.openDraft.taskId==='estimate-seeds','explicit replacement starts the requested invitation');
+ assert.deepEqual(s.plantings.openRecords,before.plantings.openRecords);checks++;assert.deepEqual(s.plantings.pending,before.plantings.pending);checks++;
+}
 check(spoken('Le ruban mesure 3 cm. 4 × 2 = 8','fr')==='Le ruban mesure 3 cm. 4 × 2 = 8','French text stays French');
 check(chooseLocalVoice([{name:'Remote',lang:'en-US',localService:false}])===null,'no remote voice fallback');
 console.log(`${checks} planting, open invitation, recovery and speech checks passed.`);

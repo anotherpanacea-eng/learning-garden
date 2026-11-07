@@ -327,7 +327,7 @@ def boundaries(browser,base,f,first,exported):
     for fault in ['saving-off','quota']:
         _,p=native.setup(browser,f['base'],fault)
         if fault=='saving-off':
-            h.go(p,base,'#notes','#remember');p.locator('#remember').uncheck()
+            h.go(p,base,'#notes','#remember');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             p.evaluate('location.hash="#science/lens"');p.locator('[data-lens-root]').wait_for();start(p)
         else:start(p,base)
         if fault=='quota':p.evaluate("()=>{const native=Storage.prototype.setItem;Storage.prototype.setItem=function(k,v){if(String(k).startsWith('number-garden-v1:'))throw new DOMException('Invented fault','QuotaExceededError');return native.call(this,k,v)}}")

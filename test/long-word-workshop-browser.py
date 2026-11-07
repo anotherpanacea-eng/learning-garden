@@ -286,7 +286,7 @@ def boundaries(b):
     eq(p.evaluate('localStorage.getItem("number-garden-v1:explorer-1")'),saved,'stale tab never overwrites newer save')
     ok('another tab' in p.locator('[data-lww-saving]').inner_text(),'stale-tab warning stays local');held=root(p);eq(json.loads(download(p))['longWordWorkshop'],held,'stale memory work downloadable');c.close()
 
-    c,p=start(b,390);p.goto(BASE+'#notes');p.locator('#remember').uncheck();p.goto(BASE+'#library/long-words');tap(p,'words');tap(p,'append','[data-lww-piece=catch]')
+    c,p=start(b,390);p.goto(BASE+'#notes');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();p.goto(BASE+'#library/long-words');tap(p,'words');tap(p,'append','[data-lww-piece=catch]')
     ok('page stays open' in p.locator('[data-lww-saving]').inner_text(),'save-off local message');held=root(p);eq(json.loads(download(p))['longWordWorkshop'],held,'save-off actual download');c.close()
     c,p=start(b,390);tap(p,'words');p.evaluate('() => {Storage.prototype.setItem=function(){throw new Error("Synthetic storage failure")};}');tap(p,'append','[data-lww-piece=catch]')
     eq(word(p)['order'],['catch'],'failed storage retains memory work');ok(bool(p.locator('[data-lww-saving]').inner_text()),'storage failure local message');held=root(p);eq(json.loads(download(p))['longWordWorkshop'],held,'storage failure actual download');c.close()

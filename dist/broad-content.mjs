@@ -8,9 +8,17 @@ const pattern = (values, step) => ({type:'pattern', values, step});
 const shape = (shape, turns=0) => ({type:'shape', shape, turns});
 const ruler = (start, end, max=20) => ({type:'ruler', start, end, max});
 const counters = count => ({type:'counters', count});
+const spokenQuestions={
+ 'patterns-foundation':'The rule is add 2 each time: 2, 4, 6, then what number?',
+ 'patterns-anchor':'The rule is add 4 each time: 4, 8, 12, 16, then what number?',
+ 'patterns-anchor-alt':'The rule is add 8 each time: 8, 16, 24, then what number?',
+ 'patterns-support':'Add 2 each time, starting at 10: 10, 12, 14, then what number?',
+ 'patterns-explore':'Add 4 each time: 20, 24, 28, then what number?',
+ 'reasoning-support':'What number plus 7 makes 12?'
+};
 function q(id, area, label, title, prompt, answer, topicId, model, hint, solution, talk, extra={}) {
   return {id, area, skill:area, label, title, prompt, kind:'number', answer, topicId,
-    model, hint, solution, talk, ...extra};
+    model, hint, solution, talk, ...extra,...(spokenQuestions[id]?{say:spokenQuestions[id]}:{})};
 }
 function activity(tier, lesson, wonder, question) {
   return {...question, tier, lesson, wonder};

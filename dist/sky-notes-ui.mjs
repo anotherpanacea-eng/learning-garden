@@ -1,6 +1,7 @@
 import {SKY_SHAPES,SKY_COPY as T,SKY_PANELS,SKY_GROWNUP,skyShape,changePrompt} from './sky-notes-content.mjs';
 import {skyView,skyMonthDays,hemisphereView,saveSkyNote,setHemisphere,localCivilDate,validCivilDate,validMonth,moonArt} from './sky-notes-core.mjs';
 import {hearButton} from './play-media.mjs';
+import {moonlightEntry,moonlightActive,moonlightPage,openMoonlight,resetMoonlight,bindMoonlight} from './moonlight-ui.mjs';
 
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
@@ -12,9 +13,10 @@ const dateLine=iso=>`Today on this device: ${weekday(iso)}, ${MONTHS[Number(iso.
 const label=code=>skyShape(code)?.label??'';
 // Status lines are transient codes mapped to copy, never saved prose.
 const NOTICES={saved:T.saved,same:T.same,noChoice:T.noChoice,dateChanged:T.dateChanged,full:T.full,notKept:T.notKept,hemisphere:T.hemisphereSaved};
-let visit=null;
-export function resetSkyNotesView(){visit=null;}
+let visit=null,boundRoot=null;
+export function resetSkyNotesView(){visit=null;boundRoot=null;resetMoonlight();}
 function session(state,owner){
+ if(visit&&(visit.state!==state||visit.owner!==owner))resetMoonlight();
  if(!visit||visit.state!==state||visit.owner!==owner)visit={state,owner,date:localCivilDate(),draft:null,drift:false,month:null,notice:''};
  return visit;
 }
@@ -38,12 +40,13 @@ function hemisphereSetting(h){
 }
 export function skyNotesEntry(){return `<aside class="wt-entry sky-entry"><div><h2>${esc(T.entryTitle)}</h2><p>${esc(T.entryBody)}</p></div><a class="secondary" href="#almanac/sky">${esc(T.entryTitle)}</a></aside>`;}
 export function skyNotesPage(state,owner){
+ if(moonlightActive(state,owner))return moonlightPage(state,owner);
  const s=session(state,owner),v=skyView(state,s.date),h=hemisphereView(state),hemisphere=h.effective;
  let today='';
  if(v.status==='unsupported')today=`<p class="sky-unavailable">${esc(T.unavailable)}</p>`;
  else if(!v.todayValid)today=`<p class="sky-unavailable" data-sky-say>${esc(T.noDate)}</p>`;
  else today=`<p class="sky-date" data-sky-say><strong>${esc(dateLine(v.today))}</strong></p>${choices(s,v,hemisphere)}<p class="sky-help" data-sky-say>${esc(T.growing)}</p>${v.entry?`<p data-sky-say>${esc(changePrompt(label(v.entry.shape)))}</p>`:''}<div class="sky-actions"><button type="button" class="primary" data-sky-save${s.drift?' disabled':''}>${esc(T.save)}</button><button type="button" class="secondary" data-sky-refresh>${esc(T.refresh)}</button></div>`;
- return `<div class="sky-page" data-sky-root><header class="sky-header"><a class="back" href="#almanac">Keeper’s Pages</a><p class="sky-eyebrow">${esc(T.eyebrow)}</p><h1 id="sky-title" tabindex="-1">${esc(T.title)}</h1><p data-sky-say>${esc(T.intro)}</p><p class="sky-safety" data-sky-say><strong>${esc(T.safety)}</strong></p><div data-sky-hear>${hearButton(T.intro,T.hear)}</div></header><section class="sky-today" aria-labelledby="sky-title">${today}${status(s)}</section>${strip(state,s,v,hemisphere)}${panels(hemisphere)}${hemisphereSetting(h)}<footer class="sky-links"><a href="#almanac/weather">Weather notes</a><a href="#almanac">Keeper’s Pages</a></footer></div>`;
+ return `<div class="sky-page" data-sky-root><header class="sky-header"><a class="back" href="#almanac">Keeper’s Pages</a><p class="sky-eyebrow">${esc(T.eyebrow)}</p><h1 id="sky-title" tabindex="-1">${esc(T.title)}</h1><p data-sky-say>${esc(T.intro)}</p><p class="sky-safety" data-sky-say><strong>${esc(T.safety)}</strong></p><div data-sky-hear>${hearButton(T.intro,T.hear)}</div>${moonlightEntry()}</header><section class="sky-today" aria-labelledby="sky-title">${today}${status(s)}</section>${strip(state,s,v,hemisphere)}${panels(hemisphere)}${hemisphereSetting(h)}<footer class="sky-links"><a href="#almanac/weather">Weather notes</a><a href="#almanac">Keeper’s Pages</a></footer></div>`;
 }
 // Built from the page as it is now, at the moment Hear is tapped.
 function spokenPage(root){
@@ -56,9 +59,18 @@ function spokenPage(root){
  return parts.join(' ');
 }
 export function bindSkyNotes(state,ctx){
+ if(moonlightActive(state,ctx.explorerId())){boundRoot=null;return bindMoonlight(state,{...ctx,onReturn:()=>{ctx.render();ctx.focus?.('[data-moonlight-entry]');}});}
  const root=document.querySelector('[data-sky-root]');if(!root)return;
  const owner=ctx.explorerId(),s=session(state,owner),options={canExport:ctx.canExport};
- const live=()=>root.isConnected&&location.hash==='#almanac/sky'&&ctx.explorerId()===owner&&ctx.notebook()===state&&ctx.isActive?.()!==false;
+ boundRoot=root;
+ const controls=[root,...root.querySelectorAll('button,a,select,summary')],retired=new Set(),chains=new Map();
+ for(const node of controls){const chain=[];for(let n=node;n&&n!==document;n=n.parentNode)chain.push([n,n.parentNode]);chains.set(node,chain);}
+ const audit=records=>{for(const record of records)for(const removed of record.removedNodes)for(const node of controls)if(removed===node||removed.contains?.(node))retired.add(node);if(retired.has(root))observer.disconnect();};
+ const observer=new MutationObserver(audit);observer.observe(document.documentElement,{childList:true,subtree:true});
+ const live=()=>root.isConnected&&boundRoot===root&&document.querySelector('[data-sky-root]')===root&&visit===s&&!moonlightActive(state,owner)&&location.hash==='#almanac/sky'&&ctx.explorerId()===owner&&ctx.notebook()===state&&ctx.isActive?.()!==false;
+ const controlLive=node=>{audit(observer.takeRecords());if(!live()||retired.has(root)||retired.has(node)||!chains.get(node)?.every(([n,p])=>n.parentNode===p)||!root.contains(node)||!node.getClientRects().length||node.disabled)return false;for(let n=node;n;n=n.parentElement){const css=getComputedStyle(n);if(n.hidden||n.inert||n.getAttribute('aria-hidden')==='true'||css.display==='none'||['hidden','collapse'].includes(css.visibility))return false;}return true;};
+ for(const node of controls)node.addEventListener('click',event=>{if(!controlLive(node)){event.preventDefault();event.stopImmediatePropagation();}},true);
+ const entry=root.querySelector('[data-moonlight-entry]');entry?.addEventListener('click',()=>{if(!controlLive(entry))return;ctx.stopSpeech?.();openMoonlight(state,owner);ctx.render();ctx.focus?.('#moonlight-title');});
  const stop=()=>ctx.stopSpeech?.();
  const refresh=target=>{ctx.render();ctx.focus?.(target);};
  const on=(selector,fn)=>root.querySelectorAll(selector).forEach(b=>b.addEventListener('click',()=>{if(live())fn(b);}));

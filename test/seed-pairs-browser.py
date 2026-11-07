@@ -613,7 +613,7 @@ with sync_playwright() as pw:
             c, p = setup(browser, 320, failed=failed)
             go(p, '#notes')
             if not failed:
-                p.locator('#remember').uncheck()
+                p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             go(p)
             tap(p, '[data-pair-start]')
             tap(p, '[data-pair-begin]')

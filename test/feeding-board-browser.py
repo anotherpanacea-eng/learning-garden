@@ -368,6 +368,7 @@ def main():
                 go(p, base, '#notes', '#reset')
                 click(p, '#reset')
                 click(p, '#confirm-reset')
+                click(p, '[data-film-skip]')
                 go(p, base)
                 ok('feedingBoard' not in book(p), 'existing confirmed reset clears only current explorer owner')
                 click(p, '#explorer-switch')
@@ -427,7 +428,7 @@ def main():
             # Saving off deliberately removes disk copies; use actual download to inspect memory.
             p = setup(browser, 820, 1180, fixtures['partial'], 'saving-off')
             go(p, base, '#notes', '#remember')
-            p.locator('#remember').uncheck()
+            p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
             p.goto(base + '#living/who-eats', wait_until='domcontentloaded')
             p.locator(VIEW).wait_for()
             select_case(p, 'cow')

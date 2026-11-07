@@ -98,7 +98,7 @@ with sync_playwright() as pw:
   # Saving-off and failed disk writes keep the story usable in memory with honest warning.
   for failed in [False,True]:
    c,p=setup(browser,320,'plus6',failed);go(p,'#notes')
-   if not failed:p.locator('#remember').uncheck()
+   if not failed:p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
    go(p,'#almanac');keep(p);reveal(p);ok('old-map-revealed' in book(p)['story']['seenScenes'],'memory story works with saving disabled or failed');ok(('Progress could not be saved' in p.locator('body').inner_text()) if failed else p.evaluate("Object.keys(localStorage).filter(k=>k.startsWith('number-garden-v1:')).length===0"),'disk failure warning or explicit saving-off removes persisted notebooks');c.close()
   ok(not errors,'no browser runtime errors: '+str(errors));print(f'Keeper story Chrome: {checks} assertions passed at320/820.')
  finally:

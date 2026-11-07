@@ -1,7 +1,7 @@
 // Original equal-group stories. Related quantities are practice, never a recall test.
 export const GROUP_CASES = [
   {id:'little-table',name:'Little table',groups:3,each:4,total:12},
-  {id:'same-twelve',name:'Four little tables',groups:4,each:3,total:12},
+  {id:'same-twelve',name:'Corner tables',groups:4,each:3,total:12},
   {id:'picnic',name:'Picnic plates',groups:2,each:5,total:10},
   {id:'welcome-supper',name:'Welcome-back supper',groups:5,each:6,total:30},
   {id:'long-tables',name:'Long tables',groups:7,each:8,total:56},

@@ -1,3 +1,5 @@
+import {generatedBroad} from '../dist/broad-variants.mjs';
+import {broadHelper,openBroadHelp,renderBroadHelp} from '../dist/broad-help.mjs';
 import assert from 'node:assert/strict';
 import {areas} from '../dist/broad-content.mjs';
 import {renderModel,adjustModel,foldGeometry,foldChoices,shapeVertices,modelCaption,broadHome,checkinHub,activityLibrary} from '../dist/broad-ui.mjs';
@@ -27,8 +29,14 @@ for(const shape of ['triangle','rectangle','square','hexagon'])for(let turns=0;t
   const f=foldGeometry(shape,turns,choices[i].angle),matches=f.reflected.every(p=>inside(p,f.original));
   check(Math.abs(area(f.source)-area(f.reflected))<1e-7,'reflection conserves half area '+shape+i);
   check(matches===(shape==='square'||shape==='hexagon'||shape==='triangle'&&i<3||shape==='rectangle'&&i<2),'geometric fit '+shape+i+' turn '+turns);
-  const a={};adjustModel({model:{type:'shape',shape,turns}},a,`fold-angle-${i}`);const html=rendered(a.model);check(html.includes('broad-fold-outside')&&html.includes('Pink shows any part that misses'),'chosen fold shows reflected half '+shape+i);
+  const a={};adjustModel({model:{type:'shape',shape,turns}},a,`fold-angle-${i}`);const html=rendered(a.model);check(html.includes('broad-fold-outside'),'chosen fold shows reflected half '+shape+i);
+  const expected=shape==='square'||shape==='hexagon'||shape==='triangle'&&i<3||shape==='rectangle'&&i<2;
+  check(f.matches===expected,'reported result matches independent shape/axis expectation '+shape+i+' turn '+turns);
+  const feedback=expected?'This fold matches both halves.':'Part of this fold misses.';
+  check(html.split(feedback).length===3,'matching or missing result appears in both image name and readout '+shape+i);
+  check(!html.includes(expected?'Part of this fold misses.':'This fold matches both halves.'),'opposite fold result is absent '+shape+i);
  }
+ check(!foldGeometry(shape,turns,choices[0].angle+0.01).matches,'a near-axis fold is not rounded to a match '+shape+' turn '+turns);
  const unmarked=rendered({type:'shape',shape,turns});check(!unmarked.includes('stroke-dasharray')&&!unmarked.includes('broad-fold-outside'),'no fold or solution before choice '+shape);
 }
 for(const maker of [pip,dot])for(const pose of ['wave','think','point','cheer','puzzled']){
@@ -40,4 +48,11 @@ for(const a of areas)check(areaScene(a.id).includes('<svg')&&areaScene(a.id).inc
 const flowers=countingGarden({selected:[3,1],group:'rows'});check((flowers.match(/data-garden-flower=/g)||[]).length===12,'twelve interactive flowers');check(flowers.includes('You counted 2 flowers.')&&flowers.includes('garden-show-rows'),'count and grouping rendered');check((countingGarden({group:'colors'}).match(/garden-color-group/g)||[]).length===12,'color grouping preserves twelve flowers');
 const s=freshState();ensureBroad(s);for(const html of [broadHome(s,null,()=>''),checkinHub(s),activityLibrary(s,null)]){check(!html.includes('🦊')&&!html.includes('🐞'),'creatures use original art');check(!/check-in|assessment|observations/i.test(html),'child copy avoids assessment terms');}
 for(const a of areas)for(const q of a.activities)check(modelCaption(q.model).startsWith('Pip'),'each example caption describes current model '+q.id);
+
+// Spoken prompts must keep the current question's numbers, including new variants.
+for(const q of areas.flatMap(a=>[...a.checkin,...a.activities])){
+ if(q.prompt.includes('__'))check(typeof q.say==='string'&&!q.say.includes('__'),'authored blank has a spoken question '+q.id);
+ if(q.params.type==='sequence')for(let i=0;i<8;i++){const v=generatedBroad(q,'spoken-regression-'+i);check(v.say===v.prompt&&!v.say.includes('__'),'generated sequence speaks its own new-number prompt '+q.id);}
+ if(['sequence','missing'].includes(q.params.type)){const h=broadHelper(q),active={attempts:[]};openBroadHelp(q,active);check(h.say&&!h.say.includes('__'),'helper blank has spoken words '+q.id);check(renderBroadHelp(q,active).includes(h.say),'helper actually binds its spoken words '+q.id);}
+}
 console.log(checks+' Number Garden model and art checks passed.');

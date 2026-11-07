@@ -100,7 +100,7 @@ def storage(browser,base,seed):
  for mode in ['off','failure']:
   ctx,p=setup(browser,base,seed)
   try:
-   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').uncheck();back(p)
+   if mode=='off':p.evaluate('location.hash="#notes"');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click();back(p)
    else:p.evaluate('window.revisionFailStorage=true')
    edit(p,'In-memory first.');tap(p,'[data-ledger-revision-start]');tab(p,'draft');edit(p,'In-memory revision.');tap(p,'[data-ledger-revision-keep]');report=export(p,'storage-'+mode);r=report['ledgerGauge']['visits'][report['ledgerGauge']['current']]['revision'];ok(r['before']['renderedParts'][1]['text']=='In-memory first.' and r['after']['renderedParts'][1]['text']=='In-memory revision.','actual Notes preserves in-memory work with storage '+mode)
   finally:ctx.close()

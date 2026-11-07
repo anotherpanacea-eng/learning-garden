@@ -127,7 +127,7 @@ No preview map: use the existing generic original facts plus Your choice, preser
 Fit: The given place, time and current route answer this visitor's request. A plan starts with what the reader needs.
 Different history: Past actors do not tell this visitor how to reach today's show on time.
 Different wait: A usable current route is already given. Earlier routes are not needed for this visit.
-General: Match the plan to the stated purpose; do not add a requirement the supplied facts do not need.
+General: Match the plan to the stated purpose; do not add a requirement the facts in the note do not need.
 Hint: What does this visitor need to do now?
 Example: A first-time bakery visitor needs the opening time, place and entrance more than the history of every bun.
 
