@@ -1,0 +1,42 @@
+import {groupScenes,groupTeaching,groupCopy as copy} from './sentence-groups-content.mjs';
+import {groupsPresentation,groupsNarration} from './sentence-groups-core.mjs';
+import {hearButton} from './play-media.mjs';
+
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+export const initialGroupsView=()=>({factsOpen:false,talkOpen:false,grownupOpen:false});
+const button=(action,label,value='',disabled=false)=>`<button type="button" data-groups-action="${action}" data-groups-value="${esc(value)}"${disabled?' disabled':''}>${esc(label)}</button>`;
+const names=(scene,ids)=>{const labels=scene.members.filter(member=>ids.includes(member.id)).map(member=>member.label);return labels.length<2?(labels[0]||copy.noneMarked):labels.length===2?labels.join(' and '):`${labels.slice(0,-1).join(', ')}, and ${labels.at(-1)}`;};
+const panel=(kind,title,text,ui)=>`<details data-groups-panel="${kind}"${ui[kind+'Open']?' open':''}><summary>${esc(title)}</summary><p>${esc(text)}</p></details>`;
+
+// Original decorative diagrams. All figure identities and features also use native text.
+function art(member){
+ const colors={blue:'#3975a9',gold:'#d2a43e',red:'#b94f48',green:'#537c52',neutral:'#eee4c9',silver:'#adb9bd',wood:'#a17646'},feature=member.feature,color=colors[feature.color]||colors.neutral;
+ let picture='';
+ if(member.kind==='courier')picture=`<circle cx="60" cy="23" r="13" fill="#fff8e9"/><path d="M35 94V58q0-19 25-19t25 19v36M44 94V64M76 94V64" fill="#e7eddb"/><path d="m43 43 35 40" fill="none"/><rect x="57" y="57" width="29" height="29" rx="4" fill="${color}"/><path d="M63 57v-7q9-7 17 0v7" fill="none"/>`;
+ else if(member.kind==='parcel')picture=`<path d="m21 34 39-13 39 13v60H21Z" fill="#e5cea0"/><path d="m21 34 39 11 39-11M60 45v49" fill="none"/><rect x="63" y="52" width="28" height="27" rx="3" fill="#fff8e9"/>${feature.icon==='star'?'<path d="m77 55 3 7 8 1-6 5 2 8-7-4-7 4 2-8-6-5 8-1Z" fill="#b58a23"/>':'<path d="M69 61h16M69 68h16" fill="none"/>'}`;
+ else if(member.kind==='book')picture=`<path d="M31 22h57v71H31q-11 0-11-10V31q0-9 11-9Z" fill="${color}"/><path d="M31 22v61h57M31 83q-11 0-11 10h68V83" fill="#fff8e9"/><path d="M31 87h50M31 91h50" fill="none"/>`;
+ else if(member.kind==='lantern')picture=`<path d="M43 30V20q0-16 17-16t17 16v10" fill="none" stroke="${feature.id.includes('silver')?'#879ba3':'#946232'}" stroke-width="7"/><path d="M30 38h60l-7 54H37ZM25 38l15-12h40l15 12M31 96h58" fill="#fff1bb"/><path d="M45 40v48M75 40v48" fill="none"/><path d="M54 76q-4-14 7-24 12 16 4 24Z" fill="#d8a23d"/>`;
+ return `<svg viewBox="0 0 120 112" aria-hidden="true" focusable="false"><ellipse cx="60" cy="104" rx="43" ry="4" fill="#dce5d8"/><g stroke="#244d47" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">${picture}</g></svg>`;
+}
+function memberCard(member,marked,reference,editable){
+ const content=`${art(member)}<span class="groups-member-caption"><strong>${esc(member.label)}</strong><span>${esc(member.feature.text)}</span>${marked?`<span class="groups-own-mark"><span aria-hidden="true">✓ </span>${esc(copy.yourMarks)}</span>`:''}${reference?`<span class="groups-reference-mark">${esc(copy.messageIncludes)}</span>`:''}</span>`;
+ return editable?`<label class="groups-member" data-groups-figure="${esc(member.id)}">${content}<input type="checkbox" data-groups-member="${esc(member.id)}" aria-label="${esc(member.label)}, ${esc(member.feature.text)}"${marked?' checked':''}></label>`:`<figure class="groups-member${reference?' groups-included':''}" data-groups-figure="${esc(member.id)}">${content}</figure>`;
+}
+// A comma travels with its preceding word, while the rest of each strip wraps normally.
+function withComma(text){const split=text.lastIndexOf(' ');return `${esc(split<0?'':text.slice(0,split+1))}<span class="groups-comma-word">${esc(text.slice(split+1))}<span class="groups-comma">,</span></span>`;}
+function sentence(scene,draft){
+ if(!draft.attached)return `<span data-groups-noun>${esc(scene.noun)}</span> <span data-groups-predicate>${esc(scene.predicate)}</span>`;
+ return `<span data-groups-noun>${draft.commas?withComma(scene.noun):esc(scene.noun)}</span> <span class="groups-clause" data-groups-clause>${draft.commas?withComma(scene.clause):esc(scene.clause)}</span> <span data-groups-predicate>${esc(scene.predicate)}</span>`;
+}
+function teachingView(work){
+ const step=groupTeaching[work.teachingStep];
+ return `<section class="groups-teaching"><p class="groups-step">${esc(copy.teachingCount.replace('{n}',work.teachingStep+1))}</p><h3 id="groups-teaching-title" tabindex="-1">${esc(step.title)}</h3><p>${esc(step.intro)}</p><div class="groups-roster groups-example-roster">${step.members.map(member=>memberCard(member,false,false,false)).join('')}</div><div class="groups-teaching-copy">${step.blocks.map(block=>`<p${block.kind==='sentence'?' class="groups-example-sentence"':''}>${esc(block.text)}</p>`).join('')}</div><div class="groups-paging">${button('teaching-step',copy.previousTeaching,'-1',work.teachingStep===0)}${button('teaching-step',copy.nextTeaching,'1',work.teachingStep===groupTeaching.length-1)}</div>${button('teaching-close',copy.backToMessage)}</section>`;
+}
+export function groupsView(work,ui=initialGroupsView()){
+ const p=groupsPresentation(work),scene=p.scene,draft=p.work,meaning=work.page==='meaning',teaching=work.page==='teaching';
+ const tools=teaching?'':`<div class="groups-toolbar"><label for="groups-scene">${esc(copy.scene)}</label><select id="groups-scene" data-groups-scene>${groupScenes.map(item=>`<option value="${esc(item.id)}"${item.id===scene.id?' selected':''}>${esc(item.title)}</option>`).join('')}</select></div>`;
+ const build=meaning?`<div class="groups-comparison"><section><h3>${esc(copy.yourMarks)}</h3><p data-groups-marked>${esc(names(scene,p.marked))}</p></section><section><h3>${esc(copy.messageIncludes)}</h3><p data-groups-reference>${esc(names(scene,p.reference))}</p></section><p class="groups-explanation" data-groups-explanation>${esc(p.explanation)}</p>${p.verdict?`<p class="groups-feedback" data-groups-verdict>${esc(p.verdict)}</p>`:''}</div>${button('page',copy.changeMarks,'message')}`:`${!draft.attached?`<div class="groups-offered"><h3>${esc(copy.detail)}</h3><p>${esc(scene.clause)}</p></div>`:''}<div class="groups-edits">${draft.attached?`${button('commas',draft.commas?copy.removeCommas:copy.addCommas)}${button('remove',copy.remove)}`:`${button('attach',copy.attach)}${button('commas',copy.addCommas,'',true)}`} ${button('undo',copy.undo,'',!p.canUndo)}</div>${!draft.attached?`<p class="groups-availability">${esc(copy.needDetail)}</p>`:''}${!p.canUndo?`<p class="groups-availability">${esc(copy.noUndo)}</p>`:''}`;
+ const mat=teaching?teachingView(work):`<p class="groups-page-name"><strong>${esc(meaning?copy.meaningPage:copy.messagePage)}</strong></p><div class="groups-workmat"><section class="groups-message"><h3>${esc(copy.sentence)}</h3><p id="groups-sentence" class="groups-sentence">${sentence(scene,draft)}</p>${build}</section><section class="groups-scene"><h3>${esc(scene.title)}</h3><p>${esc(scene.factsIntro)}</p>${!meaning?`<p id="groups-mark-prompt">${esc(copy.markPrompt)}</p>`:''}<div class="groups-roster"${!meaning?' role="group" aria-labelledby="groups-mark-prompt"':''}>${scene.members.map(member=>memberCard(member,p.marked.includes(member.id),meaning&&p.reference.includes(member.id),!meaning)).join('')}</div><p class="groups-scene-notice">${esc(copy.sceneNotice)}</p>${panel('facts',copy.facts,[scene.story,...scene.facts].join(' '),ui)}</section></div>${!meaning?`<div class="groups-checks groups-primary-actions">${button('check',copy.check)}${button('page',copy.reveal,'meaning')}</div>`:''}`;
+ const hear=hearButton(groupsNarration(work,ui),copy.hear).replace('data-speak-lang=','data-groups-read data-speak-lang=');
+ return `<section class="groups-page" data-groups-root data-groups-page="${esc(work.page)}"><h2 id="groups-task" tabindex="-1">${esc(copy.label)}</h2>${!teaching?`<p class="groups-opening">${esc(copy.opening)}</p>`:''}${tools}${mat}<div class="groups-help-actions">${hear}${!teaching?button('teaching-open',copy.teaching):''}</div>${!teaching?`<p class="groups-hint">${esc(copy.hint)}</p>`:''}${panel('talk',copy.talkLabel,copy.talk,ui)}${panel('grownup',copy.grownupLabel,copy.grownup,ui)}<p class="groups-visit">${esc(copy.visit)}</p></section>`;
+}

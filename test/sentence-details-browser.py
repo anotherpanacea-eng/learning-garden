@@ -206,7 +206,7 @@ def phone(browser,base,seed,src):
   h.ok(p.evaluate('document.querySelector("#details-sentence-title").getBoundingClientRect().top-document.querySelector(".details-attachments").getBoundingClientRect().bottom>=8'),'sentence heading has visible space below the phrase controls')
   h.ok(p.locator('[data-details-noun="parcel"]').inner_text()=='The parcel','real words retain noun spacing')
   p.screenshot(path=str(OUT/'phone-320.png'),full_page=True)
-  p.locator('[data-bridges-mode-choice="details"]').focus();p.keyboard.press('Home');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='joins','Home activates first tab');p.keyboard.press('End');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='details','End activates last tab');p.keyboard.press('ArrowLeft');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='joins','Left activates first tab')
+  p.locator('[data-bridges-mode-choice="details"]').focus();p.keyboard.press('Home');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='joins','Home activates first tab');p.keyboard.press('End');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='groups','End activates new last tab');p.keyboard.press('ArrowLeft');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='details','Left activates middle detail tab');p.keyboard.press('ArrowLeft');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='joins','Left activates first tab')
  finally:c.close()
 
 class Quiet(http.server.SimpleHTTPRequestHandler):
