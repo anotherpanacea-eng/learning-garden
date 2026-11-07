@@ -1282,6 +1282,7 @@ def chase_dirty(p,before):
     act(p,'chase-case',3,before);act(p,'chase-target',1,before);act(p,'chase-solution',before=before)
     act(p,'chase-case',12,before);act(p,'chase-target',2,before);act(p,'chase-solution',before=before)
     act(p,'chase-case',14,before);act(p,'chase-target',2,before);chase_entry(p,32,before);act(p,'chase-reason','corner',before);act(p,'chase-check',before=before);act(p,'chase-example',before=before);act(p,'chase-example-step',1,before)
+    act(p,'chase-return',before=before)
     for case in range(15,21):
         act(p,'chase-case',case,before);act(p,'chase-target',1,before);chase_entry(p,9,before);act(p,'chase-reason','line',before);act(p,'chase-check',before=before);act(p,'chase-hint',before=before);act(p,'chase-solution',before=before);act(p,'chase-rotation',before=before);act(p,'chase-example',before=before);act(p,'chase-example-step',1,before);act(p,'chase-return',before=before)
 
