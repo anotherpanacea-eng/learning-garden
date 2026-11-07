@@ -1,5 +1,7 @@
 # After the Storm
 
+**Crossing Angles** is an optional paper model inside Copy Frame (`#workshop/copy-frame`). Turn two straight strips, compare opposite and neighboring angles, follow the shared-neighbor explanation, and revisit their crossings using the dimensions of your waiting panel. The comparison lasts only for this visit and creates no learner record. See [spec415](docs/specs/415-crossing-angles.md). Check with `node test/crossing-angles-checks.mjs` and `python3 test/crossing-angles-browser.py`; [PR498](https://github.com/anotherpanacea-eng/learning-garden/pull/498) owns review and publication status.
+
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
 [Try After the Storm](https://after-the-storm-learning.anotherpanacea.workers.dev/).

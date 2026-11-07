@@ -4,10 +4,12 @@ import {hearButton} from './play-media.mjs';
 import {squarePensEntry,openSquarePens,closeSquarePens,resetSquarePens,squarePensActive,squarePensPage,bindSquarePens} from './square-pens-ui.mjs';
 import {shadowYardEntry,openShadowYard,closeShadowYard,resetShadowYard,shadowYardActive,shadowYardPage,bindShadowYard} from './shadow-yard-ui.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let visit=null;
-export function resetCopyFrame(){visit=null;resetSquarePens();resetShadowYard();}
+import {createCrossingAngles,changeCrossingAngles,captureCrossingPanel} from './crossing-angles-core.mjs';
+import {renderCrossingAngles,bindCrossingAngles} from './crossing-angles-ui.mjs';
+let visit=null,generation=0;
+export function resetCopyFrame(){visit=null;generation++;resetSquarePens();resetShadowYard();}
 function current(notebook,owner){
- if(!visit||visit.notebook!==notebook||visit.owner!==owner)visit={notebook,owner,caseId:'small-panel',cases:new Map(),example:false,frame:0,pending:''};
+ if(!visit||visit.notebook!==notebook||visit.owner!==owner)visit={notebook,owner,caseId:'small-panel',cases:new Map(),example:false,frame:0,pending:'',foldOpen:false,crossingActive:false,crossingWork:null,crossingContext:null};
  if(!visit.cases.has(visit.caseId))visit.cases.set(visit.caseId,{material:createCopyFrame(visit.caseId),tiles:false,read:false});
  return visit;
 }
@@ -28,23 +30,65 @@ function liveBoard(v,entry){
  return `<h2 id="cframe-title" tabindex="-1" data-cframe-read>${esc(c.prompt)}</h2><p class="cframe-teaching" data-cframe-read>${copy.teaching}</p>${references(m)}<div class="cframe-workbench">${controls(m,entry)}${drawing(m,entry.tiles)}</div><div class="cframe-buttons">${button('compare','Compare measures')}${button('example','Show another example')}${hearButton('','Hear this copy')}</div>${entry.read?comparison(m,entry.material):''}`;
 }
 function exampleBoard(v){const m=copyFrameExample(v.frame);return `<h2 id="cframe-title" tabindex="-1" data-cframe-read>${copy.exampleTitle}</h2><p data-cframe-read>${copy.exampleNotice}</p><div class="cframe-buttons">${button('previous','Previous picture',v.frame===0)}${button('next','Next picture',v.frame===3)}${button('close','Return to my copy')}${hearButton('','Hear this example')}</div><p data-cframe-read>Worked example, picture ${m.displayIndex} of 4. ${esc(m.text)}</p>${references(m,true)}<div class="cframe-example-art">${drawing(m,true,true)}</div>`;}
-export function copyFramePage(notebook,owner){if(shadowYardActive(notebook,owner))return shadowYardPage(notebook,owner);if(squarePensActive(notebook,owner))return squarePensPage(notebook,owner);const v=current(notebook,owner),entry=v.cases.get(v.caseId);return `<section class="panel cframe-board" data-cframe-root data-cframe-view="${v.example?'example':'live'}"><div class="section-heading"><div><h1>${copy.title}</h1><p data-cframe-read>${copy.opening}</p></div><a class="pill" href="#workshop">Workshop</a></div>${shadowYardEntry()}${squarePensEntry()}<label class="cframe-selector">Choose a panel <select data-cframe-case>${copyFrameCases.map(c=>`<option value="${c.id}"${c.id===v.caseId?' selected':''}>${c.title}</option>`).join('')}</select></label>${v.example?exampleBoard(v):liveBoard(v,entry)}<p class="cframe-status" role="status" aria-live="polite" aria-atomic="true"></p><p class="cframe-visit">${copy.visit}</p><a class="pill" href="#workshop/hinge">Explore turns and right angles</a><a class="pill" href="#workshop/same-ground">Try the same area with a different fence</a><details><summary>For grown-ups</summary><p>${copy.grownup}</p></details></section>`;}
+// Retire original controls when their binding or ancestor chain is no longer current.
+function copyBindingGuard(root,valid){
+ const controls=[root,...root.querySelectorAll('button,input,select,summary,a,details')],retired=new WeakSet(),chains=new Map();
+ const chain=n=>{const result=[];for(;n;n=n.parentNode)result.push(n);return result;};
+ for(const n of controls)chains.set(n,chain(n));
+ const audit=records=>{for(const r of records){
+  if(r.type==='attributes'){for(const n of controls)if(chains.get(n).includes(r.target))retired.add(n);continue;}
+  for(const removed of r.removedNodes)for(const n of controls)if(chains.get(n).includes(removed)||removed.contains?.(n))retired.add(n);
+ }};
+ const observer=new MutationObserver(records=>{audit(records);if(!root.isConnected)observer.disconnect();});
+ observer.observe(document,{childList:true,subtree:true,attributes:true,attributeFilter:['hidden','inert','aria-hidden','style','class']});
+ return node=>{
+  audit(observer.takeRecords());if(!valid()||!root.isConnected||!root.contains(node)||retired.has(node)||node.disabled)return false;
+  const old=chains.get(node),now=chain(node);if(!old||old.length!==now.length||!old.every((n,i)=>n===now[i]))return false;
+  for(let n=node;n?.nodeType===1;n=n.parentElement){const css=getComputedStyle(n);if(n.hidden||n.inert||n.getAttribute('aria-hidden')==='true'||css.display==='none'||['hidden','collapse'].includes(css.visibility))return false;if(n.tagName==='DETAILS'&&!n.open&&n!==node&&!n.querySelector(':scope>summary')?.contains(node))return false;}
+  return node.getClientRects().length>0;
+ };
+}
+function guardCopyControls(root,live){
+ for(const node of root.querySelectorAll('button,input,select,summary,a')){
+  const guard=event=>{if(!live(node)){event.preventDefault();event.stopImmediatePropagation();}};
+  node.addEventListener('click',guard,{capture:true});if(node.matches('input,select'))for(const type of ['input','change'])node.addEventListener(type,guard,{capture:true});
+ }
+}
+const crossingEntry=()=>`<aside class="crossing-angles-entry"><button type="button" data-crossing-angles-entry>Explore crossing angles</button><span>Cross two straight strips. Why do the angles across the crossing match?</span></aside>`;
+export function copyFramePage(notebook,owner){const v=current(notebook,owner);generation++;if(v.crossingActive)return renderCrossingAngles(v.crossingWork,v.crossingContext);if(shadowYardActive(notebook,owner))return shadowYardPage(notebook,owner);if(squarePensActive(notebook,owner))return squarePensPage(notebook,owner);const entry=v.cases.get(v.caseId);return `<section class="panel cframe-board" data-cframe-root data-cframe-view="${v.example?'example':'live'}"><div class="section-heading"><div><h1>${copy.title}</h1><p data-cframe-read>${copy.opening}</p></div><a class="pill" href="#workshop">Workshop</a></div>${shadowYardEntry()}${squarePensEntry()}${crossingEntry()}<label class="cframe-selector">Choose a panel <select data-cframe-case>${copyFrameCases.map(c=>`<option value="${c.id}"${c.id===v.caseId?' selected':''}>${c.title}</option>`).join('')}</select></label>${v.example?exampleBoard(v):liveBoard(v,entry)}<p class="cframe-status" role="status" aria-live="polite" aria-atomic="true"></p><p class="cframe-visit">${copy.visit}</p><a class="pill" href="#workshop/hinge">Explore turns and right angles</a><a class="pill" href="#workshop/same-ground">Try the same area with a different fence</a><details><summary>For grown-ups</summary><p>${copy.grownup}</p></details></section>`;}
 export function bindCopyFrame(notebook,ctx){
+ if(visit?.crossingActive){
+  const v=visit,token=generation,work=v.crossingWork,context=v.crossingContext,owner=v.owner,root=document.querySelector('[data-crossing-angles-root]');if(!root)return;
+  const id=v.caseId,entry=v.cases.get(id),material=entry.material,example=v.example,frame=v.frame;
+  const frameLive=()=>visit===v&&v.crossingActive&&generation===token&&location.hash==='#workshop/copy-frame'&&root===document.querySelector('[data-crossing-angles-root]')&&root.isConnected&&ctx.notebook()===notebook&&ctx.explorerId()===owner&&(!ctx.isActive||ctx.isActive())&&v.caseId===id&&v.cases.get(id)===entry&&entry.material===material&&v.example===example&&v.frame===frame;
+  const live=copyBindingGuard(root,()=>frameLive()&&v.crossingWork===work&&v.crossingContext===context);
+  guardCopyControls(root,live);
+  bindCrossingAngles(work,context,{
+   live,
+   change:(action,value)=>{if(!frameLive()||v.crossingWork!==work||v.crossingContext!==context)return false;const next=changeCrossingAngles(work,action,value);if(next===work)return false;v.crossingWork=next;return true;},
+   render:()=>{if(frameLive())ctx.render();},
+   focus:selector=>ctx.focus?.(selector),
+   back:()=>{if(!frameLive()||v.crossingWork!==work||v.crossingContext!==context)return;v.crossingActive=false;ctx.render();ctx.focus?.('[data-crossing-angles-entry]');},
+   stopSpeech:()=>ctx.stopSpeech?.(),stopSound:()=>ctx.stopSound?.()
+  });return;
+ }
+
  if(shadowYardActive(notebook,ctx.explorerId()))return bindShadowYard(notebook,{...ctx,onReturn:()=>{closeShadowYard();ctx.render();ctx.focus?.('[data-shadow-yard-entry]');}});
  if(squarePensActive(notebook,ctx.explorerId()))return bindSquarePens(notebook,{...ctx,onReturn:()=>{closeSquarePens();ctx.render();ctx.focus?.('[data-square-pens-entry]');}});
  const root=document.querySelector('[data-cframe-root]');if(!root||!visit)return;
- const v=visit,owner=v.owner,id=v.caseId,entry=v.cases.get(id),material=entry.material,example=v.example,frame=v.frame;
- const live=()=>root.isConnected&&document.querySelector('[data-cframe-root]')===root&&location.hash==='#workshop/copy-frame'&&visit===v&&v.caseId===id&&v.cases.get(id)===entry&&entry.material===material&&v.example===example&&v.frame===frame&&(!ctx.isActive||ctx.isActive())&&ctx.notebook()===notebook&&ctx.explorerId()===owner;
+ const v=visit,token=generation,owner=v.owner,id=v.caseId,entry=v.cases.get(id),material=entry.material,example=v.example,frame=v.frame;
+ const live=()=>generation===token&&!v.crossingActive&&!squarePensActive(notebook,owner)&&!shadowYardActive(notebook,owner)&&root.isConnected&&document.querySelector('[data-cframe-root]')===root&&location.hash==='#workshop/copy-frame'&&visit===v&&v.caseId===id&&v.cases.get(id)===entry&&entry.material===material&&v.example===example&&v.frame===frame&&(!ctx.isActive||ctx.isActive())&&ctx.notebook()===notebook&&ctx.explorerId()===owner;
+ const details=root.querySelector('details');if(details)details.open=!!v.foldOpen;
+ const nodeLive=copyBindingGuard(root,live);guardCopyControls(root,nodeLive);
+ details?.addEventListener('toggle',()=>{if(live())v.foldOpen=details.open;});
  const stop=()=>{ctx.stopSpeech?.();ctx.stopSound?.();};
  for(const [selector,canOpen,open,title] of [
   ['[data-square-pens-entry]',()=>!shadowYardActive(notebook,owner),openSquarePens,'#square-pens-title'],
-  ['[data-shadow-yard-entry]',()=>!squarePensActive(notebook,owner),openShadowYard,'#shadow-yard-title']
+  ['[data-shadow-yard-entry]',()=>!squarePensActive(notebook,owner),openShadowYard,'#shadow-yard-title'],
+  ['[data-crossing-angles-entry]',()=>!squarePensActive(notebook,owner)&&!shadowYardActive(notebook,owner),()=>{const model=copyFrameModel(material);v.crossingWork??=createCrossingAngles();v.crossingContext=captureCrossingPanel(model,model?copyFrameCase(model.caseId)?.title:null);v.crossingActive=true;return true;},'#crossing-angles-title']
  ]){
   const entryButton=root.querySelector(selector);if(!entryButton)continue;
-  let removed=false;const chain=[];for(let n=entryButton;n&&n!==document;n=n.parentNode)chain.push([n,n.parentNode]);
-  const audit=records=>{for(const record of records)for(const node of record.removedNodes)if(node===entryButton||node.contains?.(entryButton)||node===root||node.contains?.(root)){removed=true;observer.disconnect();}};
-  const observer=new MutationObserver(audit);observer.observe(root.parentNode,{childList:true,subtree:true});
-  entryButton.addEventListener('click',()=>{audit(observer.takeRecords());if(removed||!live()||!canOpen()||entryButton.disabled||!chain.every(([n,p])=>n.parentNode===p)||!root.contains(entryButton)||!entryButton.getClientRects().length||entryButton.closest('[hidden],[inert]')||getComputedStyle(entryButton).visibility==='hidden')return;stop();if(open(notebook,owner)){ctx.render();ctx.focus?.(title);}});
+  entryButton.addEventListener('click',()=>{if(!nodeLive(entryButton)||!canOpen())return;v.foldOpen=!!details?.open;stop();if(open(notebook,owner)){ctx.render();ctx.focus?.(title);}});
  }
  if(v.pending)requestAnimationFrame(()=>requestAnimationFrame(()=>{if(live()){root.querySelector('.cframe-status').textContent=v.pending;v.pending='';}}));
  function redraw(selector='#cframe-title'){ctx.render();const candidate=document.querySelector(selector),node=candidate&&!candidate.disabled?candidate:document.querySelector('#cframe-title');if(node){node.focus({preventScroll:true});const box=node.getBoundingClientRect();if(box.top<0||box.bottom>innerHeight)node.scrollIntoView({block:'nearest'});}}
@@ -62,5 +106,5 @@ export function bindCopyFrame(notebook,ctx){
   if(example&&action==='close'){stop();v.example=false;v.pending='My copy restored.';redraw('[data-cframe-action="example"]');}
   if(example&&['previous','next'].includes(action)){const next=frame+(action==='next'?1:-1);if(!copyFrameExample(next))return;stop();v.frame=next;v.pending=`Worked example, picture ${next+1} of 4.`;redraw(next===0?'[data-cframe-action="next"]':next===3?'[data-cframe-action="previous"]':`[data-cframe-action="${action}"]`);}
  }));
- root.addEventListener('click',e=>{const b=e.target.closest('[data-speak]');if(!b||!root.contains(b))return;if(!live()){e.preventDefault();e.stopImmediatePropagation();return;}b.dataset.speak=[...root.querySelectorAll('[data-cframe-read]')].map(x=>x.textContent.trim()).join(' ');},{capture:true});
+ root.addEventListener('click',e=>{const b=e.target.closest('[data-speak]');if(!b||!root.contains(b))return;if(!nodeLive(b)){e.preventDefault();e.stopImmediatePropagation();return;}b.dataset.speak=[...root.querySelectorAll('[data-cframe-read]')].map(x=>x.textContent.trim()).join(' ');},{capture:true});
 }
