@@ -1,6 +1,6 @@
 # 424 · Which Ones? · clauses, commas and a reader’s group
 
-Status: draft for independent specification and complete finite English/content/visual-plan review. No runtime work before clearance. Continues admitted LG-1 / LG-G1, operational custody1629, session `codex-lg424-20261107`, branch `build/which-ones`.
+Status: independently BUILD-READY atb96b8d8f after six lenses, complete finite English/content/visual-plan review and focused repair closure. Bounded implementation is built; actual-app qualification and exact-head implementation review/publication remain pending. Continues admitted LG-1 / LG-G1, operational custody1629, session `codex-lg424-20261107`, branch `build/which-ones`.
 
 ## Purpose and boundary
 

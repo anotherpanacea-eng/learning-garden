@@ -28,18 +28,19 @@ for(const h of drawnHowtos){const a=drawnArt[h.id];
  const total=a.steps.reduce((t,s)=>t+stepMs(s),0)+(a.steps.length-1)*650;ok(total<=15000,`${h.id}: the play-through lasts at most 15 seconds (${total} ms)`);}
 eq(drawnHowtoTag('missing'),'','unknown how-to renders nothing');eq(drawnHowto('missing'),null,'unknown how-to has no source');
 
-// Only the details mode on the exact bridges route suppresses the joins how-to.
-function offered(hash,details){
+// The two detail modes on the exact bridges route suppress the joins how-to.
+function offered(hash,mode){
  const insertions=[];
  const heading={parentElement:null,nextElementSibling:null,insertAdjacentHTML:(position,html)=>insertions.push([position,html])};
- const main={querySelector:selector=>selector==='h1'?heading:selector==='.bridges-page[data-bridges-mode="details"]'&&details?{}:null};
+ const main={querySelector:selector=>selector==='h1'?heading:selector.split(',').some(part=>part===`.bridges-page[data-bridges-mode="${mode}"]`)?{}:null};
  heading.parentElement=main;
  offerHowto(main,hash);return insertions;
 }
-eq(offered('#loft/bridges',true),[],'details omits the joins demonstration');
-eq(offered('#loft/bridges',false),[['afterend',drawnHowtoTag(howtoForPage('#loft/bridges').id)]],'joins still offers its demonstration');
-eq(offered('#orchard/gather/dew-drop',true),[['afterend',drawnHowtoTag('orchard-gather')]],'a details marker does not suppress another route');
-eq(offered('#loft/bridges/extra',true),[],'a different route retains its existing no-how-to result');
+eq(offered('#loft/bridges','details'),[],'details omits the joins demonstration');
+eq(offered('#loft/bridges','groups'),[],'groups omits the joins demonstration');
+eq(offered('#loft/bridges','joins'),[['afterend',drawnHowtoTag(howtoForPage('#loft/bridges').id)]],'joins still offers its demonstration');
+eq(offered('#orchard/gather/dew-drop','groups'),[['afterend',drawnHowtoTag('orchard-gather')]],'a details marker does not suppress another route');
+eq(offered('#loft/bridges/extra','groups'),[],'a different route retains its existing no-how-to result');
 
 // Playback: plays once on open, stops on the finished last step, and Back/Next/Pause hand control to the child.
 const play=(s,count,steps=[])=>{for(const a of steps)s=howtoNext(s,a,count);return s;};
