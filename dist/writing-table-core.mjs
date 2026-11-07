@@ -148,11 +148,12 @@ function initialWork(s){
 }
 const fail=error=>({ok:false,error});
 // Compare notebook fields as well as JSON: a probe adding an undefined field is still changed.
-function intact(a,b){
+function sameFields(a,b){
  if(Object.is(a,b))return true;
- if(a===null||b===null||typeof a!=='object'||typeof b!=='object'||Object.getPrototypeOf(a)!==Object.getPrototypeOf(b)||!same(a,b))return false;
- const keys=Reflect.ownKeys(a);return keys.length===Reflect.ownKeys(b).length&&keys.every(k=>own(b,k)&&intact(a[k],b[k]));
+ if(a===null||b===null||typeof a!=='object'||typeof b!=='object'||Object.getPrototypeOf(a)!==Object.getPrototypeOf(b))return false;
+ const keys=Reflect.ownKeys(a);return keys.length===Reflect.ownKeys(b).length&&keys.every(k=>own(b,k)&&sameFields(a[k],b[k]));
 }
+const intact=(a,b)=>same(a,b)&&sameFields(a,b);
 function change(state,mutate,options={}){
  try{
   const before=clone(state),liveDesk=state.writingDesk,next=clone(state),result=mutate(next);if(!result.ok||result.changed===false)return result;

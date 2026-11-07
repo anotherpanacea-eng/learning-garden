@@ -3,6 +3,7 @@ import {makeThreadSource} from './two-threads-content.mjs';
 const clone=structuredClone;
 export const summaryCopy=Object.freeze({
   "label": "Summary Press",
+  "familiar": "You have opened another summary brief",
   "invitation": "The next reader needs a short account. Which sentences carry what matters?",
   "prompt": "Choose sentences; their order is prepared. Keep what this reader needs, and leave the rest in a tray.",
   "reader": "For someone who needs a short account of this story.",
@@ -21,7 +22,6 @@ export const summaryCopy=Object.freeze({
   "different": "Some sentences fit another tray for this brief.",
   "feedbackDetails": "Compare these sentences.",
   "incomplete": "Some parts are still waiting. You can keep this version or keep arranging.",
-  "checkUnavailable": "This earlier summary guide cannot check a draft here. Your work is still here to arrange or keep.",
   "example": "In The Spare Chair, “Mina replaced an unsteady meeting chair; everyone had a steady seat ready” keeps the problem and its outcome. “Mina had a chair” loses them. Now return to your whole story."
 });
 const demo={

@@ -20,7 +20,6 @@ All new words original. The full seven scenes of **The Second Knock** remain exa
 - Waiting empty: No sentences waiting.
 - Incomplete check: Some parts are still waiting. You can keep this version or keep arranging.
 - Placement: Sentence moved to {label}.
-- Check unavailable: This earlier summary guide cannot check a draft here. Your work is still here to arrange or keep.
 - Reference label: Compare with {title}, story part {N} / story parts {Ns}.
 - Aside note: These sentences stay here. A detail can be true without belonging in this short account. Some sentences go beyond what the story says; others go against it. Compare them with the story.
 - Fit: These choices fit this reader's brief. The prepared sentences keep the important connections without adding a reader's judgment. Another brief may need different details.
