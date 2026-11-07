@@ -1,6 +1,6 @@
 # 415 · Crossing Angles
 
-Status: independently BUILD-READY atc88074bddaa693c9ae21cbee695662c0f2eb74f7 after six-lens and full mathematics/copy/visual review with repair closure; admitted LG-1 / LG-G1. Implementation qualification and publication are recorded with the PR.
+Status: independently BUILD-READY atc88074bddaa693c9ae21cbee695662c0f2eb74f7 after six-lens and full mathematics/copy/visual review with repair closure; admitted LG-1 / LG-G1. Implementation qualification and publication are recorded with [PR498](https://github.com/anotherpanacea-eng/learning-garden/pull/498).
 
 ## Need and story
 
