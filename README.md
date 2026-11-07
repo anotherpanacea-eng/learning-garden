@@ -9,6 +9,8 @@
 **Polygon Frames** is the next view in Triangle Corners: split convex frames, compare a total with one corner, and walk the outside turns. The copied rectangle supplies a useful equal-angle contrast even when it is not regular. See independently reviewed [spec418](docs/specs/418-polygon-frames.md). [PR501](https://github.com/anotherpanacea-eng/learning-garden/pull/501) owns implementation review and publication status. It uses the same temporary-work boundary and existing checks.
 
 
+**Matching Triangles**, in development inside Crossing Angles, adds guided exact constructions, rigid comparisons and point/side correspondence. Compare determining parts with ambiguous sides or equal angles, then return to the two halves of the waiting rectangle. See independently reviewed [spec419](docs/specs/419-matching-triangles.md). It uses the existing Crossing Angles checks and creates no learner record.
+
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
 [Try After the Storm](https://after-the-storm-learning.anotherpanacea.workers.dev/).

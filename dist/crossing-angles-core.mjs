@@ -1,17 +1,45 @@
-import {crossingCopy as copy,crossingPrompts,crossingCards,twoCrossingsCopy as twoCopy,twoCrossingsPrompts,twoPanelPrompts,triangleCopy as triCopy,trianglePrompts,trianglePanelPrompts,polygonCopy as polyCopy,polygonPrompts,polygonPanelPrompts} from './crossing-angles-content.mjs';
+import {crossingCopy as copy,crossingPrompts,crossingCards,twoCrossingsCopy as twoCopy,twoCrossingsPrompts,twoPanelPrompts,triangleCopy as triCopy,trianglePrompts,trianglePanelPrompts,polygonCopy as polyCopy,polygonPrompts,polygonPanelPrompts,matchingCopy,matchingCases,matchingPrompts,matchingPanelPrompts} from './crossing-angles-content.mjs';
 const integer=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
 const dimension=n=>integer(n,1,12);
 const angleValue=n=>integer(n,15,165)&&n%15===0;
 const rotationValue=n=>integer(n,0,330)&&n%30===0;
 const triAngle=n=>integer(n,15,150)&&n%15===0;
 const pairs=['corresponding','alternate','co-interior'];
+const matchDefaults=()=>({step:0,rotation:120,flip:true,move:0,pair:0});
+const object=v=>v&&typeof v==='object'&&!Array.isArray(v);
+const matchChannel=v=>object(v)&&integer(v.step,0,2)&&rotationValue(v.rotation)&&typeof v.flip==='boolean'&&integer(v.move,0,4)&&integer(v.pair,0,2);
+function validMatching(m){return object(m)&&['parts','panel'].includes(m.mode)&&['build','fit','letters'].includes(m.view)&&['explore','given'].includes(m.fit)&&Object.hasOwn(matchingCases,m.case)&&integer(m.prompt,0,5)&&matchChannel(m.parts)&&matchChannel(m.panel)&&integer(m.parts.variant,0,['ssa','aaa'].includes(m.case)?3:1);}
 const spacings={near:120,middle:150,far:180};
-function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel','triangle'].includes(work.page)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5)&&['free','panel'].includes(work.triMode)&&['gather','reason','outside','polygons'].includes(work.triView)&&triAngle(work.triA)&&triAngle(work.triB)&&work.triA+work.triB<=165&&['small','large'].includes(work.triSize)&&integer(work.triGather,0,2)&&integer(work.triProof,0,2)&&integer(work.triPrompt,0,5)&&integer(work.polySides,3,12)&&['regular','stretched'].includes(work.polyKind)&&['small','large'].includes(work.polySize)&&['split','corner','walk'].includes(work.polyView)&&integer(work.polyCorner,0,work.polySides-1)&&integer(work.polyDraw,0,work.polySides-3)&&integer(work.polyWalk,0,work.polySides)&&integer(work.polyPrompt,0,5)&&integer(work.polyPanelCorner,0,3)&&integer(work.polyPanelDraw,0,1)&&integer(work.polyPanelWalk,0,4);}
-export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0};}
+function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel','triangle','matching'].includes(work.page)&&validMatching(work.matching)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5)&&['free','panel'].includes(work.triMode)&&['gather','reason','outside','polygons'].includes(work.triView)&&triAngle(work.triA)&&triAngle(work.triB)&&work.triA+work.triB<=165&&['small','large'].includes(work.triSize)&&integer(work.triGather,0,2)&&integer(work.triProof,0,2)&&integer(work.triPrompt,0,5)&&integer(work.polySides,3,12)&&['regular','stretched'].includes(work.polyKind)&&['small','large'].includes(work.polySize)&&['split','corner','walk'].includes(work.polyView)&&integer(work.polyCorner,0,work.polySides-1)&&integer(work.polyDraw,0,work.polySides-3)&&integer(work.polyWalk,0,work.polySides)&&integer(work.polyPrompt,0,5)&&integer(work.polyPanelCorner,0,3)&&integer(work.polyPanelDraw,0,1)&&integer(work.polyPanelWalk,0,4);}
+export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0,matching:{mode:'parts',view:'build',fit:'explore',case:'sss',prompt:0,parts:{variant:0,...matchDefaults()},panel:matchDefaults()}};}
 export function changeCrossingAngles(work,action,value){
  if(!valid(work))return work;
  const set=(key,v)=>work[key]===v?work:{...work,[key]:v};
- if(action==='page')return ['build','learn','parallel','triangle'].includes(value)?set('page',value):work;
+ if(action==='page')return ['build','learn','parallel','triangle','matching'].includes(value)?set('page',value):work;
+ if(work.page==='matching'){
+  const m=work.matching,channel=m.mode;
+  const outer=(key,v)=>m[key]===v?work:{...work,matching:{...m,[key]:v}};
+  const inner=(key,v)=>m[channel][key]===v?work:{...work,matching:{...m,[channel]:{...m[channel],[key]:v}}};
+  if(action==='match-mode')return ['parts','panel'].includes(value)?outer('mode',value):work;
+  if(action==='match-view')return ['build','fit','letters'].includes(value)?outer('view',value):work;
+  if(action==='match-prompt')return integer(value,0,5)?outer('prompt',value):work;
+  if(channel==='parts'){
+   if(action==='match-case')return Object.hasOwn(matchingCases,value)&&m.case!==value?{...work,matching:{...m,case:value,parts:{variant:0,...matchDefaults()}}}:work;
+   if(action==='match-variant')return integer(value,0,['ssa','aaa'].includes(m.case)?3:1)?inner('variant',value):work;
+  }
+  if(action==='match-step'&&m.view==='build')return integer(value,0,2)?inner('step',value):work;
+  if(action==='match-pair'&&m.view==='letters')return integer(value,0,2)?inner('pair',value):work;
+  if(m.view==='fit'){
+   if(action==='match-fit')return ['explore','given'].includes(value)?outer('fit',value):work;
+   if(m.fit==='explore'){
+    if(action==='match-rotation')return rotationValue(value)?inner('rotation',value):work;
+    if(action==='match-move')return integer(value,0,4)?inner('move',value):work;
+    if(action==='match-flip'&&value===undefined)return inner('flip',!m[channel].flip);
+    if(action==='match-home'&&value===undefined)return m[channel].rotation===120&&m[channel].flip===true&&m[channel].move===0?work:{...work,matching:{...m,[channel]:{...m[channel],rotation:120,flip:true,move:0}}};
+   }
+  }
+  return work;
+ }
  if(work.page==='build'||work.page==='parallel'||work.page==='triangle'){
   if(action==='rotation'&&rotationValue(value))return set('rotation',value);
   if(action==='turn')return {...work,rotation:(work.rotation+30)%360};
@@ -147,10 +175,14 @@ export function crossingAnglesModel(work,context=null){
  if(!valid(work))return null;
  const g=geometry(work.page==='build'?work.angle:60,work.page==='build'?work.rotation:0,work.page==='build'?work.pair:'opposite');
  const diagrams=work.page==='build'||work.card<2?[{title:work.page==='build'?'My crossing':'60° example',geometry:g}]:work.card===2?[{title:'60° example',geometry:g},{title:'90° example',geometry:geometry(90,0)}]:[];
- return {page:work.page,build:{angle:work.angle,rotation:work.rotation,pair:work.pair,prompt:work.prompt,canLess:work.angle>15,canMore:work.angle<165},prompt:crossingPrompts[work.prompt],card:crossingCards[work.card],cardIndex:work.card,step:work.step,geometry:g,diagrams,context:panelContext(context),two:twoModel(work,context),triangle:triangleModel(work,context),polygon:polygonModel(work,context)};
+ return {page:work.page,build:{angle:work.angle,rotation:work.rotation,pair:work.pair,prompt:work.prompt,canLess:work.angle>15,canMore:work.angle<165},prompt:crossingPrompts[work.prompt],card:crossingCards[work.card],cardIndex:work.card,step:work.step,geometry:g,diagrams,context:panelContext(context),two:twoModel(work,context),triangle:triangleModel(work,context),polygon:polygonModel(work,context),matching:matchingModel(work,context)};
 }
 export function crossingAnglesNarration(work,context=null){
  const m=crossingAnglesModel(work,context);if(!m)return '';
+ if(m.page==='matching'){
+  const t=m.matching;if(t.missing)return `${matchingCopy.title}. ${matchingCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
+  return `${matchingCopy.title}. ${matchingCopy.instruction} ${matchingCopy.modes[t.mode]}. ${matchingCopy.views[t.view]}. ${t.source} ${t.givens.join('; ')}. ${t.chosen} ${t.counter}. ${t.legend} ${t.caption} ${t.poseNote} ${t.completedNotice} ${t.currentPair} ${t.reasonLabel} ${t.text} ${t.view==='letters'?`${t.definition} ${t.naming} ${t.notation}`:''} ${t.prompt.title}. ${t.prompt.text} ${matchingCopy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
+ }
  if(m.page==='triangle'&&m.polygon){
   const p=m.polygon;
   if(p.missing)return `${copy.title}. Polygon frames. ${polyCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
@@ -302,4 +334,124 @@ function polygonScene({raw,kind,size='large',rotation,view,corner,draw,walk,prom
  const chosen=`A is corner ${corner+1} of ${n}.`,current=view==='walk'?`Current corner ${i+1} of ${n}.`:'',definition=`${polyCopy.definition} ${polyCopy.regularDefinition}`;
  const description=`${source} ${definition} ${polyCopy.naming} ${chosen} ${current} ${counter}${counter?'.':''} ${text} ${equations.join('. ')} ${perTurn} ${fractionNote} Picture orientation ${rotation}°.`;
  return {mode,view,n,corner,draw,walk,prompt,rotation,regular,equalCorners,total,width:640,height:560,center:[320,280],vertices,triangles,diagonals,remainder,interior,exterior,extension,outgoing,marker,startRing,points,tags,text,counter,equations,perTurn,fractionNote,source,definition,naming:polyCopy.naming,chosen,current,description,...(panel?{context}:{kind,size})};
+}
+
+// Matching scenes receive only active inputs; no other page or source can
+// participate in a construction or in its authored geometric explanation.
+const matchRad=Math.PI/180;
+const matchU=5*Math.sin(60*matchRad)*Math.cos(50*matchRad)/Math.sin(70*matchRad);
+const matchV=5*Math.sin(60*matchRad)*Math.sin(50*matchRad)/Math.sin(70*matchRad);
+const matchCentroid=raw=>[0,1].map(i=>raw.reduce((n,p)=>n+p[i],0)/3);
+const matchTurn=([x,y],rotation,flip)=>{y=flip?-y:y;const r=rotation*matchRad;return [x*Math.cos(r)-y*Math.sin(r),x*Math.sin(r)+y*Math.cos(r)];};
+function matchRaw(key,variant){
+ let raw;
+ if(key==='sss')raw=[[0,0],[5,0],[16/5,12/5]];
+ else if(key==='sas')raw=[[0,0],[8,0],[5/2,5*Math.sqrt(3)/2]];
+ else if(key==='rhs')raw=[[0,0],[4,3],[4,0]];
+ else if(key==='ssa')raw=[[0,0],[3*Math.sqrt(3)+(variant%2?-1:1)*Math.sqrt(7),0],[3*Math.sqrt(3),3]];
+ else {const k=key==='aaa'&&variant%2?8/5:1;raw=[[0,0],[5*k,0],[matchU*k,matchV*k]];}
+ const lower=['ssa','aaa'].includes(key)?variant>=2:variant===1;
+ return raw.map(([x,y])=>[x,lower?-y:y]);
+}
+function matchRight(points,index,role){
+ const b=points[index],a=points[(index+1)%3],c=points[(index+2)%3];
+ const unit=p=>{const d=[p[0]-b[0],p[1]-b[1]],n=Math.hypot(...d);return d.map(v=>v/n*12);};
+ const u=unit(a),v=unit(c);
+ return {role,points:[[b[0]+u[0],b[1]+u[1]],[b[0]+u[0]+v[0],b[1]+u[1]+v[1]],[b[0]+v[0],b[1]+v[1]]]};
+}
+function matchGeometry(){return {width:640,height:560,reference:null,candidate:null,segments:[],circles:[],rays:[],meetings:[],labels:[],rightMarks:[],rectangle:null,diagonal:null,description:''};}
+function matchLabel(g,name,point,anchor,role='candidate',selected=false){g.labels.push({name,point,anchor,role,selected});}
+function matchBuild(key,variant,step){
+ const g=matchGeometry(),raw=matchRaw(key,variant),project=([x,y])=>[200+28*x,340-28*y],p=raw.map(project),lower=['ssa','aaa'].includes(key)?variant>=2:variant===1,sign=lower?-1:1;
+ const seg=(a,b)=>g.segments.push({start:p[a],end:p[b],role:'candidate'});
+ const ray=(origin,angle,length)=>g.rays.push({start:project(origin),end:project([origin[0]+length*Math.cos(angle*matchRad),origin[1]+length*Math.sin(angle*matchRad)])});
+ const circle=(center,radius)=>g.circles.push({center:project(center),radius:radius*28});
+ const meeting=(point,selected)=>g.meetings.push({point:project(point),selected});
+ const first=['rhs','ssa'].includes(key)?2:1;seg(0,first);
+ let placed=[0,first];
+ if(key==='ssa')ray([0,0],0,9);
+ if(step>=1){
+  if(key==='sss'){circle(raw[0],4);circle(raw[1],3);meeting(raw[2],true);meeting([16/5,-sign*12/5],false);}
+  if(key==='sas'){ray([0,0],sign*60,6);circle([0,0],5);meeting(raw[2],true);}
+  if(['asa','aas','aaa'].includes(key)){
+   ray([0,0],sign*50,8);
+   if(key!=='aas'||step===2){ray(raw[1],sign*120,8);meeting(raw[2],true);}
+  }
+  if(key==='rhs'){
+   circle([0,0],5);g.rays.push({start:project([4,-4]),end:project([4,4]),line:true});meeting(raw[1],true);meeting([4,-sign*3],false);g.rightMarks.push(matchRight(p,2,'candidate'));
+  }
+  if(key==='ssa'){
+   circle(raw[2],4);meeting(raw[1],true);meeting([3*Math.sqrt(3)+(variant%2?1:-1)*Math.sqrt(7),0],false);
+  }
+  if(key!=='aas'||step===2)placed=[0,1,2];
+ }
+ if(step===2){g.candidate={points:p,names:['D','E','F']};g.segments=[];}
+ placed.forEach(i=>matchLabel(g,'DEF'[i],p[i],[[85,70],[555,70],[85,500]][i]));
+ return g;
+}
+function matchCompare(reference,candidate,scale,view,fit,channel,panel,lower,rightIndex){
+ const g=matchGeometry(),rc=matchCentroid(reference),cc=matchCentroid(candidate),provided=view==='letters'||fit==='given';
+ const screen=([x,y])=>[320+x*scale,280-y*scale];
+ const rp=reference.map(p=>screen(p.map((v,i)=>v-rc[i])));
+ const rotation=provided?(panel?180:0):channel.rotation,flip=provided?(panel?false:lower):channel.flip;
+ const turned=candidate.map(p=>matchTurn(p.map((v,i)=>v-cc[i]),rotation,flip));
+ const offset=provided?[rp[0][0]-320-turned[0][0]*scale,rp[0][1]-280+turned[0][1]*scale]:[80-20*channel.move,0];
+ const cp=turned.map(p=>{const q=screen(p);return [q[0]+offset[0],q[1]+offset[1]];});
+ g.reference={points:rp,names:['A','B','C']};g.candidate={points:cp,names:['D','E','F']};
+ rp.forEach((p,i)=>matchLabel(g,'ABC'[i],p,[[70,70],[320,50],[570,70]][i],'reference',view==='letters'&&channel.pair===i));
+ cp.forEach((p,i)=>matchLabel(g,'DEF'[i],p,[[70,500],[320,520],[570,500]][i],'candidate',view==='letters'&&channel.pair===i));
+ if(rightIndex!==null){g.rightMarks.push(matchRight(rp,rightIndex,'reference'),matchRight(cp,rightIndex,'candidate'));}
+ return g;
+}
+function matchCommon(mode,view,fit,promptIndex,channel){
+ return {mode,view,...(view==='fit'?{fit}:{}),promptIndex,prompt:(mode==='panel'?matchingPanelPrompts:matchingPrompts)[promptIndex],...(view==='build'?{step:channel.step}:{}),...(view==='letters'?{pair:channel.pair}:{}),...(view==='fit'&&fit==='explore'?{rotation:channel.rotation,flip:channel.flip,move:channel.move}:{}),source:'',givens:[],chosen:'',definition:matchingCopy.definition,naming:matchingCopy.naming,notation:matchingCopy.notation,legend:view==='build'?'D, E and F name the construction points. Light guides locate possible meetings.':'Dark solid outline: reference A/B/C. Purple dashed outline: copy D/E/F. Thin dotted lines lead to the letter tags.',text:'',reasonLabel:'',currentPair:'',completedNotice:view==='build'?'':mode==='parts'?'Compare and Letters use completed outlines from this parts card. Your construction step is kept.':'Compare and Letters use the two complete rectangle halves. Your construction step is kept.',counter:view==='build'?`Step ${channel.step} of 2`:view==='letters'?`Point pair ${channel.pair+1} of 3: ${['A ↔ D','B ↔ E','C ↔ F'][channel.pair]}`:fit==='explore'?`Slide ${channel.move} of 4. Copy turn: ${channel.rotation}°`:'Line up the given parts',caption:'',poseNote:view==='build'?'':view==='letters'?'A steady comparison for reading letters; your move-and-turn choices are kept.':fit==='explore'?matchingCopy.miss:'A provided rigid comparison pose lines up the given parts without changing any length.'};
+}
+function matchingParts(key,variant,view,fit,channel,prompt){
+ const m=matchCommon('parts',view,fit,prompt,channel),c=matchingCases[key],lower=['ssa','aaa'].includes(key)?variant>=2:variant===1;
+ const base=key==='aaa'&&variant%2?8:5;
+ Object.assign(m,{case:key,caseTitle:c.title,variant,variantCount:['ssa','aaa'].includes(key)?4:2,variantLabel:key==='ssa'?`${variant%2?'Near closure, shorter base':'Far closure, longer base'}; ${lower?'reflected lower':'upper'} placement`:key==='aaa'?`Chosen base ${base}; ${lower?'reflected lower':'upper'} placement`:`${lower?'Reflected lower':'Upper'} placement`,givens:c.givens,source:c.title});
+ if(key==='aaa')m.chosen=`This build uses a base of ${base} units; the parts card did not fix it.`;
+ const reason=c.reason+' '+matchingCopy.circleFacts+(!['ssa','aaa'].includes(key)?' '+matchingCopy.uniqueness:'');
+ if(view==='build'){
+  m.text=channel.step===0?`Start with ${key==='aaa'?`chosen DE ${base}`:c.firstPart}. The card fixes: ${c.givens.join('; ')}. Where could the missing point go? ${m.chosen}`:channel.step===1?`${matchingCopy.circleRay} ${c.guide}`:reason;
+  m.caption=key==='sss'&&channel.step>=1?'The light unselected meeting is the reflected alternative.':key==='rhs'&&channel.step>=1?'The light unselected meeting is on the other side of DF.':key==='ssa'&&channel.step>=1?'Both meetings are on the positive DE ray: one shorter base and one longer base. The light dot is the other closure.':'';
+  m.geometry=matchBuild(key,variant,channel.step);
+  if(key==='aaa'&&channel.step===2)m.geometry.labels.find(label=>label.name==='F').givenAngle=70;
+ }else{
+  m.text=reason;m.reasonLabel='About the possible builds:';
+  m.currentPair=key==='ssa'?(variant%2?'This near closure and the far reference have different base lengths. Moving, turning or reflecting keeps those lengths.':'This build matches the reference closure. The card also allows a shorter base. Try Another build.'):key==='aaa'?(variant%2?'The same angles allow this base of 8 and the reference base of 5. These triangles have different sizes.':'This chosen size matches the reference. The angles card also allows other sizes. Try Another build.'):'This build has the same shape and size as the reference. Another build may reflect its placement.';
+  m.relationship=['ssa','aaa'].includes(key)&&variant%2?'different':'same';
+  m.geometry=matchCompare(matchRaw(key,0),matchRaw(key,variant),40,view,fit,channel,false,lower,key==='rhs'?2:null);
+ }
+ m.geometry.description=`${c.title}. ${m.counter}. ${m.caption} ${view==='build'?m.text:m.currentPair}`;
+ return m;
+}
+function matchingPanel(source,view,fit,channel,prompt){
+ const {width:w,height:h,caseTitle}=source,m=matchCommon('panel',view,fit,prompt,channel);
+ m.source=`${caseTitle}. Waiting rectangle: width ${w}, height ${h}.`;m.givens=[`AB = DE = ${w}`,`BC = EF = ${h}`,'CA and FD are the same diagonal','∠B = ∠E = 90°'];
+ m.caption='ABC uses P, Q, R. DEF uses R, S, P. Opposite rectangle sides match, and both included corners are right angles.';
+ if(view==='build'){
+  const g=matchGeometry(),project=([x,y])=>[320+24*(x-w/2),280-24*(y-h/2)],raw=[[0,0],[w,0],[w,h],[0,h]],p=raw.map(project);
+  g.rectangle=p;
+  if(channel.step>=1)g.diagonal={start:p[0],end:p[2]};
+  if(channel.step===2){g.reference={points:[p[0],p[1],p[2]],names:['A','B','C']};g.candidate={points:[p[2],p[3],p[0]],names:['D','E','F']};}
+  p.forEach((point,i)=>matchLabel(g,'PQRS'[i],point,[[85,500],[555,500],[555,70],[85,70]][i],'panel'));
+  g.rightMarks=[matchRight([p[0],p[1],p[2]],1,'reference'),matchRight([p[2],p[3],p[0]],1,'candidate')];
+  m.geometry=g;m.text=channel.step===0?`This is your waiting rectangle: width ${w}, height ${h}. What can you say about opposite sides and square corners?`:channel.step===1?'Join P to R with one diagonal. It makes two triangular halves, and both share that same segment.':matchingCopy.panelReason;
+ }else{
+  const reference=[[0,0],[w,0],[w,h]],candidate=[[w,h],[0,h],[0,0]],rc=matchCentroid(reference),cc=matchCentroid(candidate),radius=Math.max(...reference.map(p=>Math.hypot(...p.map((v,i)=>v-rc[i]))),...candidate.map(p=>Math.hypot(...p.map((v,i)=>v-cc[i]))));
+  m.geometry=matchCompare(reference,candidate,180/radius,view,fit,channel,true,false,1);m.text=matchingCopy.panelReason;m.reasonLabel='About the rectangle halves:';m.currentPair='The two rectangle halves have the same shape and size. Their opposite sides match and they share the diagonal.';m.relationship='same';
+ }
+ m.caption+=' Drawing zoom can vary between views; the part lengths do not. Both compared outlines always share one scale.';
+ m.geometry.description=`${m.source} ${m.counter}. ${m.caption} ${view==='build'?m.text:m.currentPair}`;
+ return m;
+}
+function matchingModel(work,context){
+ if(work.page!=='matching')return null;
+ const m=work.matching;
+ if(m.mode==='parts')return matchingParts(m.case,m.parts.variant,m.view,m.fit,m.parts,m.prompt);
+ const captured=captureCrossingPanel(context,context?.caseTitle);
+ if(!captured)return {mode:'panel',missing:true};
+ const {caseTitle,width,height}=captured;
+ return matchingPanel({caseTitle,width,height},m.view,m.fit,m.panel,m.prompt);
 }

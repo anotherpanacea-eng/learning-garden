@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Matching Triangles419 · which parts fix the shape?
 
-[Matching Triangles419](specs/419-matching-triangles.md) selects the deferred exact-construction/congruence bridge from182. It proposes staged SSS/SAS/ASA/AAS/RHS builds, SSA and AAA counterexamples, rigid comparison and standard letter correspondence, returning to the actual waiting rectangle. The finite specification is awaiting independent review; no implementation or publication is claimed. Impossible/degenerate data, tangent/no-meeting SSA, independent measuring/construction and decision fluency remain missing. M5-III/IV and M7-II are partial candidates, not topic completion.
+[Matching Triangles419](specs/419-matching-triangles.md) selects the deferred exact-construction/congruence bridge from182. It proposes staged SSS/SAS/ASA/AAS/RHS builds, SSA and AAA counterexamples, rigid comparison and standard letter correspondence, returning to the actual waiting rectangle. The finite specification is independently BUILD-READY at e2fe0daf; implementation is in progress, with no publication claimed. Impossible/degenerate data, tangent/no-meeting SSA, independent measuring/construction and decision fluency remain missing. M5-III/IV and M7-II are partial candidates, not topic completion.
 
 ## Polygon Frames418 · a total, a corner and a lap
 

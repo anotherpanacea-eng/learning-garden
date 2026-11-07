@@ -156,3 +156,163 @@ export const polygonPanelPrompts=freeze([
  {title:'One complete turn',text:'Walk the four quarter turns (90° each). Explain why one full lap is 360°.'},
  {title:'Back to the design',text:'Change a side in Copy Frame and return. What can change, and which rectangle angle facts remain?'}
 ]);
+
+export const matchingCopy=freeze({
+ "title": "Matching triangles",
+ "instruction": "Start with fixed parts. Build an outline, compare another build, then follow the point pairs.",
+ "modelNote": "Ideal paper triangles in a flat plane. Exact parts define the model; the screen is not a ruler or protractor. Guided builds and poses are help, not assessment or construction advice.",
+ "adultNote": "Matching triangles provides ideal constructions, rigid-motion support and provided correspondence. A missed manual overlap is not a noncongruence result. Circle facts support the stated criteria; this does not qualify independent compass/protractor work, all congruence problems, real material or mastery.",
+ "nullContext": "Your waiting panel could not be copied. Choose Parts cards, or go back to Copy Frame.",
+ "modes": {
+  "parts": "Parts cards",
+  "panel": "My waiting panel"
+ },
+ "views": {
+  "build": "Build",
+  "fit": "Compare",
+  "letters": "Letters"
+ },
+ "circleRay": "A circle marks all points at one fixed distance from its center. A ray fixes a direction from a point.",
+ "circleFacts": "Two different straight lines intersect in at most one point. Two distinct circles meet in at most two points; with a fixed center-to-center baseline, the meeting pair is reflected across that baseline. A line meets a circle in at most two points, symmetric about the perpendicular from its center.",
+ "uniqueness": "Any valid triangle satisfying this card can be moved and turned so its fixed first side lies on DE (DF for RHS). Its remaining point must lie on the same determining guides. They permit one point or a reflected pair, hence one shape and size up to rigid motion. These chosen valid parts supply a triangle; the intersection facts explain why its shape and size are fixed.",
+ "definition": "Congruent triangles have the same shape and size. One can be moved, turned or reflected exactly onto the other.",
+ "naming": "The order ABC ↔ DEF pairs A with D, B with E, C with F. Lowercase side a is BC, opposite A; d is EF, opposite D. Likewise b = CA ↔ e = FD and c = AB ↔ f = DE. In ∠BAC the middle letter A names the angle’s vertex; ∠EDF is at D. Point names, side names and angle names do different jobs.",
+ "notation": "To say they are congruent in this order, write △ABC ≅ △DEF. This says all corresponding sides and angles match, not merely the three parts on the card.",
+ "miss": "A missed overlap is not proof that two triangles differ. These controls are help, not a test.",
+ "panelReason": "The opposite rectangle sides match and the included corners B/E are 90°. Two sides and their included angle give SAS. Both halves also share the diagonal, so their three corresponding sides match for SSS. Their right corners, common hypotenuse and one equal leg also support RHS. We can reason without a numeric diagonal length."
+});
+
+export const matchingCases=freeze({
+ "sss": {
+  "title": "SSS — three sides",
+  "givens": [
+   "AB = DE = 5",
+   "AC = DF = 4",
+   "BC = EF = 3"
+  ],
+  "firstPart": "DE 5",
+  "guide": "F must be 4 units from D and 3 from E, so it must lie on both circles.",
+  "reason": "Fix DE, then draw the circle of distance 4 from D and the circle of distance 3 from E. F must lie on both. Their two meetings are reflections across DE, so they make the same shape and size. Three valid side lengths fix one triangle up to sliding, turning or flipping; one shape does not mean one drawing."
+ },
+ "sas": {
+  "title": "SAS — two sides and the included angle",
+  "givens": [
+   "AB = DE = 8",
+   "AC = DF = 5",
+   "∠A = ∠D = 60°, between those sides"
+  ],
+  "firstPart": "DE 8",
+  "guide": "Follow the 60° ray from D to the circle 5 units from D.",
+  "reason": "Fix DE 8 and the 60° angle at D. F must be 5 units from D along that ray. One point on the chosen ray has that distance. The other side of DE reflects the whole construction. Two sides and the angle between them fix one triangle shape and size. The included angle matters."
+ },
+ "asa": {
+  "title": "ASA — two angles and their included side",
+  "givens": [
+   "∠A = ∠D = 50°",
+   "∠B = ∠E = 60°",
+   "AB = DE = 5, the side between these angles"
+  ],
+  "firstPart": "DE 5",
+  "guide": "Follow the 50° ray from D and 60° ray from E toward their meeting.",
+  "reason": "Fix DE 5. The 50° ray from D and 60° ray from E can meet only once on the chosen side of DE, because two different straight lines meet at most once. Reflecting gives the other placement. Two angles and their included side fix one triangle shape and size."
+ },
+ "aas": {
+  "title": "AAS — two angles and a corresponding side",
+  "givens": [
+   "∠A = ∠D = 50°",
+   "∠C = ∠F = 70°",
+   "AB = DE = 5"
+  ],
+  "firstPart": "DE 5",
+  "guide": "The missing angle at E is 180° − 50° − 70° = 60°. Keep the 50° ray from D; the next step adds E’s ray.",
+  "reason": "The third angle is 180°−50°−70°=60°. Now the known side DE lies between the 50° and 60° angles. The same ASA construction applies. Two angles and a corresponding side can fix the triangle even if that side was not between the two originally given angles."
+ },
+ "rhs": {
+  "title": "RHS — right angle, hypotenuse and side",
+  "givens": [
+   "∠C = ∠F = 90°",
+   "AB = DE = 5, the hypotenuse",
+   "AC = DF = 4, one leg"
+  ],
+  "firstPart": "DF 4",
+  "guide": "E must lie on the perpendicular through F and on the circle 5 units from D.",
+  "reason": "Fix leg DF 4. The right corner at F puts E on the perpendicular through F. The circle of distance 5 from D meets that line at two reflected points, one on either side of DF. They make the same shape and size. A valid hypotenuse, one leg and the right angle fix one triangle. The hypotenuse is across the right angle, not a fixed screen direction."
+ },
+ "ssa": {
+  "title": "SSA — two sides and a non-included angle",
+  "givens": [
+   "AC = DF = 6",
+   "BC = EF = 4",
+   "∠A = ∠D = 30°, not between the two known sides"
+  ],
+  "firstPart": "DF 6 at 30° from the DE ray",
+  "guide": "Both light meeting points lie on the positive DE ray and 4 units from F. Which base is shorter?",
+  "reason": "The circle of distance 4 from F meets the positive DE ray twice. Both closures, near and far, keep DF 6, EF 4 and the 30° angle at D. Their DE lengths differ, so the near and far closures are not congruent. That angle is not between the two known sides. These parts do not force one triangle; other non-included-angle data can have a different number of solutions."
+ },
+ "aaa": {
+  "title": "AAA — three angles, no length",
+  "givens": [
+   "∠A = ∠D = 50°",
+   "∠B = ∠E = 60°",
+   "∠C = ∠F = 70°",
+   "No length given"
+  ],
+  "firstPart": "",
+  "guide": "The chosen base and 50°/60° rays locate this particular size; the angles alone did not choose that base.",
+  "reason": "Both chosen sizes keep 50°, 60° and 70°. Enlarging every length keeps the directions and angles but changes the size. The parts card fixed no length, so more sizes are possible. Matching angles alone do not force congruent triangles."
+ }
+});
+
+export const matchingPrompts=freeze([
+ {
+  "title": "Lay the parts",
+  "text": "Use Build. Predict where the missing point can meet every given part, then reveal the guides."
+ },
+ {
+  "title": "Another valid build",
+  "text": "Try Another build. Is it only a turn or reflection, or can the shape or size change? Use Compare to investigate."
+ },
+ {
+  "title": "Between which sides?",
+  "text": "Compare SAS and SSA. Which given angle lies between the two given sides? Use Another build in SSA to see both the near and far closure. Why does that matter?"
+ },
+ {
+  "title": "Angles and size",
+  "text": "Choose AAA and change the build size. Line up the given parts. What did the angles fix, and what can still change?"
+ },
+ {
+  "title": "Read the order",
+  "text": "Use Letters and trace each point pair. Which side is opposite each point?"
+ },
+ {
+  "title": "Back to the design",
+  "text": "Choose My waiting panel. Find a SAS or SSS reason for its two halves to match."
+ }
+]);
+
+export const matchingPanelPrompts=freeze([
+ {
+  "title": "Lay the parts",
+  "text": "Add the diagonal. Which opposite sides match?"
+ },
+ {
+  "title": "Another valid build",
+  "text": "The two halves are fixed here. Turn and flip the copy, then use Line up the given parts."
+ },
+ {
+  "title": "Between which sides?",
+  "text": "The width and height sides meet at right corners. Which parts give the SAS reason?"
+ },
+ {
+  "title": "Angles and size",
+  "text": "Change a side in Copy Frame and return. What can change even though each half still has a right corner?"
+ },
+ {
+  "title": "Read the order",
+  "text": "Use Letters. Match the two widths, the two heights and the same diagonal."
+ },
+ {
+  "title": "Back to the design",
+  "text": "Return to Copy Frame, change one side and re-enter. Compare the new frozen dimensions with the unchanged rectangle reasoning."
+ }
+]);
