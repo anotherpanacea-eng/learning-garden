@@ -97,13 +97,13 @@ const tallyWords = tally => spinnerMarks.map((m, i) => `${m.label} ${tally[i]}`)
 export function spinnerTableNarration(work) {
   const m = spinnerTableModel(work), parts = [spinnerCopy.pages[work.page]];
   if (work.page === 'design') {
-    parts.push(spinnerCopy.designInstruction, spinnerCopy.rule, 'Current design.', wheelWords(m.design), `${work.counts.join('/12 + ')}/12 = 12/12 = 1.`, m.design.equal ? 'Equal chance for all three marks: 1/3 each.' : 'The named marks have different shares.', `Take one slice from ${spinnerMarks[work.from].label}. Give it to ${spinnerMarks[work.to].label}.`, m.moveReason, 'Move one slice. Presets: Equal shares, Half for Sun, Mostly Sun.');
+    parts.push(spinnerCopy.designInstruction, spinnerCopy.rule, 'Current design.', wheelWords(m.design), `${work.counts.join('/12 + ')}/12 = 12/12 = 1.`, m.design.equal ? 'Equal chance for all three marks: 1/3 each.' : 'Not all three marks have the same chance.', `Take one slice from ${spinnerMarks[work.from].label}. Give it to ${spinnerMarks[work.to].label}.`, m.moveReason, 'Move one slice. Presets: Equal shares, Half for Sun, Mostly Sun.');
   } else if (work.page === 'runs') {
     parts.push(spinnerCopy.rule);
-    if (!m.active) parts.push('Current design.', wheelWords(m.design), 'Not drawn yet. Start a run with this wheel.');
+    if (!m.active) parts.push('Current design.', wheelWords(m.design), 'Not drawn yet.');
     else {
       parts.push(`Run ${m.active.number}’s wheel.`, wheelWords(m.active), m.active.last ? `Screen draw ${m.active.drawCount}: ${m.active.last.mark.label} mark. Tally: ${tallyWords(m.active.tally)}.` : 'Not drawn yet.');
-      if (m.active.drawCount) parts.push('Recorded screen draws:', m.active.results.map(r => `${r.slice}: ${r.mark.label}`).join(', '));
+      if (m.active.drawCount) parts.push('Recorded screen draws:', m.active.results.map((r, i) => `Draw ${i + 1}: ${r.mark.label} mark`).join(', '));
       parts.push(m.active.canSpin ? 'Spin for one screen draw.' : 'This run has twenty recorded screen draws.');
       if (m.active.mismatch) parts.push(m.canStart ? spinnerCopy.mismatch : spinnerCopy.mismatchFull);
     }
@@ -124,6 +124,7 @@ export function spinnerTableNarration(work) {
     if (m.explanation) parts.push(`Explanation: ${m.explanation}`);
     parts.push('Show explanation or Hide explanation changes the optional help. Previous question. Next question.');
   }
+  if (work.page === 'design' || work.page === 'runs') parts.push(m.canStart ? 'Start a run with this wheel.' : 'Three runs are here. On Try runs, begin a fresh set to use another wheel.');
   parts.push('Design the wheel, Try runs and See why are freely available.', 'Back to Seed Stall returns to the Seed Stall you left.', spinnerCopy.lifetime);
   return parts.join(' ');
 }

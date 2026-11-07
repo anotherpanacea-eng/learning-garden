@@ -104,6 +104,10 @@ def frame(p):
 
 
 def bounds(p):
+    results=p.locator('[data-stw-results]')
+    if results.count() and results.is_visible():
+        layout=results.evaluate(r'e=>{const c=getComputedStyle(e);return {display:c.display,list:c.listStyleType,columns:c.gridTemplateColumns.split(/\s+/).length}}')
+        ok(layout=={'display':'grid','list':'none','columns':4 if p.viewport_size['width']>600 else 2},'ordered results retain one numbering and responsive columns: '+str(layout))
     labels=p.locator('[data-stw-root] label').evaluate_all('xs=>xs.filter(e=>e.checkVisibility()&&!e.control).map(e=>e.textContent)')
     ok(not labels,'visible labels associate with their native controls: '+str(labels))
     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal overflow')
@@ -344,6 +348,23 @@ def lifecycle(browser,base,report):
     ok(not q.locator('[data-stw-entry]').count(),'legacy alias omits Spinner entry')
 
 
+def repaired_paths(browser,base):
+    print('Spinner Table: draw-order speech and recovery cancel an open clear',flush=True)
+    p=setup(browser,base);enter(p);click(p,'start');before=snapshot(p)
+    spin(p,5,[6,3,3],[1,0,0],before);spin(p,11,[6,3,3],[1,0,1],before);spin(p,3,[6,3,3],[2,0,1],before)
+    hear(p,before,includes=['Recorded screen draws: Draw 1: Sun mark, Draw 2: Rain mark, Draw 3: Sun mark'])
+    click(p,'reset-request',before=before)
+    old=p.locator(selector('reset-confirm')).element_handle();n=reads(p)
+    # Explicitly synthetic source replacement while a confirmation is open.
+    p.evaluate('const s=__spinnerObservedState();s.seedStall=structuredClone(s.seedStall)')
+    after=snapshot(p);dispatch(old);p.locator('[data-stw-entry]').wait_for()
+    unchanged(p,after,'source recovery with open reset');ok(reads(p)==n,'recovery neither draws nor clears')
+    enter(p,after);ok(not p.locator(selector('reset-confirm')).count(),'re-entry never restores open confirmation after source recovery')
+    ok(tally(p)==(3,'Sun',[2,0,1]),'recovery keeps all local draws while cancelling clear')
+    dispatch(old);ok(tally(p)==(3,'Sun',[2,0,1]),'retired confirmation cannot clear recovered local work')
+    bounds(p);capture(p,'tablet-repaired-runs.png')
+
+
 def responsive_and_motion(browser,base):
     print('Spinner Table: focused320px keyboard/layout and non-reduced motion',flush=True)
     p=setup(browser,base,width=320);enter(p);bounds(p)
@@ -383,7 +404,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);lifecycle(browser,base,report);responsive_and_motion(browser,base)
+                report=journey(browser,base);lifecycle(browser,base,report);responsive_and_motion(browser,base);repaired_paths(browser,base)
                 ok(not errors,'no page, console or HTTP errors: '+str(errors))
                 print(json.dumps({'status':'passed','checks':checks,'artifacts':str(OUT)}),flush=True)
             except Exception:

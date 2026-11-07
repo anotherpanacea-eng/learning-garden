@@ -193,4 +193,11 @@ assert.ok(narration(change(work, 'reset-request')).includes('This clears these 2
 assert.ok(!narration(work).includes('This clears'));
 assert.ok(speech.includes(spinnerCopy.lifetime));
 assert.ok(speech.includes('Back to Seed Stall'));
+// Non-sequential stops must still be narrated in recorded draw order.
+let spokenRun = change(createSpinnerTable(), 'start');
+for (const slot of [5, 11, 3]) spokenRun = change(spokenRun, 'spin', slot);
+const orderedSpeech = narration(spokenRun);
+assert.ok(orderedSpeech.includes('Recorded screen draws: Draw 1: Sun mark, Draw 2: Rain mark, Draw 3: Sun mark'));
+assert.ok(orderedSpeech.includes('Start a run with this wheel.'));
+assert.ok(narration(initial).includes('Start a run with this wheel.'));
 console.log('Spinner Table: 91 designs, exact shares and stops, entropy boundaries, frozen runs, finite reset lifecycle, supported questions and visible narration passed.');

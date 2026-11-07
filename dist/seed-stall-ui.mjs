@@ -14,7 +14,7 @@ function activeTurn(state,owner=null){if(turn.state!==state||turn.owner!==owner)
 function parentFrame(){return {root:turn.state.seedStall,raw:JSON.stringify(turn.state.seedStall),display:JSON.stringify([turn.count,turn.choosing,turn.pending,turn.notice])};}
 const sameFrame=(a,b)=>!!a&&a.root===b.root&&a.raw===b.raw&&a.display===b.display;
 const benchEntry=()=>turn.lastBench==='spinner'?'[data-stw-entry]':'[data-cl-entry]';
-function retireChangedFrame(){if(!turn.activeBench||sameFrame(turn.benchFrame,parentFrame()))return false;turn.activeBench=null;turn.benchFrame=null;turn.choosing=false;turn.pending=null;turn.notice='Your Seed Stall changed. The current bag is shown here.';turn.folds=null;turn.focusEntry=true;return true;}
+function retireChangedFrame(){if(!turn.activeBench||sameFrame(turn.benchFrame,parentFrame()))return false;if(turn.spinnerWork)turn.spinnerWork=changeSpinnerTable(turn.spinnerWork,'reset-cancel');turn.activeBench=null;turn.benchFrame=null;turn.choosing=false;turn.pending=null;turn.notice='Your Seed Stall changed. The current bag is shown here.';turn.folds=null;turn.focusEntry=true;return true;}
 // Local counterpart of Living Layers: removed controls cannot revive on reinsertion.
 function bindingGuard(root,valid){
  const controls=[root,...root.querySelectorAll('button,select,summary,a')],retired=new WeakSet(),chains=new Map();
