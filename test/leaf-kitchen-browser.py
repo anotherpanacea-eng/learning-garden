@@ -343,7 +343,7 @@ def exits(browser, base, seed):
         p.evaluate('location.hash="#living/layers"')
         p.locator('[data-ll-root]').wait_for()
         click(p, '[data-ll-turn="1"]')
-        h.ok('No cards placed' in p.locator('[data-ll-order]').inner_text(), 'warned exit clears unsaved parent guide')
+        h.ok('No cards placed' in p.locator('[data-ll-order]').text_content(), 'warned exit clears unsaved parent guide')
         open_kitchen(p)
         h.ok(p.locator('[data-lk-action="place"]:disabled').count() == 5, 'room exit starts fresh local model')
 
