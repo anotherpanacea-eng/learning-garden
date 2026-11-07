@@ -1,4 +1,4 @@
-"""Crossing Angles415/416/417 in the actual application, with invented notebooks only.
+"""Crossing Angles415/416/417/418 in the actual application, with invented notebooks only.
 
 One complete tablet visit and focused phone/label/lifetime probes. The sole app
 instrumentation exposes a read-only getter at its real initialization marker.
@@ -10,7 +10,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = Path(os.environ.get('CROSSING_ANGLES_ARTIFACTS') or tempfile.mkdtemp(prefix='lg417-native-'))
+OUT = Path(os.environ.get('CROSSING_ANGLES_ARTIFACTS') or tempfile.mkdtemp(prefix='lg418-native-'))
 OUT.mkdir(parents=True, exist_ok=True)
 spec = importlib.util.spec_from_file_location('crossing_actual_helpers', ROOT/'test/shared-turn-browser.py')
 h = importlib.util.module_from_spec(spec)
@@ -43,7 +43,7 @@ def sel(action, value=None):
 
 def act(p, action, value=None, before=None):
     spoken=p.evaluate('__sharedSpoken.length')
-    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt','tri-a','tri-b','tri-size','tri-prompt']
+    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt','tri-a','tri-b','tri-size','tri-prompt','poly-sides','poly-kind','poly-size','poly-prompt']
     target = p.locator(('select' if action in selects else '')+sel(action, None if action in selects or action=='rotation' else value))
     if action in selects:
         target.select_option(str(value))
@@ -92,7 +92,7 @@ def hear(p, before, includes=(), excludes=()):
     spoken = p.evaluate('__sharedSpoken.slice('+str(n)+')')
     h.ok(len(spoken)==1, 'one real shared Hear request')
     text = spoken[0]
-    expected=raw.replace('×',' times ').replace('−',' minus ').replace('=',' equals ')
+    expected=raw.replace('×',' times ').replace('÷',' divided by ').replace('−',' minus ').replace('=',' equals ')
     h.ok(text==re.sub(' +',' ',expected).strip(),'shared Hear reads exactly its current declared narration')
     h.ok(all(s in text for s in includes) and not any(s in text for s in excludes), 'Hear current visible explanation only: '+text)
     h.ok('Exploration here is not assessed' not in text, 'Hear excludes grown-up note')
@@ -103,6 +103,8 @@ def hear(p, before, includes=(), excludes=()):
 
 def capture(p, name):
     p.screenshot(path=str(OUT/(name+'.png')), full_page=True)
+    inset=p.locator('[data-polygon-direction-inset]')
+    if inset.count():inset.locator('..').screenshot(path=str(OUT/(name+'-direction.png')))
 
 
 def shape(p):
@@ -236,6 +238,14 @@ def reset_state(p):
     h.ok(p.locator(sel('tri-mode','free')).get_attribute('aria-pressed')=='true' and p.locator(sel('tri-view','gather')).get_attribute('aria-pressed')=='true','fresh visit resets triangle mode/view')
     h.ok(p.locator('[data-crossing-angles-tri-step=previous]').is_disabled(),'fresh visit resets triangle steps')
     act(p,'tri-view','reason',before);h.ok(p.locator('[data-crossing-angles-tri-step=previous]').is_disabled(),'fresh visit also resets independent triangle proof step');act(p,'tri-view','gather',before)
+    act(p,'tri-view','polygons',before)
+    h.ok([p.locator('select'+sel(a)).input_value() for a in ['poly-sides','poly-kind','poly-size','poly-prompt']]==['5','regular','large','0'],'fresh visit resets polygon settings')
+    h.ok('A is corner 1 of 5.' in p.locator(R).inner_text() and '0 of 2 diagonals' in p.locator(R).inner_text(),'fresh visit resets polygon split/corner')
+    act(p,'poly-view','walk',before);h.ok('0 of 5 turns' in p.locator(R).inner_text(),'fresh visit resets free walk')
+    act(p,'tri-mode','panel',before);act(p,'poly-view','split',before)
+    h.ok('A is corner 1 of 4.' in p.locator(R).inner_text() and '0 of 1 diagonal' in p.locator(R).inner_text(),'fresh visit resets independent panel work')
+    act(p,'poly-view','walk',before);h.ok('0 of 4 turns' in p.locator(R).inner_text(),'fresh visit resets panel walk')
+    act(p,'tri-mode','free',before);act(p,'tri-view','gather',before)
     act(p,'page','build',before)
 
 
@@ -247,6 +257,9 @@ def lifetime_setting(p):
     act(p,'page','triangle',before);act(p,'tri-a',90,before);act(p,'tri-b',45,before)
     act(p,'tri-size','small',before);act(p,'tri-prompt',5,before);tri_step(p,'gather',2,before)
     tri_step(p,'reason',2,before);act(p,'tri-view','outside',before);act(p,'tri-mode','panel',before)
+    act(p,'tri-view','polygons',before);act(p,'tri-mode','free',before);act(p,'poly-sides',11,before);act(p,'poly-kind','stretched',before);act(p,'poly-size','small',before);act(p,'poly-prompt',5,before)
+    act(p,'tri-mode','free',before);act(p,'poly-corner',1,before);act(p,'poly-corner',2,before);poly_step(p,'split',3,11,before);poly_step(p,'walk',4,11,before)
+    act(p,'tri-mode','panel',before);act(p,'poly-corner',1,before);poly_step(p,'split',1,4,before);poly_step(p,'walk',2,4,before)
     act(p,'page','build',before)
 
 
@@ -654,6 +667,233 @@ def triangle_guards(browser,base):
         h.unchanged(p,before,'retired triangle '+mode);p.context.close()
 
 
+def poly_open(p,before):
+    act(p,'page','triangle',before);act(p,'tri-view','polygons',before)
+    h.focus(p,sel('tri-view','polygons'),'polygon view retains focus before Hear')
+
+
+def poly_step(p,view,target,n,before):
+    act(p,'poly-view',view,before)
+    h.focus(p,sel('poly-view',view),'polygon view keeps its own enabled focus')
+    action='poly-draw' if view=='split' else 'poly-walk'
+    maximum=n-3 if view=='split' else n
+    for _ in range(n+1):
+        match=re.search(r'(\d+) of\s*'+str(maximum)+r' '+('diagonal' if view=='split' else 'turn'),p.locator(R).inner_text())
+        h.ok(match is not None,'current polygon counter visible')
+        position=int(match.group(1))
+        if position==target:break
+        value=position+(1 if target>position else -1)
+        act(p,action,value,before)
+        if value in [0,maximum]:
+            opposite=value+1 if value==0 else value-1
+            h.focus(p,sel(action,opposite),'polygon endpoint focuses enabled opposite before Hear')
+    else:raise AssertionError('polygon native steps did not reach requested position')
+    if maximum==0:
+        h.ok(all(e.is_disabled() for e in p.locator(sel(action)).all()),'triangle polygon has two static disabled diagonal controls')
+    elif target in [0,maximum]:
+        h.ok(p.locator(sel(action,-1 if target==0 else maximum+1)).is_disabled(),'polygon endpoint control disabled')
+
+
+def poly_walk_geometry(p,n):
+    # Reconstruct directions from actual SVG vertices, not echoed angle metadata.
+    result=p.locator('[data-crossing-angles-polygon-stage]').evaluate('''(stage,n)=>{
+      const svg=stage.querySelector('svg'),text=stage.closest('[data-crossing-angles-root]').innerText;
+      const i=Number(text.match(/Current corner (\\d+) of/)[1])-1;
+      const vertices=svg.querySelector('[data-polygon-outline]').getAttribute('points').trim().split(/\\s+/).map(x=>x.split(',').map(Number));
+      const V=vertices[i],prev=vertices[(i+n-1)%n],next=vertices[(i+1)%n],sub=(a,b)=>a.map((x,j)=>x-b[j]),len=a=>Math.hypot(...a),unit=a=>a.map(x=>x/len(a));
+      const u=unit(sub(V,prev)),d=unit(sub(next,V)),p=[-u[1],u[0]],q=[-d[1],d[0]],rho=Math.min(24,.35*Math.min(len(sub(V,prev)),len(sub(next,V))));
+      const M=V.map((x,j)=>x+(rho+8)*p[j]),tip=M.map((x,j)=>x+7*d[j]),base=M.map((x,j)=>x+2*d[j]);
+      const point=(node,a,b)=>[Number(node.getAttribute(a)),Number(node.getAttribute(b))];
+      const line=name=>{const node=svg.querySelector('[data-polygon-line='+name+']');return node?[point(node,'x1','y1'),point(node,'x2','y2')]:null};
+      const close=(a,b)=>a.every((x,j)=>Math.abs(x-b[j])<.012),bad=[];
+      const leader=line('marker-leader'),heading=line('marker-heading'),arrow=svg.querySelector('[data-polygon-arrow]').getAttribute('d').match(/-?\\d+(?:\\.\\d+)?/g).map(Number);
+      const glyph=[heading[0],heading[1],[arrow[0],arrow[1]],[arrow[2],arrow[3]],[arrow[4],arrow[5]]];
+      if(!close(leader[0],V)||!close(leader[1],M))bad.push('leader');
+      if(!close(heading[0],M.map((x,j)=>x-7*d[j]))||!close(heading[1],tip))bad.push('heading');
+      if(!close(glyph[2],base.map((x,j)=>x+4*q[j]))||!close(glyph[3],tip)||!close(glyph[4],base.map((x,j)=>x-4*q[j])))bad.push('arrow');
+      const dot=svg.querySelector('[data-polygon-marker-dot]');if(!close(point(dot,'cx','cy'),M)||Number(dot.getAttribute('r'))!==3)bad.push('dot');
+      for(const G of glyph){if(sub(G,V).reduce((s,x,j)=>s+x*p[j],0)<rho+.98)bad.push('glyph on turn/continuation side');if(len(sub(G,[320,280]))>200.02)bad.push('glyph outside stage safety radius');}
+      const ext=line('extension'),out=line('outgoing'),sector=svg.querySelector('[data-polygon-sector=exterior]');
+      const step=Number(text.match(/(\\d+) of\\s*\\d+ turns/)[1]);
+      if(step===0){if(ext||out||sector)bad.push('uncounted start has turn');}
+      else{
+        if(!ext||!close(ext[0],V)||!close(ext[1],V.map((x,j)=>x+30*u[j])))bad.push('incoming continuation');
+        if(!out||!close(out[0],V)||!close(out[1],V.map((x,j)=>x+Math.min(30,len(sub(next,V)))*d[j])))bad.push('outgoing ray');
+        if(!sector||!sector.getAttribute('d').includes('A'))bad.push('exterior arc');
+      }
+      const ring=svg.querySelector('[data-polygon-start-ring]'),chosen=Number(text.match(/A is corner (\\d+) of/)[1])-1;
+      if(!close(point(ring,'cx','cy'),vertices[chosen])||Number(ring.getAttribute('r'))!==5)bad.push('start ring');
+      const inset=stage.closest('[data-crossing-angles-root]').querySelector('[data-polygon-direction-inset]');
+      if(!inset)bad.push('missing enlarged direction');
+      else{
+        const box=inset.getBoundingClientRect(),shaft=inset.querySelector('[data-polygon-direction-heading]'),a=point(shaft,'x1','y1'),b=point(shaft,'x2','y2'),vector=sub(b,a),direction=unit(vector);
+        if(Math.abs(box.width-64)>.1||Math.abs(box.height-64)>.1||inset.getAttribute('viewBox')!=='0 0 64 64')bad.push('inset CSS size');
+        if(Math.abs(len(vector)-40)>.01||!close(a,[32-20*d[0],32-20*d[1]])||!close(b,[32+20*d[0],32+20*d[1]]))bad.push('enlarged shaft');
+        if(Math.abs(direction[0]*d[1]-direction[1]*d[0])>.001||direction[0]*d[0]+direction[1]*d[1]<.999)bad.push('inset not positively parallel to actual next edge');
+        const transform=shaft.getScreenCTM(),screenA=new DOMPoint(...a).matrixTransform(transform),screenB=new DOMPoint(...b).matrixTransform(transform);
+        if(Math.abs(Math.hypot(screenB.x-screenA.x,screenB.y-screenA.y)-40)>.02)bad.push('shaft below40 CSS px');
+        const arrowPoints=inset.querySelector('[data-polygon-direction-arrow]').getAttribute('d').match(/-?\\d+(?:\\.\\d+)?/g).map(Number);
+        for(const [index,along,across] of [[0,8,8],[1,20,0],[2,8,-8]])if(!close(arrowPoints.slice(index*2,index*2+2),[32+along*d[0]+across*q[0],32+along*d[1]+across*q[1]]))bad.push('enlarged arrow');
+        const wrapper=inset.parentElement;
+        if(!wrapper.previousElementSibling?.classList.contains('ca-polygon-counter')||!wrapper.nextElementSibling?.classList.contains('ca-polygon-figure'))bad.push('inset outside counter/figure flow');
+        const label=wrapper.querySelector('span');if(label?.textContent!=='Next side direction (enlarged)'||parseFloat(getComputedStyle(label).fontSize)<15.9)bad.push('inset label');
+      }
+      return bad;
+    }''',n)
+    h.ok(not result,'actual walker/reference SVG coordinates keep turn visible: '+str(result))
+
+
+def poly_scene(p,n,view):
+    svg_access(p);bounds(p)
+    h.ok(p.locator('[data-polygon-direction-inset]').count()==int(view=='walk'),'enlarged direction appears only in Walk')
+    h.ok(p.locator(R+' svg[viewBox="0 0 640 560"]').count()==1,'one accessible current polygon stage')
+    text=p.locator(R).inner_text()
+    h.ok('A polygon is a closed shape' in text and 'Regular means all sides equal and all corners equal.' in text,'polygon definitions visible')
+    h.ok(re.search(r'A is corner \d+ of '+str(n)+r'\.',text) is not None,'chosen corner has explicit current index')
+    if view=='walk':
+        poly_walk_geometry(p,n)
+        h.ok(re.search(r'Current corner \d+ of '+str(n),text) is not None,'walker current corner explicit')
+        h.ok(p.locator('.ca-point-label').count()==0,'walking reference has no opaque point label')
+    h.ok('Separate worked example' not in text and 'a = ' not in text,'old triangle settings/worked example omitted from polygon region')
+
+
+def poly_native_identity(p,before):
+    control=p.locator('select'+sel('poly-sides'));original=control.element_handle()
+    value=control.input_value();html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+    control.select_option(value)
+    h.ok(original.evaluate('e=>e.isConnected&&e===document.querySelector("select[data-crossing-angles-action=poly-sides]")') and p.locator(R).inner_html()==html,'same sides identity does not render/reset local split/walk')
+    control.evaluate('e=>{const o=document.createElement("option");o.value="99";e.append(o);e.value="99";e.dispatchEvent(new Event("change",{bubbles:true}));o.remove()}')
+    h.ok(control.input_value()==value and p.locator(R).inner_html()==html,'refused polygon select restores its actual value without render')
+    h.ok(p.evaluate('__sharedSpoken.length')==spoken,'same/refused polygon native selection has no speech');h.unchanged(p,before,'same/refused polygon sides')
+
+
+def polygon_journey(browser,base):
+    print('Polygon Frames: one complete tablet visit, independent channels and actual Notes exports',flush=True)
+    p=setup(browser,base);exported=h.notes(p,'polygon-notes-before')
+    p.evaluate('location.hash='+json.dumps(ROUTE));ready(p)
+    parent(p,'width-more');parent(p,'height-less');source=frame(p)
+    dims=p.locator('[data-cframe-copy]').evaluate('e=>[Number(e.getAttribute("width"))/22,Number(e.getAttribute("height"))/22]')
+    before=h.snapshot(p);enter(p,before);act(p,'page','triangle',before)
+    act(p,'tri-a',90,before);act(p,'tri-b',45,before);act(p,'tri-size','small',before);act(p,'tri-prompt',4,before)
+    tri_step(p,'gather',2,before);tri_step(p,'reason',1,before);act(p,'tri-view','polygons',before)
+    for n in [3,5,7,11,12]:
+        act(p,'poly-sides',n,before);h.focus(p,'select'+sel('poly-sides'),'side selector focus survives reset')
+        h.ok('A is corner 1 of '+str(n)+'.' in p.locator(R).inner_text(),'changed side count resets only free chosen corner')
+        poly_step(p,'split',0,n,before);poly_scene(p,n,'split');capture(p,'polygon-tablet-n'+str(n)+'-split-start')
+        if n==3:
+            h.ok('already one triangle' in p.locator(R).inner_text(),'explicit triangle base case');h.focus(p,sel('poly-view','split'),'n3 disabled draw controls do not steal view focus')
+        else:
+            poly_step(p,'split',1,n,before)
+            h.ok('1 completed triangle' in p.locator(R).inner_text(),'first diagonal has one completed triangle')
+            poly_step(p,'split',0,n,before);poly_step(p,'split',n-3,n,before)
+        h.ok('All corners together: '+str((n-2)*180)+'°' in p.locator(R).inner_text(),'independent polygon total from full fan')
+        poly_native_identity(p,before);capture(p,'polygon-tablet-n'+str(n)+'-split-complete')
+        act(p,'poly-corner',1,before);h.focus(p,sel('poly-corner',2),'chosen-corner action focuses current enabled control')
+        h.ok('A is corner 2 of '+str(n)+'.' in p.locator(R).inner_text(),'alternate chosen corner indexed')
+        poly_step(p,'split',n-3,n,before)
+        act(p,'poly-view','corner',before);poly_scene(p,n,'corner')
+        if n in [7,11]:
+            h.ok(str((n-2)*180)+'°÷'+str(n) in p.locator(R).inner_text(),'exact fractional regular corner expression')
+            hear(p,before,includes=[str((n-2)*180)+'° divided by '+str(n)],excludes=['128.57','147.27'])
+        else:hear(p,before,includes=['Polygon frames','A total is different from one corner.'])
+        capture(p,'polygon-tablet-n'+str(n)+'-corner-regular')
+        act(p,'poly-kind','stretched',before);poly_scene(p,n,'corner')
+        hear(p,before,includes=['finds an average'],excludes=['This regular frame has']);capture(p,'polygon-tablet-n'+str(n)+'-corner-stretched')
+        act(p,'poly-size','small',before);act(p,'poly-size','large',before)
+        poly_step(p,'walk',0,n,before);poly_scene(p,n,'walk');hear(p,before,includes=['No turns counted yet.']);capture(p,'polygon-tablet-n'+str(n)+'-walk-start')
+        poly_step(p,'walk',1,n,before);poly_scene(p,n,'walk');hear(p,before,includes=['outside turn','e3']);capture(p,'polygon-tablet-n'+str(n)+'-walk-partial')
+        poly_step(p,'walk',n,n,before);poly_scene(p,n,'walk');hear(p,before,includes=['one full 360° turn','same final direction']);capture(p,'polygon-tablet-n'+str(n)+'-walk-complete')
+        poly_step(p,'walk',n-1,n,before);act(p,'poly-kind','regular',before);poly_step(p,'walk',n,n,before)
+        if n in [7,11]:h.ok('360°÷'+str(n) in p.locator(R).inner_text(),'fractional turn division only after full lap')
+        act(p,'poly-view','split',before)
+        h.ok(str(n-3)+' of '+str(n-3)+' diagonal' in p.locator(R).inner_text(),'view and geometry changes retain completed split')
+    for prompt in range(6):act(p,'poly-prompt',prompt,before);hear(p,before,includes=['Polygon frames'])
+    act(p,'tri-mode','panel',before);h.focus(p,sel('tri-mode','panel'),'polygon mode focus before Hear')
+    h.ok(all(p.locator(sel(a)).count()==0 for a in ['poly-sides','poly-kind','poly-size']),'panel omits all free shape settings')
+    h.ok('Copied width '+str(dims[0])+' × height '+str(dims[1]) in p.locator(R).inner_text(),'polygon uses actual copied rectangle dimensions')
+    poly_step(p,'split',1,4,before);capture(p,'polygon-tablet-panel-split')
+    act(p,'poly-corner',1,before);poly_step(p,'split',1,4,before);poly_step(p,'walk',2,4,before)
+    act(p,'poly-view','corner',before);poly_scene(p,4,'corner');hear(p,before,includes=['irregular but has equal angles','90°']);capture(p,'polygon-tablet-panel-corner')
+    act(p,'tri-mode','free',before)
+    h.ok(p.locator('select'+sel('poly-sides')).input_value()=='12' and 'A is corner 2 of 12.' in p.locator(R).inner_text(),'panel actions preserve independent free channel')
+    poly_step(p,'walk',12,12,before)
+    act(p,'tri-mode','panel',before)
+    h.ok('2 of 4 turns' in p.locator(R).inner_text() and 'A is corner 2 of 4.' in p.locator(R).inner_text(),'free roundtrip retains panel chosen corner/walk')
+    poly_step(p,'walk',4,4,before);hear(p,before,includes=['Each turn: 90°']);capture(p,'polygon-tablet-panel-walk')
+    back(p,before);h.ok(frame(p)==source,'polygon Back preserves exact parent')
+    parent(p,'width-more');changed=frame(p);dims[0]+=1;enter(p,before)
+    h.ok('Copied width '+str(dims[0])+' × height '+str(dims[1]) in p.locator(R).inner_text() and '4 of 4 turns' in p.locator(R).inner_text(),'source recapture changes actual copy and retains panel work')
+    act(p,'tri-mode','free',before);act(p,'tri-view','gather',before)
+    h.ok([p.locator('select'+sel(a)).input_value() for a in ['tri-a','tri-b','tri-size','tri-prompt']]==['90','45','small','4'] and 'Move 2 of' in p.locator(R).inner_text(),'polygon visit retains original triangle choices and gather')
+    act(p,'tri-view','reason',before);h.ok('Reason 1 of' in p.locator(R).inner_text(),'polygon visit retains independent original proof')
+    back(p,before);h.ok(frame(p)==changed,'recaptured source remains exact');h.unchanged(p,before,'complete polygon visit')
+    after=h.notes(p,'polygon-notes-after')
+    h.ok({k:v for k,v in after.items() if k!='exportedAt'}=={k:v for k,v in exported.items() if k!='exportedAt'},'actual Notes exports unchanged across complete polygon visit')
+    p.context.close()
+
+
+def polygon_focused(browser,base):
+    print('Polygon Frames: focused phone/tablet fan, fractions, thin panels and original resized controls',flush=True)
+    p=setup(browser,base);before=h.snapshot(p);enter(p,before);poly_open(p,before)
+    for step in [0,5]:
+        poly_step(p,'walk',step,5,before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});poly_scene(p,5,'walk');capture(p,'polygon-default-direction-'+str(step)+'-'+str(width))
+    for n,view,target,kind in [(12,'split',9,'regular'),(3,'split',0,'regular'),(7,'corner',0,'regular'),(11,'walk',11,'regular'),(7,'corner',0,'stretched'),(12,'walk',1,'stretched')]:
+        act(p,'poly-sides',n,before);act(p,'poly-kind',kind,before)
+        if view=='corner':act(p,'poly-view',view,before)
+        else:poly_step(p,view,target,n,before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});poly_scene(p,n,view);capture(p,'polygon-risk-'+str(n)+'-'+kind+'-'+view+'-'+str(width))
+    act(p,'poly-sides',12,before);poly_step(p,'split',0,12,before)
+    for action,value in [('poly-draw',1),('rotation',None),('poly-corner',1)]:
+        original=p.locator(sel(action,value)).element_handle()
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');bounds(p)
+            h.ok(original.evaluate('e=>e.isConnected'),'live resize retains original polygon control');h.unchanged(p,before,'polygon live resize')
+        html=p.locator(R).inner_html();original.click();h.ok(p.locator(R).inner_html()!=html,'original polygon control still acts after820/320/820');h.unchanged(p,before,'original polygon control')
+    back(p,before)
+    for w,t,rotation in [(1,12,90),(12,1,180),(1,1,270)]:
+        for side,target in [('width',w),('height',t)]:
+            while not p.locator('[data-cframe-action="'+side+'-less"]').is_disabled():parent(p,side+'-less')
+            for _ in range(target-1):parent(p,side+'-more')
+        enter(p,before);act(p,'tri-mode','panel',before)
+        while int(re.search(r'Picture orientation: (\d+)°',p.locator(R).inner_text()).group(1))!=rotation:act(p,'rotation',before=before)
+        for view,step in [('split',1),('corner',0),('walk',0),('walk',1),('walk',4)]:
+            if view=='corner':act(p,'poly-view',view,before)
+            else:poly_step(p,view,step,4,before)
+            for width in [320,820]:
+                p.set_viewport_size({'width':width,'height':1000});poly_scene(p,4,view)
+                h.ok('Copied width '+str(w)+' × height '+str(t) in p.locator(R).inner_text(),'thin/square actual copied source')
+                capture(p,'polygon-panel-'+str(w)+'-'+str(t)+'-'+view+'-'+str(step)+'-'+str(width))
+        hear(p,before);back(p,before)
+    p.context.close()
+
+
+def polygon_guards(browser,base):
+    print('Polygon Frames: retired new/old controls and Hear inert before effects',flush=True)
+    for mode in ['detached','hidden','ancestor','reparented']:
+        p=setup(browser,base);enter(p);act(p,'page','triangle')
+        old=[p.locator('select'+sel('tri-a')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+        act(p,'tri-view','polygons')
+        handles=[p.locator('select'+sel(a)).element_handle() for a in ['poly-sides','poly-kind','poly-size','poly-prompt']]
+        for e,value in zip(handles,['7','stretched','small','1']):e.evaluate('(e,value)=>e.value=value',value)
+        handles += [p.locator(sel(a,v)).element_handle() for a,v in [('poly-view','walk'),('poly-corner',1),('poly-draw',1),('tri-mode','panel')]]
+        handles += [p.locator(R+' [data-speak]').element_handle()]
+        for e in handles:retire(e,mode)
+        before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+        for e in old+handles:h.dispatch(e,'change' if e.evaluate('e=>e.tagName')=='SELECT' else 'click')
+        h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'retired polygon '+mode+' and old triangle controls cannot render or speak');h.unchanged(p,before,'retired polygon '+mode)
+        p.context.close()
+    # A current walker and Hear must reject a changed exact route before hashchange.
+    p=setup(browser,base);enter(p);poly_open(p,None);act(p,'poly-view','walk')
+    controls=[p.locator(sel('poly-walk',1)).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+    before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+    p.evaluate('history.replaceState(null,"","#workshop/copy-frame/")')
+    for e in controls:h.dispatch(e)
+    h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'new walk and Hear guard exact route before render/speech');h.unchanged(p,before,'polygon changed route');p.context.close()
+
+
 def main():
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self,*args):pass
@@ -664,7 +904,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base)
+                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base);polygon_journey(browser,base);polygon_focused(browser,base);polygon_guards(browser,base)
                 h.ok(not h.errors,'no browser/HTTP errors: '+str(h.errors))
                 result={'status':'passed','checks':h.checks,'artifacts':str(OUT)}
                 (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result),flush=True)

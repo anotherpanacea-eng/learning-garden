@@ -90,7 +90,7 @@ export const triangleCopy=freeze({
  rotationNote:'Turning this picture also turns Explore and Two crossings. Its copied dimensions stay unchanged.',
  settingsNote:'Your free triangle settings are waiting. This triangle uses half of your copied rectangle.',
  workedExample:'To find a missing interior angle, take the two known angles from 180°. For example, 180°−45°−60°=75°. You can try a=45° and b=60° in Free triangle, then explain why the total is a half turn.',
- adultNote:'Triangle corners distinguishes gathering one example from a parallel-line argument for all triangles in the stated flat model. Its values, diagrams and worked subtraction are support, not evidence of independent angle reasoning. It does not qualify physical cutting, real structures, polygons or a full geometry course.',
+ adultNote:'Its triangle views distinguish gathering one example from a parallel-line argument for all triangles in the stated flat model. Its values, diagrams and worked subtraction are support, not evidence of independent angle reasoning. Those triangle views do not qualify physical cutting, real structures, polygons or a full geometry course.',
  modes:{free:'Free triangle',panel:'My waiting panel'},views:{gather:'Gather corners',reason:'Why every triangle?',outside:'Outside corner'},
  gather:[
  'Look at the three inside corners. The introduction tells us the destination is a straight turn. Predict how each corner would need to move or turn to join the others.',
@@ -119,4 +119,40 @@ export const trianglePanelPrompts=freeze([
  {title:'Bigger, same corners',text:'Turn this picture. Which dimensions and right-angle fact stay the same?'},
  {title:'The outside shortcut',text:'Use Outside corner. Explain outside=a+90° and why that does not give a numeric value for a.'},
  {title:'Return to the design',text:'Go back to Copy Frame. Which side or diagonal became each part of this triangle? Return to compare the new copied dimensions.'}
+]);
+
+export const polygonCopy=freeze({
+ header:'Polygon frames',
+ instruction:'A triangle contributes 180°. Split a larger frame to find all its corners, then compare one corner with a whole lap.',
+ modes:{free:'Free frame',panel:'My waiting panel'},
+ views:{split:'Split the frame',corner:'One corner',walk:'Walk the edge'},
+ definition:'A polygon is a closed shape with straight sides that do not cross. These frames are convex: no inward dents or straight-through corners.',
+ regularDefinition:'Regular means all sides equal and all corners equal.',
+ naming:'A is the chosen corner, not a fixed screen position.',
+ freeCaption:'This is a chosen paper frame, not a measured sign.',
+ panelCaption:'Your free frame is waiting. This outline uses your copied rectangle.',
+ stretched:'Irregular: a stretched regular frame.',
+ cornerNote:'Changing the chosen corner starts a new split and walk. Your other mode is kept.',
+ sidesNote:'Changing the side count starts a new frame. Your Triangle corners choices and waiting-panel work are kept.',
+ rotationNote:'Turning the whole picture also turns the other Crossing Angles views; copied dimensions stay unchanged.',
+ walkLegend:'Hollow ring: start A. The marker’s leader shows the current corner; its arrow points along the next side.',
+ modelNote:'Ideal straight-sided polygons in a flat plane. These frames stay convex. Drawings and formulas are help, not measurements or building plans.',
+ nullContext:'Your waiting panel could not be copied. Choose Free frame, or go back to Copy Frame.',
+ adultNote:'Polygon frames teaches a convex fan argument and total-versus-one-corner reasoning. Regularity is sufficient for equal corners; rectangles have their own right-angle facts. Guided splits and turns are not independent fluency, physical measurement, polygon mastery or complete geometry coverage.'
+});
+export const polygonPrompts=freeze([
+ {title:'Count the pieces',text:'Use Split the frame. If a diagonal is needed, add one at a time. Which pieces are triangles, and when are they all triangles?'},
+ {title:'Another starting corner',text:'Finish a split, then choose another corner. Why do you still get the same total?'},
+ {title:'Regular or stretched?',text:'Keep the side count and switch Regular to Stretched. Which total stays? Can you still divide to find every corner?'},
+ {title:'One corner, all corners',text:'Use One corner. For a regular pentagon, compare the 540° total with the 108° corner. Try 7 sides: keep the answer as a division; do not round.'},
+ {title:'One complete turn',text:"Walk the edge. At the end, why is the arrow's original direction back even though the turns add to 360°?"},
+ {title:'Back to the design',text:'Choose My waiting panel. Use its sides and diagonal to explain a polygon total, then return to your free frame.'}
+]);
+export const polygonPanelPrompts=freeze([
+ {title:'Count the pieces',text:'Split this rectangle from A. How many triangles fill it?'},
+ {title:'Another starting corner',text:'Split from another rectangle corner. Explain why both triangles still give 360°.'},
+ {title:'Regular or stretched?',text:'This rectangle has four right corners. Does that alone tell you all four sides are equal? Explain the square case too.'},
+ {title:'One corner, all corners',text:'Use One corner. Explain the difference between 360° total and 90° at each corner.'},
+ {title:'One complete turn',text:'Walk the four quarter turns (90° each). Explain why one full lap is 360°.'},
+ {title:'Back to the design',text:'Change a side in Copy Frame and return. What can change, and which rectangle angle facts remain?'}
 ]);
