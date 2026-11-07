@@ -26,8 +26,8 @@ const accepted={
  'summary-belief':{folder:['keep','extra'],worry:['keep'],fact:['unknown'],praise:['opinion'],frame:['keep'],boards:['extra'],unseen:['unknown'],meeting:['keep']},
  'summary-lantern':{bench:['extra'],guess:['keep'],lost:['unknown'],storage:['keep','extra'],check:['keep'],'no-outcome':['unknown'],ready:['keep'],favorite:['opinion']}
 };
-const ids=Object.keys(accepted),sources=ids.map(taskSource),ordinary=writingTasks.filter(t=>t.bench!=='summary');
-eq(writingTasks.length,44);eq(ordinary.length,41);eq(writingTasks.filter(t=>t.bench==='summary').map(t=>t.id),ids);
+const ids=Object.keys(accepted),sources=ids.map(taskSource),ordinary=writingTasks.filter(t=>!['summary','voice'].includes(t.bench));
+eq(writingTasks.length,52);eq(ordinary.length,41);eq(writingTasks.filter(t=>t.bench==='summary').map(t=>t.id),ids);
 eq(sources.map(s=>s.choices.map(c=>c.id)),[['keep','extra','opinion','unknown'],['unknown','keep','extra','opinion'],['extra','opinion','unknown','keep']]);
 eq(sources.map(s=>s.parts.map((p,i)=>accepted[s.id][p.id].includes('keep')?i+1:null).filter(Boolean)),[[2,3,6,8],[1,2,5,8],[2,4,5,7]],'three different prepared positions');
 eq(sources.map(s=>accepted[s.id][s.parts.at(-1).id]),[['unknown'],['keep'],['opinion']],'final strips vary by role');

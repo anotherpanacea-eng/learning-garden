@@ -78,6 +78,34 @@ export function writingSummaryPreview(s,w){
  }catch{return null;}
 }
 
+// Optional frozen sentence study: historical sources own their wording and comparison.
+export function writingVoiceStudy(s){
+ const unavailable={status:'unavailable'};
+ try{
+  if(!object(s)||!own(s,'bench')||s.bench!=='voice'||s.kind==='choice')return {status:'absent'};
+  if(!plain(s)||!['kind','parts','choices','key','feedback','spotlight'].every(k=>own(s,k))||s.kind!=='sort'||!validWritingSource(s)||!dense(s.parts,3,3)||!dense(s.choices,6,6)||![...s.parts,...s.choices].every(p=>plain(p)&&own(p,'id')&&own(p,'text')&&display(p.text,4000))||!plain(s.key))return unavailable;
+  const packet=s.spotlight,slots=['start','verb','finish'];
+  if(!plain(packet)||!['v','slots','original','context','agent','affected','action','demo'].every(k=>own(packet,k))||packet.v!==1||!dense(packet.slots,3,3)||!packet.slots.every((k,i)=>k===slots[i])||!slots.every(k=>s.parts.some(p=>p.id===k)&&own(s.key,k)&&s.choices.some(c=>c.id===s.key[k]))||!['original','context','agent','affected','action'].every(k=>display(packet[k],4000)))return unavailable;
+  const demo=packet.demo;
+  if(!plain(demo)||!['original','steps','contrast'].every(k=>own(demo,k))||!display(demo.original,4000)||!display(demo.contrast,4000)||!dense(demo.steps,4,4)||!demo.steps.every(x=>display(x,4000)))return unavailable;
+  const feedback=s.feedback;
+  if(!plain(feedback)||!['fit','general','different'].every(k=>own(feedback,k))||!display(feedback.fit,4000)||!display(feedback.general,4000)||!plain(feedback.different)||!slots.every(k=>own(feedback.different,k)&&display(feedback.different[k],4000)))return unavailable;
+  return {status:'ready',study:packet};
+ }catch{return unavailable;}
+}
+export function writingVoicePreview(s,w){
+ try{
+  const study=writingVoiceStudy(s);if(study.status!=='ready'||!validWritingWork(s,w))return null;
+  const placements=own(w,'placements')?w.placements:{},slots=study.study.slots.map(k=>{
+   const phraseId=own(placements,k)?placements[k]:null,part=s.parts.find(p=>p.id===k),phrase=s.choices.find(c=>c.id===phraseId);
+   return {id:k,label:part.text,phraseId,text:phrase?phrase.text:null};
+  });
+  const words=slots.map((slot,i)=>slot.text===null?`[${slot.label}]`:i===0?slot.text.replace(/^(\s*)(\p{L})/u,(_,space,letter)=>space+letter.toUpperCase()):slot.text);
+  let sentence=words.join(' ');if(!/[.?!]\s*$/u.test(sentence))sentence+='.';
+  return {slots,text:sentence,complete:slots.every(slot=>slot.phraseId!==null)};
+ }catch{return null;}
+}
+
 // Optional source-local references are derived without changing the frozen raw source.
 const dense=(xs,min,max)=>Array.isArray(xs)&&xs.length>=min&&xs.length<=max&&Array.from({length:xs.length},(_,i)=>own(xs,i)).every(Boolean);
 const display=(x,max)=>typeof x==='string'&&x.trim().length>0&&Array.from(x).length<=max;
@@ -182,7 +210,7 @@ export function openWritingTask(state,taskId,options){return change(state,next=>
  r.currentId=taskId;return {ok:true};
  },options);}
 export function nextWritingTask(state,options){
- const summary=writingView(state).record?.source.bench==='summary',tasks=writingTasks.filter(t=>(t.bench==='summary')===summary);
+ const group=bench=>bench==='summary'?'summary':bench==='voice'?'voice':'ordinary',current=group(writingView(state).record?.source.bench),tasks=writingTasks.filter(t=>group(t.bench)===current);
  if(!tasks.length)return fail('selection');
  const at=tasks.findIndex(x=>x.id===state?.writingDesk?.currentId);return openWritingTask(state,tasks[(at+1)%tasks.length].id,options);
 }
@@ -215,7 +243,7 @@ export function showWritingHelp(state,kind,options){return edit(state,r=>{
 export function writingResult(s,w){
  if(!validWritingWork(s,w))return null;
  const summary=s.bench==='summary'?writingSummaryStudy(s):null;
- if(summary&&summary.status!=='ready')return null;
+ if(summary&&summary.status!=='ready'||s.bench==='voice'&&s.kind!=='choice'&&writingVoiceStudy(s).status!=='ready')return null;
  let outcome='different',feedback=[];
  if(s.kind==='tap'){
   outcome=!w.taps.length?'incomplete':w.taps.length===s.key.length&&s.key.every(k=>w.taps.includes(k))?'fit':'different';
@@ -225,7 +253,7 @@ export function writingResult(s,w){
   const pending=s.parts.filter(x=>!placed(w,x.id));
   const fits=p=>summary?summary.study.accepted[p.id].includes(placed(w,p.id)):placed(w,p.id)===s.key[p.id];
   outcome=pending.length?'incomplete':s.parts.every(fits)?'fit':'different';
-  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&!fits(part))feedback.push(summary?`${part.text} ${s.feedback.different[part.id]}`:['research','revision'].includes(s.bench)?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
+  for(const part of s.parts){const selected=placed(w,part.id);if(selected&&!fits(part))feedback.push(s.bench==='voice'?`${part.text}: ${s.feedback.different[part.id]}`:summary?`${part.text} ${s.feedback.different[part.id]}`:['research','revision'].includes(s.bench)?`${part.text} ${own(s.feedback.different,part.id)?s.feedback.different[part.id]:`Under ${s.choices.find(x=>x.id===selected).text}; compare with ${s.choices.find(x=>x.id===s.key[part.id]).text}.`}`:`${part.text} Under ${s.choices.find(x=>x.id===selected).text}; this sentence is about ${s.choices.find(x=>x.id===s.key[part.id]).text}.`);}
  }else if(s.kind==='order')outcome=same(w.order,s.key)?'fit':'different';
  else{const picked=s.kind==='break'?w.boundary:w.choice;outcome=picked===null?'incomplete':picked===s.key?'fit':'different';if(outcome==='different'&&own(s.feedback.different,picked))feedback.push(s.feedback.different[picked]);}
  if(outcome==='fit')feedback.unshift(s.feedback.fit);
@@ -256,6 +284,7 @@ export function sameWritingWork(a,b){
 // No grading in previews: this always describes the exact supplied arrangement, including mistakes.
 export function writingPreview(s,w){
  if(!validWritingWork(s,w))return [];
+ if(s.bench==='voice'&&s.kind==='sort'){const voice=writingVoicePreview(s,w);return voice?[{heading:'Your sentence',text:voice.text}]:s.parts.map(p=>({heading:'Earlier phrase choices',text:`${p.text}: ${s.choices.find(c=>c.id===placed(w,p.id))?.text??'[No phrase chosen]'}`}));}
  if(s.bench==='point-quote'&&s.kind==='order')return [{heading:'Your paragraph',text:w.order.map(k=>s.parts.find(p=>p.id===k).text).join(' '),noteIds:[...w.order]}];
  if(s.bench==='point-quote'&&s.kind==='choice'&&!own(s,'preview')&&!s.after)return [{heading:'Your choice',text:s.choices.find(c=>c.id===w.choice)?.text||'No choice yet',noteIds:w.choice===null?[]:[w.choice]}];
  if(s.kind==='tap'&&s.bench==='research')return [{heading:'Selected source cards',text:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.text).join('\n\n')||'No source cards are selected yet.',noteIds:s.parts.filter(p=>w.taps.includes(p.id)).map(p=>p.id)}];

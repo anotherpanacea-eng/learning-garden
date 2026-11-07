@@ -70,7 +70,7 @@ export function runCohesionChecks(){
  const raw=copy(old);writingPage(old,'synthetic');writingNotes(old);eq(old,raw,'readers do not normalize historical source');
  const s=fullCohesionNotebook();eq(Object.keys(s.writingDesk.records).length,writingTasks.length);ok(Object.values(s.writingDesk.records).every(r=>r.checks.length===24&&r.count===30&&r.firstKept&&r.latestKept),'all twenty-four maximum retained histories and versions');
  const report=cohesionReport(s),restored=prepareProgressImport(JSON.stringify(report,null,2));ok(restored.ok,'maximum authored notebook fits actual Notes import');eq(restored.state.writingDesk,s.writingDesk,'full sources and checks transfer exact');
- const next=cohesionSeed();for(const task of writingTasks.filter(t=>t.bench!=='summary')){ok(c.nextWritingTask(next,options).ok);eq(next.writingDesk.currentId,task.id);}c.nextWritingTask(next,options);eq(next.writingDesk.currentId,'bakery','ordinary catalogue wraps without entering the separate summary cycle');
+ const next=cohesionSeed();for(const task of writingTasks.filter(t=>!['summary','voice'].includes(t.bench))){ok(c.nextWritingTask(next,options).ok);eq(next.writingDesk.currentId,task.id);}c.nextWritingTask(next,options);eq(next.writingDesk.currentId,'bakery','ordinary catalogue wraps without entering the separate summary cycle');
  console.log(`Writing cohesion: ${n} checks passed (nine tasks, tap subsets, old-source compatibility, snapshots and actual full-history transfer).`);return n;
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href)runCohesionChecks();

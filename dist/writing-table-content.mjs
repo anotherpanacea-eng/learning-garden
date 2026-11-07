@@ -1,3 +1,4 @@
+import {voiceTasks} from './writing-voice-content.mjs';
 import {summaryTasks} from './writing-summary-content.mjs';
 import {revisionTasks} from './writing-revision-content.mjs';
 import {researchTasks} from './writing-research-content.mjs';
@@ -150,7 +151,7 @@ const holding=[
   feedback:{fit:'Both fit, so the reader can’t tell. Name the thing: “Then the bun slid off the table.”',different:{bun:'Maybe. The plate fits too.',plate:'Maybe. The bun fits too.'},general:'Your draft is still here. You can change it.'}})
 ];
 
-const catalog=[bakery,day,...breaks,...joins,...questions,...holding,...researchTasks,...revisionTasks,...quotationTasks,...summaryTasks];
+const catalog=[bakery,day,...breaks,...joins,...questions,...holding,...researchTasks,...revisionTasks,...quotationTasks,...summaryTasks,...voiceTasks];
 export const writingTasks=Object.freeze(catalog.map(({id,title,bench})=>Object.freeze({id,title,bench})));
 export function taskSource(id){const source=catalog.find(s=>s.id===id);return source?structuredClone(source):null;}
 export const writingCopy=Object.freeze({
