@@ -553,11 +553,14 @@ function chaseGeometry(spec,rotation,visible,activeName=null){
  const project=([x,y])=>{x=(x-plan.center[0])*plan.scale;y=(y-plan.center[1])*plan.scale;return [320+x*Math.cos(rot)-y*Math.sin(rot),280-x*Math.sin(rot)-y*Math.cos(rot)];};
  // Point names must sit beyond the small angle arcs, including on phones.
  // Crossing/hub centres and parallel intersections use unmarked directions.
- const labelAngles={crossing:{O:207.5},hub:{O:180},parallel:{P:148,Q:238},quadrilateral:{D:100}};
+ const labelAngles={crossing:{O:207.5},hub:{O:180},parallel:{P:148,Q:238}};
  const points=Object.entries(plan.points).filter(([name])=>!plan.visiblePoints||plan.visiblePoints.includes(name)).map(([name,p])=>{
   const point=project(p),fixed=labelAngles[spec.family]?.[name],dx=point[0]-320,dy=point[1]-280,length=Math.hypot(dx,dy)||1;
   const offset=fixed===undefined?[64*dx/length,64*dy/length]:[80*Math.cos((fixed+rotation)*rad),-80*Math.sin((fixed+rotation)*rad)];
-  const position=point.map((v,i)=>v+offset[i]);return {name,point,position,label:position};
+  // Keep quadrilateral names below the fixed given row at every rotation.
+  // These finite anchors also clear the actual corner arcs on narrow screens.
+  const anchor=spec.family==='quadrilateral'?{A:[0,-140],B:[140,0],C:[0,140],D:[-130,-50],E:[-107,90]}[name]:null;
+  const position=anchor?[320+anchor[0]*Math.cos(rot)-anchor[1]*Math.sin(rot),280-anchor[0]*Math.sin(rot)-anchor[1]*Math.cos(rot)]:point.map((v,i)=>v+offset[i]);return {name,point,position,label:position};
  });
  const segments=plan.lines.map(([a,b])=>({start:project(plan.points[a]),end:project(plan.points[b])}));
  const selected={crossing:{x:['a','x'],y:['a','x','y']},hub:{x:['p','q','x'],y:['x','y'],z:['p','y','z','q']},triangle:{x:['a','c','x'],y:['a','c','x','y']},parallel:{x:['a','x'],y:['a','x','y'],z:['a','y','z']},rectangle:{x:['a','x'],y:['a','x','y'],z:['x','y','z']},regular:{x:['x','y'],y:['x','y']},quadrilateral:{x:['a','b','c','x','y'],y:['a','b','c','x','y']}};

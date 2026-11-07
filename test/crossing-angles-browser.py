@@ -996,10 +996,10 @@ def matching_focused(browser,base):
         for step in [1,2]:
             match_stage(p,step,before)
             for width in [320,820]:
-                p.set_viewport_size({'width':width,'height':1000});match_scene(p);capture(p,'matching-risk-'+case+'-'+str(step)+'-'+str(width))
+                p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');match_scene(p);capture(p,'matching-risk-'+case+'-'+str(step)+'-'+str(width))
         act(p,'match-view','fit',before);act(p,'match-fit','given',before)
         for width in [320,820]:
-            p.set_viewport_size({'width':width,'height':1000});match_scene(p);capture(p,'matching-risk-'+case+'-given-'+str(width))
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');match_scene(p);capture(p,'matching-risk-'+case+'-given-'+str(width))
     act(p,'match-fit','explore',before);original=p.locator(sel('match-rotation')).element_handle()
     for width in [320,820]:
         p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');bounds(p)
@@ -1016,7 +1016,7 @@ def matching_focused(browser,base):
             if view=='build':match_stage(p,2,before)
             elif view=='fit':act(p,'match-fit','given',before)
             for width in [320,820]:
-                p.set_viewport_size({'width':width,'height':1000});match_scene(p);capture(p,'matching-panel-'+str(w)+'-'+str(t)+'-'+view+'-'+str(width))
+                p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))');match_scene(p);capture(p,'matching-panel-'+str(w)+'-'+str(t)+'-'+view+'-'+str(width))
         back(p,before)
     p.context.close()
 
