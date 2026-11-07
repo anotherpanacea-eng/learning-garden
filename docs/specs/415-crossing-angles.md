@@ -1,6 +1,6 @@
 # 415 · Crossing Angles
 
-Status: draft for independent specification review; admitted LG-1 / LG-G1. Initial seven independent review contexts completed at1bdb77c6. Findings are folded below; focused closure pending before implementation.
+Status: independently BUILD-READY atc88074bddaa693c9ae21cbee695662c0f2eb74f7 after six-lens and full mathematics/copy/visual review with repair closure; admitted LG-1 / LG-G1. Implementation qualification and publication are recorded with the PR.
 
 ## Need and story
 
