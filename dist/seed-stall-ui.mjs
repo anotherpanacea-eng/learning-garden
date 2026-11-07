@@ -2,16 +2,19 @@ import {seedView,seedCounts,seedReplacement,startSeed,chooseSeedPrediction,drawS
 import {createChanceLine} from './chance-line-core.mjs';
 import {chanceCopy} from './chance-line-content.mjs';
 import {chanceLinePage,bindChanceLine} from './chance-line-ui.mjs';
+import {createSpinnerTable,changeSpinnerTable} from './spinner-table-core.mjs';
+import {spinnerTablePage,bindSpinnerTable} from './spinner-table-ui.mjs';
 
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const freshTurn=(state=null,owner=null)=>({state,owner,count:3,choosing:false,pending:null,notice:'',chanceWork:null,chanceActive:false,chanceFrame:null,folds:null,restoreFolds:null,focusEntry:false});
+const freshTurn=(state=null,owner=null)=>({state,owner,count:3,choosing:false,pending:null,notice:'',chanceWork:null,spinnerWork:null,activeBench:null,benchFrame:null,lastBench:'chance',folds:null,restoreFolds:null,focusEntry:false});
 let turn=freshTurn(),binding=0;
 export function resetSeedTurn(){turn=freshTurn();binding++;}
-export function resetChanceVisit(){turn.chanceWork=null;turn.chanceActive=false;turn.chanceFrame=null;turn.folds=null;binding++;}
+export function resetSeedVisitBenches(){turn.chanceWork=null;turn.spinnerWork=null;turn.activeBench=null;turn.benchFrame=null;turn.folds=null;turn.restoreFolds=null;turn.focusEntry=false;turn.lastBench='chance';binding++;}
 function activeTurn(state,owner=null){if(turn.state!==state||turn.owner!==owner)turn=freshTurn(state,owner);return turn;}
 function parentFrame(){return {root:turn.state.seedStall,raw:JSON.stringify(turn.state.seedStall),display:JSON.stringify([turn.count,turn.choosing,turn.pending,turn.notice])};}
 const sameFrame=(a,b)=>!!a&&a.root===b.root&&a.raw===b.raw&&a.display===b.display;
-function retireChangedFrame(){if(!turn.chanceActive||sameFrame(turn.chanceFrame,parentFrame()))return false;turn.chanceActive=false;turn.chanceFrame=null;turn.choosing=false;turn.pending=null;turn.notice='Your Seed Stall changed. The current bag is shown here.';turn.folds=null;turn.focusEntry=true;return true;}
+const benchEntry=()=>turn.lastBench==='spinner'?'[data-stw-entry]':'[data-cl-entry]';
+function retireChangedFrame(){if(!turn.activeBench||sameFrame(turn.benchFrame,parentFrame()))return false;turn.activeBench=null;turn.benchFrame=null;turn.choosing=false;turn.pending=null;turn.notice='Your Seed Stall changed. The current bag is shown here.';turn.folds=null;turn.focusEntry=true;return true;}
 // Local counterpart of Living Layers: removed controls cannot revive on reinsertion.
 function bindingGuard(root,valid){
  const controls=[root,...root.querySelectorAll('button,select,summary,a')],retired=new WeakSet(),chains=new Map();
@@ -47,9 +50,9 @@ function active(entry){
  return `<section class="seed-panel"><p class="tiny">Experiment ${entry.id} · run ${entry.runs.length} of 3</p><h2 id="seed-run-heading" tabindex="-1">Draw from your bag</h2>${bag(source.slots,source.labels)}<p class="seed-rule">${esc(source.rule)}</p><p>${esc(source.explanation)}</p>${n?`<p class="seed-recorded-prediction">${run.prediction===null?'No prediction was recorded before this run’s first draw.':`Prediction before this run: ${esc(source.predictionLabels[run.prediction])}.`}</p>`:`<fieldset class="seed-prediction"><legend>${esc(source.predictionPrompt)}</legend><div class="seed-choices">${['sun','moon','same','unsure','none'].map(key=>button(source.predictionLabels[key],`data-seed-predict="${key}" aria-pressed="${prediction===key}"`)).join('')}</div></fieldset><p class="tiny">Prediction is optional and unscored. You can change it until the first draw.</p>`}${n<6?button(`Draw seed ${n+1} of 6`,'data-seed-draw',true):''}${n?`<p class="seed-returned">${esc(source.labels[run.draws.at(-1)])} appeared. Returned to the bag. All six seeds can be drawn next.</p>`:''}${chart(run,source)}${n===6?`<section class="seed-finish" id="seed-finish" tabindex="-1"><h3>This run is recorded</h3><p>This run showed ${counts.sun} ${esc(source.labels.sun.toLowerCase())} and ${counts.moon} ${esc(source.labels.moon.toLowerCase())}. Prediction: ${esc(source.predictionLabels[prediction])}.</p><p>${sunInBag===0||sunInBag===6?`This bag can show only ${esc(source.labels[source.slots[0]].toLowerCase())}, because every pictured seed has that mark.`:sunInBag===3?'Both marks have the same chance on each draw. Six draws need not end in a tie.':'A bag with more of one mark makes that mark more likely on each draw. One short run can look different.'} These counts do not test a real bag or prove fairness.</p>${entry.runs.length<3?button('Try another six draws with this bag','data-seed-repeat',true):'<p>All three short runs with this bag are recorded.</p>'}</section>`:''}${past.length?`<table class="seed-run-table"><caption>Runs with this frozen bag</caption><thead><tr><th>Run</th><th>${esc(source.labels.sun)}</th><th>${esc(source.labels.moon)}</th><th>Prediction</th></tr></thead><tbody>${past.map((r,i)=>runSummary(r,source,i)).join('')}</tbody></table>`:''}<details class="seed-talk" data-seed-fold="talk"><summary>Talk together</summary><p>Which mark was more likely from the bag? Did every short run have to follow that pattern? Returning a seed leaves the next draw's chances unchanged.</p></details>${button('Change the bag for a new experiment','data-seed-change')}</section>`;
 }
 export const seedEntry=()=>'<section class="resume-strip seed-entry"><div><h2>Seed Stall</h2><p>Choose a pictured bag, predict, and compare short screen-draw runs.</p><a class="secondary" href="#numbers/seeds">Try the Seed Stall</a></div></section>';
-export function seedPage(state,{owner=null,entry='',allowChance=true}={}){
- activeTurn(state,owner);binding++;retireChangedFrame();if(turn.chanceActive)return chanceLinePage(turn.chanceWork);const v=seedView(state),showChooser=v.status==='missing'||v.status==='ready'&&(!v.current||turn.choosing);
- return `<div class="seed-sheet" data-seed-root><a class="back" href="#numbers"><span aria-hidden="true">←</span> Back to Number Garden</a><h1 id="seed-title" tabindex="-1">Seed Stall</h1><p>Make-believe screen draws. Choose a bag, then see what happens. One short run cannot prove a bag is fair.</p>${status()}${allowChance?`<section class="seed-chance-entry"><h2>Chance Line</h2><p>Place your own chance pin, then compare bags on the same line.</p>${button(chanceCopy.entry,'data-cl-entry')}</section>`:''}${entry}${v.status==='recovery'?`<section class="seed-panel"><h2>Earlier Seed Stall record</h2><p>This record cannot be opened safely. It stays unchanged in your notes download. You can start a separate Seed Stall while keeping the earlier data.</p>${button('Use a new Seed Stall','data-seed-recover',true)}</section>`:showChooser?chooser(v):active(v.current)}${v.status==='ready'?history(v):''}<p class="seed-links"><a class="secondary" href="#notes">Grown-up notes</a><a class="secondary" href="#numbers">Number Garden</a></p></div>`;
+export function seedPage(state,{owner=null,entry='',allowBenches=true}={}){
+ activeTurn(state,owner);binding++;retireChangedFrame();if(turn.activeBench)return turn.activeBench==='spinner'?spinnerTablePage(turn.spinnerWork):chanceLinePage(turn.chanceWork);const v=seedView(state),showChooser=v.status==='missing'||v.status==='ready'&&(!v.current||turn.choosing);
+ return `<div class="seed-sheet" data-seed-root><a class="back" href="#numbers"><span aria-hidden="true">←</span> Back to Number Garden</a><h1 id="seed-title" tabindex="-1">Seed Stall</h1><p>Make-believe screen draws. Choose a bag, then see what happens. One short run cannot prove a bag is fair.</p>${status()}${allowBenches?`<section class="seed-chance-entry"><h2>Explore chances</h2><p>Compare picture bags or redesign a wheel.</p><div class="seed-choices">${button(chanceCopy.entry,'data-cl-entry')}${button('Build and try a spinner','data-stw-entry')}</div></section>`:''}${entry}${v.status==='recovery'?`<section class="seed-panel"><h2>Earlier Seed Stall record</h2><p>This record cannot be opened safely. It stays unchanged in your notes download. You can start a separate Seed Stall while keeping the earlier data.</p>${button('Use a new Seed Stall','data-seed-recover',true)}</section>`:showChooser?chooser(v):active(v.current)}${v.status==='ready'?history(v):''}<p class="seed-links"><a class="secondary" href="#notes">Grown-up notes</a><a class="secondary" href="#numbers">Number Garden</a></p></div>`;
 }
 export function seedNotes(state){
  if(!Object.hasOwn(state,'seedStall'))return '';
@@ -60,21 +63,22 @@ export function bindSeed(state,ctx){
  const visit=turn,token=binding,route=location.hash,owner=()=>typeof ctx.explorerId==='function'?ctx.explorerId():visit.owner;
  const contextLive=()=>turn===visit&&binding===token&&visit.state===state&&owner()===visit.owner&&(!ctx.notebook||ctx.notebook()===state)&&(!ctx.isActive||ctx.isActive())&&location.hash===route;
  const redraw=selector=>{render();focus?.(selector);};
- if(turn.chanceActive){
-  const scope=document.querySelector('[data-cl-root]');if(!scope)return;
-  const listenerLive=bindingGuard(scope,()=>contextLive()&&route==='#numbers/seeds'&&document.querySelector('[data-cl-root]')===scope);
-  const live=n=>{if(!listenerLive(n))return false;if(retireChangedFrame()){redraw('[data-cl-entry]');return false;}return turn.chanceActive;};
-  bindChanceLine(turn.chanceWork,{live,change:next=>{turn.chanceWork=next;},render,focus,stopSpeech:ctx.stopSpeech,stopSound:ctx.stopSound,back:()=>{turn.chanceActive=false;turn.restoreFolds=turn.folds;turn.chanceFrame=null;redraw('[data-cl-entry]');}});return;
+ if(turn.activeBench){
+  const spinner=turn.activeBench==='spinner',selector=spinner?'[data-stw-root]':'[data-cl-root]',scope=document.querySelector(selector);if(!scope)return;
+  const listenerLive=bindingGuard(scope,()=>contextLive()&&route==='#numbers/seeds'&&document.querySelector(selector)===scope);
+  const live=n=>{if(!listenerLive(n))return false;if(retireChangedFrame()){redraw(benchEntry());return false;}return !!turn.activeBench;};
+  const bind=spinner?bindSpinnerTable:bindChanceLine,work=spinner?turn.spinnerWork:turn.chanceWork;
+  bind(work,{live,change:next=>{if(spinner)turn.spinnerWork=next;else turn.chanceWork=next;},render,focus,stopSpeech:ctx.stopSpeech,stopSound:ctx.stopSound,back:()=>{if(spinner)turn.spinnerWork=changeSpinnerTable(turn.spinnerWork,'reset-cancel');turn.activeBench=null;turn.restoreFolds=turn.folds;turn.benchFrame=null;redraw(benchEntry());}});return;
  }
  const scope=document.querySelector('[data-seed-root]');if(!scope)return;
- if(turn.focusEntry&&contextLive()){turn.focusEntry=false;focus?.('[data-cl-entry]');}
+ if(turn.focusEntry&&contextLive()){turn.focusEntry=false;focus?.(benchEntry());}
  if(turn.restoreFolds){for(const node of scope.querySelectorAll('[data-seed-fold]'))node.open=!!turn.restoreFolds[node.dataset.seedFold];turn.restoreFolds=null;}
  const bound=parentFrame(),listenerLive=bindingGuard(scope,()=>contextLive()&&document.querySelector('[data-seed-root]')===scope);
- const live=b=>listenerLive(b)&&!turn.chanceActive&&sameFrame(bound,parentFrame());
+ const live=b=>listenerLive(b)&&!turn.activeBench&&sameFrame(bound,parentFrame());
  // Capture links as well as writers so old parent controls cannot act behind the child.
  scope.addEventListener('click',e=>{const n=e.target.closest('button,a,summary');if(n&&(!live(n)||n.disabled)){e.preventDefault();e.stopImmediatePropagation();}},{capture:true});
  const click=(selector,action)=>scope.querySelectorAll(selector).forEach(b=>b.addEventListener('click',()=>{if(live(b))action(b);}));
- click('[data-cl-entry]',()=>{if(route!=='#numbers/seeds')return;turn.folds=Object.fromEntries([...scope.querySelectorAll('[data-seed-fold]')].map(n=>[n.dataset.seedFold,n.open]));turn.chanceWork??=createChanceLine();turn.chanceFrame=parentFrame();turn.chanceActive=true;redraw('#cl-title');});
+ click('[data-cl-entry],[data-stw-entry]',n=>{if(route!=='#numbers/seeds')return;const spinner=n.hasAttribute('data-stw-entry');turn.lastBench=spinner?'spinner':'chance';turn.folds=Object.fromEntries([...scope.querySelectorAll('[data-seed-fold]')].map(x=>[x.dataset.seedFold,x.open]));if(spinner)turn.spinnerWork??=createSpinnerTable();else turn.chanceWork??=createChanceLine();turn.benchFrame=parentFrame();turn.activeBench=turn.lastBench;redraw(spinner?'#stw-title':'#cl-title');});
  const refuse=(message,selector)=>{turn.notice=message||'That change cannot fit safely in a notes download. Your earlier work is still here.';redraw(selector);};
  click('[data-seed-adjust]',b=>{turn.count+=Number(b.dataset.seedAdjust);turn.pending=null;turn.notice='';render();focus(`[data-seed-adjust="${b.dataset.seedAdjust}"]:not(:disabled), #seed-title`);});
  click('[data-seed-change]',()=>{const v=seedView(state);turn.count=v.current?count(v.current):3;turn.choosing=true;turn.pending=null;turn.notice='';redraw('#seed-title');});

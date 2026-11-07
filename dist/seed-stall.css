@@ -1,3 +1,4 @@
+@import url('./spinner-table.css');
 @import url('./chance-line.css');
 .seed-sheet{max-width:880px;margin:0 auto;padding:1.2rem 1rem 3rem}
 .seed-sheet h1{margin:.55rem 0}

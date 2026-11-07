@@ -95,7 +95,7 @@ import {clockWalkPage,clockWalkEntry,bindClockWalk} from './courier-clock-ui.mjs
 import {lanternPage,lanternEntry,bindLantern} from './lantern-line-ui.mjs';
 import {collectionPage,collectionEntry,bindCollection} from './count-collection-ui.mjs';
 import {hundredthsPage,hundredthsEntry,bindHundredths} from './hundredths-ui.mjs';
-import {seedPage,seedEntry,bindSeed,resetSeedTurn,resetChanceVisit} from './seed-stall-ui.mjs';
+import {seedPage,seedEntry,bindSeed,resetSeedTurn,resetSeedVisitBenches} from './seed-stall-ui.mjs';
 import {tenthsPage,tenthsEntry,bindTenths} from './tenths-ui.mjs';
 import {sortingPage,bindSorting} from './sorting-desk-ui.mjs';
 import {doublePage,bindDoubleCheck} from './willow-double-ui.mjs';
@@ -255,7 +255,7 @@ function touchActiveRooms(route){
  // Never recreate data another tab removed or switched off: write only beside a notebook that is still saved.
  if(explorerStore.persist&&!explorerStore.conflict&&JSON.stringify(next)!==JSON.stringify(stored)){try{if(localStorage.getItem(`number-garden-v1:${p.id}`)!==null)localStorage.setItem(key,JSON.stringify(next));}catch{}}
 }
-keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root],[data-qb-root],[data-cs-root],[data-dt-root],[data-ll-root],[data-lens-root],[data-rc-root],[data-pd-root],[data-cw-root],[data-rm-root],[data-cl-root]')?'':location.hash);
+keepOfferingHowto(main,()=>choosingExplorer||location.hash==='#cafe'||main.querySelector('[data-watts-root],[data-qb-root],[data-cs-root],[data-dt-root],[data-ll-root],[data-lens-root],[data-rc-root],[data-pd-root],[data-cw-root],[data-rm-root],[data-cl-root],[data-stw-root]')?'':location.hash);
 let needsExplorerInitialization=(location.hash||'').split('/')[0]==='#journeys'||['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/fair','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#science/lens','#living/layers','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)||['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])||location.hash==='#begin'||location.hash==='#arrive'||location.hash==='#cafe/units'||location.hash==='#loft/shadows'||(location.hash==='#workshop/scale'&&!choosingExplorer)||!!actThreeRoute(location.hash)||!!actFourRoute(location.hash);
 if(!needsExplorerInitialization)initializeExplorerState(state);setSpeechPreferences(state.garden?.speech);
 let progressImport={candidate:null,message:'',reading:false},importRead=0;
@@ -467,7 +467,7 @@ function render(){
   if(root!=='numbers'||slug!=='join'||detail!=='ledger'||choosingExplorer)resetJoiningLedger();
   if(root!=='science'||slug!=='evidence'||choosingExplorer)resetEvidenceShelf();
   if(root!=='numbers'||slug!=='seeds'||choosingExplorer)resetSeedTurn();
-  if(hash!=='#numbers/seeds'||choosingExplorer)resetChanceVisit();
+  if(hash!=='#numbers/seeds'||choosingExplorer)resetSeedVisitBenches();
   if(root!=='field'||choosingExplorer)resetFieldKitTurn();
   if(root!=='numbers'||slug!=='path')resetWillowVoice();
   if(root!=='archive'||slug!=='labels'||choosingExplorer)resetLabelTurn();
@@ -892,7 +892,7 @@ function render(){
   else if(doubleBench)html=orderedEntry()+doublePage(state,detail);
   else if(hundredthsBench)html=hundredthsPage(state)+unitsEntry();
   else if(hash==='#numbers/seeds/pairs'){const ready=preparePairDisplay(state,priceOptions());html=ready.ok?pairsPage(state):pairsRefusal();if(ready.changed)save();}
-  else if(seedBench)html=seedPage(state,{owner:explorerStore.active.id,entry:pairsEntry(),allowChance:hash==='#numbers/seeds'});
+  else if(seedBench)html=seedPage(state,{owner:explorerStore.active.id,entry:pairsEntry(),allowBenches:hash==='#numbers/seeds'});
   else if(lanternBench)html=lanternPage(state);
   else if(noticeBench)html=noticePage(state);
   else if(joiningLedgerBench){const v=joiningView(state),examples=v.source?ledgerSourceExamples(v.source):[];const outcome=recordLedgerDisplay(state,examples,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=outcome.ok?joiningLedgerPage(state,explorerStore.active.id):ledgerRefusalPage();if(outcome.changed)save();if(!outcome.ok)queueMicrotask(()=>{if(location.hash==='#numbers/join/ledger')focusElement('#ledger-notice');});}
@@ -982,7 +982,7 @@ function render(){
 
   if(!choosingExplorer){const townChapter=root==='workshop'&&slug==='coins'?'market':root==='cafe'&&slug==='batches'?'birthday':root==='loft'&&!slug?'show':null;if(townChapter)html+=actTwoReturn(state,townChapter);}
   if(!choosingExplorer&&root==='cafe'&&!slug)html+=keeperInvitation(state,{blocked:keeperFilmBlocked()});
-  main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer&&hash!=='#cafe'&&!main.querySelector('[data-cl-root]'))offerHowto(main,location.hash);
+  main.innerHTML=(state.broad?.draftNotice?'<section class="storage-warning" role="status"><p>Some paused questions could not be resumed. Their earlier work is kept in <a href="#notes">Grown-up notes</a>; it is not scored against the current question.</p><button class="secondary" id="dismiss-draft-notice">Keep exploring</button></section>':'')+html;if(!choosingExplorer&&hash!=='#cafe'&&!main.querySelector('[data-cl-root],[data-stw-root]'))offerHowto(main,location.hash);
   bindEgyptPhotoFallback(main);
   if(joiningExamples!==null){const shown=noteJoiningExamples(state,joiningExamples);const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;if(noteBundleDisplay(state,[],live)||shown)save();}
   updateStorageNotice();bind();

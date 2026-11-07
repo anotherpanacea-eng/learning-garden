@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Spinner Table410 · equal stops, unequal shares
 
-[Spinner Table410](specs/410-spinner-table.md) selects the next M6-III/IV bridge from202: edit a twelve-slice wheel, preserve its frozen design beside each short virtual run, and distinguish model chances from recorded counts. It will sit beside Chance Line inside Seed Stall, preserving parent work and both children's local visits. The complete finite specification is authored for independent review; implementation has not begun. No weather forecast, persistent learner record or whole-course claim is proposed.
+[Spinner Table410](specs/410-spinner-table.md) selects the next M6-III/IV bridge from202: edit a twelve-slice wheel, preserve its frozen design beside each short virtual run, and distinguish model chances from recorded counts. It will sit beside Chance Line inside Seed Stall, preserving parent work and both children's local visits. The complete finite specification is independently BUILD-READY at55607b53 after six-lens and mathematics/model repair closure. The bounded implementation is underway; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/493#issuecomment-6704281111) owns implementation clearance and publication status. No weather forecast, persistent learner record or whole-course claim is proposed.
 
 ## Chance Line409 · count the whole, compare the share
 
