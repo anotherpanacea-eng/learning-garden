@@ -35,8 +35,13 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     "refusal": "That view could not be prepared safely. Your earlier proposal is unchanged. Retry, download your notes, or go back.",
     "sessionOnly": "The pictures can still work during this visit. These help notes are not saved on this device. Ask a grown-up to download your notes if you want to keep them.",
     "diagramEmpty": "Both pictures use the same length scale. Your post appears after you choose a height.",
-    "diagramZero": "Both pictures use the same length scale. With zero shadows there is no triangle; each chosen post is drawn as an upright line.",
-    "crossNote": "These products multiply two lengths. They are not areas marked in the yard."
+    "diagramZero": "Both pictures use the same length scale. With zero shadows there is no triangle; each post is drawn as an upright line.",
+    "crossNote": "These products multiply two lengths. They are not areas marked in the yard.",
+    "exampleGiven": "Example reference",
+    "exampleProposed": "Example post",
+    "exampleEmpty": "The example height is introduced in step 3.",
+    "exampleDiagramEmpty": "Both example pictures use the same length scale. The target shows only its given shadow; the example height is introduced in step 3.",
+    "exampleDiagram": "Both example pictures use the same length scale. The example’s proposed height is 4.5 m; it does not change your own proposal."
   },
   "cases": [
     {
@@ -137,9 +142,11 @@ Original fictional cases; all measurements in metres. This JSON is the finite re
     "proposalAria": "My proposed post: height {height} m, given shadow {shadow} m. This height is a proposal.",
     "emptyAria": "Target shadow: {shadow} m. No proposed height is drawn.",
     "ratio": "Height/shadow: {height}/{shadow} = {ratio}.",
-    "product": "{left} × {right} = {product} square metres.",
+    "product": "{left} × {right} = {product} {unit}.",
     "waiting": "Your proposal waits: {height} m.",
-    "step": "Step {number} of 4."
+    "step": "Step {number} of 4.",
+    "exampleAria": "Example post: height {height} m, shadow {shadow} m.",
+    "exampleEmptyAria": "Example target shadow: {shadow} m. The example height is not drawn yet."
   }
 }
 ```
