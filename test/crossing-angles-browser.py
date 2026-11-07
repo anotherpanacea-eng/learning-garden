@@ -1254,8 +1254,11 @@ def chase_focused(browser,base):
         act(p,'chase-case',case,before);act(p,'chase-example',before=before)
         for width in [320,820]:
             p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+            while not p.locator('[data-chase-example-nav=previous]').is_disabled():
+                p.locator('[data-chase-example-nav=previous]').click();h.unchanged(p,before,'example previous after resize')
             for step in [0,1,2]:
-                act(p,'chase-example-step',step,before);chase_scene(p,CHASE_FAMILIES[case//3])
+                if step:act(p,'chase-example-step',step,before)
+                chase_scene(p,CHASE_FAMILIES[case//3])
             capture(p,'polygon-chase-example-'+str(case)+'-'+str(width))
         act(p,'chase-return',before=before)
     h.unchanged(p,before,'focused Chase layouts');p.context.close()
