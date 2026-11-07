@@ -38,7 +38,7 @@ function triangleSector(s,kind){
 function triangleStage(g){
  const line=(r,kind)=>`<line data-triangle-line="${kind}" x1="${tn(r.start[0])}" y1="${tn(r.start[1])}" x2="${tn(r.end[0])}" y2="${tn(r.end[1])}"/>`;
  const labels=[...g.tags.map(t=>({...t,target:t.leader})),...(g.outline?g.points.map(t=>{const dx=t.point[0]-320,dy=t.point[1]-280,len=Math.hypot(dx,dy)||1;let position=[t.point[0]+dx/len*35,t.point[1]+dy/len*35];
-  if(g.view==='outside'&&t.name==='C'){const [a,b,c]=g.vertices,bx=c[0]-b[0],by=c[1]-b[1],length=Math.hypot(bx,by),normal=[-by/length,bx/length],away=normal[0]*(a[0]-c[0])+normal[1]*(a[1]-c[1])>0?-1:1;position=c.map((v,i)=>v+40*away*normal[i]);}
+  if(g.view==='outside'&&t.name==='C'){const [a,b,c]=g.vertices,bx=c[0]-b[0],by=c[1]-b[1],length=Math.hypot(bx,by),normal=[-by/length,bx/length],away=normal[0]*(a[0]-c[0])+normal[1]*(a[1]-c[1])>0?-1:1;position=c.map((v,i)=>v+40*away*normal[i]+30*[bx/length,by/length][i]);}
   return {name:t.name,position,target:t.point,point:true};}):[])];
  // Outer labels stay beyond the geometry's 230-unit maximum extent.
  for(const t of labels)if(!t.point){const locations={a:[85,60],b:[555,60],c:[75,500],outside:[555,500]};t.position=locations[t.name]||t.position;}
