@@ -490,7 +490,20 @@ function changeChase(work,action,value){
  return work;
 }
 const numericChase=a=>a.draft!==''?Number(a.draft):null;
+const equationFamily=spec=>spec.targets.some(t=>t.scalar===true);
+const chaseUnit=t=>t.scalar===true?'number':'degrees';
+const chaseValue=(t,value)=>`${t.name} = ${value}${chaseUnit(t)==='degrees'?'°':''}`;
+function equationWorking(spec,name,example=false){
+ const {m,b,k,r,s}=spec.givens,keys=spec.key,mt=m===1?'t':`${m}t`,rt=r===1?'t':`${r}t`;
+ if(name==='x')return `Using t = ${keys.t}, x = (${m} × ${keys.t} + ${b})° = ${keys.x}°.${example?'':' This working shows t as help; it does not fill your answer for t.'}`;
+ if(spec.family==='equationLine')return `${mt} + ${b} + ${k} = 180. Subtract ${k} and ${b} from both sides, then divide both sides by ${m}. t = (180 − ${k} − ${b}) ÷ ${m} = ${keys.t}. t is a number. Use it in the expression to find angle x.`;
+ return `${mt} + ${b} = ${rt} + ${s}. Subtract ${rt} and ${b} from both sides, then divide both sides by ${m-r}, which is not zero. t = (${s} − ${b}) ÷ (${m} − ${r}) = ${keys.t}. t is a number. Use it in the expression to find angle x.`;
+}
 function chaseMissing(spec,t,id){
+ if(spec.family==='equationLine'&&id==='opposite')return 'These two marked angles are beside each other, not vertically opposite.';
+ if(spec.family==='equationLine'&&id==='point')return 'The two marked angles fill a half turn, not a full turn around O.';
+ if(spec.family==='equationOpposite'&&id==='line')return 'The two marked angles are across the crossing, not beside each other on one straight line.';
+ if(spec.family==='equationOpposite'&&id==='point')return 'The two marked angles do not fill the whole turn around O.';
  if(spec.family==='regular'&&t.name==='x'&&id==='point')return "x and y fill a half turn at A. The polygon's corners are different points, not parts of one turn around A.";
  if(spec.family==='regular'&&t.name==='y'&&id==='opposite')return 'x and y are beside each other at A, not across a crossing.';
  if(spec.family==='quadrilateral'&&t.name==='x'&&id==='regular')return 'The marked inside corners are unequal. Share equally only when the corners are equal; here subtract the known corners.';
@@ -506,10 +519,13 @@ function chaseMissing(spec,t,id){
 function chaseFeedback(spec,t,a){
  if(!a.checked)return 'Not checked yet.';
  const v=numericChase(a),number=v===spec.key[t.name],reason=t.accepted.includes(a.reason),r=t.relations[a.reason];
+ if(v===null&&t.scalar)return 'Enter a whole number for t, then check when you’re ready.';
+ if(v>360&&t.scalar)return 'Use a whole number from 0 to 360 here.';
  if(v===null)return spec.family==='rectangle'&&t.name==='x'&&a.reason==='insufficient'?'The marked right corner and angle a do determine x. Try a whole-number angle, or open a hint when you’re ready.':'Enter a whole-number angle, then check when you’re ready.';
  if(v>360)return 'Use a whole-number angle from 0° to 360°.';
+ if(a.reason===null&&t.scalar)return number?'The number fits these facts. Choose an equation and its reason when you’re ready.':'Check the number using the marked facts. Choose an equation and its reason when you’re ready.';
  if(a.reason===null)return number?'The number fits these facts. Choose a reason when you’re ready.':'Check the number using the marked facts. Choose a reason when you’re ready.';
- if(number&&reason)return `${t.name} = ${v}°. ${r.text}`;
+ if(number&&reason)return `${chaseValue(t,v)}. ${r.text}`;
  if(number)return `The number fits. This relationship does not explain the marked parts. ${chaseMissing(spec,t,a.reason)}`;
  if(reason)return `That relationship fits here. Check the calculation using ${r.formula}${r.predecessor?`, and the value you used for ${r.predecessor}`:''}.`;
  return `Let’s look at the marked facts again. ${chaseMissing(spec,t,a.reason)} A hint or a different worked sketch can help.`;
@@ -520,17 +536,20 @@ function polygonChaseWorking(spec,name){
  return name==='x'?`x = 360° − ${a}° − ${b}° − ${c}° = ${k.x}°. Subtract the three known inside corners from the four-corner total.`:`y = 360° − (180° − ${a}°) − (180° − ${b}°) − (180° − ${c}°) = ${k.y}°. Each known inside corner has an adjacent outside turn. The four positive outside turns total 360°. These corners are different points, not parts of one turn around D.`;
 }
 function chaseSolution(spec,name){
+ if(equationFamily(spec))return `Shown solution: ${chaseValue(spec.targets.find(t=>t.name===name),spec.key[name])}. ${equationWorking(spec,name)} This is provided help; your answer is kept separately.`;
  if(['regular','quadrilateral'].includes(spec.family))return `Shown solution: ${name} = ${spec.key[name]}°. ${polygonChaseWorking(spec,name)} This is provided help; your answer is kept separately.`;
  const {a,c,p,q}=spec.givens,k=spec.key;
  const routes={crossing:{x:`x = 180° − ${a}° = ${k.x}°. A–O–C is straight.`,y:`y = 180° − ${a}° = ${k.y}°. B–O–D is straight.`},hub:{x:`x = 360° − ${p}° − ${q}° = ${k.x}°. p, q and x fill one whole turn at O.`,y:`p + q + x = 360° around O gives x = 360° − ${p}° − ${q}° = ${k.x}°. Then y = 180° − ${k.x}° = ${k.y}° on straight C–O–E.`,z:`z = 180° − ${q}° = ${k.z}°. E–O–C is straight.`},triangle:{x:`x = 180° − ${a}° − ${c}° = ${k.x}°. These are the inside corners of ABC.`,y:`y = ${a}° + ${c}° = ${k.y}°. The outside angle equals the two far inside corners.`},parallel:{x:`x = a = ${a}°. Corresponding angles on the marked parallel lines match.`,y:`y = a = ${a}°. Alternate interior angles on the marked parallel lines match.`,z:`z = 180° − ${a}° = ${k.z}°. Co-interior angles on the marked parallel lines total 180°.`},rectangle:{x:`x = 90° − ${a}° = ${k.x}°. The corner at A is right.`,y:`y = a = ${a}°. Alternate interior angles on AB ∥ DC match.`,z:`First y = a = ${a}° by alternate angles on AB ∥ DC. Then z = 90° − ${k.y}° = ${k.z}° at right corner C.`}};
  const extra=spec.family==='hub'&&name==='y'||spec.family==='rectangle'&&name==='z';
  return `Shown solution: ${name} = ${k[name]}°. ${routes[spec.family][name]} This is provided help; your answer is kept separately.${extra?' This working shows a value used by another angle. It does not fill your answers.':''}`;
 }
-function chaseProvided(spec,answers){const set=new Set();answers.forEach((a,i)=>{if(a.solution){const name=spec.targets[i].name;set.add(name);if(spec.family==='hub'&&name==='y')set.add('x');if(spec.family==='rectangle'&&name==='z')set.add('y');}});return set;}
+function chaseProvided(spec,answers){const set=new Set();answers.forEach((a,i)=>{if(a.solution){const name=spec.targets[i].name;set.add(name);if(equationFamily(spec)&&name==='x')set.add('t');if(spec.family==='hub'&&name==='y')set.add('x');if(spec.family==='rectangle'&&name==='z')set.add('y');}});return set;}
 // The schematic has source-authored incidence. Its visual angles do not measure keys.
 function chaseGeometry(spec,rotation,visible,activeName=null){
  const rad=Math.PI/180,polar=a=>[3*Math.cos(a*rad),3*Math.sin(a*rad)];
  const plans={
+ equationLine:{points:{O:[0,0],A:polar(0),B:polar(110),C:polar(180)},center:[0,0],scale:52,lines:[['A','C'],['O','B']],sectors:[['x','O','A','B'],['k','O','B','C']]},
+ equationOpposite:{points:{O:[0,0],A:polar(0),B:polar(110),C:polar(180),D:polar(290)},center:[0,0],scale:52,lines:[['A','C'],['B','D']],sectors:[['x','O','A','B'],['e','O','C','D']]},
  crossing:{points:{O:[0,0],A:polar(0),B:polar(55),C:polar(180),D:polar(235)},center:[0,0],scale:52,lines:[['A','C'],['B','D']],sectors:[['a','O','A','B'],['x','O','B','C'],['y','O','D','A']]},
  hub:{points:{O:[0,0],A:polar(0),E:polar(60),B:polar(115),C:polar(240)},center:[0,0],scale:52,lines:[['O','A'],['O','B'],['C','E']],sectors:[['p','O','A','B',96],['q','O','B','C'],['x','O','C','A'],['y','O','A','E'],['z','O','E','B']]},
  triangle:{points:{A:[0,0],B:[4,0],C:[1.5,3],D:[6,0]},center:[3,1.5],scale:45,lines:[['A','D'],['A','C'],['B','C']],sectors:[['a','A','B','C'],['c','C','A','B'],['x','B','C','A'],['y','B','D','C']]},
@@ -553,7 +572,7 @@ function chaseGeometry(spec,rotation,visible,activeName=null){
  const project=([x,y])=>{x=(x-plan.center[0])*plan.scale;y=(y-plan.center[1])*plan.scale;return [320+x*Math.cos(rot)-y*Math.sin(rot),280-x*Math.sin(rot)-y*Math.cos(rot)];};
  // Point names must sit beyond the small angle arcs, including on phones.
  // Crossing/hub centres and parallel intersections use unmarked directions.
- const labelAngles={crossing:{O:207.5},hub:{O:180},parallel:{P:148,Q:238}};
+ const labelAngles={equationLine:{O:270},equationOpposite:{O:145},crossing:{O:207.5},hub:{O:180},parallel:{P:148,Q:238}};
  const points=Object.entries(plan.points).filter(([name])=>!plan.visiblePoints||plan.visiblePoints.includes(name)).map(([name,p])=>{
   const point=project(p),fixed=labelAngles[spec.family]?.[name],dx=point[0]-320,dy=point[1]-280,length=Math.hypot(dx,dy)||1;
   const offset=fixed===undefined?[64*dx/length,64*dy/length]:[80*Math.cos((fixed+rotation)*rad),-80*Math.sin((fixed+rotation)*rad)];
@@ -563,7 +582,7 @@ function chaseGeometry(spec,rotation,visible,activeName=null){
   const position=anchor?[320+anchor[0]*Math.cos(rot)-anchor[1]*Math.sin(rot),280-anchor[0]*Math.sin(rot)-anchor[1]*Math.cos(rot)]:point.map((v,i)=>v+offset[i]);return {name,point,position,label:position};
  });
  const segments=plan.lines.map(([a,b])=>({start:project(plan.points[a]),end:project(plan.points[b])}));
- const selected={crossing:{x:['a','x'],y:['a','x','y']},hub:{x:['p','q','x'],y:['x','y'],z:['p','y','z','q']},triangle:{x:['a','c','x'],y:['a','c','x','y']},parallel:{x:['a','x'],y:['a','x','y'],z:['a','y','z']},rectangle:{x:['a','x'],y:['a','x','y'],z:['x','y','z']},regular:{x:['x','y'],y:['x','y']},quadrilateral:{x:['a','b','c','x','y'],y:['a','b','c','x','y']}};
+ const selected={equationLine:{t:['x','k'],x:['x','k']},equationOpposite:{t:['x','e'],x:['x','e']},crossing:{x:['a','x'],y:['a','x','y']},hub:{x:['p','q','x'],y:['x','y'],z:['p','y','z','q']},triangle:{x:['a','c','x'],y:['a','c','x','y']},parallel:{x:['a','x'],y:['a','x','y'],z:['a','y','z']},rectangle:{x:['a','x'],y:['a','x','y'],z:['x','y','z']},regular:{x:['x','y'],y:['x','y']},quadrilateral:{x:['a','b','c','x','y'],y:['a','b','c','x','y']}};
  const sectors=plan.sectors.map(([name,o,a,b,radius=28])=>{
   const c=plan.points[o],u=plan.points[a].map((v,i)=>v-c[i]),v=plan.points[b].map((v,i)=>v-c[i]);
   const start=normalize(Math.atan2(u[1],u[0])/rad+rotation),sweep=normalize(Math.atan2(v[1],v[0])/rad-Math.atan2(u[1],u[0])/rad),center=project(c);
@@ -583,32 +602,33 @@ function chaseGeometry(spec,rotation,visible,activeName=null){
  const mark=(a,b,fraction,count=1)=>{const A=project(plan.points[a]),B=project(plan.points[b]),length=Math.hypot(B[0]-A[0],B[1]-A[1]),u=[(B[0]-A[0])/length,(B[1]-A[1])/length],v=[-u[1],u[0]];for(let i=0;i<count;i++){const c=A.map((n,j)=>n+(B[j]-n)*fraction+u[j]*i*7);parallelMarks.push({points:[c.map((n,j)=>n-u[j]*5+v[j]*4),c,c.map((n,j)=>n-u[j]*5-v[j]*4)]});}};
  if(spec.family==='parallel'){mark('A','B',.23);mark('C','D',.23);}
  if(spec.family==='rectangle'){mark('A','B',.55);mark('D','C',.55);mark('A','D',.55,2);mark('B','C',.55,2);}
- const givens=Object.entries(spec.givens).filter(([name])=>name!=='n').map(([name,value],i)=>({name,value,label:`${name} = ${value}°`,position:[spec.family==='quadrilateral'?[100,320,540][i]:i?540:100,65]}));
- const names=spec.targets.map(t=>{const x=visible.find(x=>x.name===t.name);return x?.value!==null&&x?.value!==undefined?`${t.name} = ${x.value}°${x.shown?' shown':''}`:t.name;});
- return {width:640,height:560,points,segments,sectors,rightMarks,parallelMarks,givens,facts:[spec.facts],description:`${chaseCopy.modelNote} ${spec.facts}${givens.length?` Given ${givens.map(g=>g.label).join('; ')}.`:''} Marked targets: ${names.join('; ')}.`};
+ const givens=Object.entries(equationFamily(spec)?{}:spec.givens).filter(([name])=>name!=='n').map(([name,value],i)=>({name,value,label:`${name} = ${value}°`,position:[spec.family==='quadrilateral'?[100,320,540][i]:i?540:100,65]}));
+ const names=spec.targets.map(t=>{const x=visible.find(x=>x.name===t.name);return x?.value!==null&&x?.value!==undefined?`${chaseValue(t,x.value)}${x.shown?' shown':''}`:t.name;});
+ return {width:640,height:560,points,segments,sectors,rightMarks,parallelMarks,givens,facts:[spec.facts,...(spec.expressionFacts||[])],description:`${chaseCopy.modelNote} ${spec.facts}${spec.expressionFacts?` ${spec.expressionFacts.join(' ')}`:''}${givens.length?` Given ${givens.map(g=>g.label).join('; ')}.`:''}${equationFamily(spec)?` Angles: x (AOB), ${spec.family==='equationLine'?'k (BOC)':'e (COD)'}. Questions: t (number), x (angle). Visible quantities: ${names.join('; ')}.`:` Marked targets: ${names.join('; ')}.`}`};
 }
 export function buildChaseSolve({caseIndex,target,rotation,answers,view,exampleStep}){
  const spec=chaseCases[caseIndex],provided=chaseProvided(spec,answers),t=spec.targets[target],a=answers[target];
- const targets=spec.targets.map((t,i)=>{const answer=answers[i],shown=provided.has(t.name),numericChecked=answer.checked&&numericChase(answer)===spec.key[t.name],value=shown||numericChecked?spec.key[t.name]:null;return {name:t.name,value,shown,numericChecked,label:value===null?t.name:`${t.name} = ${value}°${shown?' shown':''}`};});
- const geometry=chaseGeometry(spec,rotation,targets,t.name);targets.forEach(t=>{t.leader=geometry.sectors.find(s=>s.name===t.name).leader;});
+ const targets=spec.targets.map((t,i)=>{const answer=answers[i],shown=provided.has(t.name),numericChecked=answer.checked&&numericChase(answer)===spec.key[t.name],value=shown||numericChecked?spec.key[t.name]:null;return {name:t.name,unit:chaseUnit(t),value,shown,numericChecked,label:value===null?t.name:`${chaseValue(t,value)}${shown?' shown':''}`};});
+ const geometry=chaseGeometry(spec,rotation,targets,t.name);targets.forEach(t=>{if(t.unit==='degrees')t.leader=geometry.sectors.find(s=>s.name===t.name).leader;});
  const openReason=targets[target].numericChecked&&!t.accepted.includes(a.reason)?'The number fits; its reason is still open.':'';
- const helpNote=[provided.has(t.name)&&!a.solution?'A value for this angle was shown in another solution. Your draft is still kept.':'',answers.some(x=>x.exampleSeen)?'A different worked sketch has been opened for this whole sketch.':'',a.hint?'A hint has been opened for this angle.':'',openReason].filter(Boolean).join(' ');
- const caption=spec.targets.every((t,i)=>provided.has(t.name)||answers[i].checked&&numericChase(answers[i])===spec.key[t.name]&&t.accepted.includes(answers[i].reason))?chaseCopy.complete:'';
- return {view,caseIndex,returnInvitation:['regular','quadrilateral'].includes(spec.family)?chaseCopy.polygonReturnInvitation:chaseCopy.returnInvitation,family:spec.family,familyLabel:spec.familyLabel,variantLabel:spec.variantLabel,caseOptions:chaseCases.map((c,value)=>({value,label:c.variantLabel})),targetIndex:target,rotation,exampleStep,targets,active:{name:t.name,draft:a.draft,reason:a.reason,checked:a.checked,feedback:chaseFeedback(spec,t,a),hint:a.hint?t.hint:null,solution:a.solution?chaseSolution(spec,t.name):null,helpNote,reasons:t.offered.map(id=>({id,label:chaseRules[id],selected:a.reason===id}))},question:`Find ${t.name}. ${chaseCopy.question}`,counter:`Angle ${target+1} of ${spec.targets.length}`,caption,geometry,working:[]};
+ const helpNote=[provided.has(t.name)&&!a.solution?`A value for this ${equationFamily(spec)?'quantity':'angle'} was shown in another solution. Your draft is still kept.`:'',answers.some(x=>x.exampleSeen)?'A different worked sketch has been opened for this whole sketch.':'',a.hint?`A hint has been opened for this ${equationFamily(spec)?'question':'angle'}.`:'',openReason].filter(Boolean).join(' ');
+ const caption=spec.targets.every((t,i)=>provided.has(t.name)||answers[i].checked&&numericChase(answers[i])===spec.key[t.name]&&t.accepted.includes(answers[i].reason))?(equationFamily(spec)?'This sketch has a checked or shown value for every question. Shown solutions are help. Pick another sketch or change one.':chaseCopy.complete):'';
+ return {view,caseIndex,quantityMode:equationFamily(spec),returnInvitation:equationFamily(spec)?'In Math pathways, the Equality Desk explores why the same operation must be done to both sides. Leaving Copy Frame clears these visit-only sketches.':['regular','quadrilateral'].includes(spec.family)?chaseCopy.polygonReturnInvitation:chaseCopy.returnInvitation,family:spec.family,familyLabel:spec.familyLabel,variantLabel:spec.variantLabel,caseOptions:chaseCases.map((c,value)=>({value,label:c.variantLabel})),targetIndex:target,rotation,exampleStep,targets,active:{name:t.name,unit:chaseUnit(t),inputLabel:t.scalar?'t, your number':`Angle ${t.name}, your answer in degrees`,firstGuidance:equationFamily(spec)?'Use the marked facts. You can choose the other question at any time.':chaseCopy.first,draft:a.draft,reason:a.reason,checked:a.checked,feedback:chaseFeedback(spec,t,a),hint:a.hint?t.hint:null,solution:a.solution?chaseSolution(spec,t.name):null,helpNote,reasons:t.offered.map(id=>({id,label:t.reasonLabels?.[id]||chaseRules[id],selected:a.reason===id}))},question:t.scalar?'Find t. Choose an equation and its angle relationship.':`Find ${t.name}. ${chaseCopy.question}`,counter:`${equationFamily(spec)?'Question':'Angle'} ${target+1} of ${spec.targets.length}`,caption,geometry,working:[]};
 }
 function chaseExampleWorking(spec,t){
+ if(equationFamily(spec))return equationWorking(spec,t.name,true);
  if(['regular','quadrilateral'].includes(spec.family))return t.name==='x'?polygonChaseWorking(spec,'x'):`y = 180° − ${spec.key.x}° = ${spec.key.y}°. ${spec.family==='regular'?'C–A–D':'C–D–E'} is straight.`;
  const {a,c,p,q}=spec.givens,k=spec.key;
  const routes={crossing:{x:`x = 180° − ${a}° = ${k.x}°. A–O–C is straight.`,y:`y = x = ${k.y}°. x and y are opposite at O.`},hub:{x:`x = 360° − ${p}° − ${q}° = ${k.x}°. p, q and x fill one whole turn.`,y:`y = 180° − ${k.x}° = ${k.y}°. C–O–E is straight.`,z:`z = ${p}° − ${k.y}° = ${k.z}°. Parts y and z add to p.`},triangle:{x:`x = 180° − ${a}° − ${c}° = ${k.x}°. The three inside triangle corners total 180°.`,y:`y = 180° − ${k.x}° = ${k.y}°. A–B–D is straight.`},parallel:{x:`x = a = ${a}°. Corresponding angles on parallel lines match.`,y:`y = x = ${k.y}°. x and y are opposite at Q.`,z:`z = 180° − ${k.y}° = ${k.z}°. C–Q–D is straight.`},rectangle:{x:`x = 90° − ${a}° = ${k.x}°. A rectangle corner is 90°.`,y:`y = 180° − 90° − ${k.x}° = ${k.y}°. These are the inside corners of triangle ADC.`,z:`z = 90° − ${k.y}° = ${k.z}°. A rectangle corner is 90°.`}};
  return routes[spec.family][t.name];
 }
 export function buildChaseExample(family,exampleStep){
- const spec=chaseExamples[family],targets=spec.targets.map((t,i)=>({name:t.name,value:i<exampleStep?spec.key[t.name]:null,shown:i<exampleStep,numericChecked:false,label:i<exampleStep?`${t.name} = ${spec.key[t.name]}° shown`:t.name})),geometry=chaseGeometry(spec,0,targets,exampleStep?spec.targets[exampleStep-1].name:null);
- targets.forEach(t=>{t.leader=geometry.sectors.find(s=>s.name===t.name).leader;});
- return {view:'example',family,familyLabel:spec.familyLabel,variantLabel:'',caseOptions:[],targetIndex:null,rotation:0,exampleStep,targets,active:null,heading:chaseCopy.exampleTitle,notice:chaseCopy.exampleNotice,question:'',counter:exampleStep===0?'Example: givens only':`Example step ${exampleStep} of ${targets.length}`,caption:'',geometry,working:spec.targets.slice(0,exampleStep).map(t=>chaseExampleWorking(spec,t))};
+ const spec=chaseExamples[family],targets=spec.targets.map((t,i)=>({name:t.name,unit:chaseUnit(t),value:i<exampleStep?spec.key[t.name]:null,shown:i<exampleStep,numericChecked:false,label:i<exampleStep?`${chaseValue(t,spec.key[t.name])} shown`:t.name})),geometry=chaseGeometry(spec,0,targets,exampleStep?spec.targets[exampleStep-1].name:null);
+ targets.forEach(t=>{if(t.unit==='degrees')t.leader=geometry.sectors.find(s=>s.name===t.name).leader;});
+ return {view:'example',quantityMode:equationFamily(spec),family,familyLabel:spec.familyLabel,variantLabel:'',caseOptions:[],targetIndex:null,rotation:0,exampleStep,targets,active:null,heading:chaseCopy.exampleTitle,notice:chaseCopy.exampleNotice,question:'',counter:exampleStep===0?'Example: givens only':`Example step ${exampleStep} of ${targets.length}`,caption:'',geometry,working:spec.targets.slice(0,exampleStep).map(t=>chaseExampleWorking(spec,t))};
 }
 function chaseNarration(c){
  if(c.view==='example')return `${chaseCopy.exampleTitle}. ${chaseCopy.exampleNotice} ${c.geometry.givens.length?c.geometry.givens.map(g=>g.label).join('; ')+'. ':''}${c.geometry.facts.join(" ")} ${c.counter}. ${c.working.join(' ')} Back to your sketch. ${copy.lifetime} Back to Copy Frame.`;
  const a=c.active;
- return `${chaseCopy.title}. ${chaseCopy.instruction} ${chaseCopy.modelNote} ${c.variantLabel}. ${c.geometry.givens.length?c.geometry.givens.map(g=>g.label).join('; ')+'. ':''}${c.geometry.facts.join(" ")} ${c.targets.map(t=>t.label).join('; ')}. Current target ${a.name}. ${c.counter}. Your answer: ${a.draft||'blank'}. ${a.reason?chaseRules[a.reason]:'No reason chosen.'} ${a.feedback} ${a.hint||''} ${a.solution||''} ${a.helpNote} ${c.caption} ${c.returnInvitation} ${copy.lifetime} Back to Copy Frame.`;
+ return `${chaseCopy.title}. ${chaseCopy.instruction} ${chaseCopy.modelNote} ${c.variantLabel}. ${c.geometry.givens.length?c.geometry.givens.map(g=>g.label).join('; ')+'. ':''}${c.geometry.facts.join(" ")} ${c.targets.map(t=>t.label).join('; ')}. Current target ${a.name}. ${c.counter}. ${c.quantityMode?(a.unit==='number'?`Your number for t: ${a.draft||'blank'}.`:`Your angle x in degrees: ${a.draft||'blank'}.`):`Your answer: ${a.draft||'blank'}.`} ${a.reason?a.reasons.find(r=>r.id===a.reason).label:a.unit==='number'?'No equation chosen.':'No reason chosen.'} ${a.feedback} ${a.hint||''} ${a.solution||''} ${a.helpNote} ${c.caption} ${c.returnInvitation} ${copy.lifetime} Back to Copy Frame.`;
 }

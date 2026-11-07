@@ -839,13 +839,21 @@ const chaseFamilies=[
  {givens:[[80,110,95],[95,100,85],[105,80,70]],keys:[[75,105],[80,100],[105,75]],offered:[['quad','regular','line'],['line','quadOutside','equalOutside']],accepted:[['quad','line'],['line','quadOutside']],example:[85,115,65,95,85]}
 ];
 const chasePacket=chaseFamilies.flatMap((f,family)=>f.keys.map((keys,variant)=>({family,variant,keys,givens:f.givens[variant],offered:f.offered,accepted:f.accepted})));
+// 422 packets are independent literal expectations; keep the old 21 angle
+// assertions intact rather than teaching them runtime-derived target names.
+const equationFamilies=[
+ {family:'equationLine',label:'One line, one equation',operands:[{m:3,b:20,k:70},{m:2,b:15,k:95},{m:4,b:12,k:64}],keys:[[30,110],[35,85],[26,116]],offered:[['line','opposite','point'],['substitute','line','opposite']],accepted:[['line'],['substitute','line']],example:{m:2,b:10,k:50},exampleKeys:[60,130]},
+ {family:'equationOpposite',label:'Opposite expressions',operands:[{m:3,b:10,r:1,s:70},{m:4,b:8,r:2,s:52},{m:5,b:5,r:2,s:86}],keys:[[30,100],[22,96],[27,140]],offered:[['opposite','line','point'],['substitute','opposite','line']],accepted:[['opposite'],['substitute','opposite']],example:{m:3,b:12,r:1,s:100},exampleKeys:[44,144]}
+];
+const equationPacket=equationFamilies.flatMap((f,j)=>f.keys.map((keys,variant)=>({...f,index:21+j*3+variant,variant,keys,operands:f.operands[variant]})));
+const allChasePacket=[...chasePacket,...equationPacket];
 const chaseAnswer=()=>({draft:'',reason:null,checked:false,hint:false,exampleSeen:false,solution:false});
 const chaseBoard=n=>({target:0,rotation:0,exampleStep:0,answers:Array.from({length:n},chaseAnswer)});
-assert.deepEqual(initialChase,{case:0,view:'solve',boards:chasePacket.map(p=>chaseBoard(p.keys.length))});
+assert.deepEqual(initialChase,{case:0,view:'solve',boards:allChasePacket.map(p=>chaseBoard(p.keys.length))});
 const chaseFresh=createCrossingAngles().chase;
-for(let i=0;i<chasePacket.length;i++){
+for(let i=0;i<allChasePacket.length;i++){
  assert.notEqual(initialChase.boards[i],chaseFresh.boards[i]);assert.notEqual(initialChase.boards[i].answers,chaseFresh.boards[i].answers);
- for(let j=0;j<chasePacket.length;j++)if(i!==j){assert.notEqual(initialChase.boards[i],initialChase.boards[j]);assert.notEqual(initialChase.boards[i].answers,initialChase.boards[j].answers);}
+ for(let j=0;j<allChasePacket.length;j++)if(i!==j){assert.notEqual(initialChase.boards[i],initialChase.boards[j]);assert.notEqual(initialChase.boards[i].answers,initialChase.boards[j].answers);}
  for(const a of initialChase.boards[i].answers){assert.equal(initialChase.boards.flatMap(b=>b.answers).filter(b=>b===a).length,1);assert.ok(!chaseFresh.boards.flatMap(b=>b.answers).includes(a));}
 }
 const chaseStart=(caseIndex=0)=>changeCrossingAngles(changeCrossingAngles(createCrossingAngles(),'page','chase'),'chase-case',caseIndex);
@@ -917,12 +925,12 @@ for(const [i,t,r] of [[0,1,'opposite'],[3,1,'line'],[3,2,'parts'],[6,1,'line'],[
 function rejectChase(chase){const bad={...createCrossingAngles(),page:'chase',chase};assert.equal(crossingAnglesModel(bad),null);assert.equal(crossingAnglesNarration(bad),'');assert.equal(changeCrossingAngles(bad,'page','build'),bad);}
 const validChase=chaseStart().chase;
 for(const bad of [null,[],{},'solve',Object('solve')])rejectChase(bad);
-for(const value of [-1,chasePacket.length,1.5,'1',Object(1),true,NaN,Infinity,null])rejectChase({...validChase,case:value});
+for(const value of [-1,allChasePacket.length,1.5,'1',Object(1),true,NaN,Infinity,null])rejectChase({...validChase,case:value});
 for(const value of ['bad',null,['solve'],Object('solve'),true])rejectChase({...validChase,view:value});
 for(const value of [null,{},[],validChase.boards.slice(1),[...validChase.boards,validChase.boards[0]]])rejectChase({...validChase,boards:value});
-for(const boardIndex of [0,14,15,16,17,18,19,20]){
+for(const boardIndex of [0,14,15,16,17,18,19,20,21,22,23,24,25,26]){
  const mutateBoard=delta=>({...validChase,boards:validChase.boards.map((b,i)=>i===boardIndex?{...b,...delta}:b)});
- const n=chasePacket[boardIndex].keys.length;
+ const n=allChasePacket[boardIndex].keys.length;
  for(const [field,values] of [['target',[-1,n,.5,'0',Object(0),null,true,NaN,Infinity]],['rotation',[-30,360,15,30.1,'30',Object(30),null,true,NaN,Infinity]],['exampleStep',[-1,n+1,.5,'0',Object(0),null,true,NaN,Infinity]],['answers',[null,{},[],validChase.boards[boardIndex].answers.slice(1),[...validChase.boards[boardIndex].answers,chaseAnswer()]]]])for(const value of values)rejectChase(mutateBoard({[field]:value}));
  for(const a of [null,[],{},'answer'])rejectChase(mutateBoard({answers:validChase.boards[boardIndex].answers.map((v,i)=>i===n-1?a:v)}));
  for(const [field,values] of [['draft',[0,null,'1000','-1','1.0',' 1','1 ','１','1e2',Object('1')]],['reason',['bad',1,[],Object('line'),{toString:()=> 'line'}]],...['checked','hint','exampleSeen','solution'].map(k=>[k,[null,0,1,'false',Object(false)]])])for(const value of values){
@@ -931,13 +939,13 @@ for(const boardIndex of [0,14,15,16,17,18,19,20]){
 }
 for(const [i,p] of chasePacket.entries())for(let t=0;t<p.keys.length;t++){
  const w=chaseApply(chaseStart(i),['chase-target',t]);
- for(const id of ['line','point','opposite','triangle','parts','exterior','corresponding','alternate','cointerior','corner','insufficient','regular','equalOutside','quad','quadOutside'])if(!p.offered[t].includes(id)){
+ for(const id of ['line','point','opposite','triangle','parts','exterior','corresponding','alternate','cointerior','corner','insufficient','regular','equalOutside','quad','quadOutside','substitute'])if(!p.offered[t].includes(id)){
   assert.equal(changeCrossingAngles(w,'chase-reason',id),w);rejectChase(chaseWith(w,{}, {reason:id}).chase);
  }
  const reasonOrder=p.offered[t].map((_,j)=>p.offered[t][(j+(i+t)%3)%3]);
  assert.deepEqual(chaseProjection(w).active.reasons.map(r=>r.id),reasonOrder,'stable authored order rotates by case and target');
 }
-for(const [action,badValues] of [['chase-case',[-1,chasePacket.length,.5,'1',Object(1),true,null,NaN]],['chase-target',[-1,2,.5,'1',Object(1),true,null,NaN]],['chase-rotation',[-30,360,15,.5,'30',Object(30),true,null,NaN]],['chase-digit',['','12','a','１',1,Object('1'),true,null]],['chase-reason',['bad',1,['line'],Object('line'),true,null]]]){
+for(const [action,badValues] of [['chase-case',[-1,allChasePacket.length,.5,'1',Object(1),true,null,NaN]],['chase-target',[-1,2,.5,'1',Object(1),true,null,NaN]],['chase-rotation',[-30,360,15,.5,'30',Object(30),true,null,NaN]],['chase-digit',['','12','a','１',1,Object('1'),true,null]],['chase-reason',['bad',1,['line'],Object('line'),true,null]]]){
  const w=chaseStart();for(const value of badValues)assert.equal(changeCrossingAngles(w,action,value),w,`${action} rejects malformed value`);
 }
 const chaseZero=['chase-backspace','chase-clear','chase-check','chase-hint','chase-solution','chase-example','chase-restart'];
@@ -961,12 +969,12 @@ for(const page of ['build','learn','parallel','triangle','matching']){
 // All per-case work survives case/page movement; restart clears only its board.
 {
  let w=chaseStart();
- for(let i=0;i<chasePacket.length;i++)w=chaseApply(w,['chase-case',i],['chase-target',chasePacket[i].keys.length-1],['chase-rotation',30*(i%12)],['chase-digit',String(i%10)],['chase-hint'],['chase-example'],['chase-example-step',1],['chase-return']);
+ for(let i=0;i<allChasePacket.length;i++)w=chaseApply(w,['chase-case',i],['chase-target',allChasePacket[i].keys.length-1],['chase-rotation',30*(i%12)],['chase-digit',String(i%10)],['chase-hint'],['chase-example'],['chase-example-step',1],['chase-return']);
  const held=structuredClone(w.chase.boards);
- for(let i=0;i<chasePacket.length;i++){w=changeCrossingAngles(w,'chase-case',i);assert.deepEqual(chaseHeld(w),held[i]);}
+ for(let i=0;i<allChasePacket.length;i++){w=changeCrossingAngles(w,'chase-case',i);assert.deepEqual(chaseHeld(w),held[i]);}
  for(const page of ['build','learn','parallel','triangle','matching','chase']){w=changeCrossingAngles(w,'page',page);assert.deepEqual(w.chase.boards,held);}
  w=changeCrossingAngles(w,'chase-case',7);const reset=changeCrossingAngles(w,'chase-restart');assert.equal(reset.chase.case,7);assert.deepEqual(chaseHeld(reset),chaseBoard(2));assert.equal(changeCrossingAngles(reset,'chase-restart'),reset);
- for(let i=0;i<chasePacket.length;i++)if(i!==7){assert.equal(reset.chase.boards[i],w.chase.boards[i]);assert.deepEqual(reset.chase.boards[i],held[i]);}
+ for(let i=0;i<allChasePacket.length;i++)if(i!==7){assert.equal(reset.chase.boards[i],w.chase.boards[i]);assert.deepEqual(reset.chase.boards[i],held[i]);}
 }
 // Explicitly printed values form a finite union, not transitive inference.
 for(const [i,n,provided] of [[0,1,[1]],[3,1,[0,1]],[3,2,[2]],[6,1,[1]],[9,2,[2]],[12,2,[1,2]]]){
@@ -989,7 +997,7 @@ for(let i=15;i<chasePacket.length;i++)for(const target of [0,1]){
  assert.ok(!new RegExp(`${'xy'[1-target]}\\s*=\\s*\\d+°`).test(m.active.solution),'solution never prints the other unknown as a provided value');
  const dirty=chaseApply(shown,['chase-digit','9'],['chase-hint'],['chase-example'],['chase-example-step',2],['chase-return'],['chase-rotation',330]);
  const reset=changeCrossingAngles(dirty,'chase-restart');assert.deepEqual(chaseHeld(reset),chaseBoard(2));
- for(let j=0;j<chasePacket.length;j++)if(j!==i)assert.equal(reset.chase.boards[j],dirty.chase.boards[j],'restart preserves every other board');
+ for(let j=0;j<allChasePacket.length;j++)if(j!==i)assert.equal(reset.chase.boards[j],dirty.chase.boards[j],'restart preserves every other board');
 }
 // Side counts remain source counts in facts/description/Hear, while only the
 // three quadrilateral givens become positioned degree tags.
@@ -1011,13 +1019,13 @@ for(const index of [18,19,20])for(const example of [false,true]){
 const chaseOldDeltas=[{angle:165},{rotation:330},{pair:'adjacent'},{prompt:5},{card:3},{step:2},{twoMode:'panel'},{twoSpacing:'far'},{twoLean:10},{twoPair:'alternate'},{twoMove:4},{twoPrompt:5},{triMode:'panel'},{triView:'outside'},{triA:45,triB:75},{triSize:'small'},{triGather:2},{triProof:2},{triPrompt:5},{polySides:8},{polyKind:'stretched'},{polySize:'small'},{polyView:'walk'},{polyCorner:3},{polyDraw:2},{polyWalk:3},{polyPrompt:5},{polyPanelCorner:2},{polyPanelDraw:1},{polyPanelWalk:3},{matching:{...createCrossingAngles().matching,case:'aaa',view:'letters',prompt:5}}];
 const chaseContexts=[null,captureCrossingPanel({originalWidth:9,originalHeight:7,width:1,height:12},'Synthetic tall source'),captureCrossingPanel({originalWidth:2,originalHeight:11,width:12,height:1},'Synthetic wide source')];
 function chaseInvariant(w,changes){const m=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);for(const [v,c] of changes){assert.deepEqual(chaseProjection(v,c),m);assert.equal(renderCrossingAngles(v,c),html);assert.equal(crossingAnglesNarration(v,c),hear);}}
-for(const i of [0,3,6,9,12,15,16,17,18,19,20]){
+for(const i of chasePacket.map((_,i)=>i)){
  const w=chaseApply(chaseStart(i),['chase-hint']);
- const inactive=w.chase.boards.map((b,j)=>j===i?b:{...b,target:chasePacket[j].keys.length-1,rotation:330,exampleStep:1,answers:b.answers.map((a,t)=>({...a,draft:'999',reason:chasePacket[j].offered[t][0],checked:true,hint:true,exampleSeen:true,solution:true}))});
+ const inactive=w.chase.boards.map((b,j)=>j===i?b:{...b,target:allChasePacket[j].keys.length-1,rotation:330,exampleStep:1,answers:b.answers.map((a,t)=>({...a,draft:'999',reason:allChasePacket[j].offered[t][0],checked:true,hint:true,exampleSeen:true,solution:true}))});
  chaseInvariant(w,[...chaseOldDeltas.map(d=>[{...w,...d},null]),...chaseContexts.map(c=>[w,c]),[{...w,chase:{...w.chase,boards:inactive}},null]]);
 }
 for(const old of [initial,panelWork,parallel,triangle,poly,matchWork()]){
- const different={...old,chase:{...chaseStart(14).chase,boards:chaseStart(14).chase.boards.map((b,i)=>({...b,target:chasePacket[i].keys.length-1,rotation:330,exampleStep:1,answers:b.answers.map((a,t)=>({...a,draft:'999',reason:chasePacket[i].offered[t][0],checked:true,hint:true,exampleSeen:true,solution:true}))}))}};
+ const different={...old,chase:{...chaseStart(14).chase,boards:chaseStart(14).chase.boards.map((b,i)=>({...b,target:allChasePacket[i].keys.length-1,rotation:330,exampleStep:1,answers:b.answers.map((a,t)=>({...a,draft:'999',reason:allChasePacket[i].offered[t][0],checked:true,hint:true,exampleSeen:true,solution:true}))}))}};
  assert.equal(crossingAnglesModel(old).chase,null);assert.deepEqual(crossingAnglesModel(different),crossingAnglesModel(old));assert.equal(renderCrossingAngles(different,capture),renderCrossingAngles(old,capture));assert.equal(crossingAnglesNarration(different,capture),crossingAnglesNarration(old,capture));
 }
 // Examples reveal only their finite step; all practice state is excluded.
@@ -1180,3 +1188,153 @@ for(const [i,p] of chasePacket.entries()){
 }
 
 console.log('Angle Chase: independent finite mathematics, reason alternatives, local reducer safety, exposure roles, worked-step isolation, SVG incidence and rotations passed.');
+
+// 422: equation meaning, quantity units and exposure are independently authored.
+const equationTerm=n=>n===1?'t':`${n}t`;
+function equationExpect(p){
+ const {m,b,k,r,s}=p.operands,a=`${m}t + ${b}`,e=`${equationTerm(r)} + ${s}`,isLine=p.family==='equationLine';
+ return {
+  facts:[isLine?'A–O–C is straight. x is angle AOB and k is angle BOC.':'A–O–C and B–O–D are straight lines crossing at O. x is angle AOB and e is angle COD.',`x = (${a})°.`,`${isLine?`k = ${k}°.`:`e = (${e})°.`} t is a number, not an angle. These sketches have whole-number answers for t.`,`In equations for t, we use the numbers of degrees. ${m}t means ${m} × t.`],
+  labels:isLine?[{line:`${a} + ${k} = 180 · Angles on a straight line.`,opposite:`${a} = ${k} · Vertically opposite angles.`,point:`${a} + ${k} = 360 · Angles around a point.`},{substitute:`x = (${a})° · Substitute t into the angle expression.`,line:`x + ${k}° = 180° · Angles on a straight line.`,opposite:`x = ${k}° · Vertically opposite angles.`}]:[{opposite:`${a} = ${e} · Vertically opposite angles.`,line:`(${a}) + (${e}) = 180 · Angles on a straight line.`,point:`(${a}) + (${e}) = 360 · Angles around a point.`},{substitute:`x = (${a})° · Substitute t into the angle expression.`,opposite:`x = (${e})° · Vertically opposite angles.`,line:`x + (${e})° = 180° · Angles on a straight line.`}],
+  relations:isLine?[{line:`The two marked angles share a straight line: ${a} + ${k} = 180.`},{substitute:`Use t in the angle expression: x = (${a})°.`,line:`x and k share the straight line A–O–C: x + ${k}° = 180°.`}]:[{opposite:`The marked angles are vertically opposite: ${a} = ${e}.`},{substitute:`Use t in the angle expression: x = (${a})°.`,opposite:`x and e are vertically opposite: x = (${e})°.`}],
+  formulas:isLine?[{line:`${a} + ${k} = 180`},{substitute:`x = (${a})°`,line:`x + ${k}° = 180°`}]:[{opposite:`${a} = ${e}`},{substitute:`x = (${a})°`,opposite:`x = (${e})°`}],
+  missing:isLine?{opposite:/beside each other, not vertically opposite/,point:/fill a half turn, not a full turn around O/}:{line:/across the crossing, not beside each other on one straight line/,point:/do not fill the whole turn around O/}
+ };
+}
+const equationNames=['t','x'],equationUnits=['number','degrees'];
+const equationValue=(p,j)=>`${equationNames[j]} = ${p.keys[j]}${j?'°':''}`;
+function assertEquationExposure(w,p,values,shown){
+ const g=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+ assert.deepEqual(g.targets.map(t=>[t.name,t.unit,t.value,t.shown]),equationNames.map((name,j)=>[name,equationUnits[j],values[j],shown[j]]));
+ for(let j=0;j<2;j++){
+  const attrs=chaseSvgTag(html,w.chase.view==='example'?'div':'button','data-crossing-angles-chase-target',equationNames[j]);
+  const body=html.match(new RegExp(`<(?:button|div)\\b[^>]*data-crossing-angles-chase-target="${equationNames[j]}"[^>]*>([\\s\\S]*?)<\\/(?:button|div)>`))[1].replace(/<[^>]+>/g,' ').trim();
+  if(values[j]===null){assert.ok(!/\d/.test(body));assert.ok(!new RegExp(`\\b${equationNames[j]}\\s*=\\s*${p.keys[j]}${j?'°':'(?![\\d°])'}`).test(g.geometry.description+' '+hear),'unexposed key has no quantity assignment');}
+  else {assert.ok(body.includes(`${values[j]}${j?'°':''}`));if(!j)assert.ok(!body.includes('°'));}
+  if(w.chase.view==='solve')assert.equal(chaseAttr(attrs,'aria-label'),`${j?'Choose angle x':'Choose t'}${values[j]===null?'':`, ${values[j]}${j?' degrees':''}`}${shown[j]?', shown':''}`);
+ }
+ assert.ok(!/\bt\s*=\s*\d+°/.test(html+' '+hear),'scalar never acquires a degree suffix');
+ assert.ok(!/data-(?:expected|answer-key|chase-key|measure)=/i.test(html));
+}
+for(const p of equationPacket){
+ const {m,b,k,r,s}=p.operands,isLine=p.family==='equationLine',expect=equationExpect(p),blank=chaseStart(p.index);
+ assert.equal(chaseProjection(blank).family,p.family);assert.equal(chaseProjection(blank).variantLabel,`${p.label} · sketch ${p.variant+1}`);
+ assert.deepEqual(p.keys,isLine?[(180-k-b)/m,m*((180-k-b)/m)+b]:[(s-b)/(m-r),m*((s-b)/(m-r))+b]);
+ assert.ok(m>0&&p.keys[0]>0&&p.keys[1]>0&&p.keys[1]<180);if(isLine)assert.equal(p.keys[1]+k,180);else {assert.ok(m-r>0);assert.equal(p.keys[1],r*p.keys[0]+s);}
+ assertEquationExposure(blank,p,[null,null],[false,false]);
+ for(const fact of expect.facts)for(const output of [chaseProjection(blank).geometry.facts.join(' '),chaseProjection(blank).geometry.description,crossingAnglesNarration(blank)])assert.ok(output.includes(fact),`source facts include ${fact}`);
+ assert.ok(!/Given\s*\./.test(chaseProjection(blank).geometry.description));
+ for(let j=0;j<2;j++){
+  const w=changeCrossingAngles(blank,'chase-target',j),g=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+  assert.equal(g.active.name,equationNames[j]);assert.equal(g.active.unit,equationUnits[j]);assert.equal(g.counter,`Question ${j+1} of 2`);
+  assert.equal(g.question,j?'Find x. Which relationship explains this step?':'Find t. Choose an equation and its angle relationship.');
+  assert.ok(html.includes('Choose a quantity'));assert.ok(html.includes('aria-label="Find a quantity"'));
+  const input=chaseSvgTag(html,'input','id','crossing-angles-chase-answer');
+  assert.equal(chaseAttr(input,'aria-label'),j?'Angle x, your answer in degrees':'t, your number');
+  const entry=html.match(/<div class="ca-chase-entry">([\s\S]*?)<\/div>/)[1];assert.equal(entry.includes('°'),j===1);
+  assert.ok(hear.includes(j?'Your angle x in degrees: blank.':'Your number for t: blank.'));assert.ok(hear.includes(j?'No reason chosen.':'No equation chosen.'));
+  const order=p.offered[j].map((_,n)=>p.offered[j][(n+(p.index+j)%3)%3]);assert.deepEqual(g.active.reasons.map(r=>[r.id,r.label]),order.map(id=>[id,expect.labels[j][id]]));
+  for(const id of ['line','point','opposite','triangle','parts','exterior','corresponding','alternate','cointerior','corner','insufficient','regular','equalOutside','quad','quadOutside','substitute'])if(!p.offered[j].includes(id)){assert.equal(changeCrossingAngles(w,'chase-reason',id),w);rejectChase(chaseWith(w,{}, {reason:id}).chase);}
+  for(const id of p.offered[j]){
+   const selected=changeCrossingAngles(w,'chase-reason',id);assert.ok(crossingAnglesNarration(selected).includes(expect.labels[j][id]),'Hear reads selected complete equation card');
+   const correct=chaseApply(chaseWrite(w,p.keys[j],id),['chase-check']);assertEquationExposure(correct,p,j?[null,p.keys[1]]:[p.keys[0],null],[false,false]);
+   assert.equal(changeCrossingAngles(correct,'chase-check'),correct);
+   if(p.accepted[j].includes(id))assert.equal(chaseProjection(correct).active.feedback,`${equationValue(p,j)}. ${expect.relations[j][id]}`);
+   else for(const value of [0,p.keys[j]])assert.match(chaseProjection(chaseApply(chaseWrite(w,value,id),['chase-check'])).active.feedback,expect.missing[id]);
+   if(p.accepted[j].includes(id))assert.equal(chaseProjection(chaseApply(chaseWrite(w,0,id),['chase-check'])).active.feedback,`That relationship fits here. Check the calculation using ${expect.formulas[j][id]}${j&&(id==='substitute'||!isLine)?', and the value you used for t':''}.`);
+  }
+  const draft=p.keys[j]<100?`0${p.keys[j]}`:String(p.keys[j]),checked=changeCrossingAngles(chaseWrite(w,draft),'chase-check');assert.equal(chaseHeld(checked).answers[j].draft,draft);assertEquationExposure(checked,p,j?[null,p.keys[1]]:[p.keys[0],null],[false,false]);
+  assert.equal(chaseProjection(changeCrossingAngles(w,'chase-check')).active.feedback,j?'Enter a whole-number angle, then check when you’re ready.':'Enter a whole number for t, then check when you’re ready.');
+  for(const value of [361,999])assert.equal(chaseProjection(chaseApply(chaseWrite(w,value),['chase-check'])).active.feedback,j?'Use a whole-number angle from 0° to 360°.':'Use a whole number from 0 to 360 here.');
+  const numberOnly=chaseApply(chaseWrite(w,p.keys[j]),['chase-check']);assert.match(chaseProjection(numberOnly).active.feedback,j?/Choose a reason/:/Choose an equation and its reason/);
+  for(const action of ['chase-hint','chase-solution','chase-example']){const helped=changeCrossingAngles(w,action);assert.deepEqual(chaseHeld(helped).answers.map(a=>[a.draft,a.reason,a.checked]),[['',null,false],['',null,false]]);if(action!=='chase-example')assert.equal(changeCrossingAngles(helped,action),helped);}
+  const hint=changeCrossingAngles(w,'chase-hint');assertEquationExposure(hint,p,[null,null],[false,false]);assert.ok(chaseProjection(hint).active.helpNote.includes('A hint has been opened for this question.'));
+  const shown=changeCrossingAngles(w,'chase-solution');assertEquationExposure(shown,p,j?p.keys:[p.keys[0],null],j?[true,true]:[true,false]);
+  if(j){assert.equal(chaseProjection(shown).caption,'This sketch has a checked or shown value for every question. Shown solutions are help. Pick another sketch or change one.');const t=chaseProjection(changeCrossingAngles(shown,'chase-target',0));assert.ok(t.active.helpNote.includes('this quantity'));assert.equal(t.active.solution,null);assert.equal(t.active.reason,null);}
+  else assert.ok(!/\bx\s*=\s*\d+°/.test(chaseProjection(shown).active.solution));
+  const dirty=chaseApply(shown,['chase-digit','9'],['chase-rotation',330],['chase-example'],['chase-example-step',2],['chase-return']);assert.deepEqual(chaseHeld(changeCrossingAngles(dirty,'chase-restart')),chaseBoard(2));
+  for(const bad of [-1,2,.5,'1',null,true,NaN])assert.equal(changeCrossingAngles(w,'chase-target',bad),w);
+  const digits=chaseWrite(w,'123');assert.equal(changeCrossingAngles(digits,'chase-digit','4'),digits);
+ }
+ // A typed or checked wrong t never supplies a key for any accepted x route.
+ for(const id of p.accepted[1]){const wrong=chaseApply(chaseWrite(blank,1,p.accepted[0][0]),['chase-check'],['chase-target',1]);const x=chaseApply(chaseWrite(wrong,p.keys[1],id),['chase-check']);assert.ok(chaseProjection(x).active.feedback.startsWith(`${equationValue(p,1)}.`));assert.equal(chaseHeld(x).answers[0].draft,'1');assert.equal(chaseHeld(x).answers[0].checked,true);assert.equal(chaseProjection(x).targets[0].value,null);}
+ // Direct help uses fixed source arithmetic and keeps every entered response.
+ const shownT=chaseProjection(changeCrossingAngles(blank,'chase-solution')).active.solution;
+ assert.ok(shownT.includes(isLine?`${m}t + ${b} + ${k} = 180.`:`${m}t + ${b} = ${equationTerm(r)} + ${s}.`));
+ assert.ok(shownT.includes(isLine?`t = (180 − ${k} − ${b}) ÷ ${m} = ${p.keys[0]}.`:`t = (${s} − ${b}) ÷ (${m} − ${r}) = ${p.keys[0]}.`));
+ if(!isLine)assert.ok(shownT.includes(`divide both sides by ${m-r}, which is not zero`));
+ for(const draft of ['', '1', String(p.keys[0])]){
+  const prior=draft?chaseApply(chaseWrite(blank,draft,p.accepted[0][0]),['chase-check']):blank;
+  const shown=chaseApply(prior,['chase-target',1],['chase-solution']),g=chaseProjection(shown);
+  assert.ok(g.active.solution.includes(`Using t = ${p.keys[0]}, x = (${m} × ${p.keys[0]} + ${b})° = ${p.keys[1]}°.`));
+  assert.ok(g.active.solution.includes('This working shows t as help; it does not fill your answer for t.'));
+  assertEquationExposure(shown,p,p.keys,[true,true]);assert.deepEqual(chaseHeld(shown).answers[0],chaseHeld(prior).answers[0]);
+  const checkedT=chaseApply(chaseWrite(changeCrossingAngles(shown,'chase-target',0),p.keys[0],p.accepted[0][0]),['chase-check']);assertEquationExposure(checkedT,p,p.keys,[true,true]);
+ }
+ for(const [action,values] of [['chase-case',[-1,27,.5,'21',null]],['chase-target',[-1,2,.5,'1',null]],['chase-rotation',[-30,360,15,'30',null]],['chase-digit',['','12','a','１',1,null]],['chase-reason',['bad','triangle','substitute',1,null]]])for(const value of values){if(action==='chase-reason'&&p.offered[0].includes(value))continue;assert.equal(changeCrossingAngles(blank,action,value),blank);}
+ for(const action of chaseZero)for(const value of [null,0,false,'',[],{}])assert.equal(changeCrossingAngles(blank,action,value),blank);
+ const example=changeCrossingAngles(blank,'chase-example');for(const [action,value] of chaseSolveActions)assert.equal(changeCrossingAngles(example,action,value),example);
+ for(const value of [-1,3,.5,'1',null,true,NaN])assert.equal(changeCrossingAngles(example,'chase-example-step',value),example);
+ const inactive=blank.chase.boards.map((b,i)=>i===p.index?b:{...b,target:allChasePacket[i].keys.length-1,rotation:330,answers:b.answers.map((a,j)=>({...a,draft:'999',reason:allChasePacket[i].offered[j][0],checked:true,solution:true}))});
+ chaseInvariant(blank,[...chaseContexts.map(c=>[blank,c]),...chaseOldDeltas.map(d=>[{...blank,...d},null]),[{...blank,chase:{...blank.chase,boards:inactive}},null]]);
+}
+// Each example has its own independent operands and keys, and no practice state.
+for(const [f,family] of equationFamilies.entries()){
+ const p={...family,operands:family.example,keys:family.exampleKeys},expect=equationExpect(p),{m,b,k,r,s}=p.operands;
+ assert.ok(p.keys.every(n=>!family.keys.flat().includes(n)),'example keys disjoint from every practice target in their family');
+ assert.deepEqual(p.keys,f?[(s-b)/(m-r),m*(s-b)/(m-r)+b]:[(180-k-b)/m,180-k]);
+ for(let step=0;step<=2;step++){
+  const w=chaseApply(chaseStart(21+3*f),['chase-example'],['chase-example-step',step]),g=chaseProjection(w),html=renderCrossingAngles(w),hear=crossingAnglesNarration(w);
+  assertEquationExposure(w,p,p.keys.map((v,j)=>j<step?v:null),p.keys.map((v,j)=>j<step));assert.equal(g.active,null);assert.equal(g.rotation,0);assert.equal(g.working.length,step);
+  assert.ok(html.includes('aria-label="Example quantities"'));assert.ok(!hear.includes('Leaving Copy Frame clears'));
+  for(const fact of expect.facts)for(const output of [g.geometry.facts.join(' '),g.geometry.description,hear])assert.ok(output.includes(fact));
+  if(step<2)assert.ok(!/\bx\s*=\s*\d+°/.test(g.working.join(' ')+' '+hear),'step one contains no future x result');
+  if(step>=1){assert.ok(g.working[0].includes(`t = (`));assert.ok(g.working[0].includes(`= ${p.keys[0]}. t is a number.`));}
+  if(step===2)assert.equal(g.working[1],`Using t = ${p.keys[0]}, x = (${m} × ${p.keys[0]} + ${b})° = ${p.keys[1]}°.`);
+  const changes=[...chaseContexts.map(c=>[w,c]),...chaseOldDeltas.map(d=>[{...w,...d},null])];
+  for(let variant=0;variant<3;variant++){
+   const different={...w,chase:{...w.chase,case:21+3*f+variant}};
+   changes.push([chaseWith(different,{target:1,rotation:330,exampleStep:step,answers:chaseHeld(different).answers.map((a,j)=>({...a,draft:'999',reason:family.offered[j][0],checked:true,hint:true,solution:true}))}),null]);
+  }
+  chaseInvariant(w,changes);
+ }
+}
+// The new SVG plans are read back from actual elements. Keys never measure a
+// drawing; these coordinates establish only named incidence and pointer roles.
+const equationSketches=[
+ {points:{O:[0,0],A:chasePolar(0),B:chasePolar(110),C:chasePolar(180)},center:[0,0],scale:52,lines:['AC','OB'],regions:{x:'OAB',k:'OBC'},oLabel:270},
+ {points:{O:[0,0],A:chasePolar(0),B:chasePolar(110),C:chasePolar(180),D:chasePolar(290)},center:[0,0],scale:52,lines:['AC','BD'],regions:{x:'OAB',e:'OCD'},oLabel:145}
+];
+for(const [f,s] of equationSketches.entries()){
+ close(cross(sub(s.points.A,s.points.O),sub(s.points.C,s.points.O)),0,'A O C collinear');assert.ok(dot(sub(s.points.A,s.points.O),sub(s.points.C,s.points.O))<0);
+ if(f){close(cross(sub(s.points.B,s.points.O),sub(s.points.D,s.points.O)),0,'B O D collinear');assert.ok(dot(s.points.B,s.points.D)<0);close(chaseExpectedArc(s,'OAB',0,'x').sweep,chaseExpectedArc(s,'OCD',0,'e').sweep,'actual opposite sectors match');}
+ else close(chaseExpectedArc(s,'OAB',0,'x').sweep+chaseExpectedArc(s,'OBC',0,'k').sweep,Math.PI,'actual line sectors form half turn');
+ for(const variant of [0,1,2,'example'])for(let rotation=0;rotation<360;rotation+=30){
+  if(variant==='example'&&rotation)continue;
+  const w=variant==='example'?chaseApply(chaseStart(21+f*3),['chase-example']):chaseApply(chaseStart(21+f*3+variant),['chase-rotation',rotation]);
+  const g=chaseProjection(w).geometry,html=renderCrossingAngles(w);
+  assert.deepEqual(g.points.map(p=>p.name).sort(),Object.keys(s.points).sort());assert.deepEqual(g.givens,[]);assert.deepEqual(g.rightMarks,[]);assert.deepEqual(g.parallelMarks,[]);
+  assert.equal(g.sectors.length,2);assert.deepEqual(g.sectors.map(a=>a.name).sort(),Object.keys(s.regions).sort());
+  assert.ok(!html.includes('ca-chase-given'),'no floating expression, x duplicate or k/e source tag');
+  assert.equal([...html.matchAll(/data-ca-leader="/g)].length,Object.keys(s.points).length,'ordinary point-name leaders only');
+  for(const [name,raw] of Object.entries(s.points)){
+   const expected=chaseProject(raw,s,rotation),point=g.points.find(p=>p.name===name);chaseNear(point.point,expected,'projected equation-family endpoint');
+   const attrs=chaseSvgTag(html,'span','data-crossing-angles-label',name),position=chaseSvgPoint(attrs,['data-ca-x','data-ca-y']);assert.ok(position.every((v,i)=>v>=0&&v<=[640,560][i]));
+   assert.ok(Math.hypot(...sub(position,expected))>=44,'readable label displaced from its vertex');
+   if(name==='O'){const a=(s.oLabel+rotation)*Math.PI/180;chaseNear(position,[320+80*Math.cos(a),280-80*Math.sin(a)],'O lies in stipulated empty-sector direction');}
+  }
+  assert.equal(g.segments.length,2);
+  s.lines.forEach(([a,b],j)=>{const attrs=chaseSvgTag(html,'line','data-chase-line',j);chaseNear(chaseSvgPoint(attrs,['x1','y1']),chaseProject(s.points[a],s,rotation),'actual line first endpoint');chaseNear(chaseSvgPoint(attrs,['x2','y2']),chaseProject(s.points[b],s,rotation),'actual line second endpoint');});
+  for(const [name,region] of Object.entries(s.regions)){
+   const expected=chaseExpectedArc(s,region,rotation,name),sector=g.sectors.find(a=>a.name===name),path=nums(chaseAttr(chaseSvgTag(html,'path','data-chase-sector',name),'d'));
+   chaseNear(sector.center,expected.center,'true equation vertex');close(sector.sweep,expected.sweep*180/Math.PI,'true equation sector sweep');assert.equal(sector.radius,28);chaseNear(sector.leader,expected.leader,'actual sector bisector');
+   assert.equal(path.length,9);chaseNear(path.slice(0,2),expected.first,'arc first named ray');chaseNear(path.slice(2,4),[28,28],'radius28');assert.deepEqual(path.slice(4,7),[0,0,0]);chaseNear(path.slice(7),expected.last,'arc second named ray');
+   if(name==='x'){const attrs=chaseSvgTag(html,variant==='example'?'div':'button','data-crossing-angles-chase-target','x');chaseNear(chaseSvgPoint(attrs,['data-chase-leader-x','data-chase-leader-y']),expected.leader,'only angular target connector follows true x bisector');}
+  }
+  const t=chaseSvgTag(html,variant==='example'?'div':'button','data-crossing-angles-chase-target','t');assert.ok(!/data-(?:chase-leader|ca-[xy])/.test(t),'scalar control has no geometric coordinate');
+  assert.equal([...html.matchAll(/data-chase-connector="x"/g)].length,1);assert.ok(!html.includes('data-chase-connector="t"'));assert.ok(!html.includes('data-chase-sector="t"'));
+  assert.ok(g.description.includes(`Angles: x (AOB), ${f?'e (COD)':'k (BOC)'}. Questions: t (number), x (angle).`));
+  if(variant!=='example')for(const target of [0,1])assert.deepEqual(chaseProjection(changeCrossingAngles(w,'chase-target',target)).geometry.sectors.filter(a=>a.selected).map(a=>a.name).sort(),Object.keys(s.regions).sort(),'both quantity questions highlight both real sectors');
+ }
+}
+console.log('Angle equations: independent scalar/angle mathematics, equation cards, provided values, examples, state isolation and actual SVG geometry passed.');
