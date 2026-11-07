@@ -53,8 +53,6 @@ def choose(p, case):
         if not button.first.is_visible():
             button.first.locator('xpath=ancestor::details[1]').locator('summary').click()
         button.first.click()
-    else:
-        p.locator('[data-join-case]').select_option(case)
     p.locator('[data-join-view="case"]').wait_for()
 
 def go(p, base, route=ROUTE):
@@ -141,7 +139,7 @@ def geometry(p, original, example=False):
 def layout(p, label):
     p.screenshot(path=str(OUT/(label+'.png')), full_page=True)
     ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'), 'no horizontal overflow '+label)
-    bad = p.locator(VIEW+' button,'+VIEW+' a,'+VIEW+' select,'+VIEW+' summary').evaluate_all('xs=>xs.filter(e=>!e.closest(".speech-controls,drawn-howto")&&e.checkVisibility()&&(e.getBoundingClientRect().width<43.5||e.getBoundingClientRect().height<43.5||parseFloat(getComputedStyle(e).fontSize)<16)).map(e=>e.outerHTML.slice(0,100))')
+    bad = p.locator(VIEW+' button,'+VIEW+' a,'+VIEW+' summary').evaluate_all('xs=>xs.filter(e=>!e.closest(".speech-controls,drawn-howto")&&e.checkVisibility()&&(e.getBoundingClientRect().width<43.5||e.getBoundingClientRect().height<43.5||parseFloat(getComputedStyle(e).fontSize)<16)).map(e=>e.outerHTML.slice(0,100))')
     ok(not bad, '44px native targets and16px text '+str(bad))
 
 def speech(p):
@@ -234,6 +232,8 @@ def journey(browser, base):
             if frame<4:ok('Adding the tops' not in words and '2 sixths' not in words, 'earlier frame speech excludes later false claim')
             if frame==4:
                 ok('Different claim: 2/6' in p.locator('[data-join-view="example"]').inner_text(), 'fifth frame contrast explicitly separate')
+                claim=p.locator('.join-claim')
+                ok(claim.locator('[data-source]').count()==0 and not claim.locator('svg text').evaluate_all("xs=>xs.some(e=>/^[AB]$/.test(e.textContent.trim()))"), 'false claim has neutral units without source A/B identity')
                 false=p.locator('.join-claim svg').evaluate('e=>{const whole=e.querySelector("[data-join-whole]").getBoundingClientRect();const pieces=[...e.querySelectorAll("[data-join-piece]")].map(x=>x.getBoundingClientRect().width);return {whole:whole.width,pieces,cuts:e.querySelectorAll(".join-cut").length}}')
                 true_whole=p.locator('[data-join-output] [data-join-whole]').evaluate('e=>e.getBoundingClientRect().width')
                 ok(false['cuts']==5 and len(false['pieces'])==2 and abs(false['whole']-true_whole)<.2 and abs(sum(false['pieces'])/true_whole-1/3)<.0001, 'false sixths use same scale and are shorter than original half')
