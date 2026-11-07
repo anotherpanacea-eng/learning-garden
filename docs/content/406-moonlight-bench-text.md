@@ -11,11 +11,11 @@ Original explanatory model, not real observations. Place labels are diagram loca
     "model": "A simplified non-eclipse model, not tonight’s sky. Sizes and distances are not to scale.",
     "tilt": "The real Moon’s path is tilted. Most new and full moons do not make an eclipse. This flat model does not simulate eclipses.",
     "places": "Eight possible places for the same Moon, not eight moons at once.",
-    "above": "From above",
+    "above": "From above Earth’s north side",
     "earthView": "View from Earth",
     "sunlight": "Sunlight comes from the right.",
-    "viewLine": "The dashed line shows the viewing direction from Earth, not a shadow.",
-    "hidden": "The view from Earth is hidden. Imagine the lit part you could see, then look.",
+    "viewLine": "The dashed line shows the viewing direction from Earth, not sunlight or a shadow.",
+    "hidden": "The view from Earth is hidden. Imagine the lit part you could see, then show the view.",
     "show": "Show view from Earth",
     "hide": "Hide view from Earth",
     "flip": "Flip Earth view",
@@ -26,14 +26,21 @@ Original explanatory model, not real observations. Place labels are diagram loca
     "next": "Next place",
     "another": "Another invitation",
     "teaching": "Why the shape changes",
-    "back": "Back to Sky Notes",
+    "back": "Back to Sky notes",
     "explore": "Back to my model",
     "hear": "Hear this page",
     "example": "Separate example",
     "selected": "Selected place",
-    "visit": "Your model waits while you stay in Sky Notes. Leaving this page or changing explorer clears it.",
-    "returnPrompt": "Back in Sky Notes, record what you actually see. This model does not fill in or correct an observation.",
-    "grownup": "This qualitative model explains non-eclipse phases with parallel sunlight and schematic disks. It omits orbital tilt in the drawing, eclipses, Earthshine, exact distances, timing, lunar features and viewing orientation. The northern/southern drawings are simplified styles, not a location. All model choices are visit-local; the observation notebook and its picture setting are unchanged. No attempt, support or learning record is made."
+    "visit": "Your model waits while you stay in Sky notes. Leaving Sky notes or changing explorer clears it.",
+    "returnPrompt": "When you look at the real sky, record what you actually see in Sky notes. This model does not fill in or correct an observation.",
+    "grownup": "This qualitative model explains non-eclipse phases with parallel sunlight and schematic disks. It omits orbital tilt in the drawing, eclipses, Earthshine, exact distances, timing, lunar features and viewing orientation. The northern/southern drawings are simplified styles, not a location. All model choices are visit-local; the observation notebook and its picture setting are unchanged. No attempt, support or learning record is made. A not-seen observation may involve clouds, timing or new Moon; this model cannot tell which.",
+    "orbitMotion": "Next place follows the Moon’s direction around Earth in this view. The real change is smooth; these buttons sample eight places.",
+    "orbitDescription": "Earth is in the middle. Eight balls mark possible places for one Moon around Earth. Each ball’s right half faces the sunlight. The outlined ball is the place being shown.",
+    "previousStep": "Previous step",
+    "nextStep": "Next step",
+    "grownupLabel": "For grown-ups",
+    "stepTemplate": "Step {number} of 4.",
+    "placeTemplate": "{label}: {location}."
   },
   "places": [
     {
@@ -41,7 +48,7 @@ Original explanatory model, not real observations. Place labels are diagram loca
       "code": "new",
       "name": "New Moon",
       "location": "Right side",
-      "description": "The lit half faces away from Earth. The Moon is still there, though direct sunlight lights none of this ideal view.",
+      "description": "The lit half faces away from Earth. The Moon is still there, though direct sunlight lights none of this ideal view. In the real sky, a new Moon is very hard to see near the bright Sun.",
       "amount": "None of this ideal view is sunlit."
     },
     {
@@ -89,7 +96,7 @@ Original explanatory model, not real observations. Place labels are diagram loca
       "code": "half-shrinking",
       "name": "Half and shrinking (last quarter)",
       "location": "Bottom",
-      "description": "Half of the disk we see is sunlit again, now in the shrinking part of the cycle.",
+      "description": "Half of the disk we see is sunlit again, now in the shrinking part of the cycle. Last quarter also names a place in the cycle.",
       "amount": "Half of this view is sunlit."
     },
     {
@@ -106,13 +113,13 @@ Original explanatory model, not real observations. Place labels are diagram loca
       "title": "One half faces the Sun",
       "position": 1,
       "both": false,
-      "text": "The Sun lights one half of the Moon in this model. That lit half faces the sunlight source wherever we place the Moon."
+      "text": "Earth is our planet. The Sun is a star that gives light. The Moon travels around Earth on a path called its orbit. All three are roughly shaped like balls. Outside eclipses, sunlight lights half the Moon. Moonlight is reflected sunlight."
     },
     {
       "title": "Our view is another half",
       "position": 2,
       "both": false,
-      "text": "From Earth, we face one half of the Moon. How much of that visible half is sunlit depends on where the Moon is around Earth."
+      "text": "A phase is the shape of the sunlit part we see. From Earth, we face one half of the Moon. The visible half and the sunlit half can overlap in different amounts as the Moon moves around Earth."
     },
     {
       "title": "A phase is not Earth’s shadow",
@@ -131,7 +138,7 @@ Original explanatory model, not real observations. Place labels are diagram loca
     "Find a place where the view from Earth is half lit. Can you find another?",
     "Make a thin shape grow into a full circle. What stays the same in the view from above?",
     "Compare a growing crescent with a shrinking crescent. What changes when you flip the drawing?",
-    "Find new Moon, then full Moon. Why doesn’t this flat diagram predict an eclipse every time?"
+    "Find new Moon, then full Moon. In this flat drawing they line up with Earth and the sunlight. Why don’t real new and full moons make an eclipse every time?"
   ]
 }
 ```
