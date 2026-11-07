@@ -1199,16 +1199,16 @@ def chase_focused(browser,base):
         elif case in [3,12]:
             act(p,'chase-target',1 if case==3 else 2,before);act(p,'chase-solution',before=before)
         chase_scene(p,family);capture(p,'chase-tablet-'+family)
-        p.set_viewport_size({'width':320,'height':1000})
+        p.set_viewport_size({'width':320,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
         for rotation in range(0,360,30):
             chase_scene(p,family)
             if rotation in [0,180,330]:capture(p,'chase-phone-'+family+'-'+str(rotation))
             act(p,'chase-rotation',before=before)
-        p.set_viewport_size({'width':820,'height':1000})
+        p.set_viewport_size({'width':820,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
     for case in range(15):
         act(p,'chase-case',case,before)
         for width in [320,820]:
-            p.set_viewport_size({'width':width,'height':1000})
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
             for _ in range(12):
                 chase_scene(p,['crossing','hub','triangle','parallel','rectangle'][case//3]);act(p,'chase-rotation',before=before)
     act(p,'chase-case',3,before);act(p,'chase-example',before=before)
