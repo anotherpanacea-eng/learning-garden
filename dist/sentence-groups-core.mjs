@@ -103,7 +103,7 @@ export function groupsNarration(work,ui={}){
   if(work.page==='meaning'){
    parts.push(`${copy.messageIncludes}: ${labels(p.scene.members,p.reference)}.`,p.explanation);
    if(p.verdict)parts.push(p.verdict);
-  }else parts.push(copy.hint);
+  }else{if(!p.work.attached)parts.push(`${copy.detail}: ${p.scene.clause}.`);parts.push(copy.hint);}
  }
  if(ui?.talkOpen===true)parts.push(copy.talk);
  if(ui?.grownupOpen===true)parts.push(copy.grownup);

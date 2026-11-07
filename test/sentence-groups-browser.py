@@ -66,12 +66,18 @@ def layout(p):
  ok(p.evaluate('document.documentElement.scrollWidth<=innerWidth+1'),'no horizontal scroll')
  bad=p.locator('.bridges-page button,.bridges-page a,.bridges-page select,.bridges-page summary,.groups-member').evaluate_all('xs=>xs.filter(x=>x.checkVisibility()&&(x.getBoundingClientRect().width<43.9||x.getBoundingClientRect().height<43.9||parseFloat(getComputedStyle(x).fontSize)<16)).map(x=>x.outerHTML.slice(0,130))')
  ok(not bad,'44px targets and16px native text '+str(bad))
+ if p.locator(sel('check')).count():ok(p.locator(sel('check')).evaluate('e=>Boolean(document.querySelector(".groups-roster").compareDocumentPosition(e)&Node.DOCUMENT_POSITION_FOLLOWING)'),'check action follows the selection cards')
  ok(p.locator('.groups-comma-word').evaluate_all('xs=>xs.every(e=>{const r=document.createRange();r.selectNodeContents(e);return Array.from(r.getClientRects()).every(x=>Math.abs(x.top-r.getClientRects()[0].top)<1)&&!/\\s,/.test(e.textContent)})'),'comma remains on preceding word without whitespace or orphan wrap')
  ok(p.locator('drawn-howto').count()==0,'no unrelated Joining guide in groups')
 
 def journey(browser,base):
  print('Groups: six-scene full actual-app journey',flush=True);c,p=setup(browser,base)
  try:
+  guide_before=snapshot(p)
+  p.locator('drawn-howto .dh-open').click();p.locator('drawn-howto .dh-panel').wait_for();p.locator('[data-dh="close"]').click()
+  p.locator('drawn-howto .dh-open').click();ok(p.locator('drawn-howto .dh-panel').is_visible(),'Joining guide reopens after Close');p.locator('[data-dh="close"]').click()
+  p.keyboard.press('Enter');ok(p.locator('drawn-howto .dh-panel').is_visible(),'Joining guide reopens with keyboard after Close');p.locator('[data-dh="close"]').click()
+  ok(snapshot(p)==guide_before,'Joining guide opening/closing leaves actual notebook and storage unchanged')
   baseline=export(p,base,'before');go(p,base);before=snapshot(p)
   p.locator('[data-bridges-action="word"][data-bridges-value="because"]').click();p.locator('[data-bridges-action="swap"]').click();joined=p.locator('.bridges-output').inner_text()
   mode(p,'details');p.locator('[data-details-action="attach"][data-details-value="parcel"]').click();detail=p.locator('[data-details-sentence]').inner_text()
