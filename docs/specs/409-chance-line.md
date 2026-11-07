@@ -29,7 +29,7 @@ Three freely reachable pages: **Place a chance**, **See why**, **Try questions**
 
 See why has four freely turned pictures, using original counters and a0–1 line, with these exact mathematical ideas (wording may be split into short equivalent sentences):
 
-1. Count the whole: four equal-chance positions, one Sun. Sun has1/4 chance; three Moons stay in the denominator. A fraction names a share of one whole. Zero means impossible; one means certain. Half is an even chance. Below half is unlikely, above half is likely for the named event, with endpoints named separately.
+1. Count the whole: four equal-chance positions, one Sun. Sun has1/4 chance; three Moons stay in the denominator. A fraction names a share of one whole. One of four counters is one quarter of the set; two of four is two quarters. The denominator counts every counter, including the other mark. Zero means impossible; one means certain. Half is an even chance. Below half is unlikely, above half is likely for the named event, with endpoints named separately.
 2. Compare shares:3Sun+1Moon versus6Sun+6Moon;3/4 >6/12 =1/2, despite6 >3. Draw both references on the same0–1 line and show both bags. Chance uses a share, not the Sun count alone. A larger coordinate is more likely.
 3. Same chance, different bags:2Sun+2Moon and6Sun+6Moon both have Sun chance1/2. Draw coincident references with separate rows and show both bags. Equivalent fractions describe the same point, not identical bags.
 4. More likely is not promised:3Sun+1Moon gives Sun3/4, Moon1/4. Either mark can appear next. Putting a drawn counter back restores the same four-position bag. A short run need not follow the proportions; neither a catch-up rule nor a streak changes this model's next-draw chance. Actual draws remain in Seed Stall.
@@ -83,6 +83,8 @@ Upstreams refreshed2026-11-07: Jane `c681f6bf2f2adf2aa032f765983a4691774cfba5` L
 | Equally Likely Outcomes `mt_xSgAgg9Ej_` | ordering above | equal positions explicitly defined; unequal Sun/Moon shares; no general physical fairness claim |
 | Probability as a Fraction `mt_-c4Ca_nBzX` | generic fraction meaning `mt_ndGqFPWyen`; equally likely above | picture1 recaps share of whole;4-,6-,12-position counts and optional reference; existing fraction activities available, never presumed mastered |
 | 0-to-1 Probability Scale `mt_t0g2SlP404` | probability as fraction above | count fraction, reduced fraction and own/reference point; decimals/percent remain missing, so partial only |
+
+Pinned-graph reconciliation: the bundled `curriculum/marble/dependencies.json` instead names Unit fractions `mt_k2WE0-22-4` as the hard fraction prerequisite. Its discrete-set unit/non-unit fraction description is supported narrowly by picture1's one-of-four and two-of-four counter examples and optional count/reference display. The refreshed upstream replaces that edge with generic fraction meaning `mt_ndGqFPWyen`; both are explicitly recapped, neither inferred as mastered. Other listed hard edges agree. Existing Sharing Counter remains an optional revisit, not an entry gate.
 
 Math source studied: [OpenStax Introductory Statistics2e §3.1](https://openstax.org/books/introductory-statistics-2e/pages/3-1-terminology). Its equally-likely count/whole rule and inclusive0–1 bounds inform original finite models; no text/figure copied. Independent reviewer must recompute every table/reference/choice/diagram and check this source boundary. No measurable learning claim follows.
 
