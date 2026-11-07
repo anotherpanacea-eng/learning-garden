@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Chance Line409 · count the whole, compare the share
 
-[Chance Line409](specs/409-chance-line.md) is the next proposed M6/M3 bridge inside Seed Stall: place an ungraded chance pin, compare a separate reference, and contrast different bags on the same0–1 line. It connects87's short runs with119's existing two-draw work. The complete finite specification is independently BUILD-READY at2240b6db after six-lens and mathematics/model repair closure. Implementation is built in [PR492](https://github.com/anotherpanacea-eng/learning-garden/pull/492), with actual-app qualification and independent implementation review underway. No saved learner root, access gate or claim of a complete probability course is added.
+[Chance Line409](specs/409-chance-line.md) is the next proposed M6/M3 bridge inside Seed Stall: place an ungraded chance pin, compare a separate reference, and contrast different bags on the same0–1 line. It connects87's short runs with119's existing two-draw work. The complete finite specification is independently BUILD-READY at2240b6db after six-lens and mathematics/model repair closure. The bounded implementation is built; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/492#issuecomment-6703972947) owns independent implementation acceptance and publication status. No saved learner root, access gate or claim of a complete probability course is added.
 
 ## Leaf Kitchen408 · materials, energy and food
 
