@@ -67,8 +67,8 @@ Hints: line t **Write the half-turn total. Take away the known corner and the ad
 
 Direct shown solution bodies (inside the existing shown-help wrapper; values come from source/keys, never response history):
 
-- line t: **{m}t + {b} + {k} = 180. Subtract {k} and {b} from both sides, then divide both sides by {m}. t = (180 − {k} − {b}) ÷ {m} = {t}. t is a number; this has not yet evaluated the angle x.** No intermediate x value is printed.
-- opposite t: **{m}t + {b} = {r}t + {s}. Subtract {r}t and {b} from both sides, then divide both sides by {m−r}, which is not zero. t = ({s} − {b}) ÷ ({m} − {r}) = {t}. t is a number; this has not yet evaluated the angle x.** No intermediate x value is printed.
+- line t: **{m}t + {b} + {k} = 180. Subtract {k} and {b} from both sides, then divide both sides by {m}. t = (180 − {k} − {b}) ÷ {m} = {t}. t is a number. Use it in the expression to find angle x.** No intermediate x value is printed.
+- opposite t: **{m}t + {b} = {r}t + {s}. Subtract {r}t and {b} from both sides, then divide both sides by {m−r}, which is not zero. t = ({s} − {b}) ÷ ({m} − {r}) = {t}. t is a number. Use it in the expression to find angle x.** No intermediate x value is printed.
 - new x: **Using t = {t}, x = ({m} × {t} + {b})° = {x}°. This working shows t as help; it does not fill your answer for t.**
 
 Show solution t exposes t only. Show solution x explicitly prints both quantities: extend420's finite provided-set map by new x→t, truthfully labeling both shown even if a draft is blank/wrong or later checked. It does not mark either answer entered, correct reasoning or independent. Example step1 uses its own direct-t body; example step2 **Using t = {t}, x = ({m} × {t} + {b})° = {x}°.** t was already revealed there. Do not print future example x in step1, including its prose/aria/Hear.
