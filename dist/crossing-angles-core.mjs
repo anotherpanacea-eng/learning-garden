@@ -1,4 +1,4 @@
-import {crossingCopy as copy,crossingPrompts,crossingCards,twoCrossingsCopy as twoCopy,twoCrossingsPrompts,twoPanelPrompts,triangleCopy as triCopy,trianglePrompts,trianglePanelPrompts} from './crossing-angles-content.mjs';
+import {crossingCopy as copy,crossingPrompts,crossingCards,twoCrossingsCopy as twoCopy,twoCrossingsPrompts,twoPanelPrompts,triangleCopy as triCopy,trianglePrompts,trianglePanelPrompts,polygonCopy as polyCopy,polygonPrompts,polygonPanelPrompts} from './crossing-angles-content.mjs';
 const integer=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
 const dimension=n=>integer(n,1,12);
 const angleValue=n=>integer(n,15,165)&&n%15===0;
@@ -6,8 +6,8 @@ const rotationValue=n=>integer(n,0,330)&&n%30===0;
 const triAngle=n=>integer(n,15,150)&&n%15===0;
 const pairs=['corresponding','alternate','co-interior'];
 const spacings={near:120,middle:150,far:180};
-function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel','triangle'].includes(work.page)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5)&&['free','panel'].includes(work.triMode)&&['gather','reason','outside'].includes(work.triView)&&triAngle(work.triA)&&triAngle(work.triB)&&work.triA+work.triB<=165&&['small','large'].includes(work.triSize)&&integer(work.triGather,0,2)&&integer(work.triProof,0,2)&&integer(work.triPrompt,0,5);}
-export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0};}
+function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel','triangle'].includes(work.page)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5)&&['free','panel'].includes(work.triMode)&&['gather','reason','outside','polygons'].includes(work.triView)&&triAngle(work.triA)&&triAngle(work.triB)&&work.triA+work.triB<=165&&['small','large'].includes(work.triSize)&&integer(work.triGather,0,2)&&integer(work.triProof,0,2)&&integer(work.triPrompt,0,5)&&integer(work.polySides,3,12)&&['regular','stretched'].includes(work.polyKind)&&['small','large'].includes(work.polySize)&&['split','corner','walk'].includes(work.polyView)&&integer(work.polyCorner,0,work.polySides-1)&&integer(work.polyDraw,0,work.polySides-3)&&integer(work.polyWalk,0,work.polySides)&&integer(work.polyPrompt,0,5)&&integer(work.polyPanelCorner,0,3)&&integer(work.polyPanelDraw,0,1)&&integer(work.polyPanelWalk,0,4);}
+export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0,polySides:5,polyKind:'regular',polySize:'large',polyView:'split',polyCorner:0,polyDraw:0,polyWalk:0,polyPrompt:0,polyPanelCorner:0,polyPanelDraw:0,polyPanelWalk:0};}
 export function changeCrossingAngles(work,action,value){
  if(!valid(work))return work;
  const set=(key,v)=>work[key]===v?work:{...work,[key]:v};
@@ -32,7 +32,23 @@ export function changeCrossingAngles(work,action,value){
   }
  }
  if(work.page==='triangle'){
-  for(const [act,key,accept] of [['tri-mode','triMode',v=>['free','panel'].includes(v)],['tri-view','triView',v=>['gather','reason','outside'].includes(v)],['tri-gather','triGather',v=>integer(v,0,2)],['tri-proof','triProof',v=>integer(v,0,2)],['tri-prompt','triPrompt',v=>integer(v,0,5)]])if(action===act)return accept(value)?set(key,value):work;
+  if(action==='tri-mode')return ['free','panel'].includes(value)?set('triMode',value):work;
+  if(action==='tri-view')return ['gather','reason','outside','polygons'].includes(value)?set('triView',value):work;
+  if(work.triView==='polygons'){
+   const panel=work.triMode==='panel',n=panel?4:work.polySides,prefix=panel?'polyPanel':'poly';
+   if(action==='poly-view')return ['split','corner','walk'].includes(value)?set('polyView',value):work;
+   if(action==='poly-prompt')return integer(value,0,5)?set('polyPrompt',value):work;
+   if(action==='poly-corner'&&integer(value,0,n-1))return work[prefix+'Corner']===value?work:{...work,[prefix+'Corner']:value,[prefix+'Draw']:0,[prefix+'Walk']:0};
+   if(action==='poly-draw')return integer(value,0,n-3)?set(prefix+'Draw',value):work;
+   if(action==='poly-walk')return integer(value,0,n)?set(prefix+'Walk',value):work;
+   if(!panel){
+    if(action==='poly-sides'&&integer(value,3,12))return work.polySides===value?work:{...work,polySides:value,polyCorner:0,polyDraw:0,polyWalk:0};
+    if(action==='poly-kind')return ['regular','stretched'].includes(value)?set('polyKind',value):work;
+    if(action==='poly-size')return ['small','large'].includes(value)?set('polySize',value):work;
+   }
+   return work;
+  }
+  for(const [act,key,accept] of [['tri-gather','triGather',v=>integer(v,0,2)],['tri-proof','triProof',v=>integer(v,0,2)],['tri-prompt','triPrompt',v=>integer(v,0,5)]])if(action===act)return accept(value)?set(key,value):work;
   if(work.triMode==='free'){
    if(action==='tri-size'&&['small','large'].includes(value))return set('triSize',value);
    if(action==='tri-a'&&triAngle(value)&&value+work.triB<=165)return set('triA',value);
@@ -131,10 +147,15 @@ export function crossingAnglesModel(work,context=null){
  if(!valid(work))return null;
  const g=geometry(work.page==='build'?work.angle:60,work.page==='build'?work.rotation:0,work.page==='build'?work.pair:'opposite');
  const diagrams=work.page==='build'||work.card<2?[{title:work.page==='build'?'My crossing':'60° example',geometry:g}]:work.card===2?[{title:'60° example',geometry:g},{title:'90° example',geometry:geometry(90,0)}]:[];
- return {page:work.page,build:{angle:work.angle,rotation:work.rotation,pair:work.pair,prompt:work.prompt,canLess:work.angle>15,canMore:work.angle<165},prompt:crossingPrompts[work.prompt],card:crossingCards[work.card],cardIndex:work.card,step:work.step,geometry:g,diagrams,context:panelContext(context),two:twoModel(work,context),triangle:triangleModel(work,context)};
+ return {page:work.page,build:{angle:work.angle,rotation:work.rotation,pair:work.pair,prompt:work.prompt,canLess:work.angle>15,canMore:work.angle<165},prompt:crossingPrompts[work.prompt],card:crossingCards[work.card],cardIndex:work.card,step:work.step,geometry:g,diagrams,context:panelContext(context),two:twoModel(work,context),triangle:triangleModel(work,context),polygon:polygonModel(work,context)};
 }
 export function crossingAnglesNarration(work,context=null){
  const m=crossingAnglesModel(work,context);if(!m)return '';
+ if(m.page==='triangle'&&m.polygon){
+  const p=m.polygon;
+  if(p.missing)return `${copy.title}. Polygon frames. ${polyCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
+  return `${copy.title}. Polygon frames. ${polyCopy.instruction} ${polyCopy.modes[p.mode]}. ${polyCopy.views[p.view]}. ${p.source} ${p.definition} ${p.naming} ${p.chosen} ${p.current}${p.current?' ':''}${p.counter}${p.counter?'. ':''}${p.text} ${p.equations.join('. ')}${p.equations.length?'. ':''}${p.perTurn}${p.perTurn?'. ':''}${p.fractionNote}${p.fractionNote?' ':''}${p.prompt.title}. ${p.prompt.text} ${polyCopy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
+ }
  if(m.page==='triangle'){
   const t=m.triangle;if(t.missing)return `${copy.title}. Triangle corners. ${triCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
   return `${copy.title}. Triangle corners. ${triCopy.instruction} ${triCopy.modes[t.mode]}. ${triCopy.views[t.view]}. ${t.source} ${t.definition}. ${t.naming} ${t.summary} ${t.counter?`${t.counter}. `:''}${t.text} ${t.equations.join('. ')}${t.equations.length?'. ':''}${t.workedExample?`Separate worked example. ${t.workedExample} `:''}${t.prompt.title}. ${t.prompt.text} ${triCopy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
@@ -199,7 +220,7 @@ function panelTriangleScene(context,rotation,view,step,promptIndex){
  return triangleScene({raw:[[0,0],[context.width,0],[context.width,context.height]],A,B:90,rotation,view,step,prompt:trianglePanelPrompts[promptIndex],context});
 }
 function triangleModel(work,context){
- if(work.page!=='triangle')return null;
+ if(work.page!=='triangle'||work.triView==='polygons')return null;
  const step=work.triView==='gather'?work.triGather:work.triView==='reason'?work.triProof:0;
  if(work.triMode==='panel'){
   const c=captureCrossingPanel(context,context?.caseTitle);if(!c)return {mode:'panel',missing:true};
@@ -207,4 +228,78 @@ function triangleModel(work,context){
  }
  const A=work.triA,B=work.triB,rad=Math.PI/180,t=Math.sin(B*rad)/Math.sin((A+B)*rad);
  return triangleScene({raw:[[0,0],[1,0],[t*Math.cos(A*rad),t*Math.sin(A*rad)]],A,B,rotation:work.rotation,view:work.triView,step,prompt:trianglePrompts[work.triPrompt],size:work.triSize});
+}
+
+// The two entry builders deliberately accept only the active channel.
+function freePolygonScene(n,kind,size,rotation,view,corner,draw,walk,promptIndex){
+ const raw=Array.from({length:n},(_,i)=>{const t=(90+360*i/n)*Math.PI/180;return [(kind==='regular'?1:1.6)*Math.cos(t),Math.sin(t)];});
+ return polygonScene({raw,kind,size,rotation,view,corner,draw,walk,prompt:polygonPrompts[promptIndex],mode:'free',regular:kind==='regular',equalCorners:kind==='regular',source:polyCopy.freeCaption});
+}
+function panelPolygonScene(context,rotation,view,corner,draw,walk,promptIndex){
+ const {width,height,caseTitle}=context;
+ return polygonScene({raw:[[0,0],[width,0],[width,height],[0,height]],rotation,view,corner,draw,walk,prompt:polygonPanelPrompts[promptIndex],mode:'panel',regular:width===height,equalCorners:true,source:`${caseTitle}. Copied width ${width} × height ${height}.`,context:{caseTitle,width,height}});
+}
+function polygonModel(work,context){
+ if(work.page!=='triangle'||work.triView!=='polygons')return null;
+ if(work.triMode==='panel'){
+  const c=captureCrossingPanel(context,context?.caseTitle);if(!c)return {mode:'panel',missing:true};
+  return panelPolygonScene(c,work.rotation,work.polyView,work.polyPanelCorner,work.polyPanelDraw,work.polyPanelWalk,work.polyPrompt);
+ }
+ return freePolygonScene(work.polySides,work.polyKind,work.polySize,work.rotation,work.polyView,work.polyCorner,work.polyDraw,work.polyWalk,work.polyPrompt);
+}
+function polygonScene({raw,kind,size='large',rotation,view,corner,draw,walk,prompt,mode,regular,equalCorners,source,context}){
+ const n=raw.length,total=(n-2)*180,rad=Math.PI/180,panel=mode==='panel';
+ const centroid=[0,1].map(d=>raw.reduce((s,p)=>s+p[d],0)/n),centered=raw.map(p=>p.map((v,d)=>v-centroid[d]));
+ const scale=(size==='small'?120:160)/Math.max(...centered.map(p=>Math.hypot(...p))),local=centered.map(p=>p.map(v=>v*scale));
+ const project=([x,y])=>[320+x*Math.cos(rotation*rad)-y*Math.sin(rotation*rad),280-x*Math.sin(rotation*rad)-y*Math.cos(rotation*rad)];
+ const vertices=local.map(project),index=i=>(i+n)%n,sub=(a,b)=>a.map((v,d)=>v-b[d]),cross=(a,b)=>a[0]*b[1]-a[1]*b[0],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],unit=v=>v.map(x=>x/Math.hypot(...v));
+ const add=(a,b,k=1)=>a.map((v,d)=>v+k*b[d]);
+ const i=view==='walk'?index(corner+walk):corner,V=local[i],prev=local[index(i-1)],next=local[index(i+1)],incoming=unit(sub(V,prev)),out=unit(sub(next,V));
+ const turn=Math.atan2(cross(incoming,out),dot(incoming,out))/rad,bearing=Math.atan2(incoming[1],incoming[0])/rad,short=Math.min(Math.hypot(...sub(V,prev)),Math.hypot(...sub(next,V)));
+ const distances=local.flatMap((p,j)=>j===i||index(j+1)===i?[]:[Math.abs(cross(sub(local[index(j+1)],p),sub(V,p)))/Math.hypot(...sub(local[index(j+1)],p))]);
+ const rho=Math.min(24,.35*short),interiorRadius=Math.min(rho,.7*Math.min(...distances));
+ const sector=(name,start,sweep,radius,right=false)=>({name,center:vertices[i],start:start+rotation,sweep,radius,right});
+ const interior=view==='corner'?sector(`a${i+1}`,bearing+turn,180-turn,interiorRadius,panel||regular&&n===4):null;
+ const exterior=view==='walk'&&walk>0?sector(`e${i+1}`,bearing,turn,rho):null;
+ const extension=exterior?{start:vertices[i],end:project(add(V,incoming,30))}:null,outgoing=exterior?{start:vertices[i],end:project(add(V,out,Math.min(30,Math.hypot(...sub(next,V)))))}:null;
+ let marker=null,startRing=null;
+ if(view==='walk'){
+  const p=[incoming[1],-incoming[0]],q=[out[1],-out[0]],M=add(V,p,rho+8),tip=add(M,out,7),base=add(M,out,2);
+  marker={center:project(M),leader:{start:vertices[i],end:project(M)},heading:{start:project(add(M,out,-7)),end:project(tip)},arrow:[project(tip),project(add(base,q,4)),project(add(base,q,-4))],dotRadius:3};
+  startRing={center:vertices[corner],radius:5};
+ }
+ const complete=draw===n-3,triangles=[],diagonals=[];
+ if(view==='split'){
+  for(let j=1;j<=(complete?n-2:draw);j++){const indices=[corner,index(corner+j),index(corner+j+1)];triangles.push({indices,points:indices.map(k=>vertices[k])});}
+  for(let j=0;j<draw;j++)diagonals.push({start:vertices[corner],end:vertices[index(corner+j+2)]});
+ }
+ const remaining=[corner,...Array.from({length:n-draw-1},(_,j)=>index(corner+draw+1+j))];
+ const remainder=view==='split'&&!complete?{indices:remaining,points:remaining.map(j=>vertices[j])}:null;
+ const point=vertices[corner],distance=Math.hypot(point[0]-320,point[1]-280),points=view==='walk'?[]:[{name:'A',point,leader:point,position:[point[0]+55*(point[0]-320)/distance,point[1]+55*(point[1]-280)/distance]}];
+ const selected=interior||exterior,tags=selected?[{name:selected.name,position:interior?[85,60]:[555,500],leader:[selected.center[0]+selected.radius*.75*Math.cos((selected.start+selected.sweep/2)*rad),selected.center[1]-selected.radius*.75*Math.sin((selected.start+selected.sweep/2)*rad)]}]:[];
+ const plural=(count,word)=>`${count} ${word}${count===1?'':'s'}`;
+ const fractional=expr=>`${expr} is the exact size of ${expr.startsWith('360')?'one turn':expr.startsWith('180')?'this adjacent turn':'one corner'}. It is not a whole number of degrees, so no rounded value is shown.`;
+ const one=`${total}°÷${n}`,pre=`180°−(${one})`,per=`360°÷${n}`;
+ const exact=total%n===0,cornerValue=exact?`=${total/n}°`:'',turnValue=360%n===0?`=${360/n}°`:'';
+ let text='',equations=[],perTurn='',fractionNote='',counter='';
+ if(view==='split'){
+  counter=`${draw} of ${n-3} diagonal${n-3===1?'':'s'}`;
+  if(!complete)text=`Join A to a corner that is not its neighbor. Each new diagonal adds a piece. ${plural(draw+1,'piece')} so far: ${plural(draw,'completed triangle')} and one ${n-draw}-sided piece that is not a triangle yet. How many triangles will fill the whole frame?`;
+  else {
+   text=n===3?'This frame is already one triangle: no diagonal is needed. Its corners total 180°, as Triangle Corners explains.':`Every piece is now a triangle. From A: ${plural(n-3,'diagonal')} and ${n-2} triangles. The two neighbors already share sides with A. One original region plus ${plural(n-3,'added region')} makes ${n-2}. These triangles fill the convex frame, and their angles make exactly the original corners: no gaps, overlaps or extra middle corner. Each triangle contributes 180°, so add ${n-2} lots of 180°. The same argument works from any corner of any convex frame in this model.`;
+   text+=' n means the number of sides.';equations=['For n sides: (n−2)×180°',`(${n}−2)×180°=${total}°`,`All corners together: ${total}°`];
+  }
+ }else if(view==='corner'){
+  if(panel){text=`A rectangle has four right angles. All four total 360°, and each is 90°. The corners match even if the sides do not all match. ${regular?'This one is square, so it is regular.':'This rectangle is not square, so it is irregular but has equal angles.'}`;equations=['4×90°=360°','Each corner: 90° (a right angle)','Check: 360°÷4=90°'];}
+  else if(regular){text=`This regular frame has ${n} equal corners and ${n} equal sides. All its corners total ${total}°. Share that total equally among the corners to find one. A total is different from one corner.`;equations=[`One corner: ${one}${cornerValue}`,`One adjacent outside turn: ${pre}${turnValue}`];if(!exact)fractionNote=`${fractional(one)} ${fractional(pre)}`;}
+  else {text=`Stretching kept the frame convex, but it is no longer regular. Its corners are not all equal. All corners still total ${total}°. Dividing by ${n} finds an average; it does not find the angle at A (a${i+1}).${n===4?' All four sides are still equal, yet the corners are not. Equal sides alone do not make a regular polygon.':''}`;equations=[`All corners together: ${total}°`];}
+ }else {
+  counter=`${walk} of ${n} turns`;
+  if(walk===0)text='Start at A, already pointing along the first side. No turns counted yet. Next stop moves to the next corner and turns there. Predict which way the marker will point after a whole lap.';
+  else if(walk<n){text=`We have turned at ${walk} of ${n} corners. This outside turn goes from continuing along the incoming side to following the next side. It sits beside the inside corner on a straight line.`;equations=['Inside corner + adjacent outside turn=180°'];perTurn=panel?`${walk}×90°=${walk*90}° accumulated`:regular?`Each turn: ${pre}${turnValue}`:`Turn at corner ${i+1}: e${i+1}`;if(regular&&!exact&&!panel)fractionNote=fractional(pre);}
+  else {text=`Back at A, pointing along the first side again. We made one positive turn at each corner: ${n} turns, one full 360° turn. The same final direction does not mean we turned 0°. Each inside corner and its outside turn make 180°. Taking all inside corners away from ${n} half turns leaves 360°. This convex boundary closes once without crossing or turning inward.`;equations=[`${n}×180°−(${n}−2)×180°=360°`,'All outside turns together: 360°'];perTurn=panel?'Each turn: 90°':regular?`Each turn: ${per}${turnValue}`:`Turn at corner ${i+1}: e${i+1}`;if(regular&&!exact&&!panel)fractionNote=fractional(per);}
+ }
+ const chosen=`A is corner ${corner+1} of ${n}.`,current=view==='walk'?`Current corner ${i+1} of ${n}.`:'',definition=`${polyCopy.definition} ${polyCopy.regularDefinition}`;
+ const description=`${source} ${definition} ${polyCopy.naming} ${chosen} ${current} ${counter}${counter?'.':''} ${text} ${equations.join('. ')} ${perTurn} ${fractionNote} Picture orientation ${rotation}°.`;
+ return {mode,view,n,corner,draw,walk,prompt,rotation,regular,equalCorners,total,width:640,height:560,center:[320,280],vertices,triangles,diagonals,remainder,interior,exterior,extension,outgoing,marker,startRing,points,tags,text,counter,equations,perTurn,fractionNote,source,definition,naming:polyCopy.naming,chosen,current,description,...(panel?{context}:{kind,size})};
 }
