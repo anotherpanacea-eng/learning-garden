@@ -131,7 +131,10 @@ def responsive(browser,base,seed,width,height):
  ctx,p=table.setup(browser,base,seed,width,height)
  try:
   action(p,'summary')
-  if width==1024:p.screenshot(path=str(OUT/'summary-1024-story-viewport.png'),full_page=False)
+  if width==1024:
+   for selector in ['[data-writing-summary-story] > p[data-writing-read]:last-of-type','[data-writing-summary-nav=story-next]']:
+    box=p.locator(selector).bounding_box();ok(box and box['y']>=0 and box['y']+box['height']<=height,'tablet entry shows story and next control '+selector)
+   p.screenshot(path=str(OUT/'summary-1024-story-viewport.png'),full_page=False)
   nav(p,'story-next');turn(p,'choose');place(p,'delay','keep')
   if width==1024:p.screenshot(path=str(OUT/'summary-1024-choose-viewport.png'),full_page=False)
   turn(p,'summary')

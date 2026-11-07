@@ -1,6 +1,6 @@
 # Summary Press401 · a short account for another reader
 
-Status: proposed; independent six-lens and complete finite literary review required before implementation. Parent: ongoing LG-1 / LG-G1, Fleet1590. Builds on merged ca6d5184; does not release the French Gemini or phonics/audio owner holds.
+Status: specification independently cleared at ff14bdd5 after six-lens and complete finite literary review; implementation authored. PR483 owns independent implementation clearance and release status. Parent: ongoing LG-1 / LG-G1, Fleet1590. Builds on merged ca6d5184; does not release the French Gemini or phonics/audio owner holds.
 
 ## Teaching job and placement
 

@@ -221,7 +221,7 @@ export function bindWriting(state,ctx={}){
   v[key]+=direction==='prev'?-1:1;if(kind==='sentence')v.selected=record.source.parts[v.sentence]?.id||'';
   redraw('',[`[data-writing-summary-nav='${nav}']:not(:disabled)`,`[data-writing-summary-nav='${kind}-${direction==='prev'?'next':'prev'}']:not(:disabled)`]);
  }));
- root.querySelectorAll('[data-writing-open]').forEach(el=>el.addEventListener('click',()=>{if(!live(el))return;act(el,()=>core.openWritingTask(state,el.dataset.writingOpen,options),'Your draft is waiting.','#writing-task-title');}));
+ root.querySelectorAll('[data-writing-open]').forEach(el=>el.addEventListener('click',()=>{if(!live(el))return;act(el,()=>core.openWritingTask(state,el.dataset.writingOpen,options),'Your draft is waiting.',['#writing-summary-turn-title','#writing-task-title']);}));
  root.querySelectorAll('[data-writing-other-reader]').forEach(el=>el.addEventListener('click',()=>{if(!live(el)||el.disabled)return;const target=core.writingOtherReader(state,core.writingView(state).record?.source);if(target.status!=='ready')return;act(el,()=>core.openWritingTask(state,target.taskId,options),'The other reader’s draft is here.','#writing-task-title');}));
  root.querySelectorAll('[data-writing-bench]').forEach(el=>el.addEventListener('click',()=>{if(!live(el))return;stop();v.bench=el.dataset.writingBench;redraw('',`[data-writing-bench='${v.bench}']`);}));
  root.querySelectorAll('[data-writing-strip]').forEach(el=>el.addEventListener('click',()=>{if(!live(el))return;stop();v.selected=el.dataset.writingStrip;redraw('','#writing-move-tools');}));
@@ -236,7 +236,7 @@ export function bindWriting(state,ctx={}){
   if(action==='close-source'){
    const selector=v.inspector?.returnSelector;v.inspector=null;redraw();const next=document.querySelector('[data-writing-root]');const origin=selector&&next?.querySelector(selector);const target=origin&&!origin.disabled&&visible(origin)?origin:next?.querySelector('#writing-task-title');target?.focus();target?.scrollIntoView({block:'nearest'});return;
   }
-  if(action==='summary')return act(el,()=>core.openWritingTask(state,'summary-knock',options),'Your story is ready.','#writing-task-title');
+  if(action==='summary')return act(el,()=>core.openWritingTask(state,'summary-knock',options),'Your story is ready.',['#writing-summary-turn-title','#writing-task-title']);
   if(action==='quote')return act(el,()=>core.openWritingTask(state,'quote-build',options),"Dot's sentences are ready to move.",'#writing-task-title');
   if(action==='quote-return'){
    const target=core.writingQuoteReturn(state);if(!target||!act(el,()=>core.openWritingTask(state,target.id,options),'Your kept paragraph is here.'))return;
@@ -257,7 +257,7 @@ export function bindWriting(state,ctx={}){
   if(action==='start')return act(el,()=>core.openWritingTask(state,'bakery',options),'','#writing-task-title');
   if(action==='check')return act(el,()=>core.checkWritingTask(state,options),'','#writing-feedback');
   if(action==='keep')return act(el,()=>core.keepWritingTask(state,options),'This version is in your notebook.','#writing-status');
-  if(action==='next'){return act(el,()=>core.nextWritingTask(state,options),'Your earlier draft is waiting.','#writing-task-title');}
+  if(action==='next'){return act(el,()=>core.nextWritingTask(state,options),'Your earlier draft is waiting.',['#writing-summary-turn-title','#writing-task-title']);}
   if(action==='put-back')return act(el,()=>core.setWritingMaterial(state,{strip:v.selected,heading:null},options),core.writingView(state).record?.source.bench==='summary'?'The sentence is waiting again.':'The strip is waiting again.',core.writingView(state).record?.source.bench==='summary'?["[data-writing-destination]","[data-writing-summary-nav='sentence-next']:not(:disabled)"]:`[data-writing-strip='${v.selected}']`);
   if(['hint','example','together'].includes(action))return act(el,()=>core.showWritingHelp(state,action,options),action==='hint'?'A hint is below.':action==='example'?'A separate example is below.':'Read this draft together.',action==='hint'?'#writing-hint':action==='example'?'#writing-example':`[data-writing-action='${action}']`);
  }));
