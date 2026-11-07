@@ -1,6 +1,6 @@
 #407 · Walton’s Letters: a narrator presents himself
 
-Status: proposed; six-lens specification and complete finite literary/quotation/source review precede code. Existing LG-1 / LG-G1. A bounded E3-IV/V/E4-IV return under273/219 using the actual Evidence & Voice engine, not a new reading placement or assessment system.
+Status: specification and complete finite literary/source packet independently BUILD-READY at44ff7431 after six-lens review and focused repair closure; implementation in progress. Existing LG-1 / LG-G1. A bounded E3-IV/V/E4-IV return under273/219 using the actual Evidence & Voice engine, not a new reading placement or assessment system.
 
 ## Purpose and encounter
 

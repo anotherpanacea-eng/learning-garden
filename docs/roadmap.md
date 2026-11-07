@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Walton’s Letters407 · a narrator presents himself
 
-The next proposed advanced E3-IV/V/E4-IV application is [Walton’s Letters407](specs/407-walton-letters.md): read the complete opening two letters of the1831 *Frankenstein*, distinguish narrator/author/recipient, compare confidence with qualification, annotate exact words and retain an original note/revision in Evidence & Voice. The [finite packet](content/407-walton-letters-text.md) and [source boundary](source-audits/407-walton-letters.md) await independent specification, full literary and quotation/edition review. It neither completes the novel nor grades original interpretations. Old source language is framed critically; real learner information is excluded.
+The next advanced E3-IV/V/E4-IV application is [Walton’s Letters407](specs/407-walton-letters.md): read the complete opening two letters of the1831 *Frankenstein*, distinguish narrator/author/recipient, compare confidence with qualification, annotate exact words and retain an original note/revision in Evidence & Voice. The [finite packet](content/407-walton-letters-text.md) and [source boundary](source-audits/407-walton-letters.md) are independently BUILD-READY at44ff7431 after six-lens and complete literary/quotation/edition repair closure. The implementation is in progress in [PR490](https://github.com/anotherpanacea-eng/learning-garden/pull/490). It neither completes the novel nor grades original interpretations. Old source language is framed critically; real learner information is excluded.
 
 ## Moonlight Bench406 · sunlight and viewpoint
 
