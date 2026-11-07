@@ -131,6 +131,12 @@ def journey(browser,base,seed,src):
   h.ok(p.locator('[data-bridges-mode-choice="details"]').evaluate('e=>e===document.activeElement&&e.tabIndex===0&&e.getAttribute("aria-selected")==="true"'),'selected tab has focus and roving tabindex')
   h.ok(p.locator('.bridges-page drawn-howto').count()==0,'joins drawn how-to absent in details')
   shown(p,src,0);h.ok(control(p,'scene-prev').is_disabled(),'first scene boundary disabled')
+  act(p,'attach','parcel');picture_focus=p.locator('[data-details-link="parcel"]')
+  h.ok(picture_focus.evaluate('e=>e.tagName==="BUTTON"&&!e.hasAttribute("href")'),'picture focus is an action, not a fragment navigation')
+  picture_focus.click(modifiers=['Meta']);h.ok(len(c.pages)==1 and p.evaluate('location.hash')==ROUTE,'modified picture-focus click does not open or leave the game')
+  picture_focus.click(button='middle');h.ok(len(c.pages)==1 and p.evaluate('location.hash')==ROUTE,'middle picture-focus click has no navigation')
+  h.ok(p.evaluate('document.activeElement.id==="details-figure-parcel"'),'picture-focus action focuses the described figure')
+  act(p,'remove')
   for i,case in enumerate(src['cases']):
    if i:act(p,'scene-next');focus_heading(p,case['title'])
    shown(p,src,i)
@@ -197,6 +203,7 @@ def phone(browser,base,seed,src):
  c,p=setup(browser,base,seed,320)
  try:
   mode(p,'details');act(p,'attach','parcel',True);shown(p,src,0,0);bounds(p)
+  h.ok(p.evaluate('document.querySelector("#details-sentence-title").getBoundingClientRect().top-document.querySelector(".details-attachments").getBoundingClientRect().bottom>=8'),'sentence heading has visible space below the phrase controls')
   h.ok(p.locator('[data-details-noun="parcel"]').inner_text()=='The parcel','real words retain noun spacing')
   p.screenshot(path=str(OUT/'phone-320.png'),full_page=True)
   p.locator('[data-bridges-mode-choice="details"]').focus();p.keyboard.press('Home');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='joins','Home activates first tab');p.keyboard.press('End');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='details','End activates last tab');p.keyboard.press('ArrowLeft');h.ok(p.locator('.bridges-page').get_attribute('data-bridges-mode')=='joins','Left activates first tab')

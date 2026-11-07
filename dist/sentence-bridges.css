@@ -12,3 +12,5 @@
 @media(min-width:820px){.details-layout{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr)}}
 @media(max-width:400px){.details-scene{padding:.7rem}.details-picture{gap:.4rem}.details-picture figure{padding:.25rem}.details-sentence{padding:.6rem}.details-attachments,.details-paging{gap:.4rem}}
 @media(prefers-reduced-motion:reduce){.bridges-page *{scroll-behavior:auto;transition:none;animation:none}}
+
+.details-attachments+#details-sentence-title{margin-top:.8rem}.details-link button{min-height:44px;border:0;background:transparent;padding:.3rem .2rem;font-weight:bold;text-decoration:underline;text-underline-offset:.2rem}
