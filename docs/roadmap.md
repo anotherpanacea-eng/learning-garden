@@ -6,6 +6,10 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 **Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
 
+## Pollen Path413 · a visitor carries pollen
+
+[Pollen Path413](specs/413-pollen-path.md) selects the first pollination model from proposed150 inside Living Layers. Move a paper bee among two flowers' anthers, stigmas and nectar stops; compare pollen origins with an empty visitor and distinguish transfer from later fertilization. The finite specification is awaiting independent review; runtime is not built yet. S2-II / S3-III are partial authoring candidates. The activity adds no seed forecast, learner outcome or café reward; whole life cycles, dispersal, colony roles and pollinator decline remain separate.
+
 ## Shared Turn412 · two parts of an angle
 
 [Shared Turn412](specs/412-shared-turn.md) selects the adjacent half/full-turn sum bridge from182 inside Hinge Bench. Build two parts of one turn, cover a measure, keep an ungraded own idea beside an explicit reference, and contrast a complete partition with a gap. The finite specification and mathematics are independently cleared. The bounded implementation is in [PR495](https://github.com/anotherpanacea-eng/learning-garden/pull/495); its [release record](https://github.com/anotherpanacea-eng/learning-garden/pull/495#issuecomment-6705160407) owns publication status. It preserves the parent's local settings and writes no learner record. Protractor measurement, triangles and parallel-line work remain separate.
