@@ -133,9 +133,9 @@ def journey(browser,base,seed,src):
   shown(p,src,0);h.ok(control(p,'scene-prev').is_disabled(),'first scene boundary disabled')
   act(p,'attach','parcel');picture_focus=p.locator('[data-details-link="parcel"]')
   h.ok(picture_focus.evaluate('e=>e.tagName==="BUTTON"&&!e.hasAttribute("href")'),'picture focus is an action, not a fragment navigation')
+  picture_focus.click();h.ok(p.evaluate('document.activeElement.id==="details-figure-parcel"'),'picture-focus action focuses the described figure')
   picture_focus.click(modifiers=['Meta']);h.ok(len(c.pages)==1 and p.evaluate('location.hash')==ROUTE,'modified picture-focus click does not open or leave the game')
   picture_focus.click(button='middle');h.ok(len(c.pages)==1 and p.evaluate('location.hash')==ROUTE,'middle picture-focus click has no navigation')
-  h.ok(p.evaluate('document.activeElement.id==="details-figure-parcel"'),'picture-focus action focuses the described figure')
   act(p,'remove')
   for i,case in enumerate(src['cases']):
    if i:act(p,'scene-next');focus_heading(p,case['title'])
