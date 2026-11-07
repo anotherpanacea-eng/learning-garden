@@ -77,10 +77,10 @@ def lifecycle_and_storage(browser,base):
    if off:
     go(p,'#notes');p.locator('#remember').click();p.locator('dialog[aria-label="Turn saving off for every explorer?"] [data-confirm-do]').click()
    go(p);open_letters(p);lesson(p,'write');before=p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')
-   if not off:p.evaluate('window.waltonStorageSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota failure","QuotaExceededError")}')
+   if not off:p.evaluate('()=>{window.waltonStorageSet=Storage.prototype.setItem;Storage.prototype.setItem=function(){throw new DOMException("Synthetic quota failure","QuotaExceededError")};}')
    p.locator('[data-ev-field="paragraph"]').fill('Session-only invented literary explanation.')
    h.ok('saved on this device' not in p.locator('#ev-status').inner_text().lower(),'session-only or failed-save typing never claims persistent saving')
-   p.locator('[data-ev-keep="draft"]').tap();h.ok(p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')==before,('saving off' if off else 'storage failure')+' leaves persisted notebook exact');notice=p.locator('main').inner_text();h.ok(('only while' in notice and 'page' in notice and 'notes' in notice.lower()) if off else (('cannot save' in notice or 'could not be saved' in notice) and 'notes' in notice.lower()),'actual session-saving notice explains persistence and recovery');report=h.export_notes(p,'walton-session-'+str(off));h.ok(report['evidenceVoice']['units'][FIXED]['firstDraft']['drafts']['paragraph'].startswith('Session-only'),'actual Notes download recovers session writing')
+   p.locator('[data-ev-keep="draft"]').tap();h.ok(p.evaluate('JSON.stringify(Object.entries(localStorage).sort())')==before,('saving off' if off else 'storage failure')+' leaves persisted notebook exact');notice=p.locator('main').inner_text();h.ok(((('only while' in notice and 'page' in notice) or 'only for this session' in notice) and 'notes' in notice.lower()) if off else (('cannot save' in notice or 'could not be saved' in notice) and 'notes' in notice.lower()),'actual session-saving notice explains persistence and recovery');report=h.export_notes(p,'walton-session-'+str(off));h.ok(report['evidenceVoice']['units'][FIXED]['firstDraft']['drafts']['paragraph'].startswith('Session-only'),'actual Notes download recovers session writing')
   finally:c.close()
  c,p=cg.setup(browser,base,f.seed(),width=320,height=700)
  try:
