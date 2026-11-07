@@ -5,6 +5,9 @@ import {resolve} from 'node:path';
 
 export const copyScopes = [
   {path:'dist/moonlight-content.mjs',adultBlocks:[{start:'  "grownup":',end:'  "orbitMotion":',reason:'Only shown in the folded grown-up interpretation.'}],quotations:[]},
+  {path:'dist/force-sketch-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/force-sketch-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/force-sketch-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/crossing-angles-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/crossing-angles-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/crossing-angles-ui.mjs',adultBlocks:[],quotations:[]},
