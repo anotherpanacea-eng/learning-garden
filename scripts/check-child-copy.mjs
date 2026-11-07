@@ -5,6 +5,9 @@ import {resolve} from 'node:path';
 
 export const copyScopes = [
   {path:'dist/moonlight-content.mjs',adultBlocks:[{start:'  "grownup":',end:'  "orbitMotion":',reason:'Only shown in the folded grown-up interpretation.'}],quotations:[]},
+  {path:'dist/spinner-table-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/spinner-table-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/spinner-table-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/chance-line-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/chance-line-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/chance-line-ui.mjs',adultBlocks:[],quotations:[]},
