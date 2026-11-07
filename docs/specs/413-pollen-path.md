@@ -12,7 +12,7 @@ Living Layers already relates plant parts and whole organisms. Leaf Kitchen408 e
 
 Two drawn flowers, **A** and **B**, are of the **same kind**. Their parent plants are unspecified: never call the route self- or cross-pollination. Both stigmas can catch pollen in this model. Each flower has visibly distinct **anthers** (pollen-bearing tips of stamens), central **stigma** (top of a style), and a **nectar stop** near the flower base. The drawing is a conceptual cutaway, not a botanical species diagram, scale model or physical cross-section to measure. No ovules, seeds or fruit are rendered as consequences.
 
-A paper bee has a body, head and abdomen, six legs and two pairs of wings; the simplified diagram does not teach identification of a real bee species. A child chooses exactly one part to contact on each tap. Nectar is sugary food; pollen can also feed bees. A real nectar visit may brush several flower parts; the controlled one-part contact here deliberately separates operations. The visitor carries marks on its body, not a honey pot or exclusively in pollen baskets.
+A paper bee has a head with two antennae, a thorax carrying all six legs and both pairs of wings, and an abdomen; the simplified diagram does not teach identification of a real bee species. A child chooses exactly one part to contact on each tap. Nectar is sugary food; pollen can also feed bees. A real nectar visit may brush several flower parts; the controlled one-part contact here deliberately separates operations. The visitor carries marks on its body, not a honey pot or exclusively in pollen baskets.
 
 Represent origins with two presence bits, ordered A then B. Each mark is a **label for origin**, not one grain, a count, mass, strength, amount or probability. A is a labeled circle; B a labeled diamond; colors supplement shape/letter. Both stigma mark sets and body marks remain visible in ordinary HTML beside the diagram. No numeric pollen counters.
 
@@ -31,45 +31,45 @@ Separate content/core/UI modules; no saved schema. `createPollenPath()` returns 
 - `lesson`: Learn only; integer0–3, changes worked teaching card only.
 - `fresh-request`: Garden only; opens explicit confirmation. `fresh-cancel`: cancels it. `fresh-confirm`: only if pending, clears position/body/stigmas/contacts; preserves current page, invitation and lesson. Does not clear a parent guide.
 
-Any valid ordinary action, page change or Back cancels a pending fresh confirmation. A no-op ordinary selection must still cancel a pending confirmation; invalid payloads do not change anything. No hidden action changes model state. Recent contacts are explicitly **last eight model contacts**, not a full trail record or real observation. Truncation leaves current marks intact. Nothing adapts, grades or blocks exploration. Model work survives page changes, Back and child re-entry within the same Living Layers visit. Leaving the room, explorer chooser/change, notebook replacement/import/reset, or owner/book change clears local work through existing room reset. Notes, localStorage and actual notebook objects are not written by model actions, Hear or views. Explicit shared voice/speed preference changes retain their existing garden.speech persistence; test those separately, not as model writes.
+Any valid ordinary action, page change or Back cancels a pending fresh confirmation. A no-op ordinary selection must still cancel a pending confirmation; invalid payloads do not change anything. No hidden action changes model state. Recent contacts are explicitly **last eight model actions**, not a full trail record or real observation. Truncation leaves current marks intact. Nothing adapts, grades or blocks exploration. Model work survives page changes, Back and child re-entry within the same Living Layers visit. Leaving the room, explorer chooser/change, notebook replacement/import/reset, or owner/book change clears local work through existing room reset. Notes, localStorage and actual notebook objects are not written by model actions, Hear or views. Explicit shared voice/speed preference changes retain their existing garden.speech persistence; test those separately, not as model writes.
 
 ## Complete child copy and controls
 
 Entry **Follow a pollen path**; title **Pollen Path**. Intro **The town is planning a flower patch. Move a paper bee and follow the pollen marks.** Two freely selectable pages **Model garden** / **See why**. Back **Back to Living Layers**; Hear **Hear this page**. No compulsory dragging, motion, narration or typing.
 
-Garden instruction **Choose a part of flower A or B for the paper bee to touch. Watch the marks on its body and on each stigma.** Always-visible caption **Two model flowers of the same kind. You choose exactly what the visitor touches. A real visit may touch several parts.** Mark legend **A mark names where pollen came from. It is not a grain count.**
+Garden instruction **Choose a part of flower A or B for the paper bee to touch. Watch the marks on its body and on each stigma.** Always-visible caption **Two model flowers of the same kind. You choose exactly what the visitor touches. A real visit may touch several parts.** Mark legend **A mark names where pollen came from. It is not a grain count.** Always-visible limit beside it: **Real visitors drop, lose or groom off pollen as they go. This model keeps an origin mark until you choose a clean visitor.**
 
 Each flower has three native buttons: **A · Touch anthers**, **A · Touch stigma**, **A · Visit nectar** (B equivalent), grouped under **Flower A** / **Flower B**. Labels are HTML outside the SVG. A compact anatomy key reads **Anthers hold pollen. The stigma can catch pollen. Nectar is sugary food. Bees also use pollen as food.** Current location **Paper bee: resting / at flower A's anthers / at flower A's stigma / at flower A's nectar stop** and B equivalents. Body caption **Pollen origins on the visitor: none / A / B / A and B**. Each receiving caption **Origins shown on A's stigma: none / A / B / A and B** (and B). These are model marks, not confirmed grain counts or records of learner skill.
 
 Contact status, in a polite live region and current Hear text:
 - Anthers: **The visitor touches flower F's anthers. Its body now shows pollen from O.** O is A/B/A and B.
-- Stigma with body origins O: **The visitor brings pollen from O to flower F's stigma. The stigma now shows origins S. The visitor keeps its origin marks.** Repeat origins remain truthful without a quantity claim.
-- Empty-body stigma: **No pollen came with this visitor. Marks already on flower F's stigma keep their place.**
+- Stigma with body origins O: **The visitor brings pollen from O to flower F's stigma. Origins on flower F's stigma: S. The visitor keeps its origin marks.** Repeat origins remain truthful without a quantity claim.
+- Empty-body stigma with existing marks: **No pollen came with this visitor. Marks already on flower F's stigma keep their place.** With an empty stigma instead: **No pollen came with this visitor. Flower F's stigma still shows no origins.**
 - Nectar: **The visitor stops at flower F's nectar. In this model it touches only the nectar stop, so the pollen marks stay the same.**
-- Clean: **A clean paper visitor is ready. The stigma marks stay where they are.**
+- Clean: **A clean paper visitor is ready. Any marks on the stigmas stay where they are.**
 - Initial: **Choose a flower part to begin.**
 - After fresh reset, use the same initial status **Choose a flower part to begin.** No extra event/status field is needed: an untouched and a freshly cleared model are intentionally equivalent.
 
 Buttons **Use a clean paper visitor** and **Begin a fresh model**. Confirmation **Clear this model's marks and recent contacts? Your Living Layers guide will stay.** Controls **Clear model marks** / **Keep this model**. Confirmation is visibly adjacent to fresh control, no modal or browser confirm. Reset is always reversible only by exploring again, so never silently execute on a single tap.
 
-Recent section heading **Last eight model contacts**. Empty **No model contacts yet.** Contact labels **A · anthers**, **A · stigma**, **A · nectar**, B equivalent, **Clean paper visitor**. Older contacts drop out without suggesting they never happened. No timestamp, measured duration or fabricated field note.
+Recent section heading **Last eight model actions**. Empty **No model contacts yet.** Contact labels **A · anthers**, **A · stigma**, **A · nectar**, B equivalent, **Clean paper visitor**. Older contacts drop out without suggesting they never happened. No timestamp, measured duration or fabricated field note.
 
 Selector **Choose a trail to try**, six options and exact prompts:
 1. **Between flowers** — **Try touching A's anthers, then B's stigma. Which origin mark travels?**
 2. **Travel back** — **Try B's anthers, then A's stigma. What changes if the visitor already carries A too?**
 3. **An empty visitor** — **Use a clean paper visitor, then touch a stigma. Compare its old marks with what the visitor brought.**
 4. **One flower** — **Try a flower's anthers, then that same flower's stigma. A pollen transfer can happen within one flower too.**
-5. **Two origins** — **Visit both sets of anthers, then a stigma. The marks show origins, not how many grains moved.**
+5. **Two origins** — **Touch both flowers' anthers, then a stigma. The marks show origins, not how many grains moved.**
 6. **A nectar stop** — **Pick up pollen, visit a nectar stop, then touch a stigma. What stays on the visitor?**
 No fitting-choice key or grading: these are invitations, and the next action remains the child's. Selected invitation stays across both pages. Changing it does not secretly clean a visitor.
 
 Teaching selector **Choose a teaching card**, bounded **Previous** / **Next**. Four cards, each marked **Worked picture · not your model**:
-1. **Three flower places.** **Anthers hold pollen. The stigma can catch it. Nectar is sugary food; pollen can feed bees too. This drawing pulls the parts apart so we can see them. Real flowers have different shapes.** Diagram: enlarged generic flower with separated peripheral anthers, central stigma/style, lower nectar stop, labeled HTML key.
+1. **Three flower places.** **Anthers hold pollen. The stigma can catch it. Nectar is sugary food; pollen can feed bees too. This drawing pulls the parts apart so we can see them. Real flowers have different shapes. Some have no nectar, and some have anthers and stigmas in separate flowers.** Diagram: enlarged generic flower with separated peripheral anthers, central stigma/style, lower nectar stop, labeled HTML key.
 2. **Carry it to a stigma.** **A visitor touches A's anthers and carries pollen from A. When it touches B's stigma, pollen from A can arrive there. Moving pollen from anther to stigma is pollination. Our marks show origins, not amounts.** Three clearly numbered static stages: A-anthers/bodyA/B-stigmaA, arrows show order, no arrow implies seed growth.
 3. **A visit is not one touch.** **In our model you choose one place to touch. A nectar stop alone changes no pollen marks. A real bee drinking nectar may brush anthers or a stigma too. Bees can also collect pollen for food.** Two panels: nectar-only controlled contact, and conceptual bee spanning nearby anther/stigma, latter labeled **Possible real visit · not a prediction**. Show contact possibility, never guarantee both touches.
-4. **What comes later?** **Pollen arriving on a stigma does not promise seeds or fruit. Fertilization is a different process that can happen later, when the right conditions are met. This model stops at pollen transfer. It cannot tell us whether seeds will grow.** Diagram anther→stigma; dotted further-process line ends in question mark, labeled **Later processes are not modeled**. No guaranteed fruit image.
+4. **What comes later?** **Pollen arriving on a stigma does not promise seeds or fruit. Fertilization is a different process. It may happen later, or it may not. This model stops at pollen transfer. It cannot tell us whether seeds will grow.** Diagram anther→stigma; dotted further-process line ends in question mark, labeled **Later processes are not modeled**. No guaranteed fruit image.
 
-Lifetime line **Your model stays while you visit Living Layers. Leaving the room or opening the explorer chooser clears it. Your notes are not changed.**
+Lifetime line **Your model stays while you visit Living Layers. Leaving the room, reloading or opening the explorer chooser clears it. Your notes are not changed.**
 
 ## Visual, accessibility and speech requirements
 
@@ -97,7 +97,7 @@ S2-II plant reproduction and S3-III pollination are placements for authoring, no
 
 ## Source boundary
 
-Primary fact checks (2026-11-07): [Iowa State Extension, Pollination and fertilization](https://yardandgarden.extension.iastate.edu/how-to/pollination-and-fertilization-vegetable-garden), directly opened, distinguishes anther→receptive stigma transfer and later fertilization that may not follow; [University of Minnesota Extension, Habitat for pollinators](https://extension.umn.edu/agriculture/specialty-crops/pollination/habitat), publisher search text, identifies nectar carbohydrates and pollen protein/fats/other nutrients. Facts are paraphrased in original child copy. These support mechanisms/food distinction, not this model's retention amounts, which are explicitly unmodeled. No source diagram, photograph, exercise, external script or quoted research passage incorporated. All story, visuals and labels newly authored. No percentages, population statistics or claim all plants depend on bees.
+Fact-check sources (2026-11-07): [Iowa State Extension, Pollination and fertilization](https://yardandgarden.extension.iastate.edu/how-to/pollination-and-fertilization-vegetable-garden), directly opened, distinguishes anther→receptive stigma transfer and later fertilization that may not follow; [University of Minnesota Extension, Habitat for pollinators](https://extension.umn.edu/agriculture/specialty-crops/pollination/habitat), directly opened, identifies nectar carbohydrates and pollen protein/fats/other nutrients. Facts are paraphrased in original child copy. These support mechanisms/food distinction, not this model's retention amounts, which are explicitly unmodeled. Bee anatomy is also cross-checked against the existing [150 source audit S22](../source-audits/150-bee-meadow.md), an insect body-plan reference, not incorporated art. No source diagram, photograph, exercise, external script or quoted research passage incorporated. All story, visuals and labels newly authored. No percentages, population statistics or claim all plants depend on bees.
 
 ## Proportionate qualification and delivery
 
