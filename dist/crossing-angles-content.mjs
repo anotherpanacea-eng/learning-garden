@@ -316,3 +316,40 @@ export const matchingPanelPrompts=freeze([
   "text": "Return to Copy Frame, change one side and re-enter. Compare the new frozen dimensions with the unchanged rectangle reasoning."
  }
 ]);
+
+// Original finite Angle Chase sketches. Keys are authored integers, never measurements.
+export const chaseCopy=freeze({title:'Angle Chase',instruction:'The workshop needs notes on a batch of sketches. Find angles from the marked facts, then carry a fact to the next angle.',modelNote:'An invented diagram, not to scale. Use the stated facts, not the drawing’s size.',question:'Which relationship explains this step?',first:'Use the marked facts. You can choose another angle at any time.',retained:'Each sketch keeps its own work during this visit.',exampleTitle:'A different worked sketch',exampleNotice:'These numbers belong to another sketch. Your answers are kept.',returnInvitation:'Back in Copy Frame, explore the right corners of a rectangle. These invented diagonal numbers are not measurements of a panel.',adultNote:'These finite number-and-reason checks do not grade an original proof, diagnose a level or establish learning. Another valid method can be discussed with an adult. A provided value is help; a draft is not a mathematical fact. The diagrams are not measurements or building instructions.',complete:'This sketch has a value and a reason at every marked angle. Shown solutions are help. Pick another sketch or change one.'});
+export const chaseRules=freeze({line:'Angles on a straight line total 180°.',point:'Angles all the way around a point total 360°.',opposite:'Vertically opposite angles at the same crossing match.',triangle:'The three inside angles of a triangle total 180°.',parts:'Parts of a marked angle add to its whole.',exterior:'An outside triangle angle equals the sum of the two far inside angles.',corresponding:'Corresponding angles on parallel lines match.',alternate:'Alternate interior angles on parallel lines match.',cointerior:'Co-interior angles on parallel lines total 180°.',corner:'A rectangle corner is 90°.',insufficient:'These marked facts do not determine the angle.'});
+const chaseTarget=(name,offered,accepted,hint,relations)=>({name,offered,accepted,hint,relations});
+const relation=(text,formula,predecessor=null)=>({text,formula,predecessor});
+const chaseFamilies=[
+ {family:'crossing',familyLabel:'Across or beside?',facts:'A–O–C and B–O–D are straight lines crossing at O. a is AOB, x is BOC and y is DOA.',targets:[
+ chaseTarget('x',['line','triangle','point'],['line'],'Which two marked angles fill the half turn on A–O–C?',{line:relation('A–O–C is straight: a + x = 180°.','a + x = 180°')}),
+ chaseTarget('y',['opposite','line','triangle'],['opposite','line'],'Look across the crossing from x, or use the straight line B–O–D.',{opposite:relation('x and y are opposite at O: y = x.','y = x','x'),line:relation('B–O–D is straight: a + y = 180°.','a + y = 180°')})]},
+ {family:'hub',familyLabel:'Around the hub',facts:'C–O–E is straight. p is the whole AOB angle containing y = AOE and z = EOB. q is BOC; x runs from OC through the lower part of the turn to OA.',targets:[
+ chaseTarget('x',['point','opposite','triangle'],['point'],'The outer p arc includes y and z. Which three marked parts fill one whole turn?',{point:relation('p, q and x fill one whole turn at O: p + q + x = 360°.','p + q + x = 360°')}),
+ chaseTarget('y',['line','opposite','triangle'],['line'],'C–O–E is straight. Which two marked parts fill its half turn?',{line:relation('C–O–E is straight: x + y = 180°.','x + y = 180°','x')}),
+ chaseTarget('z',['parts','line','opposite'],['parts','line'],'The whole p contains y and z. There is also a straight line E–O–C.',{parts:relation('y and z are parts of p: y + z = p.','y + z = p','y'),line:relation('E–O–C is straight: z + q = 180°.','z + q = 180°')})]},
+ {family:'triangle',familyLabel:'Inside, then outside',facts:'ABC is a triangle. A–B–D is straight with B between A and D. a is BAC, c is ACB, x is ABC and y is the outside angle CBD.',targets:[
+ chaseTarget('x',['triangle','opposite','point'],['triangle'],'Use all three inside corners of ABC.',{triangle:relation('The inside corners of ABC total 180°: a + c + x = 180°.','a + c + x = 180°')}),
+ chaseTarget('y',['line','exterior','opposite'],['line','exterior'],'y is outside beside x. You can also add the two far inside angles.',{line:relation('A–B–D is straight: x + y = 180°.','x + y = 180°','x'),exterior:relation('The outside angle CBD equals the two far inside corners: y = a + c.','y = a + c')})]},
+ {family:'parallel',familyLabel:'Between parallel lines',facts:'A–P–B and C–Q–D are straight parallel lines, marked with matching arrows. R–P–Q–S is straight. a is BPQ; x is DQS, y is CQP and z is PQD.',targets:[
+ chaseTarget('x',['corresponding','alternate','cointerior'],['corresponding'],'Find the matching parallel arrows. Trace the same position at P and Q.',{corresponding:relation('a and x are corresponding angles on the marked parallel lines: x = a.','x = a')}),
+ chaseTarget('y',['opposite','alternate','triangle'],['opposite','alternate'],'y is opposite x at Q, and alternate to a between the marked parallel rails.',{opposite:relation('x and y are opposite at Q: y = x.','y = x','x'),alternate:relation('a and y are alternate interior angles on the marked parallel lines: y = a.','y = a')}),
+ chaseTarget('z',['line','cointerior','opposite'],['line','cointerior'],'y and z share the half turn on P’s side of C–Q–D. Also compare a and z inside the rails.',{line:relation('C–Q–D is straight: y + z = 180°.','y + z = 180°','y'),cointerior:relation('a and z are co-interior angles on the marked parallel lines: a + z = 180°.','a + z = 180°')})]},
+ {family:'rectangle',familyLabel:'Rectangle corners',facts:'ABCD is a rectangle with diagonal AC. All four whole corners are right. AB ∥ DC and AD ∥ BC. a is BAC, x is CAD, y is ACD and z is ACB.',targets:[
+ chaseTarget('x',['corner','point','insufficient'],['corner'],'The two marked parts at A share one right corner, not a whole turn.',{corner:relation('a and x fill the right corner at A: a + x = 90°.','a + x = 90°')}),
+ chaseTarget('y',['triangle','alternate','opposite'],['triangle','alternate'],'Triangle ADC has a right corner at D. The opposite rectangle sides are parallel too.',{triangle:relation('Triangle ADC has a right corner at D: x + 90° + y = 180°.','x + 90° + y = 180°','x'),alternate:relation('AB ∥ DC makes a and y alternate interior angles: y = a.','y = a')}),
+ chaseTarget('z',['corner','alternate','opposite'],['corner','alternate'],'At C, the diagonal splits one right corner. You can also trace AD ∥ BC.',{corner:relation('y and z fill the right corner at C: y + z = 90°.','y + z = 90°','y'),alternate:relation('AD ∥ BC makes x and z alternate interior angles: z = x.','z = x','x')})]}
+];
+const chasePackets=[
+ [{a:43},{x:137,y:137}],[{a:68},{x:112,y:112}],[{a:117},{x:63,y:63}],
+ [{p:105,q:135},{x:120,y:60,z:45}],[{p:115,q:120},{x:125,y:55,z:60}],[{p:125,q:140},{x:95,y:85,z:40}],
+ [{a:37,c:68},{x:75,y:105}],[{a:42,c:61},{x:77,y:103}],[{a:29,c:84},{x:67,y:113}],
+ [{a:35},{x:35,y:35,z:145}],[{a:52},{x:52,y:52,z:128}],[{a:68},{x:68,y:68,z:112}],
+ [{a:25},{x:65,y:25,z:65}],[{a:37},{x:53,y:37,z:53}],[{a:58},{x:32,y:58,z:32}]
+];
+export const chaseCases=freeze(chasePackets.map(([givens,key],i)=>({...chaseFamilies[Math.floor(i/3)],givens,key,variantLabel:`${chaseFamilies[Math.floor(i/3)].familyLabel} · sketch ${i%3+1}`,targets:chaseFamilies[Math.floor(i/3)].targets.map((t,j)=>({...t,offered:t.offered.map((_,k)=>t.offered[(k+i+j)%3])}))})));
+export const chaseExamples=freeze(Object.fromEntries([
+ ['crossing',{a:50},{x:130,y:130}],['hub',{p:110,q:132},{x:118,y:62,z:48}],['triangle',{a:40,c:64},{x:76,y:104}],['parallel',{a:40},{x:40,y:40,z:140}],['rectangle',{a:30},{x:60,y:30,z:60}]
+].map(([family,givens,key],i)=>[family,{...chaseFamilies[i],givens,key}])));

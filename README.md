@@ -11,6 +11,8 @@
 
 **Matching Triangles**, inside Crossing Angles, adds guided exact constructions, rigid comparisons and point/side correspondence. Compare determining parts with ambiguous sides or equal angles, then return to the two halves of the waiting rectangle. See independently reviewed [spec419](docs/specs/419-matching-triangles.md); [PR502](https://github.com/anotherpanacea-eng/learning-garden/pull/502) owns implementation review and publication status. It uses the existing Crossing Angles checks and creates no learner record.
 
+**Angle Chase**, the next candidate inside Crossing Angles, adds replayable number-and-reason investigations: tap an unknown, use the number pad, and choose a relationship. Fifteen sketches retain their own work; hints, different worked sketches and shown solutions stay separate from answers. See independently reviewed [spec420](docs/specs/420-angle-chase.md). The existing Crossing Angles source/browser checks cover this visit-local activity.
+
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.
 
 [Try After the Storm](https://after-the-storm-learning.anotherpanacea.workers.dev/).

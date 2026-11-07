@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Angle Chase420 · values with reasons
 
-[Angle Chase420](specs/420-angle-chase.md) selects the next182 bridge after the guided geometry pages: finite point/line/crossing, triangle/exterior, parallel and rectangle chains, with touch number entry, accepted alternate reasons and separate support. Its specification is proposed for independent review; no implementation or publication is claimed. Equations, polygon chains, missing-premise tasks and broad independent fluency remain missing.
+[Angle Chase420](specs/420-angle-chase.md) selects the next182 bridge after the guided geometry pages: finite point/line/crossing, triangle/exterior, parallel and rectangle chains, with touch number entry, accepted alternate reasons and separate support. Its specification is independently BUILD-READY at d67dc6dd after six-lens, complete mathematics/copy and focused repair closure. Implementation is in progress; no publication is claimed. Equations, polygon chains, missing-premise tasks and broad independent fluency remain missing.
 
 ## Matching Triangles419 · which parts fix the shape?
 
