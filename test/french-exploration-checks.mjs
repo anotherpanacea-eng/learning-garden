@@ -101,3 +101,14 @@ for(const field of ['frenchDestination','frenchStory','frenchVariant','frenchSel
  check(!startVisit(e,'french',null)&&!startVisit(e,'french',{destination:'unknown'})&&!frenchPlan(e,'river',4),'invalid plan requests rejected');
 }
 console.log(`${checks} French exploration, adaptation, content and restore checks passed.`);
+
+// Uncertain historical support must not become an asserted help event.
+{
+ const s=fresh();visit(s,frenchStories[0],3);
+ const o=s.garden.observations.find(o=>o.status==='answered');
+ o.readingTools={...o.readingTools,supportUncertain:true};
+ const before=json(s),plan=frenchPlan(s,'river');
+ check(plan.variant===2,'uncertain earlier support retains the conservative length suggestion');
+ check(plan.reason.includes('details are missing')&&!plan.reason.includes('You used help'),'uncertainty is explained without inventing help or retry');
+ check(json(s)===before,'reading an uncertain suggestion leaves all historical records exact');
+}
