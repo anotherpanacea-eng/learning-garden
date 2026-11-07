@@ -1,4 +1,4 @@
-"""Crossing Angles415 in the actual application, with invented notebooks only.
+"""Crossing Angles415/416 in the actual application, with invented notebooks only.
 
 One complete tablet visit and focused phone/label/lifetime probes. The sole app
 instrumentation exposes a read-only getter at its real initialization marker.
@@ -10,7 +10,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = Path(os.environ.get('CROSSING_ANGLES_ARTIFACTS') or tempfile.mkdtemp(prefix='lg415-native-'))
+OUT = Path(os.environ.get('CROSSING_ANGLES_ARTIFACTS') or tempfile.mkdtemp(prefix='lg416-native-'))
 OUT.mkdir(parents=True, exist_ok=True)
 spec = importlib.util.spec_from_file_location('crossing_actual_helpers', ROOT/'test/shared-turn-browser.py')
 h = importlib.util.module_from_spec(spec)
@@ -43,8 +43,9 @@ def sel(action, value=None):
 
 def act(p, action, value=None, before=None):
     spoken=p.evaluate('__sharedSpoken.length')
-    target = p.locator(('select' if action in ['angle','prompt','card'] else '')+sel(action, None if action in ['angle','prompt','card','rotation'] else value))
-    if action in ['angle','prompt','card']:
+    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt']
+    target = p.locator(('select' if action in selects else '')+sel(action, None if action in selects or action=='rotation' else value))
+    if action in selects:
         target.select_option(str(value))
     else:
         target.first.click()
@@ -224,27 +225,41 @@ def guards(browser, base):
 
 
 def reset_state(p):
-    enter(p);h.ok(p.locator('select'+sel('angle')).input_value()=='60','fresh visit starts default local work')
+    before=h.snapshot(p)
+    enter(p,before);h.ok(p.locator('select'+sel('angle')).input_value()=='60','fresh visit starts default local work')
+    act(p,'page','parallel',before)
+    h.ok(p.locator(sel('two-mode','strips')).get_attribute('aria-pressed')=='true' and p.locator(sel('two-pair','corresponding')).get_attribute('aria-pressed')=='true','fresh visit resets two-crossing mode and pair')
+    h.ok([p.locator('select'+sel(action)).input_value() for action in ['two-spacing','two-lean','two-prompt']]==['middle','0','0'],'fresh visit resets two-crossing selections')
+    h.ok(p.locator('[data-crossing-angles-tracing=previous]').is_disabled(),'fresh visit resets tracing to first position')
+    act(p,'page','build',before)
+
+
+def lifetime_setting(p):
+    before=h.snapshot(p)
+    act(p,'angle',135,before);act(p,'page','parallel',before)
+    act(p,'two-lean',10,before);act(p,'two-spacing','far',before);act(p,'two-prompt',5,before)
+    act(p,'two-pair','co-interior',before);act(p,'two-move',1,before);act(p,'two-mode','panel',before)
+    act(p,'page','build',before)
 
 
 def lifetime(browser, base, report):
     print('Crossing Angles: exact route, chooser, owner, import and reset lifetime',flush=True)
-    p=setup(browser,base);enter(p);act(p,'angle',135)
+    p=setup(browser,base);enter(p);lifetime_setting(p)
     old=p.locator(sel('rotation')).element_handle();speaker=p.locator(R+' [data-speak]').element_handle();html=p.locator(R).inner_html();n=p.evaluate('__sharedSpoken.length')
     p.evaluate('history.replaceState(null,"","#workshop/copy-frame/")');h.dispatch(old);h.dispatch(speaker)
     h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==n,'exact route rejected before hashchange')
     p.evaluate('location.hash="#workshop"');p.locator(R).wait_for(state='detached');p.evaluate('location.hash='+json.dumps(ROUTE));ready(p);reset_state(p)
-    act(p,'angle',135);p.locator('#explorer-switch').click();p.locator('#explorer-cancel').click();ready(p);reset_state(p)
-    act(p,'angle',135);old=p.locator(sel('rotation')).element_handle();speaker=p.locator(R+' [data-speak]').element_handle()
+    lifetime_setting(p);p.locator('#explorer-switch').click();p.locator('#explorer-cancel').click();ready(p);reset_state(p)
+    lifetime_setting(p);old=p.locator(sel('rotation')).element_handle();speaker=p.locator(R+' [data-speak]').element_handle()
     p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.evaluate('location.hash='+json.dumps(ROUTE));ready(p)
     before=h.snapshot(p);n=p.evaluate('__sharedSpoken.length');h.dispatch(old);h.dispatch(speaker);h.unchanged(p,before,'retired owner');h.ok(p.evaluate('__sharedSpoken.length')==n,'retired owner Hear');reset_state(p)
-    act(p,'angle',135);p.evaluate('location.hash="#notes"');p.locator('#progress-file').set_input_files({'name':'invented-crossing-notebook.json','mimeType':'application/json','buffer':json.dumps(report).encode()});p.locator('#progress-import-confirm').click();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for()
+    lifetime_setting(p);p.evaluate('location.hash="#notes"');p.locator('#progress-file').set_input_files({'name':'invented-crossing-notebook.json','mimeType':'application/json','buffer':json.dumps(report).encode()});p.locator('#progress-import-confirm').click();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for()
     p.evaluate('location.hash='+json.dumps(ROUTE));ready(p);reset_state(p)
-    act(p,'angle',135);p.evaluate('location.hash="#notes"');p.locator('#reset').click();p.locator('#confirm-reset').click()
+    lifetime_setting(p);p.evaluate('location.hash="#notes"');p.locator('#reset').click();p.locator('#confirm-reset').click()
     film=p.locator('dialog.welcome-film[open]')
     if film.count():film.locator('[data-film-skip]').click()
     p.evaluate('location.hash='+json.dumps(ROUTE));ready(p);reset_state(p)
-    act(p,'angle',135);p.reload(wait_until='networkidle');ready(p);reset_state(p)
+    lifetime_setting(p);p.reload(wait_until='networkidle');ready(p);reset_state(p)
     p.context.close()
 
 
@@ -288,6 +303,159 @@ def voice(browser, base):
     bounds(p);p.context.close()
 
 
+def svg_access(p):
+    for svg in p.locator(R+' svg[aria-labelledby]').all():
+        for attr,tag in [('aria-labelledby','title'),('aria-describedby','desc')]:
+            ids=(svg.get_attribute(attr) or '').split()
+            h.ok(len(ids)==1,'one SVG '+tag+' reference')
+            h.ok(p.locator('[id="'+ids[0]+'"]').count()==1 and svg.locator(tag+'[id="'+ids[0]+'"]').count()==1,'unique owned SVG '+tag)
+        description=svg.locator('desc').text_content()
+        h.ok(bool(description.strip()),'current SVG has an accessible description')
+
+
+def two_measures(p, angle, lean):
+    text=p.locator(R+' .ca-two-table').inner_text()
+    for name,value in zip('abcdefgh',[angle,180-angle,angle,180-angle,angle-lean,180-angle+lean,angle-lean,180-angle+lean]):
+        h.ok(re.search(r'\b'+name+r'\s*:\s*'+str(value)+r'°',text) is not None,'independent two-crossing measure '+name+'='+str(value))
+    svg_access(p)
+
+
+def two_resize(p,before):
+    # Resize without rendering: an original bound button must remain connected.
+    original=p.locator(sel('two-move',1)).element_handle()
+    rotation=p.locator(sel('rotation')).element_handle()
+    for width in [320,820]:
+        p.set_viewport_size({'width':width,'height':1000})
+        p.evaluate('()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
+        bounds(p)
+        h.ok(original.evaluate('e=>e.isConnected'),'resize retains original new-page tracing control')
+        h.ok(rotation.evaluate('e=>e.isConnected'),'resize retains original shared turn control')
+        h.unchanged(p,before,'two-crossing actual resize')
+    original.click()
+    h.ok('Tracing move 1 of 4' in p.locator(R).inner_text().replace('of4','of 4'),'original tracing control remains bound after resize')
+    h.unchanged(p,before,'original new-page control after resize')
+    act(p,'two-move',0,before)
+
+
+def panel_only(p):
+    for action in ['angle','two-spacing','two-lean']:
+        h.ok(p.locator(sel(action)).count()==0,'inactive '+action+' controls omitted from panel DOM')
+    text=p.locator(R).inner_text()
+    h.ok('These are the dimensions copied from my waiting Copy Frame panel.' in text,'actual captured panel caption')
+    h.ok('Inside means between the two width-side lines' in text,'panel explains inside beyond rectangle corners')
+    h.ok(not p.locator('[data-crossing-angles-label] strong').count(),'panel selected tags carry no numeric angle measurements')
+    svg_access(p)
+
+
+def two_journey(browser,base):
+    print('Two Crossings: one complete tablet extension, retained source and current narration',flush=True)
+    p=setup(browser,base)
+    exported=h.notes(p,'two-notes-before')
+    p.evaluate('location.hash='+json.dumps(ROUTE));ready(p)
+    # Give original and copied rectangles deliberately different dimensions.
+    parent(p,'width-more');parent(p,'height-less')
+    source=frame(p)
+    dims=p.locator('[data-cframe-copy]').evaluate('e=>[Number(e.getAttribute("width"))/22,Number(e.getAttribute("height"))/22]')
+    before=h.snapshot(p);enter(p,before);act(p,'page','parallel',before)
+    h.ok(p.locator(sel('page','parallel')).get_attribute('aria-pressed')=='true','new native tab selected')
+    hear(p,before,includes=['Two Crossings'])
+    for angle in [60,90]:
+        act(p,'angle',angle,before)
+        for lean in [0,10,-10]:
+            act(p,'two-lean',lean,before);two_measures(p,angle,lean)
+            for pair,name in [('corresponding','corresponding'),('alternate','alternate interior'),('co-interior','co-interior')]:
+                act(p,'two-pair',pair,before)
+                for move in range(1,5):act(p,'two-move',move,before)
+                h.focus(p,'[data-crossing-angles-tracing=previous]','last tracing position falls back to previous control')
+                hear(p,before,includes=[('a + h' if pair=='co-interior' and lean else name),'line up' if lean==0 else 'does not line up'])
+                for move in [3,2,1,0]:act(p,'two-move',move,before)
+                h.focus(p,'[data-crossing-angles-tracing=next]','first tracing position falls back to next control')
+    for spacing in ['near','middle','far']:act(p,'two-spacing',spacing,before)
+    for prompt in range(6):act(p,'two-prompt',prompt,before)
+    act(p,'angle',60,before);act(p,'two-lean',10,before)
+    act(p,'rotation',before=before)
+    turn=p.locator(sel('rotation')).get_attribute('data-crossing-angles-value')
+    two_resize(p,before)
+    capture(p,'two-tablet-free')
+    act(p,'two-mode','panel',before)
+    h.focus(p,sel('two-mode','panel'),'mode switch focuses selected native button')
+    panel_only(p)
+    h.ok(p.locator(R+' .ca-dimensions').inner_text()==str(dims[0])+' × '+str(dims[1]),'panel captures actual copy dimensions rather than original')
+    for prompt in range(6):
+        act(p,'two-prompt',prompt,before)
+        hear(p,before,excludes=['60°','50°','10°','lean clockwise','lean counterclockwise'])
+    for pair in ['corresponding','alternate','co-interior']:
+        act(p,'two-pair',pair,before)
+        for move in [1,2,3,4]:act(p,'two-move',move,before)
+        hear(p,before,includes=['parallel','directions line up'],excludes=['50°','60°','10°'])
+        for move in [3,2,1,0]:act(p,'two-move',move,before)
+    two_resize(p,before);capture(p,'two-tablet-panel')
+    act(p,'two-mode','strips',before)
+    h.ok(p.locator('select'+sel('angle')).input_value()=='60' and p.locator('select'+sel('two-lean')).input_value()=='10' and p.locator('select'+sel('two-spacing')).input_value()=='far','panel roundtrip preserves all free settings')
+    act(p,'page','build',before)
+    h.ok(p.locator('select'+sel('angle')).input_value()=='60' and p.locator(sel('rotation')).get_attribute('data-crossing-angles-value')==turn,'Explore retains shared first angle and turn')
+    act(p,'page','learn',before)
+    titles=['Same position, same turn','Inside, opposite sides','Inside, same side','What a lean changes']
+    for card,title in enumerate(titles,4):
+        act(p,'card',card,before)
+        h.ok(title in p.locator(R).inner_text(),'new worked card '+str(card))
+        h.ok('Worked example, not my settings.' in p.locator(R).inner_text(),'worked settings explicitly distinguished')
+        if card==4:
+            for step,phrase in [(0,'A straight line'),(1,'Slide a tracing'),(2,'Both directions match'),(1,'Slide a tracing'),(0,'A straight line')]:
+                if p.locator(sel('step',step)).count() and not p.locator(sel('step',step)).is_disabled():act(p,'step',step,before)
+                hear(p,before,includes=[phrase])
+        else:hear(p,before,includes=[title])
+        bounds(p);svg_access(p);capture(p,'two-tablet-card-'+str(card))
+    act(p,'page','parallel',before);act(p,'two-mode','panel',before)
+    captured=p.locator(R).inner_text()
+    back(p,before);h.ok(frame(p)==source,'new page Back preserves exact waiting parent')
+    parent(p,'width-more');changed=frame(p)
+    enter(p,before)
+    panel_only(p)
+    h.ok(p.locator(R).inner_text()!=captured,'explicit re-entry recaptures changed source dimensions')
+    back(p,before);h.ok(frame(p)==changed,'recaptured parent remains unchanged')
+    h.unchanged(p,before,'all two-crossing actions and returns')
+    after=h.notes(p,'two-notes-after')
+    h.ok({k:v for k,v in after.items() if k!='exportedAt'}=={k:v for k,v in exported.items() if k!='exportedAt'},'actual Notes export unchanged across every new mathematical action')
+    p.context.close()
+
+
+def two_focused(browser,base):
+    print('Two Crossings: bounded phone/tablet extremes and thin copied rectangles',flush=True)
+    p=setup(browser,base);before=h.snapshot(p);enter(p,before);act(p,'page','parallel',before)
+    for width,angle,lean,spacing,pair,turns in [(320,15,10,'near','corresponding',0),(320,165,-10,'far','alternate',6),(820,90,0,'near','co-interior',3)]:
+        p.set_viewport_size({'width':width,'height':1000})
+        act(p,'angle',angle,before);act(p,'two-lean',lean,before);act(p,'two-spacing',spacing,before);act(p,'two-pair',pair,before)
+        for _ in range(turns):act(p,'rotation',before=before)
+        two_measures(p,angle,lean);bounds(p);capture(p,'two-extreme-'+str(width)+'-'+str(angle))
+    back(p,before)
+    for width,height in [(1,12),(12,1),(1,1)]:
+        for side,target in [('width',width),('height',height)]:
+            while not p.locator('[data-cframe-action="'+side+'-less"]').is_disabled():parent(p,side+'-less')
+            for _ in range(target-1):parent(p,side+'-more')
+        enter(p,before);act(p,'two-mode','panel',before);act(p,'two-pair','co-interior',before)
+        for screen in [820,320]:
+            p.set_viewport_size({'width':screen,'height':1000})
+            bounds(p);panel_only(p)
+            h.ok(str(width)+' × '+str(height) in p.locator(R).inner_text(),'panel uses actual copy dimensions '+str(width)+'x'+str(height))
+            capture(p,'two-panel-'+str(width)+'-'+str(height)+'-'+str(screen))
+        hear(p,before,includes=['Inside means between the two width-side lines'])
+        back(p,before)
+    p.context.close()
+
+
+def two_guards(browser,base):
+    print('Two Crossings: stale new actions and Hear remain inert before render or speech',flush=True)
+    for mode in ['detached','hidden','ancestor','reparented']:
+        p=setup(browser,base);enter(p);act(p,'page','parallel')
+        handles=[p.locator(sel('two-mode','panel')).element_handle(),p.locator('select'+sel('two-lean')).element_handle(),p.locator(sel('two-move',1)).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+        for control in handles:retire(control,mode)
+        before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+        for control in handles:h.dispatch(control,'change' if control.evaluate('e=>e.tagName')=='SELECT' else 'click')
+        h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'retired new '+mode+' controls cannot render or speak')
+        h.unchanged(p,before,'retired two-crossing '+mode);p.context.close()
+
+
 def main():
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self,*args):pass
@@ -298,7 +466,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base)
+                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base)
                 h.ok(not h.errors,'no browser/HTTP errors: '+str(h.errors))
                 result={'status':'passed','checks':h.checks,'artifacts':str(OUT)}
                 (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result),flush=True)

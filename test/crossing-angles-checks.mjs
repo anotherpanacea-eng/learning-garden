@@ -7,7 +7,7 @@ import {renderCrossingAngles} from '../dist/crossing-angles-ui.mjs';
 const close=(a,b,message)=>assert.ok(Math.abs(a-b)<1e-9,`${message}: ${a} vs ${b}`);
 const sub=(a,b)=>[a[0]-b[0],a[1]-b[1]],dot=(a,b)=>a[0]*b[0]+a[1]*b[1],cross=(a,b)=>a[0]*b[1]-a[1]*b[0];
 const initial=createCrossingAngles();
-assert.deepEqual(initial,{page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0});
+assert.deepEqual(initial,{page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0});
 for(let a=15;a<180;a+=15)for(let r=0;r<360;r+=30)for(const pair of ['opposite','adjacent']){
  const work={...initial,angle:a,rotation:r,pair},g=crossingAnglesModel(work).geometry;
  assert.deepEqual(g.sectors.map(s=>s.measure),[a,180-a,a,180-a]);
@@ -55,10 +55,10 @@ assert.equal(changeCrossingAngles(reason,'card',1),reason,'choosing same card re
 assert.equal(changeCrossingAngles(reason,'card',2).step,0);
 assert.deepEqual(changeCrossingAngles(reason,'page','build'),{...reason,page:'build'},'page retains all choices');
 for(const [action,badValues] of [['angle',[0,180,16,'60',true,NaN,Infinity,60.5,null]],['rotation',[-30,360,15,'30',false,NaN,30.2]],['prompt',[-1,6,'1',true,1.1,NaN]],['pair',['other',1,null]],['page',['cover',true,null]]])for(const bad of badValues)assert.equal(changeCrossingAngles(initial,action,bad),initial,`${action} rejects ${String(bad)}`);
-for(const [action,badValues] of [['card',[-1,4,'1',true,1.5,NaN]],['step',[-1,3,'1',false,0.5,NaN]]])for(const bad of badValues)assert.equal(changeCrossingAngles(reason,action,bad),reason);
+for(const [action,badValues] of [['card',[-1,8,'1',true,1.5,NaN]],['step',[-1,3,'1',false,0.5,NaN]]])for(const bad of badValues)assert.equal(changeCrossingAngles(reason,action,bad),reason);
 for(const action of ['angle','rotation','pair','prompt','page'])assert.equal(changeCrossingAngles(initial,action,initial[action]),initial);
 for(const action of ['card','step','unknown'])assert.equal(changeCrossingAngles(initial,action,1),initial);
-for(const bad of [null,[],{}, {...initial,angle:'60'},{...initial,rotation:360},{...initial,step:3},{...initial,card:4},{...initial,prompt:6}]){
+for(const bad of [null,[],{}, {...initial,angle:'60'},{...initial,rotation:360},{...initial,step:3},{...initial,card:8},{...initial,prompt:6}]){
  assert.equal(crossingAnglesModel(bad),null);assert.equal(changeCrossingAngles(bad,'page','learn'),bad);assert.equal(crossingAnglesNarration(bad),'');
 }
 for(let prompt=0;prompt<6;prompt++){
@@ -121,7 +121,7 @@ for(const [module,allowed] of [
  ['ui',['./crossing-angles-content.mjs','./crossing-angles-core.mjs']]
 ]){
  const source=readFileSync(new URL(`../dist/crossing-angles-${module}.mjs`,import.meta.url),'utf8');
- const imports=[...source.matchAll(/\b(?:import|export)\s+(?:[^'";]*?\s+from\s*)?['"]([^'"]+)['"]/g)].map(match=>match[1]);
+ const imports=[...source.matchAll(/\b(?:import|export)\b\s*(?:[^'";]*?\bfrom\s*)?['"]([^'"]+)['"]/g)].map(match=>match[1]);
  assert.deepEqual(imports.sort(),allowed.sort(),`${module} imports only local crossing modules`);
  assert.ok(!/\bimport\s*\(/.test(source),`${module} has no dynamic service import`);
 }
@@ -133,4 +133,93 @@ for(const [[originalWidth,originalHeight,width,height]] of cases){
  const statement=crossingAnglesModel(panelWork,{caseTitle:'Synthetic',originalWidth,originalHeight,width,height}).context.statement;
  assert.ok(!emptyPanelHTML.includes(statement),'null panel renderer omits square-case conclusions');
 }
+// Compact boundary fixtures: this is deliberately not a JavaScript parser.
+const importPattern=/\b(?:import|export)\b\s*(?:[^'";]*?\bfrom\s*)?['"]([^'"]+)['"]/g;
+for(const fixture of ["import{x}from './local.mjs';","import*as x from './local.mjs';","export{x}from './local.mjs';","import './local.mjs';"])assert.deepEqual([...fixture.matchAll(importPattern)].map(m=>m[1]),['./local.mjs']);
 console.log('Crossing Angles: finite crossing geometry, teaching/reducer boundaries, all rectangle shapes and copied-context safety passed.');
+// Expectations below use independently written mathematical coordinates and
+// vectors rather than the renderer's sector paths or its direction helper.
+const parallel={...initial,page:'parallel'};
+const twoPairs=['corresponding','alternate','co-interior'];
+const projected=(x,y,r)=>{const t=r*Math.PI/180;return [320+x*Math.cos(t)-y*Math.sin(t),280-x*Math.sin(t)-y*Math.cos(t)];};
+const coord=(actual,expected,label)=>actual.forEach((v,i)=>close(v,expected[i],label));
+for(let a=15;a<=165;a+=15)for(let r=0;r<360;r+=30)for(const lean of [-10,0,10])for(const spacing of ['near','middle','far']){
+ const D={near:120,middle:150,far:180}[spacing],t=a*Math.PI/180,v=[Math.cos(t),Math.sin(t)],base={...parallel,angle:a,rotation:r,twoLean:lean,twoSpacing:spacing};
+ const m=crossingAnglesModel(base).two;
+ coord(m.O,projected(-D*v[0]/2,-D*v[1]/2,r),'first crossing');coord(m.P,projected(D*v[0]/2,D*v[1]/2,r),'second crossing');
+ const all=m.crossings.flatMap(c=>c.sectors),expected=[a,180-a,a,180-a,a-lean,180-a+lean,a-lean,180-a+lean];
+ assert.deepEqual(all.map(s=>s.name),[...'abcdefgh']);assert.deepEqual(all.map(s=>s.measure),expected);assert.deepEqual(all.map(s=>s.inside),[true,true,false,false,false,false,true,true]);
+ for(let i=0;i<8;i++){assert.ok(expected[i]>0&&expected[i]<180);close(all[i].sweep,expected[i],'exact sector sweep');}
+ for(let i=0;i<2;i++){
+  const c=m.crossings[i],rail=m.rails[i],d=sub(rail.end,rail.start),theta=(r+(i?lean:0))*Math.PI/180;
+  coord(d,[200*Math.cos(theta),-200*Math.sin(theta)],'rail direction');
+  for(const s of c.sectors){const t=(s.start+s.sweep/2)*Math.PI/180;coord(sub(s.leader,c.center),[28*Math.cos(t),-28*Math.sin(t)],'leader exact bisector');}
+ }
+ const endpoints=[...m.rails.flatMap(l=>[l.start,l.end]),m.transversal.start,m.transversal.end];
+ for(const p of endpoints)assert.ok(Math.hypot(p[0]-320,p[1]-280)<=190+1e-9,'free bounds');
+ for(let move=0;move<=4;move++){
+  const g=crossingAnglesModel({...base,twoMove:move}).two;
+  coord(g.tracing.center,m.O.map((n,i)=>n+(m.P[i]-n)*move/4),'linear tracing');
+  for(let i=0;i<4;i++){coord(sub(g.tracing.rays[i].end,g.tracing.center),sub(m.crossings[0].rays[i].end,m.O),'copy never turns or stretches');assert.ok(Math.hypot(g.tracing.rays[i].end[0]-320,g.tracing.rays[i].end[1]-280)<=190+1e-9);}
+  assert.equal(g.tracingState!== '',move===4);
+ }
+ // Pair selection is factored from geometry: all pair relations are checked
+ // here without repeating the five interpolation computations per pair.
+ for(const pair of twoPairs){const g=crossingAnglesModel({...base,twoPair:pair}).two;
+  assert.deepEqual(g.selectedNames,['a',pair==='corresponding'?'e':pair==='alternate'?'g':'h']);
+  assert.deepEqual(g.crossings.flatMap(c=>c.sectors).filter(s=>s.selected).map(s=>s.name),g.selectedNames);
+  assert.equal(g.rails.every(l=>l.parallel),lean===0);
+  if(pair==='co-interior'){assert.equal(expected[0]+expected[7],180+lean);assert.ok(g.relation.includes(lean===0?'= 180°':`= ${180+lean}°, not 180°`));}
+  else {assert.equal(expected[0]-expected[pair==='corresponding'?4:6],lean);assert.equal(g.relation.includes(' ≠ '),lean!==0);}
+ }
+}
+for(const [a,d,e,h] of [[60,0,60,120],[60,10,50,130],[60,-10,70,110],[90,0,90,90],[15,10,5,175],[165,-10,175,5]]){
+ const s=crossingAnglesModel({...parallel,angle:a,twoLean:d}).two.crossings[1].sectors;assert.equal(s[0].measure,e);assert.equal(s[2].measure,e);assert.equal(s[3].measure,h);
+}
+for(let width=1;width<=12;width++)for(let height=1;height<=12;height++){
+ const context=captureCrossingPanel({originalWidth:12,originalHeight:11,width,height},'Synthetic copied panel');
+ const g=crossingAnglesModel({...parallel,twoMode:'panel',twoPair:'co-interior',twoMove:4},context).two;
+ close(g.rectangle.width/g.rectangle.height,width/height,'actual copy ratio');close(Math.max(g.rectangle.width,g.rectangle.height),160,'panel equal scale');
+ const corners=g.rectangle.corners,edges=corners.map((p,i)=>sub(corners[(i+1)%4],p));
+ close(cross(edges[0],edges[2]),0,'opposite sides parallel');close(dot(edges[0],edges[1]),0,'rectangle corner');
+ coord(g.O,corners[0],'diagonal starts lower left');coord(g.P,corners[2],'diagonal ends upper right');
+ close(cross(sub(g.transversal.end,g.transversal.start),sub(g.P,g.O)),0,'one diagonal correct');
+ for(const rail of g.rails)close(Math.hypot(...sub(rail.end,rail.start)),g.rectangle.width+120,'full width plus extensions');
+ for(const c of g.crossings)for(const s of c.sectors){assert.ok(!Object.hasOwn(s,'measure'),'panel sectors have no measure field');assert.ok(s.sweep>0&&s.sweep<180);}
+ assert.equal(g.lean,0);assert.ok(!Object.hasOwn(g,'angle'));assert.ok(!Object.hasOwn(g,'spacing'));
+ assert.equal(g.table,'a: first angle; c = e = g = a; b = d = f = h = 180° − a.');assert.ok(g.relation.includes('Inside means between'));
+ const ends=[...g.rails.flatMap(l=>[l.start,l.end]),g.transversal.start,g.transversal.end,...g.tracing.rays.map(l=>l.end)];
+ for(const point of ends)assert.ok(Math.hypot(point[0]-320,point[1]-280)<175,'panel bounds');
+ const html=renderCrossingAngles({...parallel,twoMode:'panel',twoPair:'co-interior',twoMove:4},context);
+ assert.ok(!/data-crossing-angles-label="[a-h]"[^>]*>[^<]*<strong>/.test(html),'no numeric angle tag');
+ for(const match of html.matchAll(/([0-9]+(?:\.[0-9]+)?)°/g))assert.ok(['0','180'].includes(match[1]),'only orientation and fixed half turn have degree values in panel HTML');assert.ok(!html.includes('≈'));
+}
+// Complete output invariance across inactive free inputs, including data-speak.
+for(const context of [captureCrossingPanel({originalWidth:3,originalHeight:2,width:1,height:12},'Tall copied panel'),captureCrossingPanel({originalWidth:3,originalHeight:2,width:4,height:4},'Square copied panel'),null]){
+ const base={...parallel,twoMode:'panel',twoPair:'alternate',twoMove:2,twoPrompt:3,rotation:150};
+ const expected=crossingAnglesModel(base,context).two,html=renderCrossingAngles(base,context),heard=crossingAnglesNarration(base,context);
+ for(let angle=15;angle<=165;angle+=15)for(const twoLean of [-10,0,10])for(const twoSpacing of ['near','middle','far']){
+  const w={...base,angle,twoLean,twoSpacing};assert.deepEqual(crossingAnglesModel(w,context).two,expected);assert.equal(renderCrossingAngles(w,context),html);assert.equal(crossingAnglesNarration(w,context),heard);
+ }
+}
+const nullBase={...parallel,twoMode:'panel'};
+const nullHear=`${crossingCopy.title}. Two Crossings. Your waiting panel could not be copied. Choose Free strips to explore two crossings, or go back to Copy Frame. ${crossingCopy.lifetime} Back to Copy Frame.`;
+for(const twoPair of twoPairs)for(let twoMove=0;twoMove<=4;twoMove++)for(let twoPrompt=0;twoPrompt<=5;twoPrompt++)for(let rotation=0;rotation<360;rotation+=30){
+ const w={...nullBase,twoPair,twoMove,twoPrompt,rotation};assert.deepEqual(crossingAnglesModel(w).two,{mode:'panel',missing:true});assert.equal(crossingAnglesNarration(w),nullHear);assert.equal(renderCrossingAngles(w),renderCrossingAngles(nullBase));
+}
+for(const [action,validValue,key] of [['two-mode','panel','twoMode'],['two-spacing','far','twoSpacing'],['two-lean',10,'twoLean'],['two-pair','alternate','twoPair'],['two-move',4,'twoMove'],['two-prompt',5,'twoPrompt']]){
+ const changed=changeCrossingAngles(parallel,action,validValue);assert.equal(changed[key],validValue);assert.equal(changeCrossingAngles(initial,action,validValue),initial);assert.equal(changeCrossingAngles(changed,action,validValue),changed);
+ for(const bad of [null,true,NaN,Infinity,{},'bogus',1.5,new String('far')])assert.equal(changeCrossingAngles(parallel,action,bad),parallel);
+}
+for(const action of ['two-lean','two-move','two-prompt'])assert.equal(changeCrossingAngles(parallel,action,'0'),parallel);
+const panelMode={...parallel,twoMode:'panel'};for(const [action,value] of [['angle',90],['two-lean',10],['two-spacing','far']])assert.equal(changeCrossingAngles(panelMode,action,value),panelMode);
+const returned=changeCrossingAngles(changeCrossingAngles({...parallel,angle:165,twoLean:-10,twoSpacing:'far'},'two-mode','panel'),'two-mode','strips');assert.deepEqual([returned.angle,returned.twoLean,returned.twoSpacing],[165,-10,'far']);
+for(let card=4;card<=7;card++)for(let step=0;step<=2;step++){
+ const w={...initial,page:'learn',card,step},m=crossingAnglesModel(w),heard=crossingAnglesNarration(w);
+ assert.ok(m.two);assert.equal(m.two.move,card===4&&step===0?0:4);assert.equal(m.two.lean,card===7?10:0);assert.equal(m.two.rotation,0);assert.equal(m.two.angle,60);
+ assert.ok(!heard.includes(crossingCopy.arcLegend));assert.ok(!heard.includes(crossingCopy.modelNote));
+ const html=renderCrossingAngles(w);assert.ok(!html.includes(crossingCopy.arcLegend));assert.ok(!html.includes(crossingCopy.modelNote));
+ if(card===4){const selected=crossingCards[card].steps[step];assert.ok(heard.includes(selected.text));for(let hidden=0;hidden<3;hidden++)if(hidden!==step)assert.ok(!heard.includes(crossingCards[card].steps[hidden].text));}
+ assert.deepEqual(crossingAnglesModel({...w,angle:15,rotation:330,twoLean:-10,twoSpacing:'far',twoPair:'co-interior',twoMove:3}).two,m.two,'worked settings fixed');
+}
+console.log('Two Crossings: complete free geometry, tracing, symbolic panels, output invariance and strict ownership passed.');
