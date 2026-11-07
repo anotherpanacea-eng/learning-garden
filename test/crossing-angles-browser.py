@@ -1,4 +1,4 @@
-"""Crossing Angles415/416 in the actual application, with invented notebooks only.
+"""Crossing Angles415/416/417 in the actual application, with invented notebooks only.
 
 One complete tablet visit and focused phone/label/lifetime probes. The sole app
 instrumentation exposes a read-only getter at its real initialization marker.
@@ -10,7 +10,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-OUT = Path(os.environ.get('CROSSING_ANGLES_ARTIFACTS') or tempfile.mkdtemp(prefix='lg416-native-'))
+OUT = Path(os.environ.get('CROSSING_ANGLES_ARTIFACTS') or tempfile.mkdtemp(prefix='lg417-native-'))
 OUT.mkdir(parents=True, exist_ok=True)
 spec = importlib.util.spec_from_file_location('crossing_actual_helpers', ROOT/'test/shared-turn-browser.py')
 h = importlib.util.module_from_spec(spec)
@@ -43,7 +43,7 @@ def sel(action, value=None):
 
 def act(p, action, value=None, before=None):
     spoken=p.evaluate('__sharedSpoken.length')
-    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt']
+    selects = ['angle','prompt','card','two-spacing','two-lean','two-prompt','tri-a','tri-b','tri-size','tri-prompt']
     target = p.locator(('select' if action in selects else '')+sel(action, None if action in selects or action=='rotation' else value))
     if action in selects:
         target.select_option(str(value))
@@ -231,6 +231,11 @@ def reset_state(p):
     h.ok(p.locator(sel('two-mode','strips')).get_attribute('aria-pressed')=='true' and p.locator(sel('two-pair','corresponding')).get_attribute('aria-pressed')=='true','fresh visit resets two-crossing mode and pair')
     h.ok([p.locator('select'+sel(action)).input_value() for action in ['two-spacing','two-lean','two-prompt']]==['middle','0','0'],'fresh visit resets two-crossing selections')
     h.ok(p.locator('[data-crossing-angles-tracing=previous]').is_disabled(),'fresh visit resets tracing to first position')
+    act(p,'page','triangle',before)
+    h.ok([p.locator('select'+sel(a)).input_value() for a in ['tri-a','tri-b','tri-size','tri-prompt']]==['60','60','large','0'],'fresh visit resets triangle free settings')
+    h.ok(p.locator(sel('tri-mode','free')).get_attribute('aria-pressed')=='true' and p.locator(sel('tri-view','gather')).get_attribute('aria-pressed')=='true','fresh visit resets triangle mode/view')
+    h.ok(p.locator('[data-crossing-angles-tri-step=previous]').is_disabled(),'fresh visit resets triangle steps')
+    act(p,'tri-view','reason',before);h.ok(p.locator('[data-crossing-angles-tri-step=previous]').is_disabled(),'fresh visit also resets independent triangle proof step');act(p,'tri-view','gather',before)
     act(p,'page','build',before)
 
 
@@ -239,6 +244,9 @@ def lifetime_setting(p):
     act(p,'angle',135,before);act(p,'page','parallel',before)
     act(p,'two-lean',10,before);act(p,'two-spacing','far',before);act(p,'two-prompt',5,before)
     act(p,'two-pair','co-interior',before);act(p,'two-move',1,before);act(p,'two-mode','panel',before)
+    act(p,'page','triangle',before);act(p,'tri-a',90,before);act(p,'tri-b',45,before)
+    act(p,'tri-size','small',before);act(p,'tri-prompt',5,before);tri_step(p,'gather',2,before)
+    tri_step(p,'reason',2,before);act(p,'tri-view','outside',before);act(p,'tri-mode','panel',before)
     act(p,'page','build',before)
 
 
@@ -456,6 +464,182 @@ def two_guards(browser,base):
         h.unchanged(p,before,'retired two-crossing '+mode);p.context.close()
 
 
+def tri_step(p,view,step,before):
+    act(p,'tri-view',view,before)
+    action='tri-gather' if view=='gather' else 'tri-proof'
+    # Target steps are adjacent native buttons; traverse intentionally.
+    for _ in range(4):
+        match=re.search(r'(?:Move|Reason)\s+(\d+)\s+of\s*2',p.locator(R).inner_text())
+        h.ok(match is not None,'active triangle step counter visible')
+        position=int(match.group(1))
+        if position==step:break
+        direction='next' if position is not None and position<step else 'previous'
+        button=p.locator('[data-crossing-angles-tri-step='+direction+']')
+        target=int(button.get_attribute('data-crossing-angles-value'))
+        act(p,action,target,before)
+        if target in [0,2]:h.focus(p,'[data-crossing-angles-tri-step='+('next' if target==0 else 'previous')+']','triangle endpoint focuses enabled opposite control')
+    else:raise AssertionError('triangle step control did not reach requested step')
+    if step in [0,2]:
+        h.ok(p.locator('[data-crossing-angles-tri-step='+('previous' if step==0 else 'next')+']').is_disabled(),'triangle endpoint is disabled')
+
+
+def tri_shape(p,view,step=0):
+    svg_access(p)
+    svg=p.locator('[data-crossing-angles-triangle-stage] svg')
+    h.ok(svg.count()==1,'one current triangle diagram')
+    original=not(view=='gather' and step>0)
+    h.ok(svg.locator('[data-triangle-outline]').count()==int(original),'triangle outline only in original arrangements')
+    h.ok(svg.locator('[data-triangle-kind=interior]').count()==(3 if original else 0),'all original interior marks only with outline')
+    for point in 'ABC':h.ok(p.locator('[data-crossing-angles-triangle-stage] [data-crossing-angles-label="'+point+'"]').count()==int(original),'point labels only with outline')
+    h.ok(svg.locator('[data-triangle-kind=detached]').count()==(3 if view=='gather' and step==1 else 0),'only detached arrangement has three detached copies')
+    h.ok(svg.locator('[data-triangle-kind=joined]').count()==(3 if view=='gather' and step==2 else 0),'only joined arrangement has three joined copies')
+    h.ok(p.locator(R+' .ca-triangle-equations').count()==int(view=='outside' or view=='reason' and step>0 or view=='gather' and step==2),'equations appear only at current teaching steps')
+    for name in 'abc':
+        h.ok(p.locator('[data-crossing-angles-triangle-stage] [data-crossing-angles-label="'+name+'"]').count()==1,'one current outer angle tag '+name)
+    h.ok(svg.locator('[data-triangle-kind=outside]').count()==int(view=='outside'),'adjacent outside sector only in outside view')
+    h.ok(svg.locator('[data-triangle-line=parallel-0]').count()==int(view=='reason' and step>0),'parallel only in active reason step')
+    text=p.locator(R).inner_text()
+    h.ok('A closed shape with three straight sides' in text,'triangle definition visible')
+    h.ok('A, B, C name points; a, b, c name their interior angles.' in text,'point and angle naming visible')
+    bounds(p)
+
+
+def tri_resize(p,before):
+    original=p.locator('[data-crossing-angles-tri-step=next]').element_handle()
+    rotation=p.locator(sel('rotation')).element_handle()
+    orientation=int(rotation.get_attribute('data-crossing-angles-value'))
+    for width in [320,820]:
+        p.set_viewport_size({'width':width,'height':1000})
+        p.evaluate('()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)))')
+        bounds(p)
+        for e in [original,rotation]:h.ok(e.evaluate('e=>e.isConnected'),'live resize retains original triangle/shared controls')
+        h.unchanged(p,before,'triangle live resize')
+    original.click();h.unchanged(p,before,'original triangle step after resize')
+    h.ok('Move 1 of' in p.locator(R).inner_text(),'original triangle step remains bound after resize')
+    # Render replaced the old rotation: independently activate a second original
+    # shared control across another real resize round trip.
+    rotation=p.locator(sel('rotation')).element_handle()
+    for width in [320,820]:p.set_viewport_size({'width':width,'height':1000})
+    rotation.click();h.unchanged(p,before,'original shared turn after triangle resize')
+    h.ok(p.locator(sel('rotation')).get_attribute('data-crossing-angles-value')==str((orientation+30)%360),'original shared turn remains bound after resize')
+    tri_step(p,'gather',0,before)
+
+
+def tri_panel(p,dims):
+    for action in ['tri-a','tri-b','tri-size']:
+        h.ok(p.locator(sel(action)).count()==0,'panel omits inactive '+action)
+    text=p.locator(R).inner_text()
+    h.ok(str(dims[0])+' × '+str(dims[1]) in text,'triangle shows actual copied dimensions')
+    h.ok(re.search(r'b\s*=\s*90° at B',text) is not None and '90° − a at C' in text,'panel angles remain symbolic at square and thin dimensions')
+    h.ok('This half uses the width and height sides' in text,'actual panel half provenance visible')
+    return text
+
+
+def triangle_journey(browser,base):
+    print('Triangle Corners: complete tablet visit, current speech, exact copied source and no saved writes',flush=True)
+    p=setup(browser,base);exported=h.notes(p,'triangle-notes-before')
+    p.evaluate('location.hash='+json.dumps(ROUTE));ready(p)
+    parent(p,'width-more');parent(p,'height-less');source=frame(p)
+    dims=p.locator('[data-cframe-copy]').evaluate('e=>[Number(e.getAttribute("width"))/22,Number(e.getAttribute("height"))/22]')
+    before=h.snapshot(p);enter(p,before);act(p,'angle',135,before);act(p,'page','triangle',before)
+    h.focus(p,sel('page','triangle'),'triangle tab retains focus')
+    tri_resize(p,before)
+    for a,b in [(15,150),(150,15),(15,15),(90,45)]:
+        act(p,'tri-a',15,before);act(p,'tri-b',b,before);act(p,'tri-a',a,before)
+        text=p.locator(R).inner_text()
+        h.ok(all(x in text for x in ['a = '+str(a)+'° at A','b = '+str(b)+'° at B','c = '+str(180-a-b)+'° at C']),'independent current chosen triangle summary')
+    # A native option is disabled and a forged DOM change cannot bypass reducer.
+    select=p.locator('select'+sel('tri-a'))
+    h.ok(select.locator('option[value="150"]').is_disabled(),'invalid angle option disabled')
+    html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+    select.evaluate('e=>{e.value="150";e.dispatchEvent(new Event("change",{bubbles:true}))}')
+    h.ok(select.input_value()=='90' and p.locator(R).inner_html()==html,'refused forced select restores native value without rendering')
+    h.ok(p.evaluate('__sharedSpoken.length')==spoken,'refused select does not speak');h.unchanged(p,before,'refused triangle pair')
+    for size in ['small','large']:act(p,'tri-size',size,before)
+    for prompt in range(6):act(p,'tri-prompt',prompt,before);hear(p,before,includes=['Triangle corners'])
+    for mode in ['free','panel']:
+        act(p,'tri-mode',mode,before);h.focus(p,sel('tri-mode',mode),'triangle mode retains focus')
+        if mode=='panel':tri_panel(p,dims)
+        for view in ['gather','reason','outside']:
+            act(p,'tri-view',view,before);h.focus(p,sel('tri-view',view),'triangle view retains focus')
+            for step in ([0,1,2] if view!='outside' else [0]):
+                if view!='outside':tri_step(p,view,step,before)
+                tri_shape(p,view,step)
+                if mode=='free':
+                    h.ok(all(p.locator('select'+sel(a)).count()==1 for a in ['tri-a','tri-b','tri-size']),'free shape settings available at every step')
+                    if view=='gather' and step==2:
+                        act(p,'tri-size','small',before);act(p,'tri-a',45,before)
+                        h.ok('Move 2 of' in p.locator(R).inner_text() and 'c = 90° at C' in p.locator(R).inner_text(),'shape changes retain chosen gather step and regenerate current third angle')
+                        act(p,'tri-a',90,before);act(p,'tri-size','large',before)
+                phrases={'gather':['Look at the three inside corners.','These are copies of this triangle’s corners.','The three corners fill a straight turn:'], 'reason':['Start with any triangle with three straight sides','AC crosses the two parallel lines.','BC crosses the same parallel lines'], 'outside':['Extend the side from B through C.']}
+                current=phrases[view][step]
+                inactive=[phrase for name,items in phrases.items() for index,phrase in enumerate(items) if name!=view or index!=step]
+                text=hear(p,before,includes=['Triangle corners',current],excludes=inactive+['Exploration here is not assessed'])
+                if mode=='free':h.ok('a equals 90° at A' in text and 'b equals 45° at B' in text and 'c equals 45° at C' in text,'Hear uses independent current free values')
+                else:h.ok('b equals 90° at B' in text and 'c equals 90° minus a at C' in text,'Hear keeps current panel summary symbolic')
+                worked=mode=='free' and (view=='outside' or step==2)
+                h.ok(('Separate worked example' in text)==worked,'Hear includes separate worked example exactly when visible')
+                if mode=='panel':h.ok('chosen model angles' not in text and 'Separate worked example' not in text,'panel Hear excludes inactive free settings/support')
+                capture(p,'triangle-tablet-'+mode+'-'+view+'-'+str(step))
+            if view!='outside':
+                tri_step(p,view,0,before)
+        for prompt in range(6):act(p,'tri-prompt',prompt,before);hear(p,before)
+    act(p,'tri-mode','free',before)
+    h.ok([p.locator('select'+sel(a)).input_value() for a in ['tri-a','tri-b','tri-size','tri-prompt']]==['90','45','large','5'],'panel round trip retains triangle free work')
+    tri_step(p,'gather',2,before);tri_step(p,'reason',1,before);act(p,'tri-view','gather',before)
+    h.ok('Move 2 of' in p.locator(R).inner_text(),'view switch restores independent gather step')
+    act(p,'page','build',before);h.ok(p.locator('select'+sel('angle')).input_value()=='135','triangle never changes old free crossing angle')
+    act(p,'page','triangle',before);act(p,'tri-mode','panel',before);captured=tri_panel(p,dims)
+    back(p,before);h.ok(frame(p)==source,'triangle Back retains exact parent work')
+    parent(p,'width-more');changed=frame(p);dims[0]+=1
+    enter(p,before);tri_panel(p,dims)
+    h.ok(p.locator(R).inner_text()!=captured and 'Move 2 of' in p.locator(R).inner_text(),'explicit reentry recaptures new source and retains triangle step')
+    act(p,'tri-mode','free',before)
+    h.ok(p.locator('select'+sel('tri-a')).input_value()=='90','explicit reentry retains free triangle work')
+    back(p,before);h.ok(frame(p)==changed,'triangle recaptured parent remains exact');h.unchanged(p,before,'complete triangle visit')
+    after=h.notes(p,'triangle-notes-after')
+    h.ok({k:v for k,v in after.items() if k!='exportedAt'}=={k:v for k,v in exported.items() if k!='exportedAt'},'actual Notes download unchanged across complete triangle visit')
+    p.context.close()
+
+
+def triangle_focused(browser,base):
+    print('Triangle Corners: bounded seven arrangements and skinny/right/panel responsive risks',flush=True)
+    p=setup(browser,base);before=h.snapshot(p);enter(p,before);act(p,'page','triangle',before)
+    samples=[('gather',0,15,150,'large',0),('gather',1,150,15,'small',2),('gather',2,15,15,'large',5),('reason',0,90,45,'large',3),('reason',1,15,150,'small',1),('reason',2,150,15,'large',4),('outside',0,15,15,'large',2)]
+    for view,step,a,b,size,turns in samples:
+        act(p,'tri-a',15,before);act(p,'tri-b',b,before);act(p,'tri-a',a,before);act(p,'tri-size',size,before)
+        for _ in range(turns):act(p,'rotation',before=before)
+        act(p,'tri-view',view,before)
+        if view!='outside':tri_step(p,view,step,before)
+        for screen in [320,820]:
+            p.set_viewport_size({'width':screen,'height':1000});tri_shape(p,view,step);capture(p,'triangle-risk-'+view+'-'+str(step)+'-'+str(screen))
+    back(p,before)
+    for width,height,view,step in [(1,12,'reason',2),(12,1,'outside',0),(1,1,'gather',2)]:
+        for side,target in [('width',width),('height',height)]:
+            while not p.locator('[data-cframe-action="'+side+'-less"]').is_disabled():parent(p,side+'-less')
+            for _ in range(target-1):parent(p,side+'-more')
+        enter(p,before);act(p,'tri-mode','panel',before);act(p,'tri-view',view,before)
+        if view!='outside':tri_step(p,view,step,before)
+        act(p,'rotation',before=before)
+        for screen in [320,820]:
+            p.set_viewport_size({'width':screen,'height':1000});tri_panel(p,[width,height]);tri_shape(p,view,step);capture(p,'triangle-panel-'+str(width)+'-'+str(height)+'-'+str(screen))
+        hear(p,before);back(p,before)
+    p.context.close()
+
+
+def triangle_guards(browser,base):
+    print('Triangle Corners: retired old/new actions and Hear inert before render/write/speech',flush=True)
+    for mode in ['detached','hidden','ancestor','reparented']:
+        p=setup(browser,base);enter(p);old=p.locator(sel('rotation')).element_handle();old_hear=p.locator(R+' [data-speak]').element_handle()
+        act(p,'page','triangle')
+        handles=[old,old_hear,p.locator(sel('tri-mode','panel')).element_handle(),p.locator('select'+sel('tri-a')).element_handle(),p.locator('[data-crossing-angles-tri-step=next]').element_handle(),p.locator(R+' [data-speak]').element_handle()]
+        for control in handles[2:]:retire(control,mode)
+        before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length')
+        for control in handles:h.dispatch(control,'change' if control.evaluate('e=>e.tagName')=='SELECT' else 'click')
+        h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'retired triangle '+mode+' old/new controls cannot render or speak')
+        h.unchanged(p,before,'retired triangle '+mode);p.context.close()
+
+
 def main():
     class Quiet(http.server.SimpleHTTPRequestHandler):
         def log_message(self,*args):pass
@@ -466,7 +650,7 @@ def main():
         with sync_playwright() as pw:
             browser=pw.chromium.launch(executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base)
+                report=journey(browser,base);guards(browser,base);lifetime(browser,base,report);phone(browser,base);voice(browser,base);two_journey(browser,base);two_focused(browser,base);two_guards(browser,base);triangle_journey(browser,base);triangle_focused(browser,base);triangle_guards(browser,base)
                 h.ok(not h.errors,'no browser/HTTP errors: '+str(h.errors))
                 result={'status':'passed','checks':h.checks,'artifacts':str(OUT)}
                 (OUT/'receipt.json').write_text(json.dumps(result,indent=2));print(json.dumps(result),flush=True)

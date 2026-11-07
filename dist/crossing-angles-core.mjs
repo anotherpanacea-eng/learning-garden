@@ -1,20 +1,21 @@
-import {crossingCopy as copy,crossingPrompts,crossingCards,twoCrossingsCopy as twoCopy,twoCrossingsPrompts,twoPanelPrompts} from './crossing-angles-content.mjs';
+import {crossingCopy as copy,crossingPrompts,crossingCards,twoCrossingsCopy as twoCopy,twoCrossingsPrompts,twoPanelPrompts,triangleCopy as triCopy,trianglePrompts,trianglePanelPrompts} from './crossing-angles-content.mjs';
 const integer=(n,min,max)=>Number.isInteger(n)&&n>=min&&n<=max;
 const dimension=n=>integer(n,1,12);
 const angleValue=n=>integer(n,15,165)&&n%15===0;
 const rotationValue=n=>integer(n,0,330)&&n%30===0;
+const triAngle=n=>integer(n,15,150)&&n%15===0;
 const pairs=['corresponding','alternate','co-interior'];
 const spacings={near:120,middle:150,far:180};
-function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel'].includes(work.page)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5);}
-export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0};}
+function valid(work){return work&&typeof work==='object'&&!Array.isArray(work)&&['build','learn','parallel','triangle'].includes(work.page)&&angleValue(work.angle)&&rotationValue(work.rotation)&&['opposite','adjacent'].includes(work.pair)&&integer(work.prompt,0,5)&&integer(work.card,0,7)&&integer(work.step,0,2)&&['strips','panel'].includes(work.twoMode)&&['near','middle','far'].includes(work.twoSpacing)&&[-10,0,10].includes(work.twoLean)&&pairs.includes(work.twoPair)&&integer(work.twoMove,0,4)&&integer(work.twoPrompt,0,5)&&['free','panel'].includes(work.triMode)&&['gather','reason','outside'].includes(work.triView)&&triAngle(work.triA)&&triAngle(work.triB)&&work.triA+work.triB<=165&&['small','large'].includes(work.triSize)&&integer(work.triGather,0,2)&&integer(work.triProof,0,2)&&integer(work.triPrompt,0,5);}
+export function createCrossingAngles(){return {page:'build',angle:60,rotation:0,pair:'opposite',prompt:0,card:0,step:0,twoMode:'strips',twoSpacing:'middle',twoLean:0,twoPair:'corresponding',twoMove:0,twoPrompt:0,triMode:'free',triView:'gather',triA:60,triB:60,triSize:'large',triGather:0,triProof:0,triPrompt:0};}
 export function changeCrossingAngles(work,action,value){
  if(!valid(work))return work;
  const set=(key,v)=>work[key]===v?work:{...work,[key]:v};
- if(action==='page')return ['build','learn','parallel'].includes(value)?set('page',value):work;
- if(work.page==='build'||work.page==='parallel'){
+ if(action==='page')return ['build','learn','parallel','triangle'].includes(value)?set('page',value):work;
+ if(work.page==='build'||work.page==='parallel'||work.page==='triangle'){
   if(action==='rotation'&&rotationValue(value))return set('rotation',value);
   if(action==='turn')return {...work,rotation:(work.rotation+30)%360};
-  if(action==='angle'&&(work.page==='build'||work.twoMode==='strips')&&angleValue(value))return set('angle',value);
+  if(action==='angle'&&(work.page==='build'||work.page==='parallel'&&work.twoMode==='strips')&&angleValue(value))return set('angle',value);
  }
  if(work.page==='build'){
   if(action==='pair'&&['opposite','adjacent'].includes(value))return set('pair',value);
@@ -28,6 +29,14 @@ export function changeCrossingAngles(work,action,value){
   if(work.twoMode==='strips'){
    if(action==='two-spacing'&&['near','middle','far'].includes(value))return set('twoSpacing',value);
    if(action==='two-lean'&&[-10,0,10].includes(value))return set('twoLean',value);
+  }
+ }
+ if(work.page==='triangle'){
+  for(const [act,key,accept] of [['tri-mode','triMode',v=>['free','panel'].includes(v)],['tri-view','triView',v=>['gather','reason','outside'].includes(v)],['tri-gather','triGather',v=>integer(v,0,2)],['tri-proof','triProof',v=>integer(v,0,2)],['tri-prompt','triPrompt',v=>integer(v,0,5)]])if(action===act)return accept(value)?set(key,value):work;
+  if(work.triMode==='free'){
+   if(action==='tri-size'&&['small','large'].includes(value))return set('triSize',value);
+   if(action==='tri-a'&&triAngle(value)&&value+work.triB<=165)return set('triA',value);
+   if(action==='tri-b'&&triAngle(value)&&value+work.triA<=165)return set('triB',value);
   }
  }
  if(work.page==='learn'){
@@ -122,10 +131,14 @@ export function crossingAnglesModel(work,context=null){
  if(!valid(work))return null;
  const g=geometry(work.page==='build'?work.angle:60,work.page==='build'?work.rotation:0,work.page==='build'?work.pair:'opposite');
  const diagrams=work.page==='build'||work.card<2?[{title:work.page==='build'?'My crossing':'60° example',geometry:g}]:work.card===2?[{title:'60° example',geometry:g},{title:'90° example',geometry:geometry(90,0)}]:[];
- return {page:work.page,build:{angle:work.angle,rotation:work.rotation,pair:work.pair,prompt:work.prompt,canLess:work.angle>15,canMore:work.angle<165},prompt:crossingPrompts[work.prompt],card:crossingCards[work.card],cardIndex:work.card,step:work.step,geometry:g,diagrams,context:panelContext(context),two:twoModel(work,context)};
+ return {page:work.page,build:{angle:work.angle,rotation:work.rotation,pair:work.pair,prompt:work.prompt,canLess:work.angle>15,canMore:work.angle<165},prompt:crossingPrompts[work.prompt],card:crossingCards[work.card],cardIndex:work.card,step:work.step,geometry:g,diagrams,context:panelContext(context),two:twoModel(work,context),triangle:triangleModel(work,context)};
 }
 export function crossingAnglesNarration(work,context=null){
  const m=crossingAnglesModel(work,context);if(!m)return '';
+ if(m.page==='triangle'){
+  const t=m.triangle;if(t.missing)return `${copy.title}. Triangle corners. ${triCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
+  return `${copy.title}. Triangle corners. ${triCopy.instruction} ${triCopy.modes[t.mode]}. ${triCopy.views[t.view]}. ${t.source} ${t.definition}. ${t.naming} ${t.summary} ${t.counter?`${t.counter}. `:''}${t.text} ${t.equations.join('. ')}${t.equations.length?'. ':''}${t.workedExample?`Separate worked example. ${t.workedExample} `:''}${t.prompt.title}. ${t.prompt.text} ${triCopy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
+ }
  let text;
  if(m.page==='parallel'){
   if(m.two.missing)return `${copy.title}. Two Crossings. ${twoCopy.nullContext} ${copy.lifetime} Back to Copy Frame.`;
@@ -138,4 +151,60 @@ export function crossingAnglesNarration(work,context=null){
   else {const c=m.context;text=`${m.card.title}. ${m.card.text} ${copy.panelWaitingNote} ${copy.panelLabel}: ${c.caseTitle}. ${copy.panelNote} ${c.frames.map(f=>`${f.description} ${copy.insetLabel}.`).join(' ')} ${copy.subscriptNote} ${c.statement}`;}
  }else {const step=m.card.steps?.[m.step];text=`See why. ${m.card.title}. ${step?`${step.text} ${step.equations.join('. ')}.`:m.card.text} ${m.diagrams.map(d=>`${d.title}. ${d.geometry.description}`).join(' ')} ${copy.arcLegend} ${copy.straightTurn}`;}
  return `${copy.title}. ${text} ${copy.modelNote} ${copy.lifetime} Back to Copy Frame.`;
+}
+// This scene works only with its explicit geometric inputs. The panel caller
+// supplies copied sides, never the inactive free triangle settings.
+function triangleScene({raw,A,B,rotation,view,step,prompt,context=null,size='large'}){
+ const panel=!!context,C=180-A-B,rad=Math.PI/180;
+ const centroid=[0,1].map(i=>raw.reduce((sum,p)=>sum+p[i],0)/3);
+ const centered=raw.map(p=>p.map((n,i)=>n-centroid[i]));
+ const scale=(size==='small'?80:110)/Math.max(...centered.map(p=>Math.hypot(...p)));
+ const local=centered.map(p=>p.map(n=>n*scale));
+ const project=([x,y])=>[320+x*Math.cos(rotation*rad)-y*Math.sin(rotation*rad),280-x*Math.sin(rotation*rad)-y*Math.cos(rotation*rad)];
+ const vertices=local.map(project),angles=[A,B,C],starts=[0,180-B,180+A];
+ const endpoint=(center,start,radius)=>[center[0]+radius*Math.cos(start*rad),center[1]-radius*Math.sin(start*rad)];
+ const original=vertices.map((center,i)=>{
+  const V=local[i],P=local[(i+1)%3],Q=local[(i+2)%3],d=(p,q)=>Math.hypot(p[0]-q[0],p[1]-q[1]);
+  const height=Math.abs((Q[0]-P[0])*(V[1]-P[1])-(Q[1]-P[1])*(V[0]-P[0]))/d(P,Q);
+  const radius=Math.min(24,.35*Math.min(d(V,P),d(V,Q)),.7*height);
+  return {name:'abc'[i],center,start:starts[i]+rotation,sweep:angles[i],radius,right:panel?i===1:angles[i]===90,...(panel?{}:{measure:angles[i]})};
+ });
+ const sector=(name,center,start,sweep,radius,role)=>({name,center,start,sweep,radius,right:false,role,...(panel?{}:{measure:sweep})});
+ const outline=view!=='gather'||step===0;
+ const interiors=outline?original:[],copies=[],parallel=[];
+ let straight=null,extension=null,outside=null;
+ if(view==='gather'&&step===1){for(const [i,index] of [0,2,1].entries())copies.push(sector('abc'[index],[160+i*160,280],starts[index]+rotation,angles[index],55,'detached'));}
+ if(view==='gather'&&step===2){let start=180+rotation;for(const index of [0,2,1]){copies.push(sector('abc'[index],[320,280],start,angles[index],85,'joined'));start+=angles[index];}straight={start:endpoint([320,280],rotation,-160),end:endpoint([320,280],rotation,160)};}
+ if(view==='reason'&&step>0){
+  parallel.push({start:project([local[2][0]-120,local[2][1]]),end:project([local[2][0]+120,local[2][1]])},{start:project([local[0][0]-60,local[0][1]]),end:project([local[1][0]+60,local[1][1]])});
+  copies.push(sector('a',vertices[2],180+rotation,A,original[2].radius,'proof'));
+  if(step===2)copies.push(sector('b',vertices[2],360-B+rotation,B,original[2].radius,'proof'));
+ }
+ if(view==='outside'){
+  const [b,c]=[local[1],local[2]],length=Math.hypot(c[0]-b[0],c[1]-b[1]);
+  extension={start:vertices[2],end:project([c[0]+60*(c[0]-b[0])/length,c[1]+60*(c[1]-b[1])/length])};
+  outside=sector('outside',vertices[2],180-B+rotation,A+B,original[2].radius,'outside');
+ }
+ const targets='abc'.split('').map(name=>copies.find(s=>s.name===name)||original['abc'.indexOf(name)]);
+ const tags=targets.map((s,i)=>({name:s.name,position:[[100,70],[540,70],[320,500]][i],leader:endpoint(s.center,s.start+s.sweep/2,s.radius*.75)}));
+ if(outside)tags.push({name:'outside',position:[540,500],leader:endpoint(outside.center,outside.start+outside.sweep/2,outside.radius*.75)});
+ const points=outline?vertices.map((point,i)=>{const d=Math.hypot(point[0]-320,point[1]-280);return {name:'ABC'[i],point,position:[point[0]+30*(point[0]-320)/d,point[1]+30*(point[1]-280)/d],leader:point};}):[];
+ const equations=view==='gather'?(step===2?[panel?'a+c+90°=180°':`${A}°+${C}°+${B}°=180°`]:[]):view==='reason'?(step===0?[]:step===1?['copied a=a']:['a+c+b=180°',panel?'Here b=90°, so a+c=90°.':`For these settings: ${A}°+${C}°+${B}°=180°.`]):panel?['outside=a+90°','c+outside=180°']:[`outside=${A}°+${B}°=${A+B}°`,`${C}°+${A+B}°=180°`];
+ const text=view==='outside'?`${triCopy.outside} ${triCopy.outsideSummary}`:`${triCopy[view][step]}${view==='gather'&&step>0?` ${triCopy.sizeNote}`:''}`;
+ const source=panel?`${context.caseTitle}. Width ${context.width}, height ${context.height}. ${triCopy.panelCaption}`:triCopy.freeCaption;
+ return {mode:panel?'panel':'free',view,step,rotation,width:640,height:560,vertices,points,outline,interiors,copies,parallel,extension,straight,outside,tags,definition:triCopy.definition,naming:triCopy.naming,summary:panel?'a at A; b =90° at B; c =90° − a at C':`a = ${A}° at A; b = ${B}° at B; c = ${C}° at C. These are chosen model angles.`,source,caption:panel?triCopy.panelCaption:triCopy.freeCaption,text,counter:view==='outside'?'':`${view==='gather'?'Move':'Reason'} ${step} of 2`,equations,workedExample:!panel&&(view==='outside'||step===2)?triCopy.workedExample:'',prompt,...(panel?{context:{caseTitle:context.caseTitle,width:context.width,height:context.height}}:{size})};
+}
+function panelTriangleScene(context,rotation,view,step,promptIndex){
+ const A=Math.atan2(context.height,context.width)*180/Math.PI;
+ return triangleScene({raw:[[0,0],[context.width,0],[context.width,context.height]],A,B:90,rotation,view,step,prompt:trianglePanelPrompts[promptIndex],context});
+}
+function triangleModel(work,context){
+ if(work.page!=='triangle')return null;
+ const step=work.triView==='gather'?work.triGather:work.triView==='reason'?work.triProof:0;
+ if(work.triMode==='panel'){
+  const c=captureCrossingPanel(context,context?.caseTitle);if(!c)return {mode:'panel',missing:true};
+  return panelTriangleScene(c,work.rotation,work.triView,step,work.triPrompt);
+ }
+ const A=work.triA,B=work.triB,rad=Math.PI/180,t=Math.sin(B*rad)/Math.sin((A+B)*rad);
+ return triangleScene({raw:[[0,0],[1,0],[t*Math.cos(A*rad),t*Math.sin(A*rad)]],A,B,rotation:work.rotation,view:work.triView,step,prompt:trianglePrompts[work.triPrompt],size:work.triSize});
 }

@@ -49,7 +49,7 @@ export const twoCrossingsCopy=freeze({
  legend:'The highlights pick two angles to compare. They do not say the angles are equal. Matching arrow marks on the two lines mean parallel.',
  header:'Follow a two-crossing example. The worked settings stay fixed here.',
  sharedAngle:'This free angle is shared with Explore. Here a, b, c and d name the angles that Explore calls AOB, BOC, COD and DOA.',
- sharedRotation:'Turning this picture also turns Explore. Your waiting Copy Frame panel stays unchanged.',
+ sharedRotation:'Turning this picture also turns Explore and Triangle corners. Your waiting Copy Frame panel stays unchanged.',
  leanNote:'Clockwise and counterclockwise are relative to the first line. Turning the whole picture keeps that relative turn.',
  retained:'This view keeps my copied panel dimensions. Return to Free strips to change those choices.',
  inside:'Inside means between the two width-side lines, even past the rectangle’s corners.',
@@ -77,4 +77,46 @@ export const twoPanelPrompts=freeze([
  {title:'A total instead of equality',text:'Choose Inside, same side. Explain a+h=180° without measuring the picture.'},
  {title:'Turn the picture',text:'Turn this picture. Which dimensions and angle relationships stay the same?'},
  {title:'Back to my panel',text:'Go back to Copy Frame, change a side and return. Do the dimensions change, and are the opposite sides still parallel?'}
+]);
+export const triangleCopy=freeze({
+ instruction:'A triangle’s corners can fill a straight turn. Gather them, then use parallel lines to explain why.',
+ modelNote:'An exact paper model of straight sides in a flat plane. Model pieces fit exactly; cut paper fits approximately. This is not a building plan.',
+ definition:'A closed shape with three straight sides',
+ naming:'A, B, C name points; a, b, c name their interior angles.',
+ nullContext:'Your waiting panel could not be copied. Choose Free triangle, or go back to Copy Frame.',
+ freeCaption:'Choosing a and b fixes the third corner. Why every triangle? explains the connection.',
+ panelCaption:'This half uses the width and height sides meeting at the right-angle corner B, and one diagonal of your copied rectangle. Turning the picture does not change those parts.',
+ sizeNote:'These display copies change drawing size, not angle.',
+ rotationNote:'Turning this picture also turns Explore and Two crossings. Its copied dimensions stay unchanged.',
+ settingsNote:'Your free triangle settings are waiting. This triangle uses half of your copied rectangle.',
+ workedExample:'To find a missing interior angle, take the two known angles from 180°. For example, 180°−45°−60°=75°. You can try a=45° and b=60° in Free triangle, then explain why the total is a half turn.',
+ adultNote:'Triangle corners distinguishes gathering one example from a parallel-line argument for all triangles in the stated flat model. Its values, diagrams and worked subtraction are support, not evidence of independent angle reasoning. It does not qualify physical cutting, real structures, polygons or a full geometry course.',
+ modes:{free:'Free triangle',panel:'My waiting panel'},views:{gather:'Gather corners',reason:'Why every triangle?',outside:'Outside corner'},
+ gather:[
+ 'Look at the three inside corners. The introduction tells us the destination is a straight turn. Predict how each corner would need to move or turn to join the others.',
+ 'These are copies of this triangle’s corners. They keep their angles when moved or turned. Next, turn the a and b copies a half turn and bring all three to one point.',
+ 'The three corners fill a straight turn: a+c+b=180°. This exact model arranges them for us. It demonstrates this triangle; trying more triangles is useful, but examples alone do not explain every triangle. Choose Why every triangle? for a reason.'
+ ],reason:[
+ 'Start with any triangle with three straight sides in this flat plane. Through C, we can draw a line parallel to AB. The next step adds it.',
+ 'AC crosses the two parallel lines. The angle beside c on the left of this unturned construction equals a: they are alternate interior angles. Turning the whole construction does not change that relation.',
+ 'BC crosses the same parallel lines, so the angle beside c on the other side equals b, also by alternate interior angles. Those two copied angles and c fill the straight turn at C. Therefore a+c+b=180°. The argument uses the parallel directions, not this triangle’s chosen sizes, so it works for every nondegenerate triangle in this flat model.'
+ ],
+ outside:'Extend the side from B through C. The marked outside angle sits beside c on a straight line, so c+outside=180°. The triangle also gives a+b+c=180°. Taking the same c away from both totals leaves outside=a+b: the two far inside corners.',
+ outsideSummary:'One adjacent exterior angle, not all the space outside the triangle.'
+});
+export const trianglePrompts=freeze([
+ {title:'Make a prediction',text:'Use Gather corners. Before the last move, predict which copies need turning and where they will meet.'},
+ {title:'Find the reason',text:'Use Why every triangle? Explain how each side crossing the parallel lines gives a matching angle.'},
+ {title:'A different triangle',text:'Try a=15°, b=150°, then b=45°, a=90°. How does the shape change? Which part of the explanation stays?'},
+ {title:'Bigger, same corners',text:'Change Drawing size, then turn the picture. Do the chosen angle values change? Why does the total stay the same?'},
+ {title:'The outside shortcut',text:'Use Outside corner. Explain why its value equals a+b without adding c. Try a triangle with an obtuse corner too.'},
+ {title:'Return to the design',text:'Choose My waiting panel. Find the right corner and explain why its other two angles add to 90°.'}
+]);
+export const trianglePanelPrompts=freeze([
+ {title:'Make a prediction',text:'Gather the three corners of this half-panel. Which copies need turning? What does its right corner contribute?'},
+ {title:'Find the reason',text:'Use Why every triangle? Follow AC and BC across the parallel lines. Which copied angle matches each inside corner?'},
+ {title:'A different triangle',text:'Change a copied side back in Copy Frame and return. The shape can change: does the straight-turn argument still apply?'},
+ {title:'Bigger, same corners',text:'Turn this picture. Which dimensions and right-angle fact stay the same?'},
+ {title:'The outside shortcut',text:'Use Outside corner. Explain outside=a+90° and why that does not give a numeric value for a.'},
+ {title:'Return to the design',text:'Go back to Copy Frame. Which side or diagonal became each part of this triangle? Return to compare the new copied dimensions.'}
 ]);
