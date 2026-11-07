@@ -559,7 +559,7 @@ function chaseGeometry(spec,rotation,visible,activeName=null){
   const offset=fixed===undefined?[64*dx/length,64*dy/length]:[80*Math.cos((fixed+rotation)*rad),-80*Math.sin((fixed+rotation)*rad)];
   // Keep quadrilateral names below the fixed given row at every rotation.
   // These finite anchors also clear the actual corner arcs on narrow screens.
-  const anchor=spec.family==='quadrilateral'?{A:[0,-140],B:[140,0],C:[0,140],D:[-112,81],E:[-134,-37]}[name]:null;
+  const anchor=spec.family==='quadrilateral'?{A:[0,-140],B:[140,0],C:[0,140],D:[-112,81],E:[-142,-30]}[name]:null;
   const position=anchor?[320+anchor[0]*Math.cos(rot)-anchor[1]*Math.sin(rot),280-anchor[0]*Math.sin(rot)-anchor[1]*Math.cos(rot)]:point.map((v,i)=>v+offset[i]);return {name,point,position,label:position};
  });
  const segments=plan.lines.map(([a,b])=>({start:project(plan.points[a]),end:project(plan.points[b])}));
