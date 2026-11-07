@@ -42,7 +42,7 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     "returnText": "The invented seedling pictures show pictured stem lengths and other features. They supply no sugar measurement. What else would an investigation need?",
     "returnLink": "Leave for the growing shelf",
     "grownupTitle": "For grown-ups: what this model can show",
-    "grownup": "This is a qualitative role model, not a molecular mechanism, gas-exchange balance, rate model or practical test. Card placement and question choices stay in this visit and create no learning record. The existing Living Layers guide and its saved versions are unchanged. General plant knowledge is separate from invented pictured stem lengths or measurements from a real investigation.",
+    "grownup": "This is a qualitative role model, not a molecular mechanism, gas-exchange balance, rate model or practical test. Card placement and question choices stay in this room visit and create no learning record. The existing Living Layers guide and its saved versions are unchanged. General plant knowledge is separate from invented pictured stem lengths or measurements from a real investigation.",
     "visitNote": "This arrangement waits while you explore this model. Leaving the room or reloading starts a fresh model visit.",
     "materialArrow": "Materials used in photosynthesis",
     "energyArrow": "Light energy into the process",
@@ -58,13 +58,15 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     "nextText": "A Leaf’s Two Accounts lets you build molecule summaries and check atom counts. It offers a more detailed representation of these ideas. In Body Clues, choose A leaf’s two accounts.",
     "nextLink": "Leave for Body Clues",
     "leaveTitle": "Leave this room",
-    "leaveWarning": "Leaving clears this model and any Living Layers guide you have not kept. To keep working on that guide, use Back to Living Layers first."
+    "leaveWarning": "Leaving clears this model and any Living Layers guide you have not kept. To keep working on that guide, use Back to Living Layers first.",
+    "emptyRole": "No cards here yet",
+    "parentLeaveWarning": "Leaving, reloading, importing or changing explorer clears guides you have not kept."
   },
   "cards": [
     {
       "id": "carbon-dioxide",
       "label": "Carbon dioxide",
-      "icon": "air"
+      "icon": "gas"
     },
     {
       "id": "water",
@@ -79,7 +81,7 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     {
       "id": "minerals",
       "label": "Mineral nutrients",
-      "icon": "crystals"
+      "icon": "dissolved"
     },
     {
       "id": "glucose",
@@ -89,7 +91,7 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     {
       "id": "oxygen",
       "label": "Oxygen",
-      "icon": "bubbles"
+      "icon": "gas"
     }
   ],
   "roles": [
@@ -99,7 +101,7 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     },
     {
       "id": "energy",
-      "label": "Energy supplied"
+      "label": "Energy source"
     },
     {
       "id": "nutrients",
@@ -128,12 +130,12 @@ Original authored copy and diagram contract; no upstream text or images copied. 
       "title": "Air and roots bring materials",
       "text": "For photosynthesis, this green leaf uses carbon dioxide from the air and water taken up through the roots. Soil is not a ready-made meal for the plant. Roots also take up dissolved mineral nutrients, which have other essential jobs.",
       "picture": "materials",
-      "caption": "The carbon dioxide path starts in air. The water path starts at roots. Minerals have a separate root path."
+      "caption": "The carbon dioxide path starts in air. The water path starts at roots. Minerals have a separate role, though they travel dissolved in water."
     },
     {
       "id": "energy",
       "title": "Light supplies energy",
-      "text": "Chlorophyll is a light-absorbing pigment inside chloroplasts. It helps capture light energy for photosynthesis. Light is not a material such as water and is not the sugar the plant makes. Green leaf cells have chloroplasts; animal cells do not. Many plant cells, such as the nongreen root cells in our example, also lack chloroplasts.",
+      "text": "Chlorophyll is a light-absorbing pigment inside chloroplasts. It helps capture light energy for photosynthesis. Light is not a material such as water and is not the sugar the plant makes. Many cells in green leaves, such as mesophyll cells, have chloroplasts; animal cells do not. Many plant cells, such as the nongreen root cells in our example, also lack chloroplasts.",
       "picture": "energy",
       "caption": "A dashed ray represents energy from light, separately from the material paths."
     },
@@ -154,9 +156,9 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     {
       "id": "night",
       "title": "A plant still uses food at night",
-      "text": "Without light, a plant cannot keep making food by photosynthesis. Its living cells can still release energy from stored food. Respiration happens in light as well as darkness; it is not a night-only replacement for photosynthesis. Roots also need energy, although they do not make food by photosynthesis in our pictured plant.",
+      "text": "Without light, a plant cannot keep making food by photosynthesis. Its living cells can still release energy from stored food. Respiration happens in light as well as darkness; it is not a night-only replacement for photosynthesis. Roots also need energy, although they do not make food by photosynthesis in our pictured plant. The pictured roots use sugars made in green parts and carried through the plant.",
       "picture": "night",
-      "caption": "In the dark picture there is no light-energy ray. Stored food and living-cell activity remain; the plant has not switched off."
+      "caption": "In the dark picture there is no light-energy ray. Stored food and living-cell activity remain; the plant has not switched off. This picture does not show the gas exchanges of respiration."
     }
   ],
   "invitations": [
@@ -172,9 +174,9 @@ Original authored copy and diagram contract; no upstream text or images copied. 
         },
         {
           "id": "choice-2",
-          "label": "Mineral nutrients, delivered by sunlight.",
+          "label": "Oxygen, taken in from the air.",
           "outcome": "different",
-          "feedback": "Our root path shows mineral nutrients dissolved in water. Sunlight supplies energy, not these minerals."
+          "feedback": "Living cells use oxygen in aerobic respiration. Photosynthesis releases oxygen; the material it uses from the air is carbon dioxide."
         },
         {
           "id": "choice-3",
@@ -186,13 +188,13 @@ Original authored copy and diagram contract; no upstream text or images copied. 
     },
     {
       "id": "light-role",
-      "prompt": "Which explanation keeps light energy separate from materials?",
+      "prompt": "What role does light have in this green-leaf process?",
       "choices": [
         {
           "id": "choice-1",
           "label": "Light is a soil mineral that is taken up with water through roots.",
           "outcome": "different",
-          "feedback": "Mineral nutrients and water are substances taken up by roots. Light supplies energy; it is not a substance."
+          "feedback": "Roots take up water and dissolved mineral nutrients. Water is a raw material in this photosynthesis word equation; minerals have other jobs. Light reaches green parts as energy."
         },
         {
           "id": "choice-2",
@@ -214,9 +216,9 @@ Original authored copy and diagram contract; no upstream text or images copied. 
       "choices": [
         {
           "id": "choice-1",
-          "label": "It switches to taking ready-made sugar from soil instead of using light.",
+          "label": "It starts respiring, a process that living plants do only at night.",
           "outcome": "different",
-          "feedback": "Our rooted green plant does not replace photosynthesis with a ready-made meal from soil. It can use stored food."
+          "feedback": "Respiration happens in light and in darkness. In the dark the plant keeps respiring but cannot keep photosynthesizing."
         },
         {
           "id": "choice-2",
