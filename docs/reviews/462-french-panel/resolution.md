@@ -1,6 +1,6 @@
 # PR462 French text review resolution
 
-Status: repairs applied; independent review of the revised text is pending. Do not treat the original conditional verdict as clearance of the repairs.
+Status: all nine initial findings resolved. Independent complete-text OpenAI, Claude and Gemini reviews are CLEAR at revised text `7aaf69ee21f6925d14098ef8b2a243d1f94d9156`, with no P1/P2. Claude also clears the implementation at that revision. Final landing/deployment status belongs to the PR release record, not this text review.
 
 ## Reviewed source and scope
 
@@ -25,3 +25,15 @@ The report's high/medium/low ratings mean misleading/unnatural/polish as defined
 | Camera vocabulary lacks support and varies its phrase | Add *pose* and *plutôt que*, retain standard *appareil photo*, and align *prend la photo*. |
 
 No story IDs, answer indexes, order permutations, selection rules, saved-source readers or historical records change. These are catalogue edits for future visits; paused visits keep their own frozen source. Every question must remain supported in each passage variant and every English meaning must follow the final French. The panel and behavioral checks establish their own limited scopes; none establishes learning, audible speech or a physical device qualification.
+
+## Revised-text panel
+
+- [OpenAI complete independent review](openai.md): CLEAR.
+- [Claude complete independent language review and implementation review](claude.md): CLEAR.
+- [Gemini complete independent confirmation](google-confirm.md): CLEAR.
+
+Each provider received the full proposed module without another provider’s findings. The final common request is the complete-module review described above: standard metropolitan French; every variant/meaning/gloss/task/key/hint/explanation/metadata item; grammar, idiom, contextual sufficiency, beginner support, answer uniqueness/order and claims. Each was asked for an actual verdict, exact reviewed head, concrete P1/P2 corrections and separate optional P3 notes. Claude formed its inline-language verdict before inspecting the implementation diff. Reports’ display-only source links are normalized to repository paths; their findings and verdicts are unchanged.
+
+The revised module hash is recorded below so documentation-only closeout does not imply another French edit. Optional new P3 suggestions (English title wording, extra vocabulary, acceptable phrasing, and a possible pronoun interpretation) are deferred: all three providers expressly accept the current text and answer support. None is retained over an error finding. The existing test-total print placement is also cosmetic and does not skip assertions. Future text changes require their own panel pass.
+
+Reviewed French module Git blob: `30782f355988508871028e235fd10736ef0760f7`.
