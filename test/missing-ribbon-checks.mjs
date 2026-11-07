@@ -130,7 +130,7 @@ for(const [i,m] of frames.entries()){
  assert.equal(m.matched,i>0);assert.equal(m.difference,i>0?1:null);assert.equal(m.remaining+m.removed,3);
  assert.equal(missingModel(m),null);for(const a of ['split-known','uncut-known','split-total','uncut-total','take','undo','return'])assert.equal(changeMissing(m,a,2),null);
 }
-assert.deepEqual(frames[4].wrongClaim,{numerator:2,denominator:2});assert.ok(2*4>3*2,'false claim exceeds starting length');
+assert.deepEqual(frames[4].wrongClaim,{numerator:2,denominator:2});
 frames[4].known.history.push(3);frames[4].wrongClaim.numerator=99;
 assert.deepEqual(missingExample(4).known.history,[2]);assert.equal(missingExample(4).wrongClaim.numerator,2);
 assert.deepEqual(initial,createMissing('half-and-third'));
