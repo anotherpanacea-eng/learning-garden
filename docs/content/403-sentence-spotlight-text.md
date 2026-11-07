@@ -4,11 +4,10 @@ Status: proposed for independent grammar and specification review. All activity 
 
 The shared copy, six-step lesson, separate Niko miniature, six constructive briefs and two contrast questions are the full first release. The planned UI renders slots in stored order, joins chosen phrase text with spaces, capitalizes the first Unicode letter for sentence display and appends one period. Phrase-bank labels keep their authored case. A missing slot is a labelled blank, never a word silently supplied from the key. No inflected form is generated.
 
-```json
 {
   "copy": {
     "label": "Sentence Spotlight",
-    "invitation": "The same event can begin with a different person or thing. Move the sentence pieces and see what comes into view.",
+    "invitation": "A sentence about the same event can begin with a different person or thing. Move the sentence pieces and see what comes into view.",
     "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
     "original": "Starting sentence",
     "draft": "Your sentence",
@@ -19,25 +18,40 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
     "notice": "These are sentences we wrote about an imaginary town. Grammar describes the wording; it does not prove an event happened.",
     "comparison": "One prepared version for this brief",
     "support": "Words and phrases are provided. Try your own version aloud or on paper with a person.",
-    "returnPrompt": "Return to another brief, or find two ways to describe an event together. What stays the same? What comes first? Is the doer still named?",
+    "returnPrompt": "Return to another brief or, with a person, find two ways to describe an event. What stays the same? What comes first? Is the doer still named?",
     "grownup": "This finite construction uses prepared phrase banks and exact requested versions. A different construction may be grammatical yet not meet this brief; the comparison is not a general grammar checker. Keeping or checking a draft does not establish independent writing, reading or mastery. A person reads original sentences. Passive voice does not prove concealment, blame, objectivity or truth. Not every sentence has an object; this small set uses selected action clauses. Historical phrases and kept choices retain their own source.",
-    "unavailable": "This earlier draft has no usable sentence spotlight here. Its phrases, choices and kept work stay unchanged in Notes."
+    "unavailable": "This earlier draft has no usable sentence spotlight here. Its phrases, choices and kept work stay unchanged in Notes.",
+    "teaching": "How sentences work",
+    "lessonCount": "Teaching card",
+    "previousTeaching": "Previous card",
+    "nextTeaching": "Next card",
+    "exampleCount": "Example part",
+    "previousExample": "Previous example part",
+    "nextExample": "Next example part",
+    "compareSummary": "Read this sentence beside the brief.",
+    "feedbackDetails": "Look at the place notes",
+    "agentLabel": "Doer",
+    "actionLabel": "Action",
+    "affectedLabel": "Affected",
+    "slotLabel": "Sentence place",
+    "bankLabel": "Choose a phrase",
+    "unavailablePlacement": "Earlier phrase choices"
   },
   "teach": [
-    "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-    "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-    "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-    "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-    "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-    "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+    "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+    "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+    "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+    "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+    "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+    "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
   ],
   "demo": {
     "original": "Niko delivered the lanterns.",
     "steps": [
       "Find Niko, who delivered, and the lanterns, which were delivered.",
       "Start with the lanterns: The lanterns.",
-      "Keep the past action and plural subject: were delivered.",
-      "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+      "Keep the past time and agree with the plural lanterns: “were delivered.”",
+      "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
     ],
     "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
   },
@@ -52,12 +66,12 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "reader": "Start with the basket. Keep the past action and name Pip as the doer.",
       "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -107,9 +121,9 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "feedback": {
         "fit": "The basket was carried by Pip. This passive starts with the basket, keeps the past action and names Pip.",
         "different": {
-          "start": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "verb": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "finish": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning."
+          "start": "Check what the brief asks to put first.",
+          "verb": "Check the time, and that the verb agrees with the start.",
+          "finish": "Check whether the brief asks for the doer, the affected thing or a time."
         },
         "general": "Read the whole sentence and this brief. These prepared comparisons are not a general grammar checker."
       },
@@ -126,14 +140,14 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "context": "A visitor asks what happened to the picnic basket.",
         "agent": "Pip",
         "affected": "the basket",
-        "action": "carried",
+        "action": "carrying",
         "demo": {
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
             "Start with the lanterns: The lanterns.",
-            "Keep the past action and plural subject: were delivered.",
-            "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+            "Keep the past time and agree with the plural lanterns: “were delivered.”",
+            "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
           "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
         }
@@ -145,16 +159,16 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "family": "voice-bowls",
       "kind": "sort",
       "bench": "voice",
-      "title": "Bowls on the washing board",
+      "title": "The usual dishwashing",
       "reader": "Start with the bowls. Keep the present action and name the kittens.",
       "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -202,11 +216,11 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "finish": "by-kittens"
       },
       "feedback": {
-        "fit": "The bowls are washed by the kittens. Bowls is plural, so this version uses are, not is. It keeps the present action.",
+        "fit": "The bowls are washed by the kittens. “Bowls” is plural, so this version uses “are,” not “is.” It keeps the present action.",
         "different": {
-          "start": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "verb": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "finish": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning."
+          "start": "Check what the brief asks to put first.",
+          "verb": "Check the time, and that the verb agrees with the start.",
+          "finish": "Check whether the brief asks for the doer, the affected thing or a time."
         },
         "general": "Read the whole sentence and this brief. These prepared comparisons are not a general grammar checker."
       },
@@ -220,17 +234,17 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
           "finish"
         ],
         "original": "The kittens wash the bowls.",
-        "context": "The café washing board describes the usual washing job.",
+        "context": "The café chore chart describes the usual dishwashing.",
         "agent": "the kittens",
         "affected": "the bowls",
-        "action": "wash",
+        "action": "washing",
         "demo": {
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
             "Start with the lanterns: The lanterns.",
-            "Keep the past action and plural subject: were delivered.",
-            "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+            "Keep the past time and agree with the plural lanterns: “were delivered.”",
+            "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
           "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
         }
@@ -242,16 +256,16 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "family": "voice-bell",
       "kind": "sort",
       "bench": "voice",
-      "title": "Who rang the bell?",
-      "reader": "Start with Dot and keep the same past action. Finish by naming what she rang.",
+      "title": "Dot comes first",
+      "reader": "Start with Dot as the doer. Keep the past time and finish with the bell.",
       "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -299,16 +313,16 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "finish": "bell"
       },
       "feedback": {
-        "fit": "Dot rang the bell. This active version puts the doer first. Rang keeps the past time; rings would change it.",
+        "fit": "Dot rang the bell. This active version puts the doer first. “Rang” is the past form here; “rung” goes with “was” in the passive. “Rings” would change the time.",
         "different": {
-          "start": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "verb": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "finish": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning."
+          "start": "Check what the brief asks to put first.",
+          "verb": "Check the time, and that the verb agrees with the start.",
+          "finish": "Check whether the brief asks for the doer, the affected thing or a time."
         },
         "general": "Read the whole sentence and this brief. These prepared comparisons are not a general grammar checker."
       },
       "hint": "Keep the same action and time. Find what the brief asks you to put first and whether to name the doer.",
-      "example": "Niko delivered the lanterns. The lanterns were delivered by Niko. Both name the same past action and doer.",
+      "example": "The lanterns were delivered by Niko. Niko delivered the lanterns. Both name the same past action and doer.",
       "spotlight": {
         "v": 1,
         "slots": [
@@ -320,14 +334,14 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "context": "The courier is asking what Dot did earlier.",
         "agent": "Dot",
         "affected": "the bell",
-        "action": "rang",
+        "action": "ringing",
         "demo": {
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
             "Start with the lanterns: The lanterns.",
-            "Keep the past action and plural subject: were delivered.",
-            "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+            "Keep the past time and agree with the plural lanterns: “were delivered.”",
+            "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
           "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
         }
@@ -343,12 +357,12 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "reader": "Start with the letters. Keep the action going on now and name Dot.",
       "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -396,11 +410,11 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "finish": "by-dot"
       },
       "feedback": {
-        "fit": "The letters are being sorted by Dot. Are being sorted keeps the ongoing action and agrees with plural letters.",
+        "fit": "The letters are being sorted by Dot. “Are being sorted” keeps the ongoing action and agrees with plural letters.",
         "different": {
-          "start": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "verb": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "finish": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning."
+          "start": "Check what the brief asks to put first.",
+          "verb": "Check the time, and that the verb agrees with the start.",
+          "finish": "Check whether the brief asks for the doer, the affected thing or a time."
         },
         "general": "Read the whole sentence and this brief. These prepared comparisons are not a general grammar checker."
       },
@@ -417,14 +431,14 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "context": "The post office board describes what is happening right now.",
         "agent": "Dot",
         "affected": "the letters",
-        "action": "is sorting",
+        "action": "sorting",
         "demo": {
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
             "Start with the lanterns: The lanterns.",
-            "Keep the past action and plural subject: were delivered.",
-            "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+            "Keep the past time and agree with the plural lanterns: “were delivered.”",
+            "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
           "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
         }
@@ -440,12 +454,12 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "reader": "Start with the parcel. Keep the past action and time phrase; leave the doer unnamed.",
       "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -493,11 +507,11 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "finish": "time"
       },
       "feedback": {
-        "fit": "The parcel was moved before dinner. The source does not name the mover. This version does not invent Pip or say that nobody moved it.",
+        "fit": "The parcel was moved before dinner. The starting sentence does not name the mover. This version does not invent Pip or say that nobody moved it.",
         "different": {
-          "start": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "verb": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "finish": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning."
+          "start": "Check what the brief asks to put first.",
+          "verb": "Check the time, and that the verb agrees with the start.",
+          "finish": "The starting sentence gives a time but does not name the mover. Adding “by Pip” would name a mover the sentence does not give."
         },
         "general": "Read the whole sentence and this brief. These prepared comparisons are not a general grammar checker."
       },
@@ -514,14 +528,14 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "context": "The story only says someone moved the parcel. It does not identify that person.",
         "agent": "someone, not named",
         "affected": "the parcel",
-        "action": "moved",
+        "action": "moving",
         "demo": {
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
             "Start with the lanterns: The lanterns.",
-            "Keep the past action and plural subject: were delivered.",
-            "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+            "Keep the past time and agree with the plural lanterns: “were delivered.”",
+            "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
           "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
         }
@@ -534,15 +548,15 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "kind": "sort",
       "bench": "voice",
       "title": "A doer need not be a person",
-      "reader": "Start with wind. Keep the past action and finish by naming what it scattered.",
+      "reader": "Start with wind as the doer. Keep the past time and finish with the seeds.",
       "prompt": "Choose a place in the sentence, then a phrase. Read the whole sentence before comparing.",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -581,7 +595,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         },
         {
           "id": "scatter",
-          "text": "scatter"
+          "text": "scatters"
         }
       ],
       "key": {
@@ -592,14 +606,14 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "feedback": {
         "fit": "Wind scattered the seeds. The doer can be wind. This active sentence keeps the past action without claiming the wind intended anything.",
         "different": {
-          "start": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "verb": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning.",
-          "finish": "Compare this place with the requested version. Another arrangement may make a sentence but change its focus, tense, doer or meaning."
+          "start": "Check what the brief asks to put first.",
+          "verb": "Check the time, and that the verb agrees with the start.",
+          "finish": "Check whether the brief asks for the doer, the affected thing or a time."
         },
         "general": "Read the whole sentence and this brief. These prepared comparisons are not a general grammar checker."
       },
       "hint": "Keep the same action and time. Find what the brief asks you to put first and whether to name the doer.",
-      "example": "Niko delivered the lanterns. The lanterns were delivered by Niko. Both name the same past action and doer.",
+      "example": "The lanterns were delivered by Niko. Niko delivered the lanterns. Both name the same past action and doer.",
       "spotlight": {
         "v": 1,
         "slots": [
@@ -611,14 +625,14 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "context": "A gardener describes what happened during a gust.",
         "agent": "wind",
         "affected": "the seeds",
-        "action": "scattered",
+        "action": "scattering",
         "demo": {
           "original": "Niko delivered the lanterns.",
           "steps": [
             "Find Niko, who delivered, and the lanterns, which were delivered.",
             "Start with the lanterns: The lanterns.",
-            "Keep the past action and plural subject: were delivered.",
-            "Keep the known doer: by Niko. The lanterns were delivered by Niko."
+            "Keep the past time and agree with the plural lanterns: “were delivered.”",
+            "Keep the named doer: “by Niko.” The lanterns were delivered by Niko."
           ],
           "contrast": "The lanterns were delivered. This still names the past action but no longer names the doer. It does not say nobody delivered them."
         }
@@ -630,16 +644,16 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "family": "voice-busy",
       "kind": "choice",
       "bench": "voice",
-      "title": "Is was enough?",
+      "title": "Is “was” enough?",
       "reader": "For someone inspecting what the wording can tell them.",
-      "prompt": "Does was by itself make this a passive action sentence?",
+      "prompt": "Does “was” by itself make this a passive action sentence?",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -650,28 +664,28 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "choices": [
         {
           "id": "yes",
-          "text": "Yes: every sentence with was is passive."
+          "text": "Yes: it has “was,” so it is passive."
         },
         {
           "id": "no",
-          "text": "No: this sentence describes the café as busy."
+          "text": "No: “busy” describes the café here."
         },
         {
-          "id": "unknown",
-          "text": "We cannot inspect its wording without a witness."
+          "id": "hidden",
+          "text": "Yes: it hides who made the café busy."
         }
       ],
       "key": "no",
       "feedback": {
-        "fit": "No. Busy describes the café. Was alone does not make a passive action sentence.",
+        "fit": "No. “Busy” describes the café. “Was” alone does not make a passive action sentence.",
         "different": {
-          "yes": "A passive action here needs more than was. Compare was carried with was busy.",
-          "unknown": "A witness could help check an event. The wording itself is available to inspect."
+          "yes": "A passive action here needs more than “was.” Compare “was carried” with “was busy.”",
+          "hidden": "This wording does not describe something being done to the café; “busy” describes it."
         },
         "general": "Compare the exact sentence with the question. Grammar does not settle what really happened."
       },
       "hint": "Look at the whole wording, not one word alone.",
-      "example": "The café was noisy describes a state. A pie was carried by Dot describes a passive action."
+      "example": "“The shop was quiet” describes a state. “A pie was carried by Mo” describes a passive action."
     },
     {
       "v": 1,
@@ -683,12 +697,12 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       "reader": "For someone inspecting what the wording can tell them.",
       "prompt": "What can we tell from this sentence alone?",
       "teach": [
-        "In these action sentences, find who or what acts and what the action affects. In “Pip carried the basket,” Pip acts and the basket is carried.",
-        "An active version starts with its subject: “Pip carried the basket.” A passive version makes the basket its subject: “The basket was carried by Pip.” Both name the same action and doer here.",
-        "For this passive version, use a form of be with a past participle: was carried. By Pip keeps the doer. The passive subject receives the action in these examples.",
-        "Keep time and number: carried becomes was carried; wash becomes are washed for plural bowls; is sorting becomes are being sorted for plural letters.",
-        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left them out. The word was alone does not make a passive: “The café was busy” describes a state.",
-        "Choose wording for the reader. Beginning with the basket puts it first; naming Pip keeps the doer available. Either voice can be useful, and neither proves a statement true."
+        "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
+        "In these examples, the doer is the subject of the active version: “Mo painted the gate.” The passive version makes the affected thing its subject: “The gate was painted by Mo.” Both name the same action and doer.",
+        "This passive uses a form of “be” with a past participle: “was painted.” The phrase “by Mo” keeps the named doer. The passive subject receives the action in this example.",
+        "Keep the time, and make the verb agree with the new subject: “painted” becomes “was painted” for one gate; “mend” becomes “are mended” for plural nets. “Mo is stacking the cups” becomes “The cups are being stacked by Mo,” because cups are plural.",
+        "A passive can leave the doer unnamed. That does not tell us who did it or why the writer left the doer out. The word “was” by itself does not make a passive: “The shop was quiet” describes a state.",
+        "Choose wording for the reader. Beginning with the gate puts it first; naming Mo keeps the doer available. Either voice can be useful, and neither proves a statement true."
       ],
       "parts": [
         {
@@ -712,7 +726,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
       ],
       "key": "wording",
       "feedback": {
-        "fit": "The by phrase names Pip. The passive wording does not prove the event happened and does not hide the named doer.",
+        "fit": "The “by” phrase names Pip. The passive wording does not prove the event happened and does not hide the named doer.",
         "different": {
           "proved": "A grammatical statement can still be untrue. Evidence is separate from its form.",
           "hidden": "By Pip explicitly names the doer. Passive does not always leave the doer out."
@@ -720,7 +734,7 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
         "general": "Compare the exact sentence with the question. Grammar does not settle what really happened."
       },
       "hint": "Look at the whole wording, not one word alone.",
-      "example": "The café was noisy describes a state. A pie was carried by Dot describes a passive action."
+      "example": "“The window was washed by Mo” names Mo in a statement. To check whether that happened, look for evidence beyond the sentence."
     }
   ]
 }
