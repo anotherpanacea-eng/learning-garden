@@ -826,6 +826,7 @@ export const copyScopes = [
   {"path":"dist/two-threads-ui.mjs","adultBlocks":[],"quotations":[]},
   {"path":"dist/writing-quote-content.mjs","adultBlocks":[],"quotations":[]},
   {path:'dist/writing-summary-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/writing-voice-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/chapter-character-content.mjs',adultBlocks:[],quotations:[]},
   {"path":"dist/writing-revision-content.mjs","adultBlocks":[],"quotations":[]},
 
