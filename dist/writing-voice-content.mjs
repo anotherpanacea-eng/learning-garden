@@ -29,7 +29,8 @@ export const voiceCopy=Object.freeze({
   "affectedLabel": "Affected",
   "slotLabel": "Sentence place",
   "bankLabel": "Choose a phrase",
-  "unavailablePlacement": "Earlier phrase choices"
+  "unavailablePlacement": "Earlier phrase choices",
+  "noTeaching": "This earlier draft has no teaching cards here."
 });
 export const voiceTasks=[
   {

@@ -146,6 +146,24 @@ def historical(browser,base,seed,report):
    saved=copy.deepcopy(h.book(p));again=h.export_notes(p,'historical-'+mode);h.ok(again['writingDesk']==saved['writingDesk'],'Notes preserves unavailable optional metadata and work')
   finally:c.close()
 
+def history_edges(browser,base,seed,report):
+ altered=copy.deepcopy(report);altered['writingDesk']['currentId']='voice-basket';record=altered['writingDesk']['records']['voice-basket'];record['source']['teach']=[]
+ next(phrase for phrase in record['source']['choices'] if phrase['id']=='basket')['text']=''
+ record['work']['placements']['start']='basket'
+ c,p=setup(browser,base,seed)
+ try:
+  r.import_report(p,altered)
+  h.ok('waiting' not in p.locator('[data-writing-voice-slot="start"]').inner_text(),'placed historical empty text is not mislabeled as a waiting slot')
+  h.ok(p.locator('.wt-voice-earlier p').first.inner_text().strip()=='Start:','fallback preview preserves the actual empty phrase')
+  r.drawer(p,'teaching');h.ok('no teaching cards here' in p.locator('[data-writing-panel="teaching"]').inner_text() and '1 of 0' not in p.locator('[data-writing-panel="teaching"]').inner_text(),'empty historical lesson has an accurate notice')
+  r.action(p,'keep');h.ok(h.work(p)['source']==record['source'],'Keep preserves blank phrase and empty lesson source')
+ finally:c.close()
+ c,p=setup(browser,base,seed)
+ try:
+  r.action(p,'start');p.locator('#writing-status').evaluate("e=>e.textContent='A synthetic ordinary-status sentinel.'")
+  words=hear(p);status=p.locator('#writing-status').inner_text();h.ok(bool(status) and status not in words,'ordinary bench Hear retains its former status exclusion')
+ finally:c.close()
+
 def refusal(browser,base,seed):
  print('Spotlight: actual app refused Keep',flush=True)
  c,p=setup(browser,base,seed,fault=True)
@@ -202,7 +220,7 @@ def main():
   with sync_playwright() as pw:
    chrome=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome');browser=pw.chromium.launch(headless=True,executable_path=chrome if Path(chrome).exists() else None,args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed);phone(browser,base,seed);historical(browser,base,seed,report);refusal(browser,base,seed);isolated(browser,base,seed);saving_off(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
+    report=journey(browser,base,seed);phone(browser,base,seed);historical(browser,base,seed,report);history_edges(browser,base,seed,report);refusal(browser,base,seed);isolated(browser,base,seed);saving_off(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
    except Exception:
     (OUT/'failure.txt').write_text(traceback.format_exc());raise
    finally:browser.close()

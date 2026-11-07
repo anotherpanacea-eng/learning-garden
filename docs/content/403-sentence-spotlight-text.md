@@ -36,7 +36,8 @@ The shared copy, six-step lesson, separate Niko miniature, six constructive brie
     "affectedLabel": "Affected",
     "slotLabel": "Sentence place",
     "bankLabel": "Choose a phrase",
-    "unavailablePlacement": "Earlier phrase choices"
+    "unavailablePlacement": "Earlier phrase choices",
+    "noTeaching": "This earlier draft has no teaching cards here."
   },
   "teach": [
     "In these action sentences, find who or what acts and what the action affects. In “Mo painted the gate,” Mo is the doer and the gate is what was painted.",
