@@ -4,7 +4,7 @@
 
 **Two Crossings** adds a parallel-line view inside that same game. Compare corresponding, alternate-interior and co-interior angles; slide a tracing without turning it; lean a line to test the condition; then apply the relations to the dimensions of your waiting Copy Frame panel. It uses the existing source/browser checks and no new saved record. See [spec416](docs/specs/416-parallel-lines.md); [PR499](https://github.com/anotherpanacea-eng/learning-garden/pull/499) owns implementation review and publication status.
 
-**Triangle Corners** extends that game with corner gathering, a parallel-line explanation of the triangle sum, and one adjacent exterior angle. Return to a symbolic triangle cut from the waiting panel. The independently reviewed [spec417](docs/specs/417-triangle-corners.md) is in implementation; it is not yet live. The same Crossing Angles checks cover this visit-local exploration.
+**Triangle Corners** extends that game with corner gathering, a parallel-line explanation of the triangle sum, and one adjacent exterior angle. Return to a symbolic triangle cut from the waiting panel. See independently reviewed [spec417](docs/specs/417-triangle-corners.md); [PR500](https://github.com/anotherpanacea-eng/learning-garden/pull/500) owns implementation review and publication status. The same Crossing Angles checks cover this visit-local exploration.
 
 
 A playful, parent-guided world of connected investigations, stories, and making things. The Learning Garden is the first place to explore; Number Garden remains its mathematics destination. The repository keeps the `learning-garden` name.

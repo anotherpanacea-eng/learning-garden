@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Triangle Corners417 · from one example to every triangle
 
-[Triangle Corners417](specs/417-triangle-corners.md) is the next M5-III/IV and M7-II bridge from182, inside the existing Crossing Angles game. Gather three corner copies, distinguish that demonstration from a general parallel-line argument, and use the adjacent exterior angle. A symbolic return uses one diagonal and the actual copied rectangle's sides. The finite specification is independently BUILD-READY at7736883d; implementation and qualification are in progress, not yet published. Polygon sums, congruence and independent unknown-angle fluency remain separate. No new destination, saved record, placement or full-topic claim is proposed.
+[Triangle Corners417](specs/417-triangle-corners.md) is the next M5-III/IV and M7-II bridge from182, inside the existing Crossing Angles game. Gather three corner copies, distinguish that demonstration from a general parallel-line argument, and use the adjacent exterior angle. A symbolic return uses one diagonal and the actual copied rectangle's sides. The finite specification is independently BUILD-READY at7736883d. [PR500](https://github.com/anotherpanacea-eng/learning-garden/pull/500) contains the implementation; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/500#issuecomment-6708113524) owns acceptance and publication status. Polygon sums, congruence and independent unknown-angle fluency remain separate. No new destination, saved record, placement or full-topic claim is proposed.
 
 ## Two Crossings416 · the parallel condition
 

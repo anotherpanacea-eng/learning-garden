@@ -1,6 +1,6 @@
 # 417 · Triangle Corners
 
-Status: independently BUILD-READY at7736883dc4bfb14c0540e7660cb4a7d10b2a94d6 after six specification lenses, complete mathematics/copy/visual-plan review and focused repair closure. Implementation and qualification are in progress; not yet published. Continues admitted LG-1 / LG-G1, operational branch custody1620.
+Status: independently BUILD-READY at7736883dc4bfb14c0540e7660cb4a7d10b2a94d6 after six specification lenses, complete mathematics/copy/visual-plan review and focused repair closure. Implementation qualification and publication status are recorded with [PR500](https://github.com/anotherpanacea-eng/learning-garden/pull/500). Continues admitted LG-1 / LG-G1, operational branch custody1620.
 
 ## The next explanation
 
