@@ -6,7 +6,7 @@ Status: proposed bounded implementation, independent specification and complete 
 
 Beside Chance Line in canonical Seed Stall `#numbers/seeds`, offer **Build and try a spinner** in every parent state. Nuria's sign has three picture marks, but the shares may differ. Help the orchard keeper redesign it and compare short screen-draw runs. Sun, Cloud and Rain are picture marks, not a weather forecast. This is an optional visit-local experiment, not assessment, an access gate, a score or a story outcome.
 
-Seed Stall87 already has six-position replacement draws; Seed Pairs119/215 already has two-draw fractions, branches and recorded runs; Chance Line409 already has count/whole comparisons and a manipulable probability line. This adds a circular, editable three-mark model and live finite trials whose frozen design stays beside the tally. No new persistent notebook, seed inventory, weather observation or mastery claim. No external art/voice/network service.
+Willow Path already has a fixed counting-on spinner; this is not the first spinner in the app. Seed Stall87 already has six-position replacement draws; Seed Pairs119/215 already has two-draw fractions, branches and recorded runs; Chance Line409 already has count/whole comparisons and a manipulable probability line. This adds a circular, editable three-mark model and live finite trials whose frozen design stays beside the tally. No new persistent notebook, seed inventory, weather observation or mastery claim. No external art/voice/network service.
 
 ## Model and complete finite mathematics
 
@@ -56,7 +56,7 @@ Lifetime copy: **Your wheel and runs stay while you visit Seed Stall. Leaving th
 
 Original pictures and wording; equivalent short splitting is allowed, with normal number/word spacing. No lesson/choice copied from upstream.
 
-1. **Count equal stops, not names.** Show `[6,3,3]`, all 12 slices, Sun 6/12 = 1/2, Cloud 3/12 = 1/4, Rain 3/12 = 1/4. Three marks can have unequal chances. The 12 stops have equal chances by the screen rule.
+1. **Count equal stops, not names.** Show `[6,3,3]`, all 12 slices, Sun 6/12 = 1/2, Cloud 3/12 = 1/4, Rain 3/12 = 1/4. One of twelve equal stops is 1/12 of the whole; six such stops make 6/12. Three marks can have unequal chances. The 12 stops have equal chances by the screen rule.
 2. **Redesign the shares.** Show `[4,4,4]` beside `[6,3,3]`. Each named mark has 1/3 on the first. Sun has 1/2 on the second, each other mark 1/4. Equal chance for three marks is thirds, not halves. One transfer preserves all 12 stops.
 3. **A run is not a promise.** Show `[6,3,3]` with explicitly authored illustration Sun, Sun, Sun, Cloud; label it **An example, not your run and not a fresh random draw**. Next Sun chance still 1/2; neither a streak nor Cloud/Rain being owed a turn changes the wheel. The picture makes no claim about a typical 20-draw tally.
 4. **Keep the old wheel with its results.** Show frozen `[6,3,3]` and a separately edited `[4,4,4]`. The earlier run's Sun chance remains 1/2; a new run from the edited design gives 1/3. Observed counts may vary between runs; a short run does not prove physical fairness or forecast weather.
@@ -76,8 +76,8 @@ Q2 **Which design gives all three named marks the same chance?**
 Explanation: Equal shares of twelve among three marks are four stops each: 1/3 each.
 
 Q3 **Three Suns appeared from a frozen 6 Sun, 3 Cloud, 3 Rain wheel. What is Sun's chance next?**
-1. **More than 1/2 because Sun has a streak** — Earlier results do not add Sun stops to this wheel.
-2. **Less than 1/2 because another mark is owed a turn** — No mark is owed a turn. The same twelve stops remain available.
+1. **More than 1/2** — Earlier results do not add Sun stops to this wheel.
+2. **Less than 1/2** — No mark is owed a turn. The same twelve stops remain available.
 3. **Still 1/2** — Six of the same twelve equal-chance stops are Sun on every draw.
 Explanation: Still 6/12 = 1/2 under this model's independent equal-stop rule.
 
