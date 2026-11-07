@@ -375,7 +375,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "toad-replies",
           "role": "supports",
-          "comment": "The modest reply supports a claim about outward behavior. The private pleasure in the same passage matters for a broader claim about his wishes."
+          "comment": "The modest reply supports a claim about outward behavior. What Toad privately feels in the same passage matters for a broader claim about his wishes."
         },
         {
           "quoteId": "toad-banquet",
@@ -388,7 +388,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
           "comment": "His private performance is important context. It does not erase the different public conduct; it can change how we interpret that conduct."
         }
       ],
-      "limit": "The restrained replies and refusal to perform support a limited reading of changed conduct. Looking down his nose and enjoying his friends’ astonishment can complicate a simple contrast. Public actions and private wishes need not change together."
+      "limit": "The restrained replies and refusal to perform support a limited reading of changed conduct. Looking down his nose and his satisfaction at his friends’ staring can complicate a simple contrast. Public actions and private wishes need not change together."
     },
     {
       "claimId": "toad-admire",
@@ -407,7 +407,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "toad-stares",
           "role": "complicates",
-          "comment": "The banquet passage explicitly gives him satisfaction at his friends’ astonishment. This reader uses that to question the claim, while recognizing that astonishment, interest and admiration are not identical."
+          "comment": "The banquet passage explicitly gives him satisfaction when his friends stare at each other. This reader uses that to question the claim, while recognizing that staring, interest and admiration are not identical."
         }
       ],
       "limit": "A promise or “altered Toad” cannot settle every private wish. This reader leaves “A way to travel” unmarked: enthusiasm about motoring does not itself bear on this claim about admiration at the end."
