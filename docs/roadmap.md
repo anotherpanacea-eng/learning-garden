@@ -6,6 +6,10 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 **Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
 
+## Polygon Chase421 · equal shares or missing corners?
+
+[Polygon Chase421](specs/421-polygon-chase.md) is the next proposed LG-G1 bridge: extend the existing Angle Chase with regular-polygon inside/outside angles and irregular-quadrilateral subtraction. It reuses the familiar number-and-reason loop, separate examples and kept visit work, returning to418’s triangle fan. Independent specification and finite mathematics/copy/visual-plan review precede code. Equations, fractional-angle cases, measurement and broad independent fluency remain missing.
+
 ## Angle Chase420 · values with reasons
 
 [Angle Chase420](specs/420-angle-chase.md) selects the next182 bridge after the guided geometry pages: finite point/line/crossing, triangle/exterior, parallel and rectangle chains, with touch number entry, accepted alternate reasons and separate support. Its specification is independently BUILD-READY at d67dc6dd after six-lens, complete mathematics/copy and focused repair closure. [PR503](https://github.com/anotherpanacea-eng/learning-garden/pull/503) contains the implementation; its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/503#issuecomment-6711060052) owns final acceptance and publication status. Equations, polygon chains, missing-premise tasks and broad independent fluency remain missing.
