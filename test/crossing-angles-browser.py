@@ -1,4 +1,4 @@
-"""Crossing Angles415/416/417/418/419/420 in the actual application, with invented notebooks only.
+"""Crossing Angles415/416/417/418/419/420/421 in the actual application, with invented notebooks only.
 
 One complete tablet visit and focused phone/label/lifetime probes. The sole app
 instrumentation exposes a read-only getter at its real initialization marker.
@@ -1042,7 +1042,8 @@ def matching_guards(browser,base):
     h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'matching current route guard rejects effects before hashchange');h.unchanged(p,before,'matching changed route');p.context.close()
 
 
-CHASE_CASES=[([137,137],['line','opposite']),([112,112],['line','opposite']),([63,63],['line','opposite']),([120,60,45],['point','line','parts']),([125,55,60],['point','line','parts']),([95,85,40],['point','line','parts']),([75,105],['triangle','line']),([77,103],['triangle','line']),([67,113],['triangle','line']),([35,35,145],['corresponding','opposite','line']),([52,52,128],['corresponding','opposite','line']),([68,68,112],['corresponding','opposite','line']),([65,25,65],['corner','triangle','corner']),([53,37,53],['corner','triangle','corner']),([32,58,32],['corner','triangle','corner'])]
+CHASE_CASES=[([137,137],['line','opposite']),([112,112],['line','opposite']),([63,63],['line','opposite']),([120,60,45],['point','line','parts']),([125,55,60],['point','line','parts']),([95,85,40],['point','line','parts']),([75,105],['triangle','line']),([77,103],['triangle','line']),([67,113],['triangle','line']),([35,35,145],['corresponding','opposite','line']),([52,52,128],['corresponding','opposite','line']),([68,68,112],['corresponding','opposite','line']),([65,25,65],['corner','triangle','corner']),([53,37,53],['corner','triangle','corner']),([32,58,32],['corner','triangle','corner']),([108,72],['regular','equalOutside']),([120,60],['regular','equalOutside']),([135,45],['regular','equalOutside']),([75,105],['quad','quadOutside']),([80,100],['quad','quadOutside']),([105,75],['quad','quadOutside'])]
+CHASE_FAMILIES=['crossing','hub','triangle','parallel','rectangle','regular','quadrilateral']
 CH='[data-crossing-angles-chase-region]'
 CI='#crossing-angles-chase-answer'
 
@@ -1088,7 +1089,7 @@ def chase_scene(p,family):
         const name=target.dataset.crossingAnglesChaseTarget,b=target.getBoundingClientRect();
         if(Math.abs(b.width-60)>.2||Math.abs(b.height-68)>.2||b.top<pb.bottom+3.5||b.left<pb.left-.5||b.right>pb.right+.5)bad.push('target box '+name);
         for(const child of target.querySelectorAll('span')){const r=child.getBoundingClientRect();if(r.left<b.left-.5||r.right>b.right+.5||r.top<b.top-.5||r.bottom>b.bottom+.5||child.scrollWidth>child.clientWidth+1)bad.push('target text '+name);}
-        const vertex=family==='triangle'?'B':family==='parallel'?'Q':family==='rectangle'?(name==='x'?'A':'C'):'O';
+        const vertex=family==='triangle'?'B':family==='parallel'?'Q':family==='rectangle'?(name==='x'?'A':'C'):family==='regular'?'A':family==='quadrilateral'?'D':'O';
         const label=plot.querySelector('[data-crossing-angles-label="'+vertex+'"]'),leader=svg.querySelector('[data-ca-leader="'+label.dataset.caLabel+'"]'),center=point(leader,'x1','y1');
         const arc=svg.querySelector('[data-chase-sector="'+name+'"]'),middle=arc.getPointAtLength(arc.getTotalLength()/2),dx=middle.x-center[0],dy=middle.y-center[1],len=Math.hypot(dx,dy),raw=[center[0]+40*dx/len,center[1]+40*dy/len];
         const expected=new DOMPoint(...raw).matrixTransform(svg.getScreenCTM()),line=overlay.querySelector('[data-chase-connector="'+name+'"]'),start=new DOMPoint(...point(line,'x1','y1')).matrixTransform(overlay.getScreenCTM()),end=new DOMPoint(...point(line,'x2','y2')).matrixTransform(overlay.getScreenCTM());
@@ -1110,14 +1111,14 @@ def chase_example(p,case,before):
     while not p.locator('[data-chase-example-nav=previous]').is_disabled():p.locator('[data-chase-example-nav=previous]').click();h.unchanged(p,before,'example previous')
     h.ok('givens only' in p.locator('.ca-chase-counter').inner_text(),'example starts with givens only')
     h.ok(all('°' not in t for t in p.locator('.ca-chase-target-band [data-crossing-angles-chase-target]').all_inner_texts()),'example zero has no target values')
-    n=len(CHASE_CASES[case][0]);expected=[[130,130],[118,62,48],[76,104],[40,40,140],[60,30,60]][case//3]
+    n=len(CHASE_CASES[case][0]);expected=[[130,130],[118,62,48],[76,104],[40,40,140],[60,30,60],[144,36],[95,85]][case//3]
     for step in range(1,n+1):
         act(p,'chase-example-step',step,before)
         if step==n:h.focus(p,'[data-chase-example-nav=previous]','last example step keeps enabled focus')
         shown=p.locator('.ca-chase-target-band [data-crossing-angles-chase-target]').all_inner_texts()
         h.ok(all((str(expected[i])+'°' in shown[i])==(i<step) for i in range(n)),'example reveals only its own completed steps')
     hear(p,before,includes=['A different worked sketch'],excludes=['Your answer:'])
-    chase_scene(p,['crossing','hub','triangle','parallel','rectangle'][case//3]);capture(p,'chase-example-'+str(case//3))
+    chase_scene(p,CHASE_FAMILIES[case//3]);capture(p,'chase-example-'+str(case//3))
     act(p,'chase-return',before=before);h.focus(p,CI,'example return restores answer focus')
     h.ok(p.locator(CI).input_value()==value,'example retains exact practice draft')
     if reason:h.ok(p.locator(sel('chase-reason',reason)).get_attribute('aria-pressed')=='true','example retains chosen practice reason')
@@ -1138,7 +1139,7 @@ def chase_journey(browser,base):
         h.ok(p.locator('.ca-chase-caption').count()==1,'completed paper sketch has truthful local caption')
         if case%3==0:
             act(p,'chase-hint',before=before);h.ok(p.locator('.ca-chase-hint').count()==1,'independent optional hint visible')
-            chase_example(p,case,before);chase_scene(p,['crossing','hub','triangle','parallel','rectangle'][case//3]);capture(p,'chase-family-'+str(case//3))
+            chase_example(p,case,before);chase_scene(p,CHASE_FAMILIES[case//3]);capture(p,'chase-family-'+str(case//3))
     # Alternate mathematically sufficient reasons are accepted on the live UI.
     for case,index,reason in [(0,1,'line'),(3,2,'line'),(6,1,'exterior'),(9,1,'alternate'),(9,2,'cointerior'),(12,1,'alternate'),(12,2,'alternate')]:
         act(p,'chase-case',case,before);act(p,'chase-target',index,before);act(p,'chase-reason',reason,before);act(p,'chase-check',before=before)
@@ -1166,6 +1167,7 @@ def chase_journey(browser,base):
     h.ok('do determine x' in chase_feedback(p) and '65' not in chase_feedback(p),'blank insufficient claim gets a premise explanation')
     act(p,'chase-target',2,before);chase_entry(p,9,before);act(p,'chase-solution',before=before)
     h.ok('shown' in chase_target(p,'y').inner_text() and '25°' in chase_target(p,'y').inner_text() and '65°' in chase_target(p,'z').inner_text() and '65°' not in chase_target(p,'x').inner_text(),'rectangle solution marks only explicitly printed targets, not every inferable one')
+    polygon_chase_steps(p,before)
     # Scoped physical keyboard on the readonly display; no OS keyboard required.
     act(p,'chase-case',3,before);act(p,'chase-target',2,before);p.locator(CI).focus();p.keyboard.press('Delete');h.unchanged(p,before,'keyboard clear')
     for digit in '045':p.keyboard.press(digit);h.focus(p,CI,'keyboard entry keeps readonly display focus');h.unchanged(p,before,'keyboard digit')
@@ -1183,10 +1185,42 @@ def chase_journey(browser,base):
     after=h.notes(p,'chase-notes-after');h.ok({k:v for k,v in after.items() if k!='exportedAt'}=={k:v for k,v in exported.items() if k!='exportedAt'},'actual Notes exports unchanged across complete Chase visit');p.context.close()
 
 
+def polygon_chase_steps(p,before):
+    # These encounters remain part of the real whole-visit Notes/storage comparison.
+    for case in range(15,21):
+        values=CHASE_CASES[case][0];regular=case<18
+        act(p,'chase-case',case,before);act(p,'chase-restart',before=before)
+        facts=p.locator('.ca-chase-facts').inner_text()
+        if regular:
+            n=[5,6,8][case-15]
+            h.ok(str(n)+' sides' in facts and 'n counts sides, not degrees' in facts,'side count is visible as a count')
+            h.ok('Given .' not in p.locator('svg desc').text_content(),'empty angle-givens produce no false given fragment')
+        else:h.ok('convex quadrilateral' in facts and p.locator('.ca-chase-stage .ca-chase-given').count()==3,'three known angle tags belong to the convex quadrilateral')
+        act(p,'chase-check',before=before);h.ok('Enter a whole-number angle' in chase_feedback(p),'new board blank is not a wrong answer')
+        chase_entry(p,values[0],before);act(p,'chase-check',before=before);h.ok('Choose a reason' in chase_feedback(p),'new number alone leaves reason open')
+        act(p,'chase-reason','point' if regular else 'regular',before);act(p,'chase-check',before=before)
+        h.ok('relationship does not explain' in chase_feedback(p),'new board rejects wrong whole or unjustified sharing')
+        act(p,'chase-reason','line',before);act(p,'chase-check',before=before);h.ok(str(values[0])+'°' in chase_feedback(p),'reverse inside route accepted before outside answer')
+        chase_entry(p,1,before);act(p,'chase-check',before=before)
+        act(p,'chase-target',1,before);chase_entry(p,values[1],before);act(p,'chase-reason','line',before);act(p,'chase-check',before=before)
+        h.ok(str(values[1])+'°' in chase_feedback(p) and '°' not in chase_target(p,'x').inner_text(),'wrong predecessor is not the later key or a given')
+        act(p,'chase-reason','opposite' if regular else 'equalOutside',before);act(p,'chase-check',before=before)
+        h.ok('relationship does not explain' in chase_feedback(p),'outside reason requires its actual equality/crossing condition')
+        act(p,'chase-restart',before=before);act(p,'chase-target',1,before);chase_entry(p,9,before);act(p,'chase-solution',before=before)
+        h.ok(p.locator(CI).input_value()=='9' and '°' not in chase_target(p,'x').inner_text() and 'shown' in chase_target(p,'y').inner_text(),'direct outside solution keeps draft and does not expose inside target')
+        hear(p,before,includes=['Your answer: 9'],excludes=['x = '+str(values[0])+'°'])
+        act(p,'chase-rotation',before=before)
+    # Follow the actual existing invitation and return to the same waiting answer.
+    act(p,'page','triangle',before);act(p,'tri-view','polygons',before);act(p,'tri-mode','free',before);act(p,'poly-view','split',before)
+    h.ok('Split the frame' in p.locator(R).inner_text(),'fan invitation reaches the existing teaching page')
+    act(p,'page','chase',before);h.ok(p.locator('#crossing-angles-chase-case').input_value()=='20' and p.locator(CI).input_value()=='9','fan return preserves selected polygon and its waiting draft')
+    act(p,'chase-case',0,before);act(p,'chase-case',20,before);h.ok(p.locator(CI).input_value()=='9','old and new boards coexist without replacement')
+
+
 def chase_focused(browser,base):
     print('Angle Chase: actual target actions, phone rotation clearance and measured connector layout',flush=True)
     p=setup(browser,base);before=h.snapshot(p);enter(p,before);act(p,'page','chase',before)
-    for case,family in [(0,'crossing'),(3,'hub'),(6,'triangle'),(9,'parallel'),(12,'rectangle')]:
+    for case,family in [(0,'crossing'),(3,'hub'),(6,'triangle'),(9,'parallel'),(12,'rectangle'),(15,'regular'),(18,'quadrilateral')]:
         act(p,'chase-case',case,before)
         y=chase_target(p,'y').element_handle();y.click();h.ok(p.locator('#crossing-angles-chase-target').input_value()=='1','initial native angle button actually acts after layout');h.unchanged(p,before,'initial target button')
         original=chase_target(p,'x').element_handle()
@@ -1205,22 +1239,30 @@ def chase_focused(browser,base):
             if rotation in [0,180,330]:capture(p,'chase-phone-'+family+'-'+str(rotation))
             act(p,'chase-rotation',before=before)
         p.set_viewport_size({'width':820,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
-    for case in range(15):
+    for case in range(len(CHASE_CASES)):
         act(p,'chase-case',case,before)
         for width in [320,820]:
             p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
             for _ in range(12):
-                chase_scene(p,['crossing','hub','triangle','parallel','rectangle'][case//3]);act(p,'chase-rotation',before=before)
+                chase_scene(p,CHASE_FAMILIES[case//3]);act(p,'chase-rotation',before=before)
     act(p,'chase-case',3,before);act(p,'chase-example',before=before)
     for step in [1,2,3]:act(p,'chase-example-step',step,before)
     for width in [320,820]:p.set_viewport_size({'width':width,'height':1000});chase_scene(p,'hub');capture(p,'chase-example-hub-'+str(width))
+    for case in [15,18]:
+        act(p,'chase-case',case,before);act(p,'chase-example',before=before)
+        for width in [320,820]:
+            p.set_viewport_size({'width':width,'height':1000});p.evaluate('()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)))')
+            for step in [0,1,2]:
+                act(p,'chase-example-step',step,before);chase_scene(p,CHASE_FAMILIES[case//3])
+            capture(p,'polygon-chase-example-'+str(case)+'-'+str(width))
+        act(p,'chase-return',before=before)
     h.unchanged(p,before,'focused Chase layouts');p.context.close()
 
 
 def chase_guards(browser,base):
     print('Angle Chase: retired clicks/selects/readonly keyboard and Hear inert before all effects',flush=True)
     for mode in ['detached','hidden','ancestor','reparented']:
-        p=setup(browser,base);enter(p);old=[p.locator(sel('rotation')).element_handle(),p.locator(R+' [data-speak]').element_handle()];act(p,'page','chase')
+        p=setup(browser,base);enter(p);old=[p.locator(sel('rotation')).element_handle(),p.locator(R+' [data-speak]').element_handle()];act(p,'page','chase');act(p,'chase-case',20)
         case=p.locator('#crossing-angles-chase-case').element_handle();target=p.locator('#crossing-angles-chase-target').element_handle();case.evaluate('e=>e.value="1"');target.evaluate('e=>e.value="1"')
         entry=p.locator(CI).element_handle();handles=[case,target,chase_target(p,'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(sel('chase-reason','line')).element_handle(),p.locator(sel('chase-check')).element_handle(),p.locator(sel('chase-hint')).element_handle(),p.locator(sel('chase-solution')).element_handle(),p.locator(sel('chase-example')).element_handle(),p.locator(R+' [data-speak]').element_handle(),entry]
         for e in handles:retire(e,mode)
@@ -1228,7 +1270,7 @@ def chase_guards(browser,base):
         for e in old+handles[:-1]:h.dispatch(e,'change' if e.evaluate('e=>e.tagName')=='SELECT' else 'click')
         entry.evaluate('e=>e.dispatchEvent(new KeyboardEvent("keydown",{key:"1",bubbles:true,cancelable:true}))')
         h.ok(p.locator(R).inner_html()==html and p.evaluate('__sharedSpoken.length')==spoken,'retired Chase '+mode+' controls/keyboard/Hear cannot render or speak');h.unchanged(p,before,'retired Chase '+mode);p.context.close()
-    p=setup(browser,base);enter(p);act(p,'page','chase');entry=p.locator(CI).element_handle();controls=[chase_target(p,'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
+    p=setup(browser,base);enter(p);act(p,'page','chase');act(p,'chase-case',17);entry=p.locator(CI).element_handle();controls=[chase_target(p,'y').element_handle(),p.locator(sel('chase-digit','1')).element_handle(),p.locator(R+' [data-speak]').element_handle()]
     before=h.snapshot(p);html=p.locator(R).inner_html();spoken=p.evaluate('__sharedSpoken.length');p.evaluate('history.replaceState(null,"","#workshop/copy-frame/")')
     entry.evaluate('e=>e.dispatchEvent(new KeyboardEvent("keydown",{key:"1",bubbles:true,cancelable:true}))')
     for e in controls:h.dispatch(e)
@@ -1240,12 +1282,14 @@ def chase_dirty(p,before):
     act(p,'chase-case',3,before);act(p,'chase-target',1,before);act(p,'chase-solution',before=before)
     act(p,'chase-case',12,before);act(p,'chase-target',2,before);act(p,'chase-solution',before=before)
     act(p,'chase-case',14,before);act(p,'chase-target',2,before);chase_entry(p,32,before);act(p,'chase-reason','corner',before);act(p,'chase-check',before=before);act(p,'chase-example',before=before);act(p,'chase-example-step',1,before)
+    for case in range(15,21):
+        act(p,'chase-case',case,before);act(p,'chase-target',1,before);chase_entry(p,9,before);act(p,'chase-reason','line',before);act(p,'chase-check',before=before);act(p,'chase-hint',before=before);act(p,'chase-solution',before=before);act(p,'chase-rotation',before=before);act(p,'chase-example',before=before);act(p,'chase-example-step',1,before);act(p,'chase-return',before=before)
 
 
 def chase_reset(p,before):
     act(p,'page','chase',before)
     h.ok(p.locator('#crossing-angles-chase-case').input_value()=='0','fresh visit resets selected Chase case and solve view')
-    for case in [0,3,12,14]:
+    for case in [0,3,12,14,15,16,17,18,19,20]:
         act(p,'chase-case',case,before)
         h.ok(p.locator('#crossing-angles-chase-target').input_value()=='0' and p.locator(CI).input_value()=='' and p.locator(sel('chase-reason')+'[aria-pressed=true]').count()==0,'clearing resets cached Chase answer/target/reason '+str(case))
         h.ok('Not checked yet' in chase_feedback(p) and p.locator('.ca-chase-hint,.ca-chase-solution,.ca-chase-help-note').count()==0,'clearing resets feedback and explicit/derived help '+str(case))

@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Polygon Chase421 · equal shares or missing corners?
 
-[Polygon Chase421](specs/421-polygon-chase.md) is the next proposed LG-G1 bridge: extend the existing Angle Chase with regular-polygon inside/outside angles and irregular-quadrilateral subtraction. It reuses the familiar number-and-reason loop, separate examples and kept visit work, returning to418’s triangle fan. Independent specification and finite mathematics/copy/visual-plan review precede code. Equations, fractional-angle cases, measurement and broad independent fluency remain missing.
+[Polygon Chase421](specs/421-polygon-chase.md) is the next proposed LG-G1 bridge: extend the existing Angle Chase with regular-polygon inside/outside angles and irregular-quadrilateral subtraction. It reuses the familiar number-and-reason loop, separate examples and kept visit work, returning to418’s triangle fan. Its specification is independently BUILD-READY at475494ff after six-lens, complete finite mathematics/copy/visual-plan review and focused repair closure. The bounded implementation is built and undergoing qualification; review, merge and publication remain pending. Equations, fractional-angle cases, measurement and broad independent fluency remain missing.
 
 ## Angle Chase420 · values with reasons
 
