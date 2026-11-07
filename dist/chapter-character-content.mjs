@@ -481,6 +481,7 @@ export const characterCopy=Object.freeze({
   "noMark": "No mark on this passage yet.",
   "roleNotice": "A passage can matter differently for a different claim. The labels alone do not prove the claim. Leave it unmarked if it does not bear on this claim.",
   "marks": "Your passage marks",
+  "marksNotice": "These count marks, not reading or success.",
   "emptyMarks": "No passage marks in this draft yet.",
   "reference": "One reader’s case",
   "referenceNotice": "An example, not a key. You can explain a different reading.",

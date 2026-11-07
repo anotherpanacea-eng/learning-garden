@@ -69,6 +69,23 @@ def journey(browser,base,seed,packet):
   after=copy.deepcopy(h.book(p));after.pop('chapterMaps');h.ok(after==before,'character work preserves every unrelated notebook root')
   p.screenshot(path=str(OUT/'tablet.png'),full_page=True);report=h.export_notes(p,'character-kept');h.ok(report['chapterMaps']==maps(p),'actual Notes download contains exact character source and choices');return report
  finally:c.close()
+def mark_pagination(browser,base,seed):
+ print('Character402: five-mark pagination and spoken saved status',flush=True)
+ c,p=setup(browser,base,seed)
+ try:
+  p.evaluate(t.SPEECH_FIXTURE);enter(p);character(p);click(p,'character-case','mole');click(p,'character-claim','mole-care')
+  for i in range(5):
+   click(p,'character-role','context')
+   if i<4:click(p,'character-quote-nav',1)
+  marks_open(p);click(p,'character-marks-page',1)
+  disclosure=p.locator(sel('character-marks'))
+  h.ok(disclosure.get_attribute('open') is not None and 'Marks 5–5 of 5' in disclosure.inner_text(),'paging five marks preserves the open list and shows the final row')
+  h.ok('These count marks, not reading or success.' in disclosure.inner_text(),'counts describe marks without implying reading or success')
+  row(p,'mole-care','mole-space').click();h.ok(p.locator(sel('character-marks')).get_attribute('open') is not None,'focusing a mark preserves disclosure state')
+  click(p,'keep');h.ok(p.locator(sel('character-marks')).get_attribute('open') is not None,'Keep preserves the open marks list')
+  spoken=hear(p);h.ok('These are the marks kept on this map.' in spoken and 'Kept map. Your original choices stay unchanged.' in spoken,'Hear includes both visible kept-map notices')
+  click(p,'copy');h.ok(p.locator(sel('character-marks')).get_attribute('open') is not None,'Copy preserves the open marks list')
+ finally:c.close()
 def import_report(p,report):
  p.evaluate('location.hash="#notes"');p.locator('#progress-file').set_input_files({'name':'synthetic-character-notes.json','mimeType':'application/json','buffer':json.dumps(report).encode()});p.locator('#progress-import-preview').wait_for();p.locator('#progress-import-confirm').click();p.locator('#progress-import-status').filter(has_text='Notebook brought').wait_for();p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-chapter-map]').wait_for();enter(p)
 def transfer(browser,base,seed,report):
@@ -76,8 +93,8 @@ def transfer(browser,base,seed,report):
  altered=copy.deepcopy(report);old=copy.deepcopy(report['chapterMaps'][0]);old['id']='chapter-map-50';old['source'].pop('characterStudy');old['work'].pop('characters');bad=copy.deepcopy(report['chapterMaps'][0]);bad['id']='chapter-map-51';bad['work']['characters']['placements'] = [copy.deepcopy(bad['work']['characters']['placements'][0]),None,copy.deepcopy(bad['work']['characters']['placements'][0])];bad['work']['characters']['futureRaw']={'exact':['untouched']};altered['chapterMaps'] += [old,bad]
  c,p=setup(browser,base,seed)
  try:
-  import_report(p,altered);open_map(p,old['id']);character(p);h.ok('This earlier map has no character case here.' in p.locator(sel('character-surface')).inner_text(),'historical absent packet is not filled from today’s catalogue');click(p,'turn','map');h.ok(p.locator(sel('chapter-panel')).count()==1,'ordinary historical book map remains open')
-  open_map(p,bad['id']);character(p);marks_open(p);h.ok(row(p,bad['work']['characters']['placements'][0]['claimId'],bad['work']['characters']['placements'][0]['quoteId']).count()==2,'malformed work displays duplicate individually readable rows separately');h.ok(not p.locator(sel('copy')).is_disabled(),'base-readable malformed character record can be copied raw');click(p,'copy');click(p,'keep');h.ok(maps(p)[-1]['work']['characters']==bad['work']['characters'],'raw copy and re-Keep preserve malformed character bytes')
+  p.evaluate(t.SPEECH_FIXTURE);import_report(p,altered);open_map(p,old['id']);character(p);h.ok('This earlier map has no character case here.' in p.locator(sel('character-surface')).inner_text(),'historical absent packet is not filled from today’s catalogue');click(p,'turn','map');h.ok(p.locator(sel('chapter-panel')).count()==1,'ordinary historical book map remains open')
+  open_map(p,bad['id']);character(p);h.ok('This character case cannot be changed here.' in hear(p),'Hear includes the visible unavailable-case notice');marks_open(p);h.ok(row(p,bad['work']['characters']['placements'][0]['claimId'],bad['work']['characters']['placements'][0]['quoteId']).count()==2,'malformed work displays duplicate individually readable rows separately');h.ok(not p.locator(sel('copy')).is_disabled(),'base-readable malformed character record can be copied raw');click(p,'copy');click(p,'keep');h.ok(maps(p)[-1]['work']['characters']==bad['work']['characters'],'raw copy and re-Keep preserve malformed character bytes')
   exported=h.export_notes(p,'character-imported');h.ok(exported['chapterMaps'][:-1]==altered['chapterMaps'],'actual Notes redownload retains all imported originals exactly')
   # Confirmed actual reset invalidates a captured character action.
   p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-chapter-map]').wait_for();enter(p);character(p);old_control=p.locator(sel('character-case')).first.element_handle();p.evaluate('location.hash="#notes"');p.locator('#reset').click();p.locator('#confirm-reset').click();p.wait_for_function('location.hash==="#home"');p.locator('[data-film-skip]').click();p.locator('dialog.welcome-film').wait_for(state='detached');p.evaluate('location.hash="#learn/english"');p.locator('[data-ev-chapter-map]').wait_for();enter(p);before=copy.deepcopy(h.book(p));old_control.evaluate('e=>e.click()');h.ok(h.book(p)==before and 'chapterMaps' not in h.book(p),'confirmed reset prevents captured character controls resurrecting notes')
@@ -134,7 +151,7 @@ def main():
   with sync_playwright() as pw:
    browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
    try:
-    report=journey(browser,base,seed,packet);transfer(browser,base,seed,report);samples(browser,base,seed,packet);metamorphic(browser,base,seed,packet);faults(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
+    report=journey(browser,base,seed,packet);mark_pagination(browser,base,seed);transfer(browser,base,seed,report);samples(browser,base,seed,packet);metamorphic(browser,base,seed,packet);faults(browser,base,seed);h.ok(not h.errors,'no page/console/HTTP errors: '+str(h.errors));receipt={'status':'passed','checks':h.checks,'scope':__doc__};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
    except Exception:
     (OUT/'failure.txt').write_text(traceback.format_exc())
     for ci,context in enumerate(browser.contexts):
