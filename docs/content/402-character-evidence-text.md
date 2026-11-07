@@ -2,7 +2,7 @@
 
 Status: proposed, not cleared. Book words are from Kenneth Grahame’s The Wind in the Willows (1908), the same public edition as399. Every card is a selected passage, never a whole chapter. Exact case, punctuation and wording are retained; original italics are not displayed. The publisher metadata marks this edition public domain in the USA; no worldwide rights claim is made. The book contains dated language outside these selected passages. The original worked miniature, contexts, claims, teaching and reader commentaries below are new original prose.
 
-The packet is optional source.characterStudy on a newly opened Chapter Map; it never backfills an earlier map. Roles are the child’s annotations. No placement is scored or compared with these reader examples. This is not an assertion that every claim is true, every interpretation equally supported or the child has read a chapter. Existing map/connection/excerpt tasks remain open.
+The packet is optional source.characterStudy on a newly opened Chapter Map; it never backfills an earlier map. Roles are the child’s annotations. A passage can be left unmarked if it does not bear on a claim. No placement is scored or compared with these reader examples. This is not an assertion that every claim is true, every interpretation equally supported or the child has read a chapter. Existing map/connection/excerpt tasks remain open.
 
 Shared surface copy:
 - Entry/turn: A character case · plot details.
@@ -12,16 +12,17 @@ Shared surface copy:
 - Passage pager: Passage {i} of {N} in this case; Previous passage / Next passage.
 - Mark caption: For this claim: {role label} / No mark on this passage yet.
 - Actions: Clear this mark / Keep this map / Work on a copy.
-- Role notice: A passage can matter differently for a different claim. The labels alone do not prove the claim.
+- Role notice: A passage can matter differently for a different claim. The labels alone do not prove the claim. Leave it unmarked if it does not bear on this claim.
 - Empty marks: No passage marks in this draft yet.
 - Placed list: Your passage marks; four rows per page, Previous marks / Next marks. These count marks, not reading or success.
 - Reference: One reader’s case; An example, not a key. You can explain a different reading. Reference note {i} of {N}; Previous note / Next note.
 - Separate example: Room for another star; Story part {i} of {N}; Previous story part / Next story part; Example step {i} of {N}; Previous example step / Next example step.
 - Blank claim: Choose a claim before marking this passage. You can read every passage first.
 - Old source: This earlier map has no character case here. Its chapters, connections and excerpts are still open. Start a new book map for today’s cases.
-- Unreadable study/work: These character notes cannot be changed here. Their originals stay unchanged in Notes. The book map and its other connections are still open.
+- Unreadable study/work: This character case cannot be changed here. Other book-map work stays open. Any character data already stored in your kept maps remains unchanged.
+- Help status: Reader examples on this map: opened / not opened. Example steps opened on this map: {N} of {M}. These choices do not show independent interpretation. Examples may have been seen on another map or in discussion.
 - Kept note: These are the marks kept on this map. Work on a copy to change them or open new help.
-- Adult scope: This companion keeps annotations on prepared claims and selected passages. It does not grade interpretation, prove chapter reading or establish a character-development level. Context, whole chapters and a human explanation matter. A role label does not establish a claim’s truth. Current examples compare selected moments; they are not a complete novel course or a personality diagnosis.
+- Adult scope: This companion keeps annotations on prepared claims and selected passages. It does not grade interpretation, prove chapter reading or establish a character-development level. Help choices on one map do not establish independent interpretation; examples may have been seen on another map, in an unkept draft or in discussion. Context, whole chapters and a human explanation matter. A role label does not establish a claim’s truth. Current examples compare selected moments; they are not a complete novel course or a personality diagnosis.
 
 The exact finite teaching/content fields below are human-reviewed source data, not an answer key. All source-card joins are consecutive paragraphs; [...] at an edge marks the omitted part of its own paragraph. A complete chapter link accompanies every card. Cards concerning Toad’s last chapter include plot details.
 
@@ -56,7 +57,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     {
       "id": "toad",
       "title": "Toad · outward behavior and inward wishes",
-      "context": "Compare a promise, private performance, public replies and later pressure. The narrator’s last claim can itself be interpreted in context.",
+      "context": "Compare a promise, private performance, public replies and later pressure. The narrator’s “altered Toad” sentence can itself be interpreted in context.",
       "claimIds": [
         "toad-public",
         "toad-admire",
@@ -67,6 +68,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         "toad-promise",
         "toad-room",
         "toad-replies",
+        "toad-stares",
         "toad-banquet",
         "toad-repayment"
       ]
@@ -87,7 +89,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     },
     {
       "id": "toad-public",
-      "text": "At the banquet, Toad behaves more modestly in front of his guests."
+      "text": "As guests gather for the banquet and during it, Toad behaves more modestly in front of them."
     },
     {
       "id": "toad-admire",
@@ -123,7 +125,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         "The Mole was quiet for a minute or two. But he began to feel more and more jealous of Rat, sculling so strongly and so easily along, and his pride began to whisper that he could do it every bit as well. He jumped up and seized the sculls, so suddenly, that the Rat, who was gazing out over the water and saying more poetry-things to himself, was taken by surprise and fell backwards off his seat with his legs in the air for the second time, while the triumphant Mole took his place and grabbed the sculls with entire confidence."
       ],
       "joins": [],
-      "context": "Mole has watched Rat rowing. After this grab, the boat tips and both animals fall into the river. Read the following paragraphs in the complete chapter.",
+      "context": "Rat has just told Mole to wait until he has had some lessons. Mole then grabs the sculls. After the grab the boat tips and both animals fall into the river. Read the following paragraphs in the complete chapter.",
       "glossary": [
         {
           "word": "sculls",
@@ -145,7 +147,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     {
       "id": "mole-paper",
       "chapterId": "c9",
-      "title": "Mole helps without taking over",
+      "title": "Pencil and paper",
       "blocks": [
         "Presently the tactful Mole slipped away and returned with a pencil and a few half-sheets of paper, which he placed on the table at his friend’s elbow.",
         "“It’s quite a long time since you did any poetry,” he remarked. “You might have a try at it this evening, instead of—well, brooding over things so much. I’ve an idea that you’ll feel a lot better when you’ve got something jotted down—if it’s only just the rhymes.”"
@@ -153,7 +155,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       "joins": [
         "paragraph"
       ],
-      "context": "Rat has been tempted to leave with a traveler and is distressed. Read the whole chapter around Mole’s response. The narrator’s description and Mole’s words/actions can be considered together.",
+      "context": "Earlier that evening Rat set out to follow a seafaring traveler south. Mole held him back by force and locked his satchel away. These later paragraphs show another response to Rat; read the whole chapter around them.",
       "glossary": [
         {
           "word": "tactful",
@@ -168,7 +170,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     {
       "id": "mole-space",
       "chapterId": "c9",
-      "title": "Leaving room for Rat",
+      "title": "Mole steps out",
       "blocks": [
         "The Rat pushed the paper away from him wearily, but the discreet Mole took occasion to leave the room, and when he peeped in again some time later, the Rat was absorbed and deaf to the world; alternately scribbling and sucking the top of his pencil. It is true that he sucked a good deal more than he scribbled; but it was joy to the Mole to know that the cure had at least begun."
       ],
@@ -184,12 +186,12 @@ The exact finite teaching/content fields below are human-reviewed source data, n
     {
       "id": "toad-motion",
       "chapterId": "c2",
-      "title": "Enthusiasm for a new way to travel",
+      "title": "A way to travel",
       "blocks": [
         "“Glorious, stirring sight!” murmured Toad, never offering to move. “The poetry of motion! The real way to travel! The only way to travel! Here to-day—in next week to-morrow! Villages skipped, towns and cities jumped—always somebody else’s horizon! O bliss! O poop-poop! O my! O my!”"
       ],
       "joins": [],
-      "context": "A motorcar has frightened the horse and left the cart in a ditch. Toad is speaking. Ask whether excitement about travel actually bears on a claim about admiration or later behavior.",
+      "context": "A motorcar has frightened the horse and left the cart in a ditch. Rat has asked Toad whether he is coming to help. Toad is speaking.",
       "glossary": [
         {
           "word": "poop-poop",
@@ -216,7 +218,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         "At last the hour for the banquet began to draw near, and Toad, who on leaving the others had retired to his bedroom, was still sitting there, melancholy and thoughtful. His brow resting on his paw, he pondered long and deeply. Gradually his countenance cleared, and he began to smile long, slow smiles. Then he took to giggling in a shy, self-conscious manner. At last he got up, locked the door, drew the curtains across the windows, collected all the chairs in the room and arranged them in a semicircle, and took up his position in front of them, swelling visibly. Then he bowed, coughed twice, and, letting himself go, with uplifted voice he sang, to the enraptured audience that his imagination so clearly saw."
       ],
       "joins": [],
-      "context": "After promising his friends, Toad is alone in his bedroom before the banquet. The song follows this paragraph; its lyrics are not part of this card.",
+      "context": "After promising his friends, Toad is alone in his bedroom before the banquet. He then sings the song twice, sighs deeply and goes quietly downstairs. A reader might hear a farewell performance; the lyrics are not quoted here.",
       "glossary": [
         {
           "word": "enraptured",
@@ -232,7 +234,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         "[...] but Toad, in a mild way, was rather snubby to him, remarking gently, as he disengaged himself, “Badger’s was the mastermind; the Mole and the Water Rat bore the brunt of the fighting; I merely served in the ranks and did little or nothing.” The animals were evidently puzzled and taken aback by this unexpected attitude of his; and Toad felt, as he moved from one guest to the other, making his modest responses, that he was an object of absorbing interest to every one."
       ],
       "joins": [],
-      "context": "At the banquet, Otter tries to lead Toad around the room in triumph. This passage gives Toad’s reply and then what the narrator says he feels.",
+      "context": "As guests gather for the banquet, Otter tries to lead Toad around the drawing-room in triumph. This passage gives Toad’s reply and then what the narrator says he feels.",
       "glossary": [
         {
           "word": "snubby",
@@ -240,9 +242,20 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         },
         {
           "word": "absorbing interest",
-          "meaning": "Interest that holds other people’s attention."
+          "meaning": "attention that occupies someone fully"
         }
       ]
+    },
+    {
+      "id": "toad-stares",
+      "chapterId": "c12",
+      "title": "His friends’ astonishment",
+      "blocks": [
+        "[...] At intervals he stole a glance at the Badger and the Rat, and always when he looked they were staring at each other with their mouths open; and this gave him the greatest satisfaction. [...]"
+      ],
+      "joins": [],
+      "context": "This happens during the banquet, after the drawing-room replies. The surrounding paragraph describes both Toad’s conduct and his pleasure at his friends’ response.",
+      "glossary": []
     },
     {
       "id": "toad-banquet",
@@ -255,7 +268,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       "joins": [
         "paragraph"
       ],
-      "context": "Guests have called for a speech and a song. Rat earlier forbade both. The narrator’s next short paragraph follows directly. Read around it before deciding what “altered” means.",
+      "context": "Guests at the banquet have called for a speech and song. Rat earlier forbade both. Earlier in this paragraph Toad looks down his nose; his friends’ astonished looks give him great satisfaction. The narrator’s next short paragraph follows directly.",
       "glossary": [
         {
           "word": "conventional",
@@ -272,10 +285,10 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       "chapterId": "c12",
       "title": "Pressure to make good a loss",
       "blocks": [
-        "[...] Under severe compulsion from the Badger, even the barge-woman was, with some trouble, sought out and the value of her horse discreetly made good to her; [...]"
+        "[...] Under severe compulsion from the Badger, even the barge-woman was, with some trouble, sought out and the value of her horse discreetly made good to her; though Toad kicked terribly at this, [...]"
       ],
       "joins": [],
-      "context": "After the banquet, the closing account describes compensation for the barge-woman’s horse. This is part of a longer paragraph; read the full chapter for the surrounding account.",
+      "context": "The closing account describes compensation for the barge-woman’s horse. Earlier in the paragraph Toad chooses a gift for the jailer’s daughter after consulting his friends; other helpers are also thanked. The rest of this sentence gives Toad a grand view of himself in dated, insulting words not quoted here.",
       "glossary": [
         {
           "word": "compulsion",
@@ -306,7 +319,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "mole-space",
           "role": "supports",
-          "comment": "Mole leaves Rat space rather than taking over. Compare this with the earlier grab at the sculls."
+          "comment": "Here Mole steps out rather than hovering. This is a gentler response later the same evening; earlier he held Rat back by force."
         },
         {
           "quoteId": "mole-rescue",
@@ -314,7 +327,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
           "comment": "The earlier rescue helps us see a shift in who offers help; receiving help is not itself a fault."
         }
       ],
-      "limit": "These moments support a reading of growing consideration, not a claim that Mole becomes perfect or never acts impulsively again."
+      "limit": "This reading compares selected moments, not the beginning of all kindness. Mole apologizes in chapter 1 and shows care for Rat in chapter 2. In chapter 9 he also uses force before this gentler help. Those moments can complicate a simple story of steady improvement."
     },
     {
       "claimId": "mole-pupil",
@@ -331,7 +344,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
           "comment": "Here Mole offers Rat practical and emotional help. This challenges the claim’s “only ever”."
         }
       ],
-      "limit": "Keep the early rescue, but revise the broad claim after reading the later scene. A relationship can involve help in both directions."
+      "limit": "This reader keeps the early rescue but would narrow “only ever” after the later help. Mole already shows care earlier too, including in chapter 2. Their relationship can involve help in both directions."
     },
     {
       "claimId": "mole-words",
@@ -340,7 +353,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "mole-impatient",
           "role": "complicates",
-          "comment": "The narrator calls Mole impatient and contemptuous in this comic encounter."
+          "comment": "The narrator calls Mole impatient and contemptuous here. Only by comparing the later descriptions can this challenge “in the same way”."
         },
         {
           "quoteId": "mole-paper",
@@ -375,7 +388,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
           "comment": "His private performance is important context. It does not erase the different public conduct; it can change how we interpret that conduct."
         }
       ],
-      "limit": "Behavior in front of guests can change while a desire for attention remains. This is narrower than saying every part of Toad’s character is transformed."
+      "limit": "The restrained replies and refusal to perform support a limited reading of changed conduct. Looking down his nose and enjoying his friends’ astonishment can complicate a simple contrast. Public actions and private wishes need not change together."
     },
     {
       "claimId": "toad-admire",
@@ -384,20 +397,20 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "toad-room",
           "role": "complicates",
-          "comment": "The imagined delighted audience after his promise makes “no longer wants anyone to admire him” hard to sustain."
+          "comment": "The imagined audience can complicate a claim about wanting no admiration. The following sigh and quiet exit also allow a farewell reading, so look at the later banquet too."
         },
         {
           "quoteId": "toad-replies",
           "role": "complicates",
-          "comment": "He enjoys being an object of interest even while replying modestly."
+          "comment": "He feels he is an object of absorbing interest. Read this with the banquet’s explicit description of his great satisfaction rather than treating the feeling alone as proof of enjoyment."
         },
         {
-          "quoteId": "toad-motion",
-          "role": "context",
-          "comment": "Excitement about motorcars is not, by itself, evidence about a desire for admiration at the end."
+          "quoteId": "toad-stares",
+          "role": "complicates",
+          "comment": "The banquet passage explicitly gives him satisfaction at his friends’ astonishment. This reader uses that to question the claim, while recognizing that astonishment, interest and admiration are not identical."
         }
       ],
-      "limit": "A promise or the narrator’s “altered Toad” sentence cannot settle every private wish. Read the neighboring events before making an absolute claim."
+      "limit": "A promise or “altered Toad” cannot settle every private wish. This reader leaves “A way to travel” unmarked: enthusiasm about motoring does not itself bear on this claim about admiration at the end."
     },
     {
       "claimId": "toad-choice",
@@ -406,7 +419,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         {
           "quoteId": "toad-repayment",
           "role": "complicates",
-          "comment": "“Under severe compulsion” directly complicates the claim that every considerate act is freely chosen without pressure."
+          "comment": "“Under severe compulsion” and “kicked terribly at this” complicate the claim that every considerate act is freely chosen without pressure."
         },
         {
           "quoteId": "toad-promise",
@@ -415,8 +428,8 @@ The exact finite teaching/content fields below are human-reviewed source data, n
         },
         {
           "quoteId": "toad-banquet",
-          "role": "context",
-          "comment": "The action is described, but the earlier ban matters when discussing why he acts this way."
+          "role": "complicates",
+          "comment": "The earlier ban on speeches and songs makes pressure relevant to this refusal. This is not proof that no part of his conduct is sincere."
         }
       ],
       "limit": "Distinguish doing something considerate from choosing it without pressure. This does not mean none of Toad’s later actions could be sincere."
@@ -428,7 +441,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       {
         "id": "d1",
         "title": "The first rehearsal",
-        "text": "Edda wanted her paper star at the front of the winter display. At the first rehearsal she interrupted Niko’s plan and moved her own star into the middle."
+        "text": "Edda wanted her paper star at the front of the winter display. At the first rehearsal she interrupted while Niko explained a plan and moved her own star into the middle."
       },
       {
         "id": "d2",
@@ -468,7 +481,7 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       },
       {
         "title": "Qualify the conclusion",
-        "text": "Someone can change an action while still having an earlier wish. An ending does not establish “forever”. Explain which words support your particular claim, which limit it and what other moments you would want to read.",
+        "text": "For the claim about giving Niko room to speak, the winter-display setting gives context but does not itself show a change. Leave a passage unmarked if it does not bear on the claim. Someone can change an action while still having an earlier wish; an ending does not establish “forever”. Explain which words support or limit your particular claim.",
         "chapterIds": [
           "d1",
           "d2",
@@ -477,6 +490,11 @@ The exact finite teaching/content fields below are human-reviewed source data, n
       }
     ]
   },
-  "returnPrompt": "After another complete chapter, return to your claim. Would you keep it, narrow it or replace it? Tell someone what the new passage changes. Your own explanation is read by a person, not graded here."
+  "returnPrompt": "After another complete chapter, return to your claim. Would you keep it, narrow it or replace it? Tell someone what the new passage changes. Your own explanation is read by a person, not graded here.",
+  "roleHelp": {
+    "supports": "Gives a textual reason to take this claim seriously. It may not prove the claim on its own.",
+    "complicates": "Gives a reason to question this claim or make it narrower.",
+    "context": "Helps place the passage or events without itself supporting or challenging this claim."
+  }
 }
 ```
