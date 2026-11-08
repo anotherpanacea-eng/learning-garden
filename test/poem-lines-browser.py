@@ -91,7 +91,7 @@ def speech(p,text,example=False):
     p.locator(VIEW+' [data-speak]').filter(has_text='Read example words' if example else 'Read the words').click()
     ok(p.evaluate('joinSpeech.words')==[text],'single flat utterance preserves only exact source words and punctuation')
 def speech_contrast(p):
-    pairs=p.locator('.speech-controls [data-speech-status],.speech-controls > details > summary').evaluate_all("""xs=>xs.filter(e=>e.checkVisibility()).map(e=>{let n=e,bg;while(n){bg=getComputedStyle(n).backgroundColor;if(bg!=='rgba(0, 0, 0, 0)'&&bg!=='transparent')break;n=n.parentElement;}return {text:e.textContent,fg:getComputedStyle(e).color,bg};})""")
+    pairs=p.locator('.speech-controls [data-speech-status],.speech-controls > details > summary,.speech-controls label').evaluate_all("""xs=>xs.filter(e=>e.checkVisibility()).map(e=>{let n=e,bg;while(n){bg=getComputedStyle(n).backgroundColor;if(bg!=='rgba(0, 0, 0, 0)'&&bg!=='transparent')break;n=n.parentElement;}return {text:e.textContent,fg:getComputedStyle(e).color,bg};})""")
     def luminance(css):
         import re
         rgb=[float(x)/255 for x in re.findall(r'[\d.]+',css)[:3]]
@@ -102,6 +102,25 @@ def speech_contrast(p):
     for pair in pairs:
         a,b=sorted([luminance(pair['fg']),luminance(pair['bg'])])
         ok((b+.05)/(a+.05)>=4.5,'readable actual speech text contrast '+str(pair))
+
+def speech_panel_states(p):
+    speech_contrast(p)
+    p.locator('[data-stop-speech]').click()
+    ok(p.locator('.speech-controls [data-speech-status]').inner_text()=='Voice stopped.','native Stop confirms actual stopped status')
+    ok(not p.locator('.speech-controls').evaluate("e=>e.classList.contains('speech-playing')"),'stopped panel no longer uses playing overlay')
+    settings=p.locator('.speech-controls > details')
+    settings.locator(':scope > summary').click()
+    ok(settings.evaluate('e=>e.open') and settings.locator('label:visible').count()==2,'native stopped voice settings and both labels visible')
+    speech_contrast(p)
+    layout(p,'speech-stopped-settings-820')
+    settings.locator(':scope > summary').click()
+
+def speech_panel_probe(browser,base):
+    c,p=setup(browser,base)
+    try:
+        before=snapshot(p);choose(p,'lantern');speech(p,POEMS['lantern'][1]);speech_panel_states(p)
+        ok(snapshot(p)==before,'native stopped speech and settings leave notebook and storages unchanged')
+    finally:c.close()
 
 def download(p,ident,breaks,pauses):
     with p.expect_download() as pending:act(p,'export')
@@ -140,7 +159,7 @@ def journey(browser,base):
             if ident=='lantern':select(p,12);select(p,1);select(p,2)
             else:select(p,2)
             speech(p,words)
-            if ident=='lantern':speech_contrast(p)
+            if ident=='lantern':speech_panel_states(p)
             own_download=download(p,ident,changed,{2:'brief'})
             saved[ident]=(changed,{2:'brief'},2)
             act(p,'compare');paper(p,ident,changed,{2:'brief'});paper(p,ident,a,kind='reference')
@@ -253,8 +272,8 @@ def main():
         with host.sync_playwright() as pw:
             browser=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
             try:
-                phases={'journey':journey,'lifecycle':lifecycle,'responsive':responsive_and_unseen}
-                for phase in (sys.argv[1:] or phases):phases[phase](browser,base)
+                phases={'journey':journey,'lifecycle':lifecycle,'responsive':responsive_and_unseen,'speech':speech_panel_probe}
+                for phase in (sys.argv[1:] or ['journey','lifecycle','responsive']):phases[phase](browser,base)
                 ok(not host.errors,'no page network HTTP or console errors '+str(host.errors));receipt={'status':'passed','scope':__doc__,'artifacts':str(OUT)};(OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt),flush=True)
             except Exception:
                 (OUT/'failure.txt').write_text(traceback.format_exc()+'\n'+json.dumps(host.errors,indent=2));raise
