@@ -139,8 +139,8 @@ One **authored fictional outcome** chosen by the plan kept in Act IV; not a calc
 
 **No readable plan** (proposed 2026-11-08, awaiting review; spec 120 §12). Only one of these appears, before the water arrives.
 
-*If no plan was ever written down* (the meeting, offered again):
-> Dot looks at the library wall, where the meeting's plan should be pinned. There is only an empty pin. "We never wrote down which plan we kept," she says. "Which was it?"
+*If no plan can be found* (the meeting, offered again):
+> Dot looks at the library wall, where the meeting's plan should be pinned. There is only an empty pin. "I can't find the plan we kept," she says. "Which was it?"
 
 **Choices:** The Wall · The Sponge · Some of Each · Let the water come
 - **A plan:** "Dot pins it up, just in time." Then that plan's scene above.
