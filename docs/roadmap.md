@@ -224,7 +224,9 @@ The [352 opening and first chapter](specs/352-act-four-opening.md), with [366's 
 
 [The meeting board and The Map We Changed602](specs/602-act-four-meeting.md) are proposed in a stacked Claude draft PR: chapter 4's three plans with an optional worry, an animated meeting scene, and the Act IV ending with the guide's change of mind. Act V and Act VI's use of the plan remain separate commissions.
 
-[Act V's opening604](specs/604-act-five-opening.md) is proposed in a stacked Claude draft PR. **Continue the story** after the Act IV ending frees Page 5, *For the next Keeper*, shown as an animated stack of blank pages. A hub then lists the six project paths and the six project steps. The explorer can choose a path, kept as a code, and switch at any time. Each path links its jobs to activities that exist today, and the Ask step links to the Question Bench. The project page (Make, Show, Change, Keep with a limit) and the Act V ending remain separate commissions.
+[Act V's opening604](specs/604-act-five-opening.md) is proposed in a stacked Claude draft PR. **Continue the story** after the Act IV ending frees Page 5, *For the next Keeper*, shown as an animated stack of blank pages. A hub then lists the six project paths and the six project steps. The explorer can choose a path, kept as a code, and switch at any time. Each path links its jobs to activities that exist today, and the Ask step links to the Question Bench. The project page and the ending follow in 605.
+
+[The Act V project page and ending605](specs/605-act-five-projects.md) are proposed in a stacked Claude draft PR. The chosen path's project runs Make, the path's Show line, Change, and Keep with one of its three limit cards, all as codes. Binding a complete project ends Act V with an animated binding scene, the season line and an almanac line naming the project and its limit. Act VI remains a separate commission.
 
 ## Reviewed release · October 31
 
