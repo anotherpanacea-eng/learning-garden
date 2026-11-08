@@ -65,7 +65,7 @@ State your confidence (high/medium/low) for each answer. Give concrete replaceme
 
 4. **Wrong choices — high confidence.** Both are grammatical, but neither isolates one difference perfectly: both omit the sender, and choice 3 changes tense, destination/person, and time. Also, *descend* can describe a stream flowing downhill, so it does not unambiguously mean its level is falling ([Larousse](https://www.larousse.fr/dictionnaires/francais/descendre/24274)). Use these complete alternatives:
 
-   **2. Le ruisseau baisse. L’eau arrivera chez vous demain matin. De la part de Willowbank.**  
+   **2. Le ruisseau baisse. L’eau arrivera chez vous demain matin. De la part de Willowbank.**
    **3. Le ruisseau monte. L’eau arrivera chez vous ce soir. De la part de Willowbank.**
 
    Update the distractor/gloss to **baisse — is falling**, and feedback accordingly.

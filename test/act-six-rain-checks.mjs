@@ -7,6 +7,7 @@ import {canExport} from './act-two-checks.mjs';
 import * as S from '../dist/act-six-core.mjs';
 import {actSixRoute,actSixPage,actSixNotes} from '../dist/act-six-ui.mjs';
 import {actSixContent as C} from '../dist/act-six-content.mjs';
+import {actFourContent as A4} from '../dist/act-four-content.mjs';
 
 const options={canExport},clone=structuredClone,refuse={canExport:()=>false};
 const esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -56,6 +57,7 @@ export function runChecks(){
  const none=clone(s);delete none.story.plan;none.story.planWorry='a-future-worry';
  let w=page(none);
  ok(w.includes(esc(C.rain.water.offer))&&['wall','sponge','some-of-each','none'].every(k=>w.includes(`data-a6r-plan="${k}"`)),'the meeting is offered again, with Let the water come');
+ ok(A4.meeting.plans.every(m=>w.includes(`data-a6r-plan-card="${m.id}"`)&&w.includes(esc(m.costs))&&w.includes(esc(m.what))),'each plan shows what it is and what it costs before choosing');
  ok(!w.includes(esc(C.rain.water.plain.short[0]))&&!Object.values(C.rain.water.scenes).some(x=>w.includes(esc(x.short[0]))),'no scene before the choice');
  unchanged(none,()=>{eq(S.chooseRainPlan(none,'a-future-plan',options),false,'an unknown plan cannot be chosen');eq(S.chooseRainPlan(none,'sponge',refuse),false,'a refused export writes nothing');},'and nothing is written');
  ok(S.chooseRainPlan(none,'sponge',options),'choose the Sponge');

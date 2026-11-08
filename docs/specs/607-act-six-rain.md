@@ -24,7 +24,7 @@ Chapter 3 at `#almanac/opening-ways/long-rain` opens once the exchange plan (606
    - **Send** (Sprout, and open to everyone) records the warning. Afterwards the script's line says the courier is halfway down the river path.
 4. **The water arrives** (after sending), by spec 120 §12:
    - **One of today's three Act IV plans:** that plan's scene from the script.
-   - **No plan stored:** the meeting, offered again. Dot finds an empty pin, and the explorer chooses one of the three plans or *Let the water come*. A chosen plan is written, and its scene plays after "Dot pins it up, just in time." *Let the water come* writes nothing, and the plain scene plays.
+   - **No plan stored:** the meeting, offered again. Dot finds an empty pin, and the explorer chooses one of the three plans, each shown with 602's description, costs and what it protects, or *Let the water come*. A chosen plan is written, and its scene plays after "Dot pins it up, just in time." *Let the water come* writes nothing, and the plain scene plays.
    - **A well-formed plan code from another version, or a malformed value:** the guide's line, then the plain scene. No choice is offered and nothing is written. Grown-up notes say a damaged plan is kept unchanged.
 
    Each version shows the flood post with the water rising and stopping, then *Warned in time* scratched beside it, and ends with the script's *Every version ends* lines.
@@ -109,7 +109,7 @@ Before build: an independent spec review of this spec and its companion. The Fre
 - **Sending.** Reads write nothing, and a refused export writes nothing. Send writes only `warned`. A repeat is a no-op. Notes say the warning was sent, and an unchosen courier reads as *the courier*.
 - **The three known plans.** Each plays its scene and *Every version ends*, with no fallback.
 - **An absent plan.**
-  - The meeting is offered with *Let the water come*, and no scene plays before the choice.
+  - The meeting is offered with *Let the water come*, each plan showing what it is and what it costs, and no scene plays before the choice.
   - An unknown plan and a refused export are refused.
   - Choosing writes only the plan and keeps the saved worry. The chosen scene plays, and a plan once present is never replaced.
 - **A later or malformed plan** (three fixtures). Each is read by shape, gets the guide's line and the plain scene with no choice, and is never overwritten. Notes say a damaged plan is kept.

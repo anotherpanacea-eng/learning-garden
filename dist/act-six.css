@@ -51,3 +51,7 @@
 .a6r-cards small{display:block;font-weight:400;font-size:.9rem}
 .a6r-choose ul{list-style:none;padding:0;display:grid;gap:.5rem}
 .a6r-choose li button{width:100%;text-align:left;padding:.5rem .75rem}
+.a6r-plan{border:1px solid #d9c9a8;border-radius:8px;padding:.6rem .8rem;margin:.6rem 0;background:#fffdf6}
+.a6r-plan h3{margin:.1rem 0 .3rem;font-size:1.1rem}
+.a6r-plan dt{font-weight:600}
+.a6r-plan dd{margin:0 0 .4rem}

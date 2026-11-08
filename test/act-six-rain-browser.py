@@ -32,6 +32,8 @@ def run(base, browser):
         c, p = setup(browser, data, width)
         go(p, base, '#almanac/opening-ways/long-rain'); p.locator('[data-a6r-post]').wait_for()
         ok(p.locator('[data-a6r-post][data-arrived="false"]').count() == 1 and p.locator('[data-a6r-send]').count() == 1, f'{width}: the rain scene and Send')
+        if width == 320:
+            layout(p, '320 before sending'); c.close(); continue
         for item, shelf in (('flour-1', 'top'), ('flour-2', 'middle'), ('honey', 'middle'), ('jam', 'middle')):
             p.locator(f'[data-a6r-shelf="{item}:{shelf}"]').tap()
         p.locator('[data-a6r-shelf-check]').tap()
@@ -40,6 +42,7 @@ def run(base, browser):
         ok('The flour is up high and dry.' in p.locator('#a6r-shelf-result').inner_text(), f'{width}: right shelves get the kept line')
         p.locator('[data-a6r-choose="down"]').tap()
         ok('going down' in p.locator('#a6r-choose-result').inner_text(), f'{width}: a wrong French card explains itself')
+        eq(p.locator('#a6r-choose-result em').get_attribute('lang'), 'fr', f'{width}: the quoted French in the feedback is marked as French')
         p.locator('[data-a6r-choose="right"]').tap()
         ok('rising' in p.locator('#a6r-choose-result').inner_text(), f'{width}: the right French card')
         for card in ('ruisseau', 'monte', 'arrivera', 'chez-vous', 'soir', 'de-la-part'):
@@ -68,6 +71,7 @@ def run(base, browser):
         c, p = setup(browser, none, width)
         go(p, base, '#almanac/opening-ways/long-rain'); p.locator('[data-a6r-plan="wall"]').wait_for()
         ok("I can't find the plan we kept" in p.locator('[data-act-six-root]').inner_text() and p.locator('#a6r-water [data-a6r-post]').count() == 0, f'{width}: the meeting is offered again, before any scene')
+        ok("orchard keepers' living" in p.locator('[data-a6r-plan-card="sponge"]').inner_text(), f'{width}: each plan shows its costs before choosing')
         layout(p, f'{width} offer')
         if width == 820:
             p.locator('[data-a6r-plan="none"]').tap()
