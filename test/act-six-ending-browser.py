@@ -50,6 +50,13 @@ def run(base, browser):
         go(p, base, route); p.locator(sel).wait_for(); layout(p, f'320 {route}')
     ok(p.locator('[data-a6e-season-art="winter"]').count() == 1 and 'Snow on the ribbons' in p.locator('[data-act-six-root]').inner_text(), '320: the winter ending')
     c.close()
+    # A child who has not seen the welcome film opens these pages directly: no film appears.
+    unseen = json.loads(json.dumps(ended)); unseen['garden'] = {'guide': 'mira'}
+    c, p = setup(browser, unseen, 820)
+    for route in ('#almanac/hollis-letter', '#almanac/ways-open'):
+        p.goto(base + route, wait_until='networkidle'); p.locator('[data-act-six-root]').first.wait_for()
+        eq(p.locator('dialog.welcome-film[open]').count(), 0, f'no welcome film on {route}')
+    c.close()
     measure = '''sel=>[...document.querySelectorAll(sel)].map(e=>{const s=getComputedStyle(e);return {name:s.animationName,count:s.animationIterationCount,dur:parseFloat(s.animationDuration),delay:parseFloat(s.animationDelay)};})'''
     for motion, still in (('reduce', True), ('no-preference', False)):
         c, p = setup(browser, ended, 820, motion)

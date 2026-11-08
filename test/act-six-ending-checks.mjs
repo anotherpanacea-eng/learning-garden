@@ -35,7 +35,7 @@ export function runChecks(){
  unchanged(s,()=>{eq(S.endActSix(s,5,refuse),false,'a refused export writes nothing');eq(S.endActSix(s,12,options),false,'an impossible month is refused');},'and nothing is written');
  const before={IV:clone(s.story.acts.IV),V:clone(s.story.acts.V),plan:s.story.plan};
  ok(S.endActSix(s,5,options),'end the act in June');
- const a=s.story.acts.VI;eq([a.ended,a.season,s.story.seenScenes.includes('ways-open')],[true,'summer',true],'ended, its season and its scene');
+ const a=s.story.acts.VI;eq([a.ended,a.season],[true,'summer'],'ended and its season');
  eq([s.story.acts.IV,s.story.acts.V,s.story.plan],[before.IV,before.V,before.plan],'nothing else changes');
  ok(S.endActSix(s,0,options),'ending again reports done');eq(s.story.acts.VI.season,'summer','and keeps the season');
  const preset=homeSeed();preset.story.acts.VI.season='winter';ok(S.endActSix(preset,5,options));eq(preset.story.acts.VI.season,'winter','a saved season is never replaced');
@@ -46,7 +46,9 @@ export function runChecks(){
  const end=actSixPage({...s,garden:{guide:'ari'}},{part:'ending'});
  ok(end.includes('data-a6e-ways')&&end.includes('data-a6e-season="summer"')&&end.includes(`aria-label="${esc(C.ending.scene)}"`),'the described ribbons, wearing summer');
  ok(end.includes(esc(C.ending.seasons.summer))&&end.includes(esc(C.ending.almanac.replaceAll('*','')))&&end.includes(esc(C.ending.village.replaceAll('*',''))),'the season, almanac and village lines');
- ok(end.includes(esc(C.ending.short[0]).slice(0,40))&&!end.includes('{guide}'),'the ending text, with the guide named');
+ ok(end.includes(esc(C.ending.short[0]).slice(0,40)),'the ending text');
+ const longer=actSixPage({...s,garden:{guide:'ari'},story:{...s.story,frameAmount:'longer'}},{part:'ending'});
+ ok(longer.includes('Ari and I will show you')&&!longer.includes('{guide}'),'the longer ending names the guide');
  ok(actSixPage(s,{part:'hub'}).includes('href="#almanac/ways-open"')&&actSixPage(s,{part:'chapter',chapter:'journey'}).includes('href="#almanac/hollis-letter"'),'the hub and chapter 4 link back');
  ok(actSixInvitation(s).includes(esc(C.ending.village.replaceAll('*','')))&&keeperPages(s).includes('href="#almanac/ways-open"'),'the Keeper\'s Pages show the village line and the ending');
  ok(actSixNotes(s).includes('the Ways are open'),'Notes');

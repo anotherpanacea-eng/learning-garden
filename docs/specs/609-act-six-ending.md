@@ -6,7 +6,7 @@ Proposed 2026-11-08 by Claude (OCA seat). Base inspected: `686f88fa`, the head o
 
 ## Purpose and boundary
 
-1. **After supper.** Act VI's ending condition (120 §6) is a kept exchange plan, the long rain (the warning sent) and the first journey. Once all three hold, chapter 4 offers **Read Hollis's letter** under *They stay for supper*. Reading it ends the act in one atomic write: `ended`, the season it ended in (never replacing a saved one) and the scene `ways-open`. It then opens Page 6.
+1. **After supper.** Act VI's ending condition (120 §6) is a kept exchange plan, the long rain (the warning sent) and the first journey. Once all three hold, chapter 4 offers **Read Hollis's letter** under *They stay for supper*. Reading it ends the act in one atomic write: `ended` and the season it ended in, never replacing a saved one. It then opens Page 6.
 2. **Page 6, *Hollis's letter*,** at `#almanac/hollis-letter`. A new reveal line follows the companion's note that Hollis gives the letter at supper. Then comes the whole letter, one version, with read-aloud, and **Go down to the bridge**.
 3. **The ending, *The Opening of the Ways*,** at `#almanac/ways-open`:
    - an animated scene: three ribbon posts, where Bramble's ribbons tie on one by one (blue, gold, red) and lift once in the wind, with a season mark;
@@ -30,7 +30,7 @@ The story never re-breaks the town, and play continues (120 §1).
 
 ## State
 
-- **Writes.** `story.acts.VI.ended: true`, `story.acts.VI.season` (when absent) and `seenScenes: 'ways-open'`, written by `endActSix`.
+- **Writes.** `story.acts.VI.ended: true` and `story.acts.VI.season` (when absent), written by `endActSix`. No scene marker is saved, because nothing would read it.
 - **Conditions.** The write needs a started act, a kept exchange plan, `warned` and `journey`. It also needs `ended` and `season` to be absent or well formed.
 - **Refusals.** A refused export, an impossible month, a malformed `ended` or a malformed `season` each write nothing.
 - **Repeats.** Ending again is a no-op that keeps the season.
@@ -43,7 +43,7 @@ The story never re-breaks the town, and play continues (120 §1).
   - `act-six-core.mjs` gains the ending view and `endActSix`.
   - `act-six-ui.mjs` gains the two routes and pages, the after-supper offer, the hub and invitation changes, the Notes line and the binder.
   - `act-six-ending-art.mjs` (`waysOpenScene`) and `act-six.css` add the picture and its animation.
-- **Tests.** `ending-film-checks` covers the two new routes, so no welcome film opens there.
+- **Tests.** `ending-film-checks` covers the two new routes, and the browser suite opens both directly for an explorer who hasn't seen the welcome film. No film appears.
 - **Hollis's pronouns.** Hollis is they/them throughout.
 - **Accessibility.**
   - The scene is an `svg role="img"` with a description.
@@ -74,7 +74,7 @@ Before build: an independent spec review of this spec and its companion.
   - Four broken conditions each refuse and write nothing: no exchange plan, no warning, a malformed `ended`, a malformed `season`.
 - **After supper.**
   - The letter is offered. A refused export and an impossible month are refused.
-  - Ending writes `ended`, the season and the scene, and nothing else changes. A repeat keeps the season, and a saved season is never replaced.
+  - Ending writes `ended` and the season, and nothing else changes. A repeat keeps the season, and a saved season is never replaced.
 - **Page 6 and the ending.**
   - Page 6 has the whole letter and the way to the bridge.
   - The ending has the described ribbons in their season, the season, almanac and village lines, and the text with the guide named.

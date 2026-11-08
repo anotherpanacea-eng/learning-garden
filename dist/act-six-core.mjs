@@ -91,5 +91,5 @@ export function sendFirstParcel(state,options={}){
 
 export function endActSix(state,month,options={}){
  const v=actSixView(state);if(v.ended)return true;const selected=seasonForMonth(month);if(!v.canEnd||!selected)return false;
- return mutate(state,options,story=>{const a=story.acts.VI;a.ended=true;if(!own(a,'season'))a.season=selected;if(!story.seenScenes.includes('ways-open'))story.seenScenes.push('ways-open');});
+ return mutate(state,options,story=>{const a=story.acts.VI;a.ended=true;if(!own(a,'season'))a.season=selected;});
 }
