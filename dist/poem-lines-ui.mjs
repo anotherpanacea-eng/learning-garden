@@ -1,5 +1,5 @@
 import {createLines,lineModel,changeLines,lineReference,lineWords,linePaperCopy,lineExample} from './poem-lines-core.mjs';
-import {poemCases,lineCopy as copy} from './poem-lines-content.mjs';
+import {poemCases,lineCopy as copy,lineExampleText} from './poem-lines-content.mjs';
 import {hearButton} from './play-media.mjs';
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let visit=null,retireBinding=()=>{},stopBinding=()=>{};
