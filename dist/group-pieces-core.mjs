@@ -36,7 +36,7 @@ export function compareGroup(work){
  const {numerator:n,denominator:d,originalNumerator:n0,originalDenominator:d0,originalPiecesPerCurrent:g}=m;
  const suggestedFactor=m.groupSizes.find(f=>factorFits(n,d,f))??null,simplest=suggestedFactor===null;
  const pieces=g===1?'original piece':'original pieces';
- const explanation=`${n0}/${d0} = ${n}/${d}. Each current piece contains ${g} ${pieces}. Dividing both counts by the same factor keeps the colored amount unchanged. Fewer pieces are larger pieces, not a smaller amount.`;
+ const explanation=`${n0}/${d0} = ${n}/${d}. Each current piece contains ${g} ${pieces}. Dividing both counts by the same factor keeps the colored amount unchanged.${g>1?' Fewer pieces are larger pieces, not a smaller amount.':''}`;
  const conclusion=d===1?(n===0?'0 of 1 piece is colored: 0/1 = 0.':'1 of 1 piece is colored: 1/1 = one whole.'):
   simplest?`No group size from 2 to ${d} fits both ${n} and ${d}, so ${n}/${d} is the simplest whole-number name.`:
   `Group size ${suggestedFactor} fits both counts: it is a common factor of ${n} and ${d}. This is one possible next grouping.`;

@@ -71,20 +71,27 @@ def focus(p,selector):ok(p.locator(selector).evaluate('e=>e===document.activeEle
 def work(p):return p.locator(VIEW).evaluate('e=>({html:e.innerHTML,case:e.querySelector("[data-gp-case]")?.value,preview:e.querySelector("[data-gp-factor]")?.value})')
 
 
-def geometry(p,original,now,g=None):
+def geometry(p,original,now,g=None,changed=False):
     diagrams=p.locator(VIEW+' svg[data-gp-diagram]')
     ok(diagrams.count()==2,'separate original and current ribbon diagrams')
     info={}
     for key,fraction in [('original',original),('current',now)]:
         svg=diagrams.nth(0 if key=='original' else 1)
-        row=svg.evaluate("""e=>{const box=s=>{const q=e.querySelector(s);if(!q)return null;const b=q.getBBox();return {x:b.x,y:b.y,w:b.width,h:b.height};};return {whole:box('[data-gp-whole]'),shade:box('[data-gp-shade]'),flag:e.querySelector('[data-gp-flag]').getAttribute('d'),wholeR:box('[data-gp-remainder=whole]'),coloredR:box('[data-gp-remainder=colored]')};}""")
+        row=svg.evaluate("""e=>{const box=s=>{const q=e.querySelector(s);if(!q)return null;const b=q.getBBox();return {x:b.x,y:b.y,w:b.width,h:b.height};};return {whole:box('[data-gp-whole]'),shade:box('[data-gp-shade]'),flag:e.querySelector('[data-gp-flag]').getAttribute('d'),flagRole:e.querySelector('[data-gp-flag]').dataset.gpFlag,brackets:[...e.querySelectorAll('[data-gp-bracket]')].map(b=>({role:b.dataset.gpBracket,path:b.getAttribute('d')})),wholeR:box('[data-gp-remainder=whole]'),coloredR:box('[data-gp-remainder=colored]')};}""")
         ok(abs(row['whole']['x']-48)<.001 and abs(row['whole']['w']-504)<.001,'fixed 0-to-1 whole has independent x48 width504 geometry')
         n,d=fraction;b=row['shade']
         ok(b is not None and abs(b['x']-48)<.01 and abs(b['w']-504*n/d)<.01,key+' actual shade fraction')
+        ok(row['flagRole']==('different' if changed and key=='current' else key),'endpoint marker identifies '+key+' or distinct changed amount')
         coordinate=float(re.match(r'M([\d.]+)',row['flag'])[1])
         ok(abs(coordinate-(48+504*n/d))<.01,key+' actual flag path at independently calculated colored end')
         if key=='current':info=row
     for role,total in [('whole',now[1]),('colored',now[0])]:
+        brackets=[b for b in info['brackets'] if b['role']==role]
+        ok(len(brackets)==(total//g if g else 0),role+' actual complete-group bracket count')
+        for i,bracket in enumerate(brackets):
+            actual=[float(x) for x in re.findall(r'-?\d+(?:\.\d+)?',bracket['path'])]
+            expected=[49+504*i*g/now[1],79 if role=='whole' else 20,7 if role=='whole' else -7,47+504*(i+1)*g/now[1],-7 if role=='whole' else 7]
+            ok(len(actual)==len(expected) and all(abs(a-b)<.01 for a,b in zip(actual,expected)),role+' bracket independently spans exactly g adjacent pieces in its correct band')
         b=info[role+'R'];remainder=total%g if g else 0
         if remainder:
             ok(b is not None and abs(b['x']-(48+504*(total-remainder)/now[1]))<.01 and abs(b['w']-504*remainder/now[1])<.01,role+' remainder covers only actual leftover current pieces')
@@ -119,7 +126,11 @@ def voice_panel(p,label):
     controls=p.locator('.speech-controls');ok(controls.is_visible(),'native speech controls visible')
     for phase in ['playing','stopped','expanded']:
         if phase=='stopped':p.locator('[data-stop-speech]').click()
-        if phase=='expanded':controls.locator('.voice-settings>summary').click()
+        if phase=='expanded':
+            controls.locator('.voice-settings>summary').click()
+            ok(controls.locator('.voice-settings').evaluate('e=>e.open'),'voice settings genuinely expanded')
+            _,words=hear(p)
+            ok('Reading voice' not in words and 'Reading speed' not in words,'final utterance excludes expanded voice controls')
         pairs=controls.evaluate('''root=>[...root.querySelectorAll('button,summary,label,select,[data-speech-status]')].filter(e=>e.checkVisibility()).map(e=>{let q=e,b;while(q){b=getComputedStyle(q).backgroundColor;if(b!=='rgba(0, 0, 0, 0)'&&b!=='transparent')break;q=q.parentElement;}return {fg:getComputedStyle(e).color,bg:b};})''')
         def lum(css):
             c=[float(x)/255 for x in re.findall(r'[\d.]+',css)[:3]]
@@ -137,7 +148,9 @@ def apply(p,g,expected):
 
 def journey(browser,base,seed):
     p=setup(browser,base,seed)
-    baseline_notes=common.download(p,base,'before-groups');common.go(p,base);before=snapshot(p)
+    baseline_notes=common.download(p,base,'before-groups')
+    ok(baseline_notes.get('groupPieces')==seed['groupPieces'],'starting actual Notes export contains opaque unknown groupPieces root')
+    common.go(p,base);before=snapshot(p)
     # Real parent work must survive the new mode, including stale parent controls.
     common.choose(p,'half-and-third');common.split(p,'left',3)
     old=p.locator('[data-common-split="left"][data-factor="2"]').element_handle()
@@ -145,10 +158,14 @@ def journey(browser,base,seed):
     for ident,(n,d) in CASES.items():
         choose(p,ident);ok(current(p)==(n,d),'case starts with immutable original '+ident)
         geometry(p,(n,d),(n,d))
+        ok('No grouping to undo yet.' in p.locator(VIEW).inner_text() and p.locator('[data-gp-action=undo]').is_disabled(),'original ribbon explains empty history')
         if ident=='six-eighths':
             for g in [3,4,5,7]:
                 preview(p,g);geometry(p,(n,d),(n,d),g)
                 ok(p.locator('[data-gp-action=apply]').is_disabled(),'nonfit remains an optional preview')
+                message=p.locator('[data-gp-preview]').inner_text()
+                role='The whole has pieces left over.' if g==3 else 'The colored part has pieces left over.' if g==4 else 'The whole and its colored part have pieces left over.'
+                ok(role in message,'preview identifies exact leftover role for6/8 group'+str(g))
             preview(p,2);geometry(p,(n,d),(n,d),2)
             # Native keyboard, with current focus style visible before activation.
             p.keyboard.press('Tab');p.locator('[data-gp-action=apply]').focus()
@@ -160,7 +177,7 @@ def journey(browser,base,seed):
                 for g in path:
                     now=(now[0]//g,now[1]//g);apply(p,g,now);geometry(p,(n,d),now)
                     if now==(9,12):
-                        action(p,'names');ok('2' in p.locator(VIEW).inner_text(),'intermediate common factor remains available')
+                        action(p,'names');text=p.locator(VIEW).inner_text();ok('Group size 3 fits both counts' in text and 'common factor of 9 and 12' in text and 'simplest' not in text,'9/12 suggests actual common factor3 and does not claim simplest')
                         action(p,'back');focus(p,'[data-gp-action=names]')
                 for _ in path:action(p,'undo')
                 ok(current(p)==(n,d),'repeated Undo returns to exact original')
@@ -168,7 +185,14 @@ def journey(browser,base,seed):
             preview(p,7);p.locator('[data-gp-action=apply]').focus();p.keyboard.press('Space')
             ok(current(p)==(2,3),'Space applies factor7');geometry(p,(n,d),(2,3))
         elif ident in ['zero-twelfths','whole-twelfths']:
+            if n==0:
+                preview(p,5);geometry(p,(n,d),(n,d),5)
+                text=p.locator('[data-gp-preview]').inner_text()
+                ok('Colored part: 0 complete groups, 0 current colored pieces left' in text and 'The whole has pieces left over.' in text and p.locator('[data-gp-action=apply]').is_disabled(),'zero complete colored groups fit; whole remainder alone prevents grouping by5')
+                preview(p,12);geometry(p,(n,d),(n,d),12)
+                ok('There are no colored pieces, so none are left over.' in p.locator('[data-gp-preview]').inner_text(),'zero colored groups permit complete whole grouping by12')
             apply(p,12,(n//12,1));geometry(p,(n,d),(n//12,1))
+            ok('This whole is already one piece.' in p.locator('[data-gp-preview]').inner_text() and p.locator('[data-gp-action=apply]').is_disabled(),'one-piece state explains why no further grouping is possible')
             ok(not p.locator('[data-gp-factor] option').evaluate_all('xs=>xs.filter(e=>Number(e.value)>=2).length'),'one whole piece offers no group sizes')
         action(p,'names');p.locator('[data-gp-view=compare]').wait_for()
         text=p.locator(VIEW).inner_text();now=current(p)
@@ -179,10 +203,10 @@ def journey(browser,base,seed):
     choose(p,'six-eighths');preview(p,3);saved=work(p);action(p,'example')
     for frame in range(6):
         p.locator('[data-gp-view=example]').wait_for();now=(2,3) if frame==2 else (3,6) if frame==5 else (6,9)
-        geometry(p,(6,9),now,3 if frame==1 else 2 if frame==3 else 9 if frame==4 else None)
+        geometry(p,(6,9),now,3 if frame==1 else 2 if frame==3 else 9 if frame==4 else None,changed=frame==5)
         script,words=hear(p)
-        if frame==4:ok('zero' in words.lower() or '0' in words,'frame5 zero complete colored groups is narrated beside leftovers')
-        if frame==5:ok('half' in words.lower() and 'third' in words.lower(),'subtraction contrast narrates distinct actual amounts')
+        if frame==4:ok('Colored part: 0 complete groups, 6 current colored pieces left' in words,'frame5 narrates zero complete colored groups alongside six leftover colored pieces')
+        if frame==5:ok('half' in words.lower() and 'third' in words.lower() and 'Different amount: 3/6' in script and 'Now: 3/6' not in script,'subtraction contrast explicitly labels its distinct amount')
         if frame<5:action(p,'next');focus(p,'[data-gp-action=previous]' if frame==4 else '[data-gp-action=next]')
     ok(p.locator('[data-gp-action=next]').is_disabled(),'example ends without automatic advance')
     action(p,'previous');action(p,'back');focus(p,'[data-gp-action=example]');ok(work(p)==saved,'six manual examples leave live material and preview exact')
