@@ -921,6 +921,7 @@ export const copyScopes = [
   {path:'dist/rehearsal-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/rehearsal-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-four-corner-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-four-meeting-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/guide-errands-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/guide-errands-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/guide-errands-ui.mjs',adultBlocks:[],quotations:[]},

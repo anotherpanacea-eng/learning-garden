@@ -58,6 +58,149 @@ export const actFourContent={
     "candidateEarlier": "Kept rain result from an earlier version",
     "unreadableWork": "Some earlier rain results cannot be read by this version. They stay in your notes. You can choose another."
   },
+  "meeting": {
+    "title": "The proposal for the low fields",
+    "short": [
+      "The bell rings for a town meeting. Three plans are on the board. Every plan costs something. Which would you keep?"
+    ],
+    "longer": [
+      "The bell rings for a town meeting, the first anyone can remember that isn't about a fête. The whole village squeezes into the library. On the board at the front are three plans for the low fields, drawn in the librarian's best pen. Everyone gets a turn to speak. The orchard keeper speaks about her trees. The miller speaks about her mill. Nuria, visiting, speaks about Vadoalto's reed beds and turns pink when everyone listens. Then Bramble stands up, and the room gets quiet, because Bramble is not usually serious."
+    ],
+    "bramble": "\"Everyone keeps talking about frogs. What about the orchard keepers? Those trees are their whole year. If you want them to give up their fields, you'd better be very sure, and you'd better help them with what comes after.\"",
+    "boardHeading": "The meeting board",
+    "what": "What it is",
+    "costs": "What it costs",
+    "protects": "What it protects",
+    "plans": [
+      {
+        "id": "wall",
+        "name": "The Wall",
+        "what": "A higher flood wall along the brook through town.",
+        "costs": "Stone, upkeep and many hands; possible effects downstream need investigation.",
+        "protects": "Intended to protect the orchard and town; its limits still matter.",
+        "worries": [
+          {
+            "id": "wall-downstream",
+            "text": "The water will go to Les Saules instead."
+          },
+          {
+            "id": "wall-upkeep",
+            "text": "A wall needs mending forever."
+          },
+          {
+            "id": "wall-higher",
+            "text": "What if the next flood is higher than the wall?"
+          }
+        ]
+      },
+      {
+        "id": "sponge",
+        "name": "The Sponge",
+        "what": "Let the lowest orchard fields go back to marsh.",
+        "costs": "Some apple trees, and some of the orchard keepers' living; the reed trade is a proposed replacement, not a guaranteed income.",
+        "protects": "The marsh holds water and lets it go slowly, so less of it reaches the mill at once. Frogs. Herons.",
+        "worries": [
+          {
+            "id": "sponge-money",
+            "text": "The orchard keepers will lose money."
+          },
+          {
+            "id": "sponge-years",
+            "text": "It will take years for a marsh to grow back."
+          },
+          {
+            "id": "sponge-alone",
+            "text": "What if it isn't enough on its own?"
+          }
+        ]
+      },
+      {
+        "id": "some-of-each",
+        "name": "Some of Each",
+        "what": "A lower wall above the mill, and a smaller wet meadow at the orchard's low corner.",
+        "costs": "A little of both costs. Some trees, some stone.",
+        "protects": "Some of both protections. Nobody gets everything they wanted.",
+        "worries": [
+          {
+            "id": "some-too-little",
+            "text": "Half a wall and half a marsh might be too little of both."
+          },
+          {
+            "id": "some-complicated",
+            "text": "It's complicated to build."
+          },
+          {
+            "id": "some-unhappy",
+            "text": "Nobody will be fully happy."
+          }
+        ]
+      }
+    ],
+    "prompt": "Which plan would you keep for Willowbank?",
+    "worryPrompt": "If something about it worries you, add the worry. Good plans have worries.",
+    "keepHeading": "Keep a plan for Willowbank",
+    "noWorry": "No worry for now",
+    "keep": "Keep this plan",
+    "kept": "Your plan goes in the almanac, under your name for it. People will keep arguing. That's allowed.",
+    "keptWorry": "Your plan and your worry go in the almanac together. The librarian says the worry is the most useful part.",
+    "yourPlan": "Your plan: {plan}",
+    "yourWorry": "Your worry: {worry}",
+    "earlierWorry": "a worry from an earlier version",
+    "earlierPlan": "a plan from an earlier version",
+    "change": "Choose again",
+    "frozen": "The meeting is over. Your plan stays in the almanac.",
+    "endOffer": "Hear what the meeting decided",
+    "needMore": "The meeting can end once you have kept a plan and brought work to two of the first three chapters. Every game is open.",
+    "scene": "The library on meeting night. Three plans are pinned to the board at the front, and lanterns glow along the shelves.",
+    "caption": "The meeting board, before anyone has decided."
+  },
+  "ending": {
+    "title": "The Map We Changed",
+    "mindHeading": "Someone changes their mind",
+    "mind": {
+      "orchard": {
+        "speaker": "The orchard keeper",
+        "line": "I thought the model could tell us when the mill would flood. It only counts water in trays. I've changed my mind about what it tells us."
+      },
+      "account": {
+        "speaker": "Pip",
+        "line": "I was sure it was all the Sponge. Now I want to know how heavy those rains were. The counts don't tell us."
+      },
+      "fallback": {
+        "speaker": "The librarian",
+        "line": "I thought we had to choose between certainty and doing nothing. We can keep a plan and write down what we still need to know."
+      }
+    },
+    "guide": [
+      "{guide} unpins the card from the library door. \"I wrote *mostly the rain*. I was sure. I can't show that either.\"",
+      "\"So I've changed my mind. It could be the rain and the Sponge together. That's a better question than I had.\"",
+      "{guide} writes the new idea under the old one, and leaves the old one showing."
+    ],
+    "tails": {
+      "mira": "Mira draws a small question mark in the corner of her sketchbook, and smiles at it.",
+      "rowan": "Rowan grins. \"Changing my mind is the thing I'm best at making.\"",
+      "ari": "Ari turns a pebble over in one hand. \"I noticed something I hadn't noticed this morning.\""
+    },
+    "short": [
+      "Nobody agrees about everything. But the map on the meeting board has new pencil on it now."
+    ],
+    "longer": [
+      "The meeting goes late. Nobody agrees about everything, and nobody pretends to. But somebody changed their mind tonight because of something they found out, and said so out loud, which takes nerve. By the time the lanterns are lit, the old map on the meeting board has new pencil on it: a line here, a question mark there, a small drawing of a reed. It isn't the same map it was this morning.",
+      "\"That's what Hollis's pages were for,\" says {guide} on the walk home. \"I think.\""
+    ],
+    "seasons": {
+      "spring": "Walking home, you can hear the brook. It sounds higher than yesterday.",
+      "summer": "It's still warm when the meeting ends. People keep arguing on the green, happily.",
+      "autumn": "Leaves blow across the meeting board as it's carried home. Someone pins them down with apples.",
+      "winter": "Frost on the library windows, and everyone's breath in the lantern light as they argue all the way home."
+    },
+    "almanac": "Act IV: The Town Has Two Stories. We kept a plan: {plan}.",
+    "between": "The pages are loosening on the windowsill. Pause here, or turn the story on.",
+    "reread": "Read the ending again",
+    "pause": "Pause here",
+    "scene": "The same meeting board, later. The old map has new pencil on it: a line, a question mark and a small drawing of a reed.",
+    "caption": "The old map, with new pencil on it."
+  },
   "page": {
     "title": "The year of the fine harvest",
     "edge": "harvest",

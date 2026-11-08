@@ -228,7 +228,9 @@ The next proposed E2-IV/E3-II return is [Which One?404](specs/404-which-one.md),
 
 The [352 opening and first chapter](specs/352-act-four-opening.md), with [366's guide lines](specs/366-guide-changes-their-mind.md), is implemented in [PR420](https://github.com/anotherpanacea-eng/learning-garden/pull/420), which records its independent review and release status. It continues after the revealed third page, opens Page4 and accepts one explicit ledger evidence-note offer. The guide pins a guess and keeps checking it; this slice does not ship the guide's ending revision, the meeting board or later chapters. Story receipts remain separate from curriculum evidence. Later chapters and the ending remain separate commissions.
 
-[Chapter 2, the wet corner601](specs/601-act-four-orchard.md) is proposed in a Claude draft PR: the orchard keeper's low corner with an animated scene, a reader that takes a kept Rain Paths result, and a way back from Rain Paths. Chapters 3 and 4, the meeting board and the ending remain separate commissions.
+[Chapter 2, the wet corner601](specs/601-act-four-orchard.md) is proposed in a Claude draft PR: the orchard keeper's low corner with an animated scene, a reader that takes a kept Rain Paths result, and a way back from Rain Paths. Chapter 3 remains a separate commission.
+
+[The meeting board and The Map We Changed602](specs/602-act-four-meeting.md) are proposed in a stacked Claude draft PR: chapter 4's three plans with an optional worry, an animated meeting scene, and the Act IV ending with the guide's change of mind. Act V and Act VI's use of the plan remain separate commissions.
 
 ## Reviewed release · October 31
 
