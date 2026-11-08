@@ -4,6 +4,7 @@ import vm from 'node:vm';
 import {freshState} from '../dist/core.mjs';
 import {actThreeRoute} from '../dist/act-three-ui.mjs';
 import {actFourRoute} from '../dist/act-four-ui.mjs';
+import {actFiveRoute} from '../dist/act-five-ui.mjs';
 import {arrivalSkipsWelcome,chooseStoryArrival} from '../dist/story-arrivals-core.mjs';
 import {ensureGarden,startVisit,currentVisit,entranceById,finishStoryNode} from '../dist/garden-core.mjs';
 import {storyEnding,gardenHome} from '../dist/garden-ui.mjs';
@@ -21,7 +22,7 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
  const focus={isConnected:true,focus(){focused++;}},main={focus(){focused++;}};
  // Map loading has its own source/browser suite; this fixture owns only films.
  const context={loadCurriculumMap(){},state,explorerStore:{active:{id:'synthetic-explorer'}},refreshKeeperVisibility(){},keeperFilmBlocked:()=>dialogs.some(d=>d.open),choosingExplorer:choosing,location:{origin:'https://synthetic.invalid',hash:'#home'},main,
- currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,arrivalSkipsWelcome,actThreeRoute,actFourRoute,
+ currentVisit,entranceById,cafeSupper,postOfficeView,currentPostOffice,arrivalSkipsWelcome,actThreeRoute,actFourRoute,actFiveRoute,
  save(){saves++;},stopBell(reason){lifecycle.push(['bell-stop',reason]);},stopSpeech(){stopped++;lifecycle.push(['speech-stop']);},esc:x=>String(x),exposeStoryFacts:x=>exposures.push(x),
  document:{activeElement:focus,querySelector:()=>dialogs.find(d=>d.open)||null,body:{append:d=>dialogs.push(d)},createElement(){
   lifecycle.push(['film-dialog-created']);
@@ -37,7 +38,7 @@ function fixture(state=freshState(),{choosing=false,welcomeSeen=true}={}){
  const active=fixture(freshState(),{welcomeSeen:false});eq(active.dialogs.length,1,'active explorer gets first-visit film');active.dialogs[0].skip.onclick();
  const switchedWelcome=app.slice(app.indexOf('function useExplorer('),app.indexOf('\nfunction freshExplorerChoice(',app.indexOf('function useExplorer('))).match(/if\((destination[^\n]+)\)requestAutomaticFilm\('welcome'\);/);
  eq(Boolean(switchedWelcome),true,'extract the actual explorer-switch welcome condition');
- for(const [destination,expected] of [['#almanac/upstream-reply',false],['#notes',false],['#cafe/units',false],['#begin',false],['#arrive',false],['#almanac/beyond',false],['#almanac/beyond/route',false],['#almanac/both-ways',false],['#almanac/the-ways',false],['#almanac/two-stories',false],['#almanac/two-stories/account',false],['#almanac/fine-harvest',false],['#home',true],['#cafe',true]])eq(vm.runInNewContext(switchedWelcome[1],{destination,actThreeRoute,actFourRoute}),expected,`explorer-switch welcome at ${destination}`);
+ for(const [destination,expected] of [['#almanac/upstream-reply',false],['#notes',false],['#cafe/units',false],['#begin',false],['#arrive',false],['#almanac/beyond',false],['#almanac/beyond/route',false],['#almanac/both-ways',false],['#almanac/the-ways',false],['#almanac/two-stories',false],['#almanac/two-stories/account',false],['#almanac/fine-harvest',false],['#almanac/next-keeper',false],['#almanac/own-question',false],['#almanac/own-question/gazette',false],['#home',true],['#cafe',true]])eq(vm.runInNewContext(switchedWelcome[1],{destination,actThreeRoute,actFourRoute,actFiveRoute}),expected,`explorer-switch welcome at ${destination}`);
 }
 // Completed real routes, including legacy English/French, are eligible only at their ending.
 for(const [id,options] of [['paris',undefined],['paris',{destination:'bookstall',variant:1}],['french',{destination:'bookstall',variant:1}],...frenchLessons.map(l=>[l.id,undefined])]){
