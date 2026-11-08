@@ -667,3 +667,9 @@ Checks: `node test/mirror-paths-checks.mjs` and `python3 test/mirror-paths-brows
 Open The Line Table from Story Loft, or `#loft/lines`. Keep four supplied poems’ words and punctuation while changing their line endings and planning pauses. Compare possible arrangements, work through a separate teaching example, and download your current layout as a text file. Pauses remain human reading plans; device speech reads the flat words and punctuation. This is layout revision, not an original-writing or performance assessment; work stays temporary in this visit.
 
 Design and current release status: [spec428](docs/specs/428-poem-lines.md), [PR511](https://github.com/anotherpanacea-eng/learning-garden/pull/511). Focused checks: `node test/poem-lines-checks.mjs` and `python3 test/poem-lines-browser.py` (Chromium).
+
+### Spring Bench429
+
+Open Motion and Evidence at `#learn/science`, then choose Spring Bench. Four invented settled-state models connect applied pull with total length, extra length and recovery. Propose an extension mark, compare its reference, remove the pull and inspect length/extension plots. A separate teaching example and preserved per-model tests support revisiting; no practical measurement or independent assessment is inferred. Tests stay in memory for this notebook and explorer; reloading starts fresh.
+
+Design and release status: [spec429](docs/specs/429-spring-bench.md), [PR512](https://github.com/anotherpanacea-eng/learning-garden/pull/512). Focused checks: `node test/spring-bench-checks.mjs` and `python3 test/spring-bench-browser.py` (Chromium).
