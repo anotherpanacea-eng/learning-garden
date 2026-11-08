@@ -25,11 +25,24 @@ export function validActFourOffer(r,chapter=r?.chapter){
 // Spec601: a kept Rain Paths result is checked as a snapshot: its own structure, ids, bounded counts and internal
 // consistency. It is never compared with today's cases, model or recomputed rows, so a later rule change cannot strand it.
 const count=(n,max=1000)=>Number.isSafeInteger(n)&&n>=0&&n<=max;
+const flags=x=>obj(x)&&Object.values(x).every(v=>v===true);
 function rainSnapshot(kept,caseId){
- if(!obj(kept)||kept.caseId!==caseId||!obj(kept.model)||!count(kept.model.capacity)||kept.model.capacity<1||!obj(kept.config)||!Array.isArray(kept.rows)||kept.rows.length<1||kept.rows.length>8||!obj(kept.support)||typeof kept.familiar!=='boolean')return false;
- const cap=kept.model.capacity,ids=new Set();
- return kept.rows.every(r=>obj(r)&&id(r.id)&&!ids.has(r.id)&&ids.add(r.id)&&['priorStored','newRainTotal','cloudRemaining','surfaceNew','storedNew','runoffNew','emptySlots'].every(k=>count(r[k]))
-  &&r.cloudRemaining+r.surfaceNew+r.storedNew+r.runoffNew===r.newRainTotal&&r.priorStored+r.storedNew+r.emptySlots===cap);
+ if(!obj(kept)||kept.caseId!==caseId||!obj(kept.support)||!Object.values(kept.support).every(flags)||typeof kept.familiar!=='boolean')return false;
+ const m=kept.model,c=kept.config;
+ if(!obj(m)||!id(m.id)||!count(m.capacity)||m.capacity<1||!count(m.batchSize)||m.batchSize<1)return false;
+ if(!obj(c)||c.id!==caseId||!count(c.newRainTotal)||c.newRainTotal<1||!Array.isArray(c.trays)||c.trays.length<1||c.trays.length>8)return false;
+ if(!Array.isArray(kept.rows)||kept.rows.length!==c.trays.length)return false;
+ const ids=new Set();
+ return c.trays.every((tray,i)=>{
+  const r=kept.rows[i];
+  if(!obj(tray)||!id(tray.id)||ids.has(tray.id)||!id(tray.cover)||!count(tray.priorStored,m.capacity)||!obj(r))return false;
+  ids.add(tray.id);
+  if(r.id!==tray.id||r.cover!==tray.cover||r.priorStored!==tray.priorStored||r.newRainTotal!==c.newRainTotal)return false;
+  if(!['cloudRemaining','surfaceNew','storedNew','runoffNew','emptySlots'].every(k=>count(r[k])))return false;
+  // A kept result is a finished run: no rain left to fall or on the surface, every new token stored or run off,
+  // and the tray's own slots adding up to its saved capacity.
+  return r.cloudRemaining===0&&r.surfaceNew===0&&r.storedNew+r.runoffNew===c.newRainTotal&&r.priorStored+r.storedNew+r.emptySlots===m.capacity;
+ });
 }
 // Rain Paths keeps one result per case, frozen at its first keep. Each case's keptResult is read on its own,
 // so one unreadable case never hides another.

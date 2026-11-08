@@ -83,8 +83,9 @@ export function runChecks(){
  // Saved snapshots are judged on their own terms, never against today's cases or rules.
  const h=orchardSeed();keepRain(h,'cover-12');
  const snap=clone(h.rainPaths.cases['cover-12'].keptResult);
- h.rainPaths.cases['flood-99']={keptResult:{...clone(snap),caseId:'flood-99'}};
- const changed=clone(snap);changed.model={...changed.model,capacity:16};changed.rows=changed.rows.map(r=>({...r,emptySlots:r.emptySlots+4}));changed.config={...changed.config,newRainTotal:99};
+ h.rainPaths.cases['flood-99']={keptResult:{...clone(snap),caseId:'flood-99',config:{...clone(snap.config),id:'flood-99'}}};
+ // A self-consistent result made under a different rule: bigger trays, so more empty slots after the same rain.
+ const changed=clone(snap);changed.model={...changed.model,capacity:16};changed.rows=changed.rows.map(r=>({...r,emptySlots:r.emptySlots+4}));
  h.rainPaths.cases['cover-12'].keptResult=changed;
  const hc=A.actFourCandidates(h,'orchard');
  eq(hc.map(c=>c.ref.caseId),['cover-12','flood-99'],'a case from another version and a changed rule are both still offered');
@@ -92,6 +93,19 @@ export function runChecks(){
  ok(actFourPage(h,{part:'chapter',chapter:'orchard'}).includes(C.orchard.candidateEarlier),'an unknown case gets a plain label');
  const bad=clone(snap);bad.rows=bad.rows.map(r=>({...r,runoffNew:r.runoffNew+1}));h.rainPaths.cases['cover-12'].keptResult=bad;
  eq(A.actFourCandidates(h,'orchard').map(c=>c.ref.caseId),['flood-99'],'a snapshot whose own counts disagree is not offered');
+ // Malformed or unfinished snapshots never become candidates (the shapes the second review reproduced, and others).
+ const n12=snap.config.newRainTotal;
+ for(const [label,make] of [
+  ['empty config',x=>{x.config={};}],
+  ['model without an id',x=>{x.model={capacity:x.model.capacity,batchSize:x.model.batchSize};}],
+  ['config filed under another case',x=>{x.config={...x.config,id:'space-12'};}],
+  ['unfinished run',x=>{x.rows=x.rows.map(r=>({...r,cloudRemaining:n12,storedNew:0,runoffNew:0,emptySlots:x.model.capacity-r.priorStored}));}],
+  ['rain left on the surface',x=>{x.rows=x.rows.map(r=>({...r,surfaceNew:1,runoffNew:r.runoffNew-1}));}],
+  ['a row that is not its tray',x=>{x.rows=[...x.rows].reverse();}],
+  ['a missing row',x=>{x.rows=x.rows.slice(1);}],
+  ['support that is not flags',x=>{x.support={global:{example:'yes'}};}],
+ ]){const y=clone(snap);make(y);h.rainPaths.cases['cover-12'].keptResult=y;eq(A.actFourCandidates(h,'orchard').map(c=>c.ref.caseId),['flood-99'],'not offered: '+label);}
+ for(const caseId of ['cover-12','cover-24','space-12','space-24']){const z=orchardSeed();keepRain(z,caseId);eq(A.actFourCandidates(z,'orchard').map(c=>c.ref.caseId),[caseId],'a real keep of '+caseId+' is accepted');}
  ok(actFourPage(h,{part:'chapter',chapter:'orchard'}).includes(C.orchard.unreadableWork),'and the chapter says some rain results cannot be read');
 
  // Receipt validation is shape only.
