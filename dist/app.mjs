@@ -240,6 +240,8 @@ let browserStorage;try{browserStorage=localStorage;}catch{}
 const explorerStore=new ExplorerStore(browserStorage);
 let state=explorerStore.load(),storageOK=!explorerStore.warning||explorerStore.recoveryNoticeOnly,persist=explorerStore.persist;
 let choosingExplorer=explorerStore.needsChooser,creatingExplorer=false,explorerDraft={avatar:'sky',color:'gold',symbol:'leaf'},gardenSelection={selected:[],group:''};
+// Spec 600: the guide's errand strip sits outside <main> and never writes.
+installGuideErrands(()=>choosingExplorer?null:state);
 // Spec 358: New marks follow every render and in-page re-render of main, and the top bar with them.
 // The observer runs as a microtask, so marks are in place before anything reads the new page. Marking twice changes nothing.
 new MutationObserver(()=>markNewRooms(document)).observe(main,{childList:true,subtree:true});
@@ -1360,6 +1362,3 @@ if(!choosingExplorer&&!['pathways','learn','journeys'].includes(location.hash.sl
 
 // Loading this optional reference never re-renders an activity or changes a notebook.
 void loadCurriculumMap();
-
-// Spec 600: the guide's errand strip sits outside <main> and never writes.
-installGuideErrands(()=>choosingExplorer?null:state);
