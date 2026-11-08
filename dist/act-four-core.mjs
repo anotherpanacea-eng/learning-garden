@@ -1,13 +1,19 @@
 // Spec352 (chapter 1) and spec601 (chapter 2): explicit story offers, separate from the learner's evidence and conclusions.
 import {storyView} from './keeper-story-core.mjs';
 import {actThreeView} from './act-three-core.mjs';
+import {seasonForMonth} from './act-two-core.mjs';
+import {actFourContent} from './act-four-content.mjs';
 import {ledgerView,validLedgerKeep} from './ledger-gauge-core.mjs';
 import {rainCaseById} from './rain-paths-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 
 export const actFourChapters=Object.freeze(['account','orchard','gazette','meeting']);
-// Chapters with a reader in this version; gazette and meeting stay reserved.
+// Chapters with a reader in this version; gazette and meeting stay reserved for receipts. Chapter 4 keeps a plan instead (spec602).
 export const actFourLiveChapters=Object.freeze(['account','orchard']);
+// Spec 120 §12 fixes these three plan ids for Acts IV and VI.
+export const actFourPlans=Object.freeze(['wall','sponge','some-of-each']);
+const worryCode=x=>typeof x==='string'&&/^[a-z][a-z-]{0,39}$/.test(x);
+const season=x=>['spring','summer','autumn','winter'].includes(x);
 const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),own=(x,k)=>Object.hasOwn(x,k);
 const field=(o,k,test)=>!own(o,k)?'missing':test(o[k])?'ready':'unreadable';
 const id=x=>typeof x==='string'&&x.length>0&&x.length<=160;
@@ -93,11 +99,20 @@ export function actFourView(state){
  const status=keeper.status==='unavailable'?'unavailable':!story||!present?'missing':act?'ready':'unreadable';
  const startedStatus=act?field(act,'started',x=>typeof x==='boolean'):'missing',contributionsStatus=act?field(act,'contributions',obj):'missing';
  const started=startedStatus==='ready'&&act.started===true,chapterStatus={},contributions={};
+ // The ending is written only after the act has started; a saved ended without a start is not a start (352).
+ const endedStatus=act?field(act,'ended',x=>typeof x==='boolean'):'missing',seasonStatus=act?field(act,'season',season):'missing',ended=started&&endedStatus==='ready'&&act.ended===true;
  for(const chapter of actFourChapters){const map=contributionsStatus==='ready'?act.contributions:{};chapterStatus[chapter]=field(map,chapter,r=>validActFourOffer(r,chapter));if(chapterStatus[chapter]==='ready')contributions[chapter]=map[chapter];}
  const writable=keeper.status==='ready'&&['missing','ready'].includes(status),pageVisible=started&&story.seenScenes.includes('harvest-page-revealed');
  const frameAmountStatus=story?field(story,'frameAmount',frame):'missing',pageAmountStatus=story?field(story,'pageAmount',page):'missing';
  const sources=Object.fromEntries(actFourChapters.map(chapter=>{try{return [chapter,sourceView(state,chapter)];}catch{return [chapter,{status:'unreadable',retainedUnreadable:true,candidates:[]}];}}));
+ // Spec602: the kept plan and its optional worry are codes at story.plan and story.planWorry. A saved worry is read by shape,
+ // never against today's worry list, and mapped to text in the UI.
+ const planStatus=story?field(story,'plan',x=>actFourPlans.includes(x)):'missing',worryStatus=story?field(story,'planWorry',x=>x===null||worryCode(x)):'missing';
+ const plan=planStatus==='ready'?story.plan:null,worry=plan&&worryStatus==='ready'?story.planWorry:null,earlierChapters=['account','orchard','gazette'].filter(c=>chapterStatus[c]==='ready').length;
  return {status,storyStatus:keeper.status,act:raw,writable,startedStatus,contributionsStatus,started,chapterStatus,contributions,count:Object.keys(contributions).length,sources,
+  endedStatus,seasonStatus,ended,season:seasonStatus==='ready'?act.season:null,planStatus,worryStatus,plan,worry,earlierChapters,
+  canKeepPlan:writable&&started&&!ended&&endedStatus!=='unreadable'&&planStatus!=='unreadable'&&worryStatus!=='unreadable',
+  canEnd:writable&&started&&!ended&&endedStatus!=='unreadable'&&contributionsStatus!=='unreadable'&&planStatus==='ready'&&earlierChapters>=2,
   canStart:writable&&startedStatus!=='unreadable'&&actThreeView(state).pageVisible,canOffer:writable&&started&&contributionsStatus!=='unreadable',pageVisible,
   frameAmountStatus,pageAmountStatus,frameAmount:frameAmountStatus==='ready'?story.frameAmount:'short',pageAmount:pageAmountStatus==='ready'?story.pageAmount:'short'};
 }
@@ -124,3 +139,19 @@ export function offerActFour(state,chapter,key,options={}){
  const found=actFourCandidates(state,chapter).find(c=>c.key===key);if(!found)return false;
  return mutate(state,options,story=>{const a=story.acts.IV;if(!own(a,'contributions'))a.contributions={};a.contributions[chapter]={kind:'act-four-offer',version:1,chapter,activity:found.activity,artifactKind:found.artifactKind,ref:structuredClone(found.ref)};return validActFourOffer(a.contributions[chapter],chapter);});
 }
+
+// Spec602 · keep a plan, with an optional worry from that plan's list. Choosing again is allowed until the ending.
+export function keepActFourPlan(state,plan,worry=null,options={}){
+ const v=actFourView(state);if(!v.canKeepPlan||!actFourPlans.includes(plan))return false;
+ const offered=actFourContent.meeting.plans.find(p=>p.id===plan);
+ if(worry!==null&&!offered?.worries.some(w=>w.id===worry))return false;
+ if(v.plan===plan&&v.worry===worry&&v.worryStatus!=='missing')return true;
+ return mutate(state,options,story=>{story.plan=plan;story.planWorry=worry;});
+}
+// Spec602 · the Act IV ending. It needs a kept plan and work in any two of chapters 1 to 3 (spec 120 §6/§7, act-4.md).
+export function endActFour(state,month,options={}){
+ const v=actFourView(state);if(v.ended)return true;const selected=seasonForMonth(month);if(!v.canEnd||!selected)return false;
+ return mutate(state,options,story=>{const a=story.acts.IV;a.ended=true;if(!own(a,'season'))a.season=selected;if(!story.seenScenes.includes('map-changed'))story.seenScenes.push('map-changed');});
+}
+// Who changes their mind at the meeting: the first line whose matching work was offered, else the librarian (act-4.md).
+export function actFourMindChange(v){return v.chapterStatus.orchard==='ready'?'orchard':v.chapterStatus.account==='ready'?'account':'fallback';}

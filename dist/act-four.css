@@ -14,3 +14,17 @@
 .a4c-glint{animation:a4c-glint 1.2s ease-in-out 3 alternate both}
 @keyframes a4c-glint{from{opacity:.25}to{opacity:.9}}
 @media (prefers-reduced-motion:reduce){.a4c-drop,.a4c-reed,.a4c-puddle,.a4c-glint{animation:none}.a4c-rain{display:none}.a4c-reed,.a4c-puddle,.a4c-glint{opacity:1}}
+/* Spec 602 · the meeting scene, the meeting board and the ending. Motion settles within about four seconds; nothing loops. */
+.a4-meeting{margin:0 0 1rem;max-width:640px}.a4-meeting svg{width:100%;height:auto;display:block;border-radius:8px;border:1px solid #d9d2c2}.a4-meeting figcaption{font-size:.95rem;margin-top:.35rem;color:#5a5245}
+.a4m-card{transform-box:fill-box;transform-origin:50% 0;animation:a4m-pin .7s ease-out both;animation-delay:var(--d)}
+@keyframes a4m-pin{from{transform:translateY(-26px) rotate(calc(var(--r) * 3));opacity:0}to{transform:rotate(var(--r));opacity:1}}
+.a4m-card{transform:rotate(var(--r))}
+.a4m-glow{animation:a4m-glow 1.4s ease-in-out 2 alternate both;animation-delay:var(--d,0s)}
+@keyframes a4m-glow{from{opacity:.15}to{opacity:.45}}
+.a4m-stroke{stroke-dasharray:1;stroke-dashoffset:1;animation:a4m-draw 1s ease-out forwards;animation-delay:var(--d)}
+@keyframes a4m-draw{to{stroke-dashoffset:0}}
+.a4-board{display:grid;gap:.8rem;margin:1rem 0}.a4-plan{border:1px solid var(--a4-ribbon);border-left:5px solid var(--a4-willow);background:#fffdf6;padding:.4rem .9rem}.a4-plan summary{font-weight:600}.a4-plan dl{margin:.4rem 0}.a4-plan dt{font-weight:600;margin-top:.5rem}.a4-plan dd{margin:0 0 .3rem}
+.a4-keep fieldset{border:1px solid var(--a4-ribbon);padding:.6rem .9rem;margin:0 0 .8rem}.a4-keep legend{font-weight:600;padding:0 .3rem}.a4-keep label{display:flex;align-items:center;gap:.5rem;min-height:44px}.a4-keep input{width:1.2rem;height:1.2rem}
+.a4-bramble{border-left:4px solid var(--a4-ribbon);margin:1rem 0;padding:.3rem 1rem;font-style:italic;max-width:60ch}
+.a4-mind{background:#eef4f6;border-left:5px solid var(--a4-river);padding:.8rem 1.1rem;margin:1rem 0;max-width:60ch}
+@media (prefers-reduced-motion:reduce){.a4m-card,.a4m-glow,.a4m-stroke{animation:none}.a4m-stroke{stroke-dashoffset:0}.a4m-card{opacity:1}}
