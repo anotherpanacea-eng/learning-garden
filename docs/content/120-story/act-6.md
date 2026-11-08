@@ -120,7 +120,7 @@ Seedling's two other choices (each plausible, each wrong in one way):
 
 ### The water arrives
 
-One **authored fictional outcome** chosen by the plan kept in Act IV; not a calculated model result or advice for a real flood. It describes this particular invented rain, never a general guarantee for a wall or marsh. A missing/unreadable prior plan requires the reviewed fallback in spec 120 before this scene can ship.
+One **authored fictional outcome** chosen by the plan kept in Act IV; not a calculated model result or advice for a real flood. It describes this particular invented rain, never a general guarantee for a wall or marsh. When no plan can be read, the **No readable plan** fallback below replaces the three plan scenes; spec 120 §12 sets its rules.
 
 **The Wall:**
 > **Short:** The water climbs the wall and stops. The orchard stays dry. Downstream, past the wall, it spreads over Léon's meadow.
@@ -136,6 +136,25 @@ One **authored fictional outcome** chosen by the plan kept in Act IV; not a calc
 > **Short:** The wall turns the water into the wet meadow. The mill boards hold, just. Nobody got everything. Nobody lost everything.
 >
 > **Longer:** The wall above the mill turns the water toward the wet meadow, which fills like a bath. The mill boards hold, just. Some of the orchard gets its feet wet. Nobody got everything they wanted. Nobody lost everything, either.
+
+**No readable plan** (proposed 2026-11-08, awaiting review; spec 120 §12). Only one of these appears, before the water arrives.
+
+*If no plan can be found* (the meeting, offered again):
+> Dot looks at the library wall, where the meeting's plan should be pinned. There is only an empty pin. "I can't find the plan we kept," she says. "Which was it?"
+
+**Choices:** The Wall · The Sponge · Some of Each · Let the water come
+- **A plan:** "Dot pins it up, just in time." Then that plan's scene above.
+- **Let the water come:** {guide}: "Then let's watch what the water does." Then the plain scene below.
+
+*If the plan is there but this story can't read it* (from a newer version, or damaged), with no choice offered:
+> {guide}: "The plan from the meeting is on a page this story can't read yet. The water comes all the same."
+
+Then the plain scene.
+
+**The plain scene** (no plan named, no plan's effects shown):
+> **Short:** The water comes down the brook in the evening, just when the runner said. The boards are in and the flour is up high. The town is ready.
+>
+> **Longer:** The water comes down the brook in the evening, just when Vadoalto's runner said it would: brown, fast and full of leaves. It fills the low places and pushes at the banks. The boards are in at the mill. The flour is up high in the baker's attic. Half the village stands where they can see the flood post, and watches the water climb, and climb, and then, after a long while, stop climbing.
 
 **Every version ends:**
 > The bridge holds. The mill holds. Everything you mended holds. The miller scratches a new mark on the flood post, and writes the date beside it, and then, after a moment, writes *Warned in time.*

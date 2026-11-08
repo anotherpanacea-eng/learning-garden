@@ -261,6 +261,32 @@ Per explorer, additive: `story:{arrival, acts:{[actId]:{chapters:[chapterId], en
 
 The meeting board (Act IV), the project page (Act V) and the exchange planner (Act VI) are unbuilt dependencies; those endings ship only when they do. With no kept Act IV plan, Act VI offers the meeting first and never assigns a plan silently.
 
+**Missing-plan fallback** (proposed 2026-11-08 by Claude, OCA seat, awaiting independent review; the owner asked for this draft). It applies at Act VI chapter 3, *The long rain*, where the plan kept in Act IV picks the water-arrives scene. Its child text is in [act-6.md](../content/120-story/act-6.md), under *The water arrives*. In today's build ([602](602-act-four-meeting.md)) Act IV cannot end without a kept plan, and Act VI needs Act V's ending, which needs Act IV's. So this fallback is for saves this version did not write, or that were damaged. It never changes how a readable, known plan is used.
+
+The long rain reads `story.plan` **by shape, not through Act IV's view**. 602's view treats a code it doesn't know as unreadable. This reader separates three cases:
+
+| Saved `story.plan` | What the long rain does | Writes |
+| --- | --- | --- |
+| `wall`, `sponge` or `some-of-each` | That plan's scene, as scripted. | Nothing new. |
+| Absent | Offers the meeting again: Dot finds an empty pin and says she can't find the plan (never that none was kept), and the explorer chooses one of the three plans, as on 602's board with its costs shown, or *Let the water come*. A chosen plan gets its scene. *Let the water come* gets the plain scene. | Only the absent `story.plan` is written, as the chosen code, through the usual atomic write. No worry is asked, and any saved `story.planWorry`, readable or not, is left exactly as it was. *Let the water come* writes no plan. |
+| A well-formed code this version doesn't know (`/^[a-z][a-z-]{0,39}$/`) | The guide's line that the plan is on a page this story can't read yet, then the plain scene. No choice is offered. | Nothing. The code stays exactly as saved. |
+| Anything else (a malformed value) | The same line, then the plain scene. No choice is offered. | Nothing. The raw value is kept, and Grown-up notes say an earlier plan is retained unchanged. |
+
+**Rules.**
+- **A plan is never assigned silently.** It is written only when it is absent and the explorer chooses it. A present value, readable or not, is never overwritten.
+- **602's rule on the ending stands.** "After the ending the plan is fixed" still holds: this offer writes only an absent plan, and only in Act VI.
+- **The plain scene attributes no outcome to any plan.** It names no wall, marsh, orchard corner or meadow, and does not repeat any plan scene's effects (a dry orchard, a flooded meadow, trees standing in water), and claims nothing about the rain's height or timing beyond the runner's warning. It ends with the shared *Every version ends* lines, so everything the explorer mended still holds.
+- **The plain scene counts as the long rain having played**, for Act VI's ending condition (§6), exactly as a plan scene does.
+- **Later readers.** Act VI's chapter 4 and ending read the *exchange* plan (chapter 2), not the Act IV plan, so nothing later depends on which scene played.
+
+**Acceptance for the build that ships the long rain:**
+- Each of the four saved states above renders as described and writes only what the table says.
+- A refused export writes nothing.
+- An unknown or malformed plan is byte-for-byte unchanged after the chapter. A saved worry, readable or not, is unchanged when an absent plan is chosen.
+- The meeting offer appears only for an absent plan.
+- The plain scene is confirmed in editorial review to attribute no outcome to any plan. This is a reading of its meaning, not a word search.
+- The plain scene satisfies the ending condition.
+
 ## 13. Owner decisions
 
 Decided by Joshua, 2026-10-23:
