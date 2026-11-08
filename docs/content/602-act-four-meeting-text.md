@@ -52,6 +52,7 @@ Companion to [spec 602](../specs/602-act-four-meeting.md). Every new child-facin
 | yourPlan | Your plan: {plan} | new |
 | yourWorry | Your worry: {worry} | new |
 | earlierWorry | a worry from an earlier version | new |
+| earlierPlan | a plan from an earlier version | new |
 | change | Choose again | new |
 | frozen | The meeting is over. Your plan stays in the almanac. | new |
 | endOffer | Hear what the meeting decided | new |

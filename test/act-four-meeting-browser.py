@@ -63,7 +63,8 @@ def run(base, browser):
         ok(p.locator('[data-a4-meeting] svg[role="img"]').get_attribute('aria-label').startswith('The library on meeting night'), f'{width}: the meeting scene is described')
         eq(p.locator('[data-a4-plan]').count(), 3, f'{width}: three plans on the board')
         boxes = p.locator('[data-a4-meeting] .a4m-card').evaluate_all('els=>{const s=els[0].ownerSVGElement.getBoundingClientRect();return els.map(e=>{const r=e.getBoundingClientRect();return {cx:(r.left+r.right)/2-s.left,cy:(r.top+r.bottom)/2-s.top,w:s.width,h:s.height};});}')
-        ok(len(boxes) == 3 and all(0.1 * b['w'] < b['cx'] < 0.9 * b['w'] and 0.5 * b['h'] < b['cy'] < b['h'] for b in boxes) and len({round(b['cx']) for b in boxes}) == 3, f'{width}: the three plan cards sit on the lower board, apart from each other')
+        board = p.locator('[data-a4-meeting] [data-a4-board]').evaluate('e=>{const s=e.ownerSVGElement.getBoundingClientRect(),r=e.getBoundingClientRect();return {l:r.left-s.left,r:r.right-s.left,t:r.top-s.top,b:r.bottom-s.top};}')
+        ok(len(boxes) == 3 and all(board['l'] < b['cx'] < board['r'] and board['t'] < b['cy'] < board['b'] for b in boxes) and len({round(b['cx']) for b in boxes}) == 3, f'{width}: the three plan cards are pinned on the board, apart from each other')
         p.locator('[data-a4-plan="wall"] summary').tap()
         ok(C['meeting']['plans'][0]['costs'][:20] in p.locator('[data-a4-plan="wall"]').inner_text(), f'{width}: opening a plan shows what it costs')
         eq(book(p), seed, f'{width}: reading the board writes nothing')
@@ -72,6 +73,12 @@ def run(base, browser):
             p.locator('input[name="a4-plan"][value="sponge"]').check()
             ok(p.locator('[data-a4-worries="sponge"]').is_visible() and p.locator('[data-a4-worries="wall"]').is_hidden(), 'the chosen plan shows its own worries')
             p.locator('input[name="a4-worry-sponge"][value="sponge-years"]').check()
+            # Switching plans resets the worries, so a worry never rides along unseen.
+            p.locator('input[name="a4-plan"][value="wall"]').check(); p.locator('input[name="a4-plan"][value="sponge"]').check()
+            ok(p.locator('input[name="a4-worry-sponge"][value=""]').is_checked() and not p.locator('input[name="a4-worry-sponge"][value="sponge-years"]').is_checked(), 'switching plans resets the shown worry')
+            p.locator('input[name="a4-worry-sponge"][value="sponge-years"]').check()
+            speech = p.evaluate("[...document.querySelectorAll('[data-act-four-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden').map(x=>x.innerText).join(' ')")
+            ok('Good plans have worries' in speech and 'It will take years for a marsh to grow back.' in speech and 'A wall needs mending forever' not in speech, 'read-aloud includes the visible worries and skips hidden ones')
             p.locator('[data-a4-keep-plan]').tap(); p.locator('.a4-kept-plan').wait_for()
             eq([book(p)['story']['plan'], book(p)['story']['planWorry']], ['sponge', 'sponge-years'], 'the plan and worry are kept as codes')
             ok('Your worry: It will take years for a marsh to grow back.' in p.locator('.a4-kept-plan').inner_text(), 'the kept worry shows')
@@ -96,16 +103,21 @@ def run(base, browser):
             ok(p.locator('[data-a4-keep-plan]').count() == 0 and 'The meeting is over' in p.locator('[data-act-four-root]').inner_text(), 'after the ending the plan is fixed')
         c.close()
     # Motion: reduced motion shows the finished pictures; otherwise every part animates once and settles within five seconds.
-    ended = fixture()
+    ended = json.loads(subprocess.check_output(['node', '--input-type=module', '-e', "import {meetingSeed} from './test/act-four-meeting-checks.mjs';import {keepActFourPlan,endActFour} from './dist/act-four-core.mjs';import {canExport} from './test/act-two-checks.mjs';const s=meetingSeed();keepActFourPlan(s,'sponge',null,{canExport});endActFour(s,0,{canExport});s.garden={guide:'ari',welcomeFilmSeen:true};console.log(JSON.stringify(s));"], cwd=ROOT, text=True))
+    measure = '''sel=>[...document.querySelectorAll(sel)].map(e=>{const s=getComputedStyle(e);return {name:s.animationName,count:s.animationIterationCount,dur:parseFloat(s.animationDuration),delay:parseFloat(s.animationDelay),offset:s.strokeDashoffset};})'''
     for motion, still in (('reduce', True), ('no-preference', False)):
         c, p = setup(browser, ended, 820, motion)
-        go(p, base, '#almanac/two-stories/meeting'); p.locator('[data-a4-meeting]').wait_for()
-        anim = p.evaluate('''()=>[...document.querySelectorAll('.a4m-card,.a4m-glow')].map(e=>{const s=getComputedStyle(e);return {name:s.animationName,count:s.animationIterationCount,dur:parseFloat(s.animationDuration),delay:parseFloat(s.animationDelay)};})''')
-        if still:
-            ok(all(a['name'] == 'none' for a in anim), 'reduced motion: the meeting scene is still')
-        else:
-            ok(all(a['name'] != 'none' and a['count'] != 'infinite' for a in anim), 'motion: cards pin and lanterns glow, finitely')
-            ok(max(a['delay'] + a['dur'] * float(a['count']) for a in anim) <= 5, 'the meeting scene settles within five seconds')
+        for route, sel in (('#almanac/two-stories/meeting', '.a4m-card,.a4m-glow'), ('#almanac/map-we-changed', '.a4m-card,.a4m-glow,.a4m-stroke')):
+            go(p, base, route); p.locator('[data-a4-meeting]').first.wait_for()
+            anim = p.evaluate(measure, sel)
+            if still:
+                ok(all(a['name'] == 'none' for a in anim), f'reduced motion: {route} is still')
+                if 'map-we-changed' in route:
+                    ok(all(a['offset'] in ('0', '0px') for a in p.evaluate(measure, '.a4m-stroke')), 'reduced motion: the pencil is already drawn')
+                    ok(p.locator('[data-a4-season="winter"]').count() == 1, 'the ending window shows the winter it ended in')
+            else:
+                ok(all(a['name'] != 'none' and a['count'] != 'infinite' for a in anim), f'motion: {route} animates finitely')
+                ok(max(a['delay'] + a['dur'] * float(a['count']) for a in anim) <= 5, f'{route} settles within five seconds')
         c.close()
     ok(not errors, 'no page errors ' + str(errors))
 

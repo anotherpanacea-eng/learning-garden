@@ -146,6 +146,7 @@ export const actFourContent={
     "yourPlan": "Your plan: {plan}",
     "yourWorry": "Your worry: {worry}",
     "earlierWorry": "a worry from an earlier version",
+    "earlierPlan": "a plan from an earlier version",
     "change": "Choose again",
     "frozen": "The meeting is over. Your plan stays in the almanac.",
     "endOffer": "Hear what the meeting decided",

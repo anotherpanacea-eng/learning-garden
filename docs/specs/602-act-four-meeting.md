@@ -15,8 +15,8 @@ Proposed 2026-11-08 by Claude (OCA seat). Base inspected: `cc85ff60`, the head o
    - the season line;
    - the almanac line naming the kept plan;
    - the between-acts line.
-   
-   The ending scene is the same board with new pencil drawing itself on the old map: "a line here, a question mark there, a small drawing of a reed".
+
+   The ending scene is the same board with new pencil drawing itself on the old map: "a line here, a question mark there, a small drawing of a reed". A library window shows the season the act ended in, read from the saved `season`, so rereading wears the same season (120 §6).
 
 The board is the game and the lesson: three plans that each cost something and protect something, and a worry that makes a plan honest. Nothing scores a plan. The script is explicit: "People will keep arguing. That's allowed." The librarian says "the worry is the most useful part."
 
@@ -53,7 +53,7 @@ Mutators, options-last `{canExport}`, each through 248's whole-notebook clone, `
   - Removing or damaging an activity never revokes the ending.
 
 Pure views add `planStatus`, `worryStatus`, `plan`, `worry`, `earlierChapters`, `endedStatus`, `seasonStatus`, `ended`, `season`, `canKeepPlan` and `canEnd`. `actFourMindChange(view)` picks *someone changes their mind* in the script's order:
-1. the orchard keeper, after a chapter 2 Rain Paths offer;
+1. the orchard keeper, after a chapter 2 offer naming one of today's supplied Rain Paths cases (her line is about the supplied two-tray comparison; a receipt for a case from another version still counts towards the ending, but falls through to the next line);
 2. Pip, after the chapter 1 ledger offer;
 3. otherwise, the librarian.
 
@@ -66,7 +66,9 @@ The Dutch-archive line waits for chapter 3. Every line refers only to work actua
 - `act-four-ui.mjs` renders the meeting page, the board, the keep form and the ending.
 - `act-four-meeting-art.mjs` draws the scene, and `act-four.css` styles and animates it.
 - No shell change: the shell already routes every hash `actFourRoute` recognizes.
-- **Keep form:** native radio groups in fieldsets. Choosing a plan shows only that plan's worries ("No worry for now" is the default), and **Keep this plan** becomes **Choose again** once a plan is kept.
+- **Keep form:** native radio groups in fieldsets. Choosing a plan shows only that plan's worries and resets them to "No worry for now", so a worry never rides along unseen. A saved worry from another version is offered as its own checked choice on its plan, so keeping again unchanged keeps it (the mutator treats an unchanged choice as a no-op before checking new input). **Keep this plan** becomes **Choose again** once a plan is kept.
+- **Read-aloud** reads the visible prose: the meeting text, Bramble, any opened plan, the plan and visible worry choices, and the kept plan and worry. Hidden worry groups are skipped.
+- **The guide's tail** shows only for a recognized saved guide; the shared-name fallback gets none (366). An unreadable plan after a reached ending reads *a plan from an earlier version* in the almanac line, and the ending stays reached.
 - **Focus:** after keeping, it moves to the keeping section; after ending, to the ending heading.
 - **Motion:** in the scene, cards pin and lanterns glow once and settle within about three seconds; in the ending, the pencil draws itself within three. Nothing loops, and reduced motion shows the finished pictures.
 - 44 px targets, 16 px text, visible focus, read-aloud of visible prose only, checks at 320 and 820.
@@ -115,7 +117,8 @@ Pure checks (`test/act-four-meeting-checks.mjs`, fixtures from the real Act IV, 
   - An unknown saved plan is unreadable and cannot be replaced or end the meeting.
   - A worry code from another version is read and shown plainly; a malformed worry blocks replacement.
   - A saved `ended` without a start is not an ending.
-- **Mind change:** after a rain result, the orchard keeper; after only the ledger note, Pip; otherwise the librarian.
+- **Mind change:** after a supplied rain result, the orchard keeper; a receipt for a case from another version falls through to Pip (with the ledger note) or the librarian; after only the ledger note, Pip; otherwise the librarian.
+- **Saved worries and guides:** an unchanged historical worry survives keeping again and is the checked choice; a fallback guide gets the shared name and no tail; the ending art wears each saved season; an unreadable plan after the ending gets plan wording.
 - **Rendering:**
   - The hub links chapter 4 and offers the ending only once it can be reached.
   - The meeting scene is described, with three plan cards, three choices and Bramble.
@@ -136,6 +139,7 @@ Browser journey (`test/act-four-meeting-browser.py`), at 820 and 320:
   - Ending records `ended`, a season and the scene.
   - The ending shows the orchard keeper's line, Mira unpinning the card with her own tail, the season line and the almanac line.
   - Afterwards the plan is fixed.
-- **Motion:** reduced motion leaves the scene still; otherwise every part animates once and settles within five seconds.
+- **Switching and reading:** switching plans resets the shown worry; read-aloud includes the visible worries and skips hidden ones; the three plan cards are pinned inside the board.
+- **Motion,** on an ended notebook: reduced motion leaves the meeting and ending scenes still, with the pencil already drawn and the window showing the season it ended in; otherwise every part, the pencil included, animates once and settles within five seconds.
 
 Physical iPad, Safari, VoiceOver and learning effects remain unqualified. This is followed by an exact-head implementation review and the repository's landing procedure.

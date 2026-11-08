@@ -75,6 +75,10 @@ export function runChecks(){
  const later=meetingSeed();later.story.plan='sponge';later.story.planWorry='sponge-herons';
  eq([A.actFourView(later).worryStatus,A.actFourView(later).worry],['ready','sponge-herons'],'a worry code from another version is read');
  ok(actFourPage(later,{part:'chapter',chapter:'meeting'}).includes(esc(C.meeting.earlierWorry)),'and shown plainly');
+ ok(A.keepActFourPlan(later,'sponge','sponge-herons',options),'keeping an unchanged historical worry is a no-op');
+ eq(later.story.planWorry,'sponge-herons','and the historical worry is kept');
+ const laterPage=actFourPage(later,{part:'chapter',chapter:'meeting'});
+ ok(/value="sponge-herons" checked/.test(laterPage),'the historical worry is the checked choice, so keeping again unchanged keeps it');
  const badWorry=meetingSeed();badWorry.story.plan='wall';badWorry.story.planWorry=42;eq(A.actFourView(badWorry).canKeepPlan,false,'a malformed worry blocks replacement');
  const endedOnly=meetingSeed();endedOnly.story.acts.IV.started=false;endedOnly.story.acts.IV.ended=true;eq(A.actFourView(endedOnly).ended,false,'a saved ended without a start is not an ending (352)');
 
@@ -83,6 +87,10 @@ export function runChecks(){
  eq(A.actFourMindChange(v),'orchard','after a kept rain result, the orchard keeper');
  eq(A.actFourMindChange({chapterStatus:{account:'ready',orchard:'missing'}}),'account','after only the ledger note, Pip');
  eq(A.actFourMindChange({chapterStatus:{account:'missing',orchard:'missing'}}),'fallback','otherwise the librarian');
+ const historic=clone(s);historic.story.acts.IV.contributions.orchard.ref={caseId:'flood-99'};
+ eq(A.actFourView(historic).chapterStatus.orchard,'ready','a receipt for a case from another version is still readable');
+ eq(A.actFourMindChange(A.actFourView(historic)),'account','but the supplied-comparison line needs a supplied case, so Pip speaks');
+ const historicOnly=clone(historic);delete historicOnly.story.acts.IV.contributions.account;eq(A.actFourMindChange(A.actFourView(historicOnly)),'fallback','and with no ledger note, the librarian');
 
  // Rendering.
  const fresh=meetingSeed();
@@ -108,6 +116,12 @@ export function runChecks(){
  ok(end.includes(esc(C.ending.seasons.spring)),'the season line for May');
  ok(end.includes('We kept a plan: The Sponge.'),'the almanac line names the plan');
  ok(end.includes(esc(C.ending.between)),'the between-acts line');
+ const nobody=actFourPage({...fresh,garden:{guide:'nobody'}},{part:'ending'});
+ ok(nobody.includes('Mira unpins the card from the library door.')&&!Object.values(C.ending.tails).some(t=>nobody.includes(esc(t))),'a fallback guide gets the shared name and no personal tail');
+ const seasons=['spring','summer','autumn','winter'].map(x=>{const y=clone(fresh);y.story.acts.IV.season=x;return actFourPage(y,{part:'ending'});});
+ ok(seasons.every((h,i)=>h.includes(`data-a4-season="${['spring','summer','autumn','winter'][i]}"`)),'the ending art wears the saved season');
+ const lostPlan=clone(fresh);lostPlan.story.plan='moat';
+ ok(actFourPage(lostPlan,{part:'ending'}).includes('We kept a plan: '+esc(C.meeting.earlierPlan)),'an unreadable plan after the ending gets plan wording, and the ending stays reached');
  ok(actFourPage(fresh,{part:'chapter',chapter:'meeting'}).includes(esc(C.meeting.frozen)),'after the ending the plan is shown as fixed');
  ok(actFourPage(fresh,{part:'hub'}).includes('#almanac/map-we-changed'),'the hub offers the ending again');
  ok(actFourNotes(fresh).includes('a plan kept')&&actFourNotes(fresh).includes('the meeting has ended'),'Notes name the plan and the ending');

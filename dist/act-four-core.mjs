@@ -143,9 +143,10 @@ export function offerActFour(state,chapter,key,options={}){
 // Spec602 · keep a plan, with an optional worry from that plan's list. Choosing again is allowed until the ending.
 export function keepActFourPlan(state,plan,worry=null,options={}){
  const v=actFourView(state);if(!v.canKeepPlan||!actFourPlans.includes(plan))return false;
+ // An unchanged choice, including a saved worry code from another version, is a no-op before any new input is checked.
+ if(v.plan===plan&&v.worry===worry&&v.worryStatus!=='missing')return true;
  const offered=actFourContent.meeting.plans.find(p=>p.id===plan);
  if(worry!==null&&!offered?.worries.some(w=>w.id===worry))return false;
- if(v.plan===plan&&v.worry===worry&&v.worryStatus!=='missing')return true;
  return mutate(state,options,story=>{story.plan=plan;story.planWorry=worry;});
 }
 // Spec602 · the Act IV ending. It needs a kept plan and work in any two of chapters 1 to 3 (spec 120 §6/§7, act-4.md).
@@ -153,5 +154,11 @@ export function endActFour(state,month,options={}){
  const v=actFourView(state);if(v.ended)return true;const selected=seasonForMonth(month);if(!v.canEnd||!selected)return false;
  return mutate(state,options,story=>{const a=story.acts.IV;a.ended=true;if(!own(a,'season'))a.season=selected;if(!story.seenScenes.includes('map-changed'))story.seenScenes.push('map-changed');});
 }
-// Who changes their mind at the meeting: the first line whose matching work was offered, else the librarian (act-4.md).
-export function actFourMindChange(v){return v.chapterStatus.orchard==='ready'?'orchard':v.chapterStatus.account==='ready'?'account':'fallback';}
+// Who changes their mind at the meeting: the first line whose matching work was offered, else the librarian (act-4.md:
+// "A line may refer only to a matching kept source/artifact"). The orchard keeper's line is about the supplied two-tray
+// comparison, so it needs a chapter 2 receipt naming one of today's supplied Rain Paths cases; a case from another
+// version is still a readable receipt and still counts towards the ending, but it falls through to the next line.
+export function actFourMindChange(v){
+ const orchard=v.chapterStatus.orchard==='ready'&&rainCaseById(v.contributions.orchard?.ref?.caseId);
+ return orchard?'orchard':v.chapterStatus.account==='ready'?'account':'fallback';
+}
