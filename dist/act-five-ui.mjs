@@ -79,7 +79,7 @@ export function bindActFive(state,ctx){
  }
  const on=(selector,fn)=>document.querySelectorAll(selector).forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.stopImmediatePropagation();return;}fn(el);}));
  // Read-aloud speaks the visible prose only, captured at the moment Hear is pressed, as in Act IV.
- root.querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.preventDefault();e.stopImmediatePropagation();return;}el.dataset.speak=[...root.querySelectorAll('[data-act-five-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden').map(x=>x.innerText).join(' ');},{capture:true}));
+ root.querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.preventDefault();e.stopImmediatePropagation();return;}el.dataset.speak=[...root.querySelectorAll('[data-act-five-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden'&&!x.closest('details:not([open])')).map(x=>x.innerText).join(' ');},{capture:true}));
  on('[data-a5-start]',()=>commit(()=>startActFive(state,options),'#almanac/next-keeper'));
  on('[data-a5-reveal]',()=>commit(()=>revealNextKeeperPage(state,options),'#almanac/next-keeper'));
  on('[data-a5-choose]',el=>commit(()=>chooseActFivePath(state,el.getAttribute('data-a5-choose'),options),null,'#act-five-choose'));
