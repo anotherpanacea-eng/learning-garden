@@ -54,7 +54,13 @@ def enter(p):
 def setup(browser, base, seed, label, width=820):
     c,p = native.setup(browser, seed, label, width)
     c.add_init_script('''window.depthUtterances=[];if(window.speechSynthesis){const nativeSpeak=speechSynthesis.speak.bind(speechSynthesis);speechSynthesis.speak=u=>{window.depthUtterances.push(u.text);return nativeSpeak(u);};}''')
-    h.go(p,base,ROUTE,'[data-dt-depth-enter]')
+    p.set_default_timeout(20000)
+    try:h.go(p,base,ROUTE,'[data-dt-depth-enter]')
+    except Exception:
+        p.screenshot(path=str(OUT/'readiness-failure.png'),full_page=True)
+        (OUT/'readiness-failure.html').write_text(p.content())
+        print(json.dumps({'artifacts':str(OUT),'errors':h.errors,'console':h.console_errors,'http':h.http_failures[-10:],'requests':h.request_failures[-10:]}),flush=True)
+        raise
     return c,p
 
 
@@ -195,12 +201,14 @@ def journey(browser,base,seed):
             if caller=='work':h.ok(p.locator('[data-dw-action="previous"]').evaluate('e=>e===document.activeElement'),'endpoint focus returns to enabled neighbor')
             action(p,'back')
             h.ok(p.locator(f'[data-dw-view="{caller}"]').count()==1,'example restores actual caller '+caller)
+            h.ok(p.locator('[data-dw-action="example"]').evaluate('e=>e===document.activeElement'),'example Back restores actual launcher focus')
+            if caller=='faces':h.ok(p.locator('[data-dw-gauge]').input_value()=='b' and p.locator('[data-dw-face-choice="right"]').get_attribute('aria-pressed')=='true','selected gauge and face survive example')
             if caller!='work':action(p,'back')
             h.ok(work(p)==preserved,'example never edits own tank')
         action(p,'pin');p.locator('[data-dw-action="faces"]').focus();p.keyboard.press('Enter');h.ok(p.locator('[data-dw-view="faces"]').count()==1,'native Enter launches faces');action(p,'back')
         text=hear(p);h.ok('kilopascals' in text and 'No water reading' in text and 'Reading speed' not in text,'current narration uses units/status and excludes voice settings')
         p.locator('.voice-settings summary').first.click();text=hear(p)
-        h.ok('Natural pace' not in text and 'Refresh voice list' not in text and 'Reading voice' not in text,'open voice settings excluded from narration')
+        h.ok('Natural pace' not in text and 'Refresh voice list' not in text and 'Reading voice' not in text and 'Narrow' not in text and 'Wide' in text,'open voice settings and unselected options excluded from narration')
         observed=p.evaluate('depthUtterances')
         h.ok(bool(observed),'native synthesis received a final utterance')
         h.ok('kilopascals' in observed[-1] and 'Reading speed' not in observed[-1],'actual final utterance uses supplied units and visible facts')
@@ -270,10 +278,12 @@ def hostile(browser,base,seed):
              ('[data-dt-depth-host]','[data-dw-field="level"]','change'),
              ('[data-dt-depth-back]',None,'click')]
     mutations=['hidden','inert','aria-hidden','style','class','reparent','reinsert']
+    c,p=setup(browser,base,seed,'hostile')
     for selector,child,event in targets:
         for mutation in mutations:
-            c,p=setup(browser,base,seed,'hostile-'+selector+'-'+mutation)
             try:
+                p.reload(wait_until='domcontentloaded');p.locator('[data-dt-depth-enter]').wait_for()
+                print('  '+selector+' '+mutation,flush=True)
                 enter(p)
                 if 'next' in selector:action(p,'example')
                 if 'gauge' in selector or 'face-choice' in selector:action(p,'faces')
@@ -296,7 +306,8 @@ def hostile(browser,base,seed):
                 if event=='change':control.evaluate('e=>{e.value=e.matches("[data-dw-gauge]")?"b":"6";}')
                 emit(control,event)
                 h.ok(p.locator('[data-dw-root]').inner_html()==before and storage(p)==saved,'retired callback refuses '+selector+' '+mutation)
-            finally:c.close()
+            finally:pass
+    c.close()
     # Parent entry guard must reject mutations before the child has ever mounted.
     for mutation in mutations:
         c,p=setup(browser,base,seed,'entry-'+mutation)
@@ -341,13 +352,44 @@ def transfers(browser,base,seed):
     finally:c.close()
 
 
+
+def stale_callbacks(browser,base,seed):
+    cases=['work','pin','view','frame','gauge','face','root']
+    for case in cases:
+        c,p=setup(browser,base,seed,'stale-'+case)
+        try:
+            enter(p);action(p,'pin')
+            if case in ['gauge','face']:action(p,'faces')
+            if case=='frame':action(p,'example')
+            selector={'work':'[data-dw-field="a"]','pin':'[data-dw-action="pin"]','view':'[data-dw-action="faces"]','frame':'[data-dw-action="next"]','gauge':'[data-dw-gauge]','face':'[data-dw-face-choice="bottom"]','root':'[data-dw-field="level"]'}[case]
+            old=capture(p,selector);root=capture(p,'[data-dw-root]')
+            if case=='frame':action(p,'next')
+            elif case=='gauge':p.locator('[data-dw-gauge]').select_option('b')
+            elif case=='face':h.click(p,'[data-dw-face-choice="left"]')
+            elif case=='view':action(p,'example');action(p,'back')
+            else:choose(p,b=3)
+            if case=='pin':action(p,'pin')
+            before=p.locator('[data-dw-root]').inner_html();saved=storage(p)
+            if case=='root':
+                p.evaluate('(old)=>document.querySelector("[data-dw-root]").replaceWith(old)',root)
+                h.ok(root.evaluate('e=>e.isConnected'),'old child root truly restored after work revision')
+                before=p.locator('[data-dw-root]').inner_html()
+            old.evaluate('e=>{if(e.tagName==="SELECT")e.value=e.matches("[data-dw-gauge]")?"b":"6";}')
+            emit(old,'change' if old.evaluate('e=>e.tagName==="SELECT"') else 'click')
+            h.ok(p.locator('[data-dw-root]').inner_html()==before and storage(p)==saved,'departed '+case+' callback refuses after actual revision')
+        finally:c.close()
+
 def samples(browser,base,seed):
-    for width in [320,1024]:
+    for width in [320,820,1024]:
         c,p=setup(browser,base,seed,str(width),width)
         try:
             enter(p)
             for values in [{'level':0,'a':6,'b':6,'width':'narrow'},{'level':1,'a':5,'b':4,'width':'wide'},{'level':5,'a':2,'b':2,'width':'narrow'},{'level':5,'a':2,'b':2,'width':'wide'}]:
                 choose(p,**values);geometry(p,values);bounds(p)
+            choose(p,level=6,a=6,b=6)
+            overlaps=p.locator('[data-dw-tank]').evaluate('''svg=>{const label=[...svg.querySelectorAll('text')].find(e=>e.textContent.startsWith('Waterline:')).getBoundingClientRect();return [...svg.querySelectorAll('[data-dw-probe] text')].some(e=>{const b=e.getBoundingClientRect();return b.left<label.right&&b.right>label.left&&b.top<label.bottom&&b.bottom>label.top;});}''')
+            h.ok(not overlaps,'surface probe letters do not overlap the waterline label')
+            p.screenshot(path=str(OUT/f'both-surface-{width}.png'),full_page=True)
             hear(p);bounds(p);p.locator('.voice-settings summary').first.click();bounds(p);h.click(p,'[data-stop-speech]');bounds(p)
             p.screenshot(path=str(OUT/f'sample-{width}.png'),full_page=True)
         finally:c.close()
@@ -366,9 +408,12 @@ def main():
     with sync_playwright() as pw:
         b=pw.chromium.launch(headless=True,executable_path=os.environ.get('CHROME_PATH','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'),args=['--disable-quic'])
         try:
-            journey(b,base,seed);parent_preservation(b,base,seed);transfers(b,base,seed);hostile(b,base,seed);samples(b,base,seed)
+            suites={'journey':journey,'parents':parent_preservation,'transfers':transfers,'hostile':hostile,'stale':stale_callbacks,'samples':samples}
+            for name,run in suites.items():
+                if os.environ.get('DEPTH_WINDOW_CASE',name)==name:
+                    print('Running '+name,flush=True);run(b,base,seed)
             h.ok(not h.errors,'no page errors '+str(h.errors));h.ok(not h.console_errors,'no console errors '+str(h.console_errors))
-            receipt={'status':'passed','checks':h.checks,'base':base,'limits':'Native Chrome only; no physical iPad/Safari, audible speech, screen-reader speech or learning qualification'}
+            receipt={'status':'passed','checks':h.checks,'base':base,'suite':os.environ.get('DEPTH_WINDOW_CASE','all'),'limits':'Native Chrome only; no physical iPad/Safari, audible speech, screen-reader speech or learning qualification'}
             (OUT/'receipt.json').write_text(json.dumps(receipt,indent=2));print(json.dumps(receipt))
         except Exception:
             for p,label in h.pages:
