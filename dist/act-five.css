@@ -30,3 +30,22 @@
 .a5-tier{display:inline-block;font-size:.95rem;font-weight:600;margin-right:.4rem}
 .a5-status:empty{display:none}
 .a5-choose{margin:1rem 0}
+/* Spec 605 · the project steps and the binding ending. */
+.a5-project{border:2px solid #d9c9a8;border-radius:10px;padding:1rem;margin:1rem 0;background:#fffdf6}
+.a5-project h2{margin-top:0}
+.a5-step{margin:1rem 0}
+.a5-step fieldset{border:0;padding:0;margin:.5rem 0}
+.a5-step label{display:flex;align-items:center;gap:.5rem;min-height:44px}
+.a5-step input[type=radio]{width:22px;height:22px}
+.a5-done{font-weight:600;color:#3f5a26}
+.a5-show{border-left:4px solid #6f8d4a;padding:.4rem .7rem;font-style:italic}
+.a5-card{border:1px dashed #b9a27e;border-radius:8px;padding:.75rem;background:#fbf6ea}
+.a5-binding{margin:1rem 0}
+.a5-binding svg{width:100%;height:auto;display:block;border-radius:6px}
+.a5-binding figcaption{font-size:1rem;color:#5b5045;margin-top:.25rem}
+.a5-binding-head{font:italic 20px Georgia,"Times New Roman",serif;fill:#3a3029}
+.a5-newpage{transform-box:fill-box;transform-origin:0 50%;animation:a5-slide 1.2s ease-out .2s both}
+@keyframes a5-slide{from{transform:translateX(60px) rotate(4deg);opacity:0}to{transform:none;opacity:1}}
+.a5-stitch{animation:a5-stitch .3s ease-out both;animation-delay:var(--d)}
+@keyframes a5-stitch{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.a5-newpage,.a5-stitch{animation:none}}

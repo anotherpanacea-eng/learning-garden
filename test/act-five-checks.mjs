@@ -91,7 +91,7 @@ export function runChecks(){
  const noEnd=clone(s);noEnd.story.acts.IV.ended=false;delete noEnd.story.acts.V;eq(F.actFiveView(noEnd).canStart,false,'Act V needs the Act IV ending');
 
  // Every content string comes from act-5.md, the 120 companion or the 604 companion.
- const sources=['../docs/content/120-story/act-5.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/content/604-act-five-opening-text.md'].map(f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('**','')).join('\n');
+ const sources=['../docs/content/120-story/act-5.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/content/604-act-five-opening-text.md','../docs/content/605-act-five-projects-text.md'].map(f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('**','')).join('\n');
  const strings=[];const walk=x=>{if(typeof x==='string')strings.push(x);else if(Array.isArray(x))x.forEach(walk);else if(x&&typeof x==='object')Object.entries(x).forEach(([k,v])=>{if(!['id','href','tier','askHref'].includes(k))walk(v);});};walk(C);
  for(const t of strings)ok(sources.includes(t),'traced: '+t.slice(0,60));
  return n;
