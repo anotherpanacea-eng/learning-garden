@@ -141,7 +141,7 @@ export function runChecks(){
  }
  {
   // The finite-text contract comes from the reviewed authoring documents, not today's saved answer keys.
-  const files=['../docs/content/352-act-four-opening-text.md','../docs/content/120-story/act-4.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/specs/366-guide-changes-their-mind.md'];
+  const files=['../docs/content/352-act-four-opening-text.md','../docs/content/120-story/act-4.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/specs/366-guide-changes-their-mind.md','../docs/content/601-act-four-orchard-text.md'];
   const plain=x=>x.replace(/\*/g,'');
   const sources=plain(files.map(p=>readFileSync(new URL(p,import.meta.url),'utf8')).join('\n')).replaceAll("My hat and my boots both got wet that year too. That doesn't mean my hat did it.","My hat and my boots both got wet that year too, and I'll keep saying it: that doesn't mean my hat did it.");
   const leafs=x=>Array.isArray(x)?x.flatMap(leafs):x&&typeof x==='object'?Object.values(x).flatMap(leafs):typeof x==='string'?[x]:[];
