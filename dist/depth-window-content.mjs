@@ -10,7 +10,7 @@ export const depthCopy=Object.freeze({
  faceExplanation:'At one point in still water, the pressure reading does not depend on how a tiny test face is turned. The force on that face is perpendicular to it. Pressure is a number, not a direction.',
  faceLimit:'Direction only; arrow length is not a force measurement.',
  facePrompt:'Choose a location below the waterline to view water acting on a test face.',
- depthContrast:'In the same tank, a lower point in the water is deeper below the surface. Its extra pressure is greater.',
+ depthContrast:'In the same tank of still water, a lower point in the water is deeper below the surface. Its extra pressure is greater.',
  conservationNote:'Each choice is a still-water setup. Width and waterline choices do not conserve one poured sample.',
  empty:'This setup has no water. The locations stay at their chosen heights.',
  noPin:'Pin a setup first, then change one setting to compare.',

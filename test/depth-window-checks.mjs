@@ -66,19 +66,29 @@ for(const face of ['Top','front',null,undefined])eq(depthFace(defaults,'a',face)
 for(let mask=0;mask<16;mask++){
  const pin={...defaults},current={...defaults},changed=[];
  for(const [index,field] of fields.entries())if(mask&(1<<index)){current[field]={level:6,a:3,b:1,width:'wide'}[field];changed.push(field);}
- const result=compareDepth(pin,current);eq(result.changed,changed);eq(result.kind,changed.length===0?'same':changed.length===1?changed[0]:'multiple');eq(result.pinned,depthModel(pin));eq(result.current,depthModel(current));assert.ok(result.text.length>0);
+ const result=compareDepth(pin,current);eq(result.changed,changed);eq(result.kind,changed.length===0?'same':changed.length===1?changed[0]:'multiple');eq(result.pinned,depthModel(pin));eq(result.current,depthModel(current));eq(result.text,changed.length===0?'These settings are the same.':changed.length>1?'More than one setting changed. We can compare these setups; to investigate one change, hold the other settings steady.':changed[0]==='width'?'Width changed while both depths stayed the same. This model gives the same pressure readings.':changed[0]==='level'?'The waterline moved while the gauges kept their heights. Compare depths where water readings are available.':`Only Gauge ${changed[0].toUpperCase()} moved. The other location stayed fixed as a reference.`);
  result.pinned.work.level=0;result.current.work.a=6;eq(pin,defaults);eq(current.a,mask&2?3:4);
 }
-for(const [level,a,b,phrase] of [[0,1,1,'Both locations still have no water reading'],[1,2,3,'Both locations still have no water reading'],[2,1,3,'Gauge A keeps the same depth and reading; Gauge B still has no water reading'],[2,3,2,'Gauge B keeps the same depth and reading; Gauge A still has no water reading'],[2,1,2,'both depths stayed the same']]){
- const pin={level,a,b,width:'narrow'},current={...pin,width:'wide'},c=compareDepth(pin,current);eq(c.kind,'width');eq(c.pinned.gauges,c.current.gauges);assert.ok(c.text.includes(phrase));
+for(const [level,a,b,phrase] of [[0,1,1,'Width changed. Both locations still have no water reading.'],[1,2,3,'Width changed. Both locations still have no water reading.'],[2,1,3,'Width changed. Gauge A keeps the same depth and reading; Gauge B still has no water reading.'],[2,3,2,'Width changed. Gauge B keeps the same depth and reading; Gauge A still has no water reading.'],[2,1,2,'Width changed while both depths stayed the same. This model gives the same pressure readings.']]){
+ const pin={level,a,b,width:'narrow'},current={...pin,width:'wide'},c=compareDepth(pin,current);eq(c.kind,'width');eq(c.pinned.gauges,c.current.gauges);eq(c.text,phrase);
 }
-for(const [oldLevel,level,a,b,phrase] of [[4,0,1,2,'now has no water'],[0,1,2,3,'below both locations'],[0,2,1,2,'now has water'],[4,2,1,3,'waterline moved'],[2,3,3,1,'waterline moved']]){
- const c=compareDepth({level:oldLevel,a,b,width:'narrow'},{level,a,b,width:'narrow'});eq(c.kind,'level');assert.ok(c.text.toLowerCase().includes(phrase));
+for(const [oldLevel,level,a,b,phrase] of [[4,0,1,2,'This tank now has no water. Neither location has a water reading.'],[0,1,2,3,'The waterline is below both locations. Neither has a water reading.'],[0,2,1,2,'This setup now has water; the gauge heights stayed fixed. Check which locations are in water or at its surface.'],[4,2,1,3,'The waterline moved while the gauges kept their heights. Compare depths where water readings are available.'],[2,3,3,1,'The waterline moved while the gauges kept their heights. Compare depths where water readings are available.']]){
+ const c=compareDepth({level:oldLevel,a,b,width:'narrow'},{level,a,b,width:'narrow'});eq(c.kind,'level');eq(c.text,phrase);
 }
 const crossing=compareDepth({level:2,a:3,b:1,width:'narrow'},{level:3,a:3,b:1,width:'narrow'});eq([crossing.pinned.gauges.a.depth,crossing.pinned.gauges.a.pressureTenths,crossing.current.gauges.a.depth,crossing.current.gauges.a.pressureTenths],[null,null,0,0]);
+// These authored contrasts catch loss of the surface reference, still-water scope,
+// or width-conservation distinction; numeric fixtures below independently check them.
+const expectedTexts=[
+ 'The bottom is our height zero. A is 3 meters above it, but only 1 meter below the surface. B is 1 meter above the bottom and 3 meters below the surface. Depth starts at the waterline.',
+ 'Both locations are 3 meters below the same waterline. Their pressure readings match even though they are side by side.',
+ 'This wider setup has the same waterline and depths. Its pressure readings still match the narrow setup. This is a differently filled tank, not one conserved sample stretched wider.',
+ 'The waterline is higher while both locations stay at height 1 meter. Their depths are now 5 meters, so both readings rise to 49 kilopascals.',
+ 'A is at the surface: 0 kilopascals extra relative to air. This does not mean no pressure at all. B is still 5 meters deep.',
+ 'A is above the water. There is no water-gauge reading here, unlike the surface’s zero. B is still in water, now 4 meters deep.'
+];
 const expectedExamples=[[4,3,1,'narrow',98,294],[4,1,1,'narrow',294,294],[4,1,1,'wide',294,294],[6,1,1,'wide',490,490],[6,6,1,'wide',0,490],[5,6,1,'wide',null,392]];
 for(const [frame,[level,a,b,width,pa,pb]] of expectedExamples.entries()){
- const example=depthExample(frame);eq(example.work,{level,a,b,width});eq(example.previousLevel,frame===3?4:null);eq(typeof example.text,'string');assert.ok(example.text.length>0);const m=depthModel(example.work);eq([m.gauges.a.pressureTenths,m.gauges.b.pressureTenths],[pa,pb]);
+ const example=depthExample(frame);eq(example.work,{level,a,b,width});eq(example.previousLevel,frame===3?4:null);eq(example.text,expectedTexts[frame]);const m=depthModel(example.work);eq([m.gauges.a.pressureTenths,m.gauges.b.pressureTenths],[pa,pb]);
  example.work.level=0;eq(depthExample(frame).work,{level,a,b,width});
 }
 for(const frame of [-1,6,.5,NaN,'0',null,undefined])eq(depthExample(frame),null);

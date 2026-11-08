@@ -131,6 +131,7 @@ def face(p, gauge, side, available=True):
     h.ok(attrs(p,'[data-dw-backing]',['x','y','width','height'])==backing,'actual solid backing away from water')
     if not available:
         h.ok(p.locator('[data-dw-force],[data-dw-arrowhead]').count()==0,'surface/dry shows no water-force arrow')
+        h.ok('Choose a location below the waterline to view water acting on a test face.' in p.locator('[data-dw-root] p').all_text_contents(),'surface/dry supplies exact no-arrow explanation')
         return
     start={'top':[150,45],'bottom':[150,165],'left':[90,105],'right':[210,105]}[side]
     shaft=attrs(p,'[data-dw-force]',['x1','y1','x2','y2'])
@@ -183,6 +184,11 @@ def journey(browser,base,seed):
         choose(p,level=4);action(p,'pin');choose(p,width='wide');compare(p,'Gauge B keeps the same depth and reading; Gauge A still has no water reading.')
         choose(p,level=5,a=4,b=2)
         action(p,'faces')
+        face_copy=['Pressure is perpendicular force per unit area. Kilopascals are units of pressure.', 'At one point in still water, the pressure reading does not depend on how a tiny test face is turned. The force on that face is perpendicular to it. Pressure is a number, not a direction.', 'In the same tank of still water, a lower point in the water is deeper below the surface. Its extra pressure is greater.']
+        paragraphs=p.locator('[data-dw-root] p').all_text_contents()
+        h.ok(all(sentence in [' '.join(t.split()) for t in paragraphs] for sentence in face_copy),'face definition, local direction and lower-point contrast match authored complete sentences')
+        narrated=hear(p)
+        h.ok(narrated.count('Direction only; arrow length is not a force measurement.')==1,'face narration includes direction-only qualification exactly once')
         for gauge in ['a','b']:
             for side in ['top','bottom','left','right']:
                 face(p,gauge,side)
@@ -354,6 +360,14 @@ def transfers(browser,base,seed):
 
 
 def stale_callbacks(browser,base,seed):
+    c,p=setup(browser,base,seed,'live-dispatch-positive')
+    try:
+        enter(p);control=capture(p,'[data-dw-field="a"]')
+        control.evaluate('e=>e.value="1"');emit(control,'change')
+        h.ok(work(p)=={**DEFAULT,'a':1},'same emit change works on fresh live selector')
+        emit(capture(p,'[data-dw-action="faces"]'))
+        h.ok(p.locator('[data-dw-view="faces"]').count()==1,'same emit click works on fresh live launcher')
+    finally:c.close()
     cases=['work','pin','view','frame','gauge','face','root']
     for case in cases:
         c,p=setup(browser,base,seed,'stale-'+case)
@@ -363,12 +377,17 @@ def stale_callbacks(browser,base,seed):
             if case=='frame':action(p,'example')
             selector={'work':'[data-dw-field="a"]','pin':'[data-dw-action="pin"]','view':'[data-dw-action="faces"]','frame':'[data-dw-action="next"]','gauge':'[data-dw-gauge]','face':'[data-dw-face-choice="bottom"]','root':'[data-dw-field="level"]'}[case]
             old=capture(p,selector);root=capture(p,'[data-dw-root]')
-            if case=='frame':action(p,'next')
-            elif case=='gauge':p.locator('[data-dw-gauge]').select_option('b')
+            if case=='frame':action(p,'next');action(p,'next')
+            elif case=='gauge':
+                p.locator('[data-dw-gauge]').select_option('b');p.locator('[data-dw-gauge]').select_option('a')
             elif case=='face':h.click(p,'[data-dw-face-choice="left"]')
             elif case=='view':action(p,'example');action(p,'back')
             else:choose(p,b=3)
-            if case=='pin':action(p,'pin')
+            if case=='pin':
+                action(p,'pin');action(p,'compare')
+                pinned=p.locator('[data-dw-setup="pinned"]').inner_text()
+                h.ok('height 3 meters' in pinned,'second pin visibly holds W2 before old W1 pin callback')
+                action(p,'back')
             before=p.locator('[data-dw-root]').inner_html();saved=storage(p)
             if case=='root':
                 p.evaluate('(old)=>document.querySelector("[data-dw-root]").replaceWith(old)',root)
@@ -377,6 +396,8 @@ def stale_callbacks(browser,base,seed):
             old.evaluate('e=>{if(e.tagName==="SELECT")e.value=e.matches("[data-dw-gauge]")?"b":"6";}')
             emit(old,'change' if old.evaluate('e=>e.tagName==="SELECT"') else 'click')
             h.ok(p.locator('[data-dw-root]').inner_html()==before and storage(p)==saved,'departed '+case+' callback refuses after actual revision')
+            if case=='pin':
+                action(p,'compare');h.ok(p.locator('[data-dw-setup="pinned"]').inner_text()==pinned,'retired W1 pin cannot replace current W2 pin')
         finally:c.close()
 
 def samples(browser,base,seed):
