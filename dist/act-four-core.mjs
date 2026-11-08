@@ -1,20 +1,69 @@
-// Spec352: explicit story offers, separate from the learner's evidence and conclusions.
+// Spec352 (chapter 1) and spec601 (chapter 2): explicit story offers, separate from the learner's evidence and conclusions.
 import {storyView} from './keeper-story-core.mjs';
 import {actThreeView} from './act-three-core.mjs';
 import {ledgerView,validLedgerKeep} from './ledger-gauge-core.mjs';
+import {rainCaseById} from './rain-paths-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 
 export const actFourChapters=Object.freeze(['account','orchard','gazette','meeting']);
+// Chapters with a reader in this version; gazette and meeting stay reserved.
+export const actFourLiveChapters=Object.freeze(['account','orchard']);
 const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),own=(x,k)=>Object.hasOwn(x,k);
 const field=(o,k,test)=>!own(o,k)?'missing':test(o[k])?'ready':'unreadable';
 const id=x=>typeof x==='string'&&x.length>0&&x.length<=160;
 const visitId=x=>typeof x==='string'&&/^ledger-[1-9][0-9]*$/.test(x)&&Number.isSafeInteger(Number(x.slice(7)));
 const frame=x=>['short','longer'].includes(x),page=x=>['short','longer','original'].includes(x);
 function reference(r){return obj(r)&&visitId(r.visitId)&&['first','latest'].includes(r.edition)&&id(r.sourceId);}
+// A chapter 2 reference names the kept Rain Paths case only. It is shape-checked, never matched against today's cases.
+const rainReference=r=>obj(r)&&Object.keys(r).length===1&&id(r.caseId);
 export function validActFourOffer(r,chapter=r?.chapter){
- return chapter==='account'&&obj(r)&&r.kind==='act-four-offer'&&r.version===1&&r.chapter===chapter&&r.activity==='ledger-gauge'&&r.artifactKind==='evidence-note'&&reference(r.ref);
+ if(!obj(r)||r.kind!=='act-four-offer'||r.version!==1||r.chapter!==chapter)return false;
+ if(chapter==='account')return r.activity==='ledger-gauge'&&r.artifactKind==='evidence-note'&&reference(r.ref);
+ if(chapter==='orchard')return r.activity==='rain-paths'&&r.artifactKind==='kept-result'&&rainReference(r.ref);
+ return false;
+}
+// Spec601: a kept Rain Paths result is checked as a snapshot: its own structure, ids, bounded counts and internal
+// consistency. It is never compared with today's cases, model or recomputed rows, so a later rule change cannot strand it.
+const count=(n,max=1000)=>Number.isSafeInteger(n)&&n>=0&&n<=max;
+const flags=x=>obj(x)&&Object.values(x).every(v=>v===true);
+function rainSnapshot(kept,caseId){
+ if(!obj(kept)||kept.caseId!==caseId||!obj(kept.support)||!Object.values(kept.support).every(flags)||typeof kept.familiar!=='boolean')return false;
+ const m=kept.model,c=kept.config;
+ if(!obj(m)||!id(m.id)||!count(m.capacity)||m.capacity<1||!count(m.batchSize)||m.batchSize<1)return false;
+ if(!obj(c)||c.id!==caseId||!count(c.newRainTotal)||c.newRainTotal<1||!Array.isArray(c.trays)||c.trays.length<1||c.trays.length>8)return false;
+ if(!Array.isArray(kept.rows)||kept.rows.length!==c.trays.length)return false;
+ const ids=new Set();
+ return c.trays.every((tray,i)=>{
+  const r=kept.rows[i];
+  if(!obj(tray)||!id(tray.id)||ids.has(tray.id)||!id(tray.cover)||!count(tray.priorStored,m.capacity)||!obj(r))return false;
+  ids.add(tray.id);
+  if(r.id!==tray.id||r.cover!==tray.cover||r.priorStored!==tray.priorStored||r.newRainTotal!==c.newRainTotal)return false;
+  if(!['cloudRemaining','surfaceNew','storedNew','runoffNew','emptySlots'].every(k=>count(r[k])))return false;
+  // A kept result is a finished run: no rain left to fall or on the surface, every new token stored or run off,
+  // and the tray's own slots adding up to its saved capacity.
+  return r.cloudRemaining===0&&r.surfaceNew===0&&r.storedNew+r.runoffNew===c.newRainTotal&&r.priorStored+r.storedNew+r.emptySlots===m.capacity;
+ });
+}
+// Rain Paths keeps one result per case, frozen at its first keep. Each case's keptResult is read on its own,
+// so one unreadable case never hides another.
+function rainSource(state){
+ const result={status:'missing',retainedUnreadable:false,candidates:[]};
+ if(!obj(state)||!own(state,'rainPaths'))return result;
+ const root=state.rainPaths;
+ if(!obj(root)||root.version!==1||!obj(root.cases))return {...result,status:'unreadable',retainedUnreadable:true};
+ result.status='ready';
+ for(const [caseId,work] of Object.entries(root.cases)){
+  if(!id(caseId)||!obj(work)||!own(work,'keptResult')){result.retainedUnreadable=true;continue;}
+  const kept=work.keptResult;
+  if(kept===null)continue;
+  if(!rainSnapshot(kept,caseId)){result.retainedUnreadable=true;continue;}
+  // Today's case list only names the case; an id from another version is still offered, with a plain label.
+  result.candidates.push({key:JSON.stringify(['orchard',caseId]),chapter:'orchard',activity:'rain-paths',artifactKind:'kept-result',ref:{caseId},caseLabel:rainCaseById(caseId)?.label??null});
+ }
+ return result;
 }
 function sourceView(state,chapter){
+ if(chapter==='orchard')return rainSource(state);
  const result={status:'missing',retainedUnreadable:false,candidates:[]};
  if(chapter!=='account'||!obj(state)||!own(state,'ledgerGauge'))return result;
  const host=ledgerView(state);
@@ -38,7 +87,7 @@ function sourceView(state,chapter){
  }
  return result;
 }
-export function actFourCandidates(state,chapter){if(chapter!=='account')return [];try{return sourceView(state,chapter).candidates;}catch{return [];}}
+export function actFourCandidates(state,chapter){if(!actFourLiveChapters.includes(chapter))return [];try{return sourceView(state,chapter).candidates;}catch{return [];}}
 export function actFourView(state){
  const keeper=storyView(state),story=keeper.status==='ready'?keeper.record:null,present=story&&own(story.acts,'IV'),raw=present?story.acts.IV:null,act=obj(raw)?raw:null;
  const status=keeper.status==='unavailable'?'unavailable':!story||!present?'missing':act?'ready':'unreadable';
@@ -71,7 +120,7 @@ export function revealHarvestPage(state,options={}){
  return mutate(state,options,story=>{if(!story.seenScenes.includes('harvest-page-revealed'))story.seenScenes.push('harvest-page-revealed');});
 }
 export function offerActFour(state,chapter,key,options={}){
- if(chapter!=='account')return false;const v=actFourView(state);if(v.chapterStatus.account==='ready')return true;if(!v.canOffer||v.chapterStatus.account==='unreadable')return false;
+ if(!actFourLiveChapters.includes(chapter))return false;const v=actFourView(state);if(v.chapterStatus[chapter]==='ready')return true;if(!v.canOffer||v.chapterStatus[chapter]==='unreadable')return false;
  const found=actFourCandidates(state,chapter).find(c=>c.key===key);if(!found)return false;
- return mutate(state,options,story=>{const a=story.acts.IV;if(!own(a,'contributions'))a.contributions={};a.contributions.account={kind:'act-four-offer',version:1,chapter,activity:found.activity,artifactKind:found.artifactKind,ref:structuredClone(found.ref)};return validActFourOffer(a.contributions.account,chapter);});
+ return mutate(state,options,story=>{const a=story.acts.IV;if(!own(a,'contributions'))a.contributions={};a.contributions[chapter]={kind:'act-four-offer',version:1,chapter,activity:found.activity,artifactKind:found.artifactKind,ref:structuredClone(found.ref)};return validActFourOffer(a.contributions[chapter],chapter);});
 }
