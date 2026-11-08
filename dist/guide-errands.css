@@ -1,0 +1,20 @@
+/* Spec 600 · Guide errands strip, scoped to #guide-errands. */
+.guide-errands{display:flex;gap:.75rem;align-items:flex-start;max-width:72rem;margin:.5rem auto 0;padding:.5rem 1rem;box-sizing:border-box}
+.guide-errands[hidden]{display:none}
+.guide-errands .ge-face{flex:0 0 44px;width:44px;height:52px;animation:ge-arrive .5s ease-out both}
+.guide-errands .ge-face .portrait{width:44px;height:52px}
+.guide-errands .ge-details{flex:1 1 auto;min-width:0;background:#fffaf0;border:2px solid #e9d9b4;border-radius:12px;padding:0 .75rem}
+.guide-errands summary{min-height:44px;display:flex;align-items:center;font-size:1rem;font-weight:600;color:#183f39;cursor:pointer}
+.guide-errands summary:focus-visible,.guide-errands .ge-go:focus-visible{outline:3px solid #2c5d9e;outline-offset:2px}
+.guide-errands .ge-lead,.guide-errands .ge-free{font-size:1rem;margin:.25rem 0 .5rem;color:#2b2a28}
+.guide-errands .ge-free{font-size:.9rem;color:#5d574d}
+.guide-errands .ge-cards{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr))}
+.guide-errands .ge-card{background:#fff;border:1px solid #e3d6bb;border-radius:10px;padding:.6rem .75rem;display:flex;flex-direction:column;gap:.5rem;animation:ge-pin .45s ease-out both}
+.guide-errands .ge-card:nth-child(2){animation-delay:.08s}
+.guide-errands .ge-card:nth-child(3){animation-delay:.16s}
+.guide-errands .ge-card p{margin:0;font-size:1rem;line-height:1.4}
+.guide-errands .ge-go{align-self:flex-start;min-height:44px;display:inline-flex;align-items:center;padding:.4rem .9rem;line-height:1.25;border-radius:14px;background:#183f39;color:#fff;font-weight:600;text-decoration:none}
+@keyframes ge-arrive{from{transform:translateY(6px) rotate(-4deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes ge-pin{from{transform:translateY(-6px) rotate(-1.5deg);opacity:0}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.guide-errands .ge-face,.guide-errands .ge-card{animation:none}}
+@media (max-width:420px){.guide-errands{padding:.5rem .75rem}.guide-errands .ge-cards{grid-template-columns:1fr}}

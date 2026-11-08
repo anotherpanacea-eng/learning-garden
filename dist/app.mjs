@@ -1,3 +1,4 @@
+import {installGuideErrands} from './guide-errands-ui.mjs';
 import {sharedSideActive,prepareSharedDisplay} from './shared-side-ui.mjs';
 import {mixerActive,prepareMixerDisplay} from './rule-mixer-ui.mjs';
 import {curveActive,prepareCurveDisplay} from './curve-window-ui.mjs';
@@ -1359,3 +1360,6 @@ if(!choosingExplorer&&!['pathways','learn','journeys'].includes(location.hash.sl
 
 // Loading this optional reference never re-renders an activity or changes a notebook.
 void loadCurriculumMap();
+
+// Spec 600: the guide's errand strip sits outside <main> and never writes.
+installGuideErrands(()=>choosingExplorer?null:state);
