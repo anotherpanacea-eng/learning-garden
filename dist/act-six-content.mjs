@@ -69,6 +69,71 @@ export const actSixContent={
       yoursSmall:'Your smaller exchange plan is kept: one Way, once a week.'
     }
   },
+  rain:{
+    title:'The long rain',
+    gate:'The long rain comes after the exchange plan is kept.',
+    gateLink:'Keep the exchange plan',
+    start:{title:'The rain starts',short:["It rains for three days. Upstream, Nuria watches Vadoalto's flood post climb. She writes one line, and Vadoalto's runner sets off."],longer:["It rains for three days. Not storm rain: steady, grey, patient rain that doesn't stop for lunch. Upstream, Nuria watches Vadoalto's flood post climb past the third mark, then the fourth. She does what Hollis taught her. She writes one line on a card, and Vadoalto's fastest runner sets off down the river path.", "In Willowbank, the bell rings. Everyone knows what to do, because they've talked about nothing else for months."],runnerCard:'The brook is rising at Vadoalto. You have until evening.',keeperNote:"Water that rises upstream reaches the towns below some hours later. A post that is read upstream gives the towns downstream time. That's what a warning is: time.",
+      scene:'Rain falls on Willowbank. By the brook, the flood post stands in the water, with its old marks above the surface.',caption:'Three days of rain.'},
+    prep:{
+      title:'Getting ready',
+      shelf:{
+        title:'Up high and dry',
+        prompt:'The baker: "Help me carry the flour up to the attic. Bags on the top shelf, jars on the middle."',
+        top:'Top shelf',middle:'Middle shelf',
+        items:[{id:'flour-1',label:'A bag of flour',shelf:'top'},{id:'flour-2',label:'Another bag of flour',shelf:'top'},{id:'honey',label:'A jar of honey',shelf:'middle'},{id:'jam',label:'A jar of jam',shelf:'middle'}],
+        hintTop:'The baker said bags go on the top shelf.',hintMiddle:'The baker said jars go on the middle shelf.',
+        notYet:'Not everything is on the right shelf yet. Read the hint, then try again.',
+        check:'Check the shelves',
+        kept:'The flour is up high and dry. The baker sits on the top step to get his breath back.'
+      },
+      jobs:[
+        {tier:'Seedling',host:null,href:null,line:'The miller: "It\'s 2 o\'clock. The water should be here by 6. The boards take an hour to put in. When must we start, at the latest?"'},
+        {tier:'Sapling',host:'Instructions for a Reader',href:'#post/instructions',line:'The librarian: "Write the notice for the bridge: when to stop crossing, and where to go instead."'}
+      ]
+    },
+    warning:{
+      title:'Passing the warning on',
+      short:["Dot remembers Les Saules. \"If it's coming here, it's going there next.\" Someone has to tell Léon, in French."],longer:["In the middle of the carrying and the boards and the bell, Dot stops with a sack of letters in her arms. \"Les Saules,\" she says. \"If it's coming here, it's going there next. Somebody has to tell Léon.\" She looks at {courier}. {courier} is already pulling on their boots. \"In French,\" says Dot. \"So everybody there can read it, not just Léon.\""],
+      card:{title:'The warning card',english:'The brook is rising. It will reach you tomorrow morning. From Willowbank.',french:'Le ruisseau monte. L’eau arrivera chez vous demain matin. De la part de Willowbank.'},
+      send:'Send',
+      sent:'{courier} is already halfway down the river path.',
+      choose:{
+        title:'Which French card says the same?',
+        options:[
+          {id:'right',text:'Le ruisseau monte. L’eau arrivera chez vous demain matin. De la part de Willowbank.',feedback:'Yes. It says the brook is rising, and it will reach them tomorrow morning.'},
+          {id:'down',text:'Le ruisseau baisse. L’eau arrivera chez vous demain matin. De la part de Willowbank.',feedback:'Not this one. *Le ruisseau baisse* means the brook is going down.'},
+          {id:'evening',text:'Le ruisseau monte. L’eau arrivera chez vous ce soir. De la part de Willowbank.',feedback:'Not this one. *Ce soir* means this evening. The water reaches them tomorrow morning.'}
+        ]
+      },
+      build:{
+        title:'Build it from word cards',
+        cards:[{id:'ruisseau',fr:'Le ruisseau',en:'the brook'},{id:'monte',fr:'monte',en:'is rising'},{id:'baisse',fr:'baisse',en:'is going down'},{id:'arrivera',fr:'L’eau arrivera',en:'the water will arrive'},{id:'chez-vous',fr:'chez vous',en:'at your place'},{id:'demain',fr:'demain matin',en:'tomorrow morning'},{id:'soir',fr:'ce soir',en:'this evening'},{id:'de-la-part',fr:'De la part de Willowbank',en:'from Willowbank'}],
+        answer:['ruisseau','monte','arrivera','chez-vous','demain','de-la-part'],
+        line:'Your card',
+        empty:'Tap word cards to build the warning.',
+        clear:'Start again',
+        check:'Check the card',
+        right:'Yes. That is the warning, in French.',
+        wrongDown:'*Baisse* means going down. The brook is rising.',
+        wrongSoir:'*Ce soir* means this evening. The water reaches Les Saules tomorrow morning.',
+        wrongOrder:'Not quite yet. Start with what is happening: *Le ruisseau monte*.'
+      }
+    },
+    water:{
+      title:'The water arrives',
+      scenes:{'wall':{short:["The water climbs the wall and stops. The orchard stays dry. Downstream, past the wall, it spreads over Léon's meadow."],longer:["The water climbs the new wall and stops. Behind it, the orchard is dry and the mill boards hold. Downstream, past the end of the wall, the water spreads wide over the meadow by Léon's ferry, and the ferry can't run for two days. In this story rain the wall held here, while the ferry meadow flooded. That scene alone cannot tell us how another wall or another storm would behave."]},'sponge':{short:["The water spreads into the low fields and slows. The mill stays dry. Three apple trees stand in water to their knees."],longer:["The water reaches the low fields and spreads out. The reeds bend under it. It slows. The miller watches the post; in this story rain the water stays below the boards. Nobody claims a measured time saving from the tray model. At the low corner, three apple trees stand up to their knees in water. The orchard keeper sighs, and goes to check on the reeds."]},'some-of-each':{short:["The wall turns the water into the wet meadow. The mill boards hold, just. Nobody got everything. Nobody lost everything."],longer:["The wall above the mill turns the water toward the wet meadow, which fills like a bath. The mill boards hold, just. Some of the orchard gets its feet wet. Nobody got everything they wanted. Nobody lost everything, either."]}},
+      plain:{short:["The water comes down the brook in the evening, just when the runner said. The boards are in and the flour is up high. The town is ready."],longer:["The water comes down the brook in the evening, just when Vadoalto's runner said it would: brown, fast and full of leaves. It fills the low places and pushes at the banks. The boards are in at the mill. The flour is up high in the baker's attic. Half the village stands where they can see the flood post, and watches the water climb, and climb, and then, after a long while, stop climbing."]},
+      offer:"Dot looks at the library wall, where the meeting's plan should be pinned. There is only an empty pin. \"I can't find the plan we kept,\" she says. \"Which was it?\"",
+      choices:{wall:'The Wall',sponge:'The Sponge','some-of-each':'Some of Each',none:'Let the water come'},
+      pinned:'Dot pins it up, just in time.',
+      letCome:'{guide}: "Then let\'s watch what the water does."',
+      unreadable:"{guide}: \"The plan from the meeting is on a page this story can't read yet. The water comes all the same.\"",
+      ends:"The bridge holds. The mill holds. Everything you mended holds. The miller scratches a new mark on the flood post, and writes the date beside it, and then, after a moment, writes *Warned in time.*",
+      scene:'The flood post by the brook. The water climbs past the old marks and stops. A new mark is scratched beside it, with the words Warned in time.',
+      caption:'Warned in time.'
+    }
+  },
   ui:{
     start:'Continue the story',
     short:'Short',
@@ -85,6 +150,7 @@ export const actSixContent={
   },
   messages:{
     unreached:'This part of the story opens after a project is bound into the Keeper\'s Pages.',
+    badStoryPlan:'Grown-up note: an earlier Act IV plan is kept unchanged; this version shows the plain scene.',
     unreadableAct:'An earlier Act VI record can\'t be read by this version. It stays in your notes, unchanged.',
     refused:'That could not be saved. Nothing has changed.',
     badPreference:'An earlier reading preference can\'t be read, so it stays as it was.',

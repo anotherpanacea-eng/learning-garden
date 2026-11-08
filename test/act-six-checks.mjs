@@ -24,7 +24,7 @@ export function runChecks(){
  eq(actSixRoute('#almanac/opening-ways'),{part:'hub'},'hub route');
  eq(actSixRoute('#almanac/opening-ways/exchange'),{part:'chapter',chapter:'exchange'},'chapter 1 route');
  eq(actSixRoute('#almanac/opening-ways/routes'),{part:'chapter',chapter:'routes'},'chapter 2 route');
- eq(actSixRoute('#almanac/opening-ways/long-rain'),{part:'hub'},'an unbuilt chapter falls back to the hub');
+ eq(actSixRoute('#almanac/opening-ways/journey'),{part:'hub'},'an unbuilt chapter falls back to the hub');
  eq(actSixRoute('#almanac/own-question'),null,'Act V routes are not Act VI');
 
  // Before a project is bound, Act VI cannot start.
@@ -93,8 +93,8 @@ export function runChecks(){
  const only=sixSeed();only.story.acts={VI:only.story.acts.VI};delete only.story.frameAmount;ok(setActTwoFrameAmount(only,'longer',options)&&only.story.frameAmount==='longer','frame controls work with only Act VI');
 
  // Every content string comes from act-6.md, letters.md or the 606 companion.
- const sources=['../docs/content/120-story/act-6.md','../docs/content/120-story/letters.md','../docs/content/606-act-six-opening-text.md'].map(f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('**','').replace(/^> ?/gm,'')).join('\n');
- const strings=[];const walk=x=>{if(typeof x==='string')strings.push(x);else if(Array.isArray(x))x.forEach(walk);else if(x&&typeof x==='object')Object.entries(x).forEach(([k,v])=>{if(!['id','href','tier','way'].includes(k))walk(v);});};walk(C);
+ const sources=['../docs/content/120-story/act-6.md','../docs/content/120-story/letters.md','../docs/content/606-act-six-opening-text.md','../docs/content/607-act-six-rain-text.md'].map(f=>readFileSync(new URL(f,import.meta.url),'utf8').replaceAll('**','').replace(/^> ?/gm,'')).join('\n');
+ const strings=[];const walk=x=>{if(typeof x==='string')strings.push(x);else if(Array.isArray(x))x.forEach(walk);else if(x&&typeof x==='object')Object.entries(x).forEach(([k,v])=>{if(!(typeof v==='string'&&['id','href','tier','way','shelf'].includes(k))&&k!=='answer')walk(v);});};walk(C);
  for(const t of strings)ok(sources.includes(t),'traced: '+t.slice(0,60));
  return n;
 }

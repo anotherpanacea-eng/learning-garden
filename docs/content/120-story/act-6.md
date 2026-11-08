@@ -108,13 +108,13 @@ Kept: "Your notice is on the bridge. People read it, then go round by the high r
 **[new] The warning card** (all depths; Sprout taps **Send**, Seedling chooses the French sentence that matches the English from three, Sapling and the desk build it from word cards):
 
 > **The brook is rising. It will reach you tomorrow morning. From Willowbank.**
-> **Le ruisseau monte. Il arrivera chez vous demain matin. De la part de Willowbank.**
+> **Le ruisseau monte. L’eau arrivera chez vous demain matin. De la part de Willowbank.**
 
-Seedling's two other choices (each plausible, each wrong in one way):
-> *Le ruisseau descend. Il arrivera chez vous demain matin.* (The brook is going down.)
-> *Le ruisseau monte. Il est arrivé chez nous hier.* (It reached us yesterday.)
+Seedling's two other choices (each plausible, each wrong in one way; revised by the 607 language panel, 2026-11-08):
+> *Le ruisseau baisse. L’eau arrivera chez vous demain matin. De la part de Willowbank.* (The brook is going down.)
+> *Le ruisseau monte. L’eau arrivera chez vous ce soir. De la part de Willowbank.* (It will reach you this evening.)
 
-**Word cards (Sapling):** *Le ruisseau* · *monte* · *descend* · *Il arrivera* · *chez vous* · *demain matin* · *ce soir* · *De la part de Willowbank*
+**Word cards (Sapling):** *Le ruisseau* · *monte* · *baisse* · *L’eau arrivera* · *chez vous* · *demain matin* · *ce soir* · *De la part de Willowbank*
 
 **After sending:** {courier} is already halfway down the river path.
 
