@@ -46,7 +46,7 @@ That is 26 rooms and six place pages. Threads cross: an errand may lead from one
 
 ## Presentation
 
-`dist/guide-errands-content.mjs` (finite copy), `-core.mjs` (pure route and act reads), `-ui.mjs` (HTML and the installer), `guide-errands.css` (scoped to `#guide-errands`, loaded by the installer). `app.mjs` gains one import and one install call at the end of the file; no other shell line changes.
+`dist/guide-errands-content.mjs` (finite copy), `-core.mjs` (pure route and act reads), `-ui.mjs` (HTML and the installer), `guide-errands.css` (scoped to `#guide-errands`, loaded by the installer). `app.mjs` gains one import on its first line and one install call just after the shell declares `state` and `choosingExplorer`; no other shell line changes. Before the strip's content is replaced, any shared voice controls that a Hear press moved into it go back to `<main>`, so the next page's Hear buttons keep working.
 
 The strip shows the guide's small portrait and a native `<details>`, closed. Opened, a **Hear these ideas** (or **Hear the requests**) button reads the visible lead and each errand's line with the guide named, through the existing local read-aloud (`hearButton`, `bindSpeech`); the shell's own navigation stops it as it stops every Hear button. The errands are cards, each with a sentence and one link. Targets are 44 px, text 16 px, focus visible. The portrait and cards arrive with a short pin-up animation; reduced motion shows them still. At 320 px the cards stack.
 

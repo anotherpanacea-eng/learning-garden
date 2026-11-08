@@ -128,6 +128,22 @@ def journey(browser, base, books, data):
         p.close()
 
 
+def speech_handoff(browser, base, books, data):
+    # Hear in the strip, then a page with its own Hear button: that button must still speak.
+    room = '#cafe/groups' if '#cafe/groups' in data['rooms'] else next(iter(data['rooms']))
+    p = open_page(browser, base, books['fresh'], 820, 'speech')
+    p.add_init_script("window.__spoken=0;try{const s=window.speechSynthesis;const o=s.speak.bind(s);s.speak=u=>{window.__spoken++;try{o(u);}catch{}};}catch{}")
+    p.goto(base + 'index.html' + room); p.wait_for_selector('#guide-errands summary'); settle(p)
+    strip(p).locator('summary').click(); strip(p).locator('[data-speak]').click(); p.wait_for_timeout(80)
+    first = p.evaluate('window.__spoken')
+    h.ok(first >= 1, 'the strip Hear button speaks')
+    p.evaluate("location.hash='#loft'"); p.wait_for_selector('main#main [data-speak]'); p.wait_for_timeout(120); settle(p)
+    h.ok(p.locator('main#main .speech-controls').count() <= 1 and p.locator('#guide-errands .speech-controls').count() == 0, 'voice controls are back in main, not lost with the strip')
+    p.locator('main#main [data-speak]').first.click(); p.wait_for_timeout(80)
+    h.ok(p.evaluate('window.__spoken') > first, 'the next page Hear button still speaks')
+    p.close()
+
+
 def chooser(browser, base, books, data):
     room = next(iter(data['rooms']))
     p = open_page(browser, base, books['fresh'], 820, 'chooser')
@@ -194,7 +210,7 @@ def main():
     with sync_playwright() as pw:
         b = pw.chromium.launch(headless=True, executable_path=os.environ.get('CHROME_PATH', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'), args=['--disable-quic'])
         try:
-            suites = {'journey': journey, 'chooser': chooser, 'acts': acts, 'reduced': reduced_motion}
+            suites = {'journey': journey, 'speech': speech_handoff, 'chooser': chooser, 'acts': acts, 'reduced': reduced_motion}
             for name, run in suites.items():
                 if os.environ.get('GUIDE_ERRANDS_CASE', name) == name:
                     print('Running ' + name, flush=True); run(b, base, books, data)

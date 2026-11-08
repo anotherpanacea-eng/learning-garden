@@ -32,7 +32,7 @@ Region label: Ideas from your guide. The Hear button reads the lead, then each s
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
 | from the start | Change the ribbon cuts | The workshop keeps a ribbon with a brass flag on it. {guide} wants to know what happens when every piece is split in two, but the flag stays put. | Ribbon Recut Table `#workshop/recut` |
-| Act II on | Plan a party tray | The café still makes trays like the ones for Ember’s birthday. One recipe feeds two, so how many whole batches does a party need? | Whole batches for a gathering `#cafe/batches` |
+| Act II on | Plan a party tray | Ember’s birthday gives the café an idea for party trays. One recipe feeds two, so how many whole batches does a party need? | Whole batches for a gathering `#cafe/batches` |
 | from the start | Plan a supper tray | Four puppeteers need supper between scenes. One recipe feeds two, so {guide} wonders how many whole batches it takes. | Whole batches for a gathering `#cafe/batches` |
 
 ### Whole batches for a gathering · `#cafe/batches`
@@ -212,7 +212,7 @@ At most three are shown, later acts first, one per destination.
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
-| Act II on | Plan a party tray | The café still makes trays like the ones for Ember’s birthday, planned in whole batches. | Whole batches for a gathering `#cafe/batches` |
+| Act II on | Plan a party tray | Ember’s birthday gives the café an idea for party trays, planned in whole batches. | Whole batches for a gathering `#cafe/batches` |
 | Act II on | Price a market stall | The weekly market is back. A stall keeper wants prices she can make with more than one handful of coins. | The Coin Counter `#workshop/coins` |
 | from the start | Set the welcome tables | Pip is planning the welcome-back tables: how many plates, and how many bites on each? | The serving bench `#cafe/groups` |
 | from the start | Pack picnic parcels | The neighbors who helped after the storm are owed a picnic, cut into fair shares. | The Sharing Counter `#cafe/sharing` |

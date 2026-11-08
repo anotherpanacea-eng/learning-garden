@@ -37,6 +37,9 @@ export function installGuideErrands(getState,doc=globalThis.document,win=globalT
   try{const state=getState();html=state?guideErrandsHTML(errandView(win.location.hash||'#home',state),state):'';}catch{html='';}
   // Unchanged content is left alone, so an open strip stays open while an activity re-renders.
   if(html===last)return;
+  // Hear moves the page's shared voice controls next to the pressed button; hand them back to <main> before
+  // replacing the strip, so the next page's Hear buttons keep working.
+  const controls=strip.querySelector('.speech-controls');if(controls)main.append(controls);
   last=html;strip.innerHTML=html;strip.hidden=!html;
   if(html)bindSpeech();
  };

@@ -21,7 +21,7 @@ export const ERRAND_ROOMS=freeze({
  ])}),
  '#cafe/fractions':freeze({onward:freeze([
   e('trail-to-recut','#workshop/recut','Change the ribbon cuts','The workshop keeps a ribbon with a brass flag on it. {guide} wants to know what happens when every piece is split in two, but the flag stays put.'),
-  e('trail-birthday','#cafe/batches','Plan a party tray','The café still makes trays like the ones for Ember’s birthday. One recipe feeds two, so how many whole batches does a party need?',2),
+  e('trail-birthday','#cafe/batches','Plan a party tray','Ember’s birthday gives the café an idea for party trays. One recipe feeds two, so how many whole batches does a party need?',2),
   e('trail-to-batches','#cafe/batches','Plan a supper tray','Four puppeteers need supper between scenes. One recipe feeds two, so {guide} wonders how many whole batches it takes.'),
  ])}),
  '#cafe/batches':freeze({onward:freeze([
@@ -137,7 +137,7 @@ export const ERRAND_ROOMS=freeze({
 // Place pages: later acts first, so an explorer further on sees those before the lines that fit from the start.
 export const ERRAND_HUBS=freeze({
  '#cafe':freeze([
-  e('cafe-birthday','#cafe/batches','Plan a party tray','The café still makes trays like the ones for Ember’s birthday, planned in whole batches.',2),
+  e('cafe-birthday','#cafe/batches','Plan a party tray','Ember’s birthday gives the café an idea for party trays, planned in whole batches.',2),
   e('cafe-market','#workshop/coins','Price a market stall','The weekly market is back. A stall keeper wants prices she can make with more than one handful of coins.',2),
   e('cafe-tables','#cafe/groups','Set the welcome tables','Pip is planning the welcome-back tables: how many plates, and how many bites on each?'),
   e('cafe-picnic','#cafe/sharing','Pack picnic parcels','The neighbors who helped after the storm are owed a picnic, cut into fair shares.'),
