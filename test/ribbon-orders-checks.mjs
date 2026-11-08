@@ -86,3 +86,10 @@ frames.forEach(([p,l,s],frame)=>{
 for(const frame of [-1,6,0.5,'1',null])assert.equal(orderExample(frame),null);
 assert.notEqual(orderExample(5).claim.numerator,orderExample(5).remaining);
 console.log(`Ribbon Orders: ${states} reachable count states and ${edges} edges, IDs, undo, routes, boundaries and six frames passed.`);
+
+// One piece can be sent, or be all that remains, before the order is finished.
+const oneSent={caseId:'all-ribbon',history:['piece']};
+assert.match(orderExplanation(oneSent).text,/Current material: 1 piece sent;/);
+const oneLeft={caseId:'all-ribbon',history:['open','piece','piece','piece','piece']};
+assert.match(orderModel(oneLeft).readout,/1 piece stays on the rack/);
+assert.match(orderExplanation(oneLeft).spokenText,/one piece on the rack/);

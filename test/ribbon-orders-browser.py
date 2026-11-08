@@ -228,7 +228,7 @@ def journey(browser,base):
         mode(p,key='Enter');focus(p,'#ro-heading')
         ok(p.locator('[data-ro-case] option').evaluate_all('xs=>xs.map(e=>e.value)')==list(CASES),'all seven finite choices open')
         ok(p.locator('[data-join-root]').inner_text().count('this work is not saved in Notes')==1,'one child-owned visit footer')
-        state(p,'quarters-gathering',[]);p.locator('[data-ro-case]').focus();p.keyboard.press('ArrowDown');p.keyboard.press('Enter');state(p,'sixths-path',[]);focus(p,'[data-ro-case]');p.keyboard.press('Home');p.keyboard.press('Enter');state(p,'quarters-gathering',[]);explanation(p,'quarters-gathering',[])
+        state(p,'quarters-gathering',[]);p.locator('[data-ro-case]').focus();p.keyboard.press('s');state(p,'sixths-path',[]);focus(p,'[data-ro-case]');choose(p,'quarters-gathering');state(p,'quarters-gathering',[]);explanation(p,'quarters-gathering',[])
         paths={'quarters-gathering':['open','whole','piece','piece','piece'],'sixths-path':['whole','open']+['piece']*5,'quarters-without-trade':['whole']*3+['piece']*3,'fifths-crossing':['piece','piece','open','piece','piece'],'whole-stock':['open']+['piece']*3,'all-ribbon':['piece','whole'],'no-order':[]}
         for ident,path in paths.items():
             choose(p,ident);history=[];state(p,ident,history)
