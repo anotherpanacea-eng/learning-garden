@@ -14,7 +14,7 @@ Status: proposal, 2026-11-06. **Writing only. Nothing here commissions a build, 
   - Pixel scale is chosen so that nothing a child must read or tap is smaller than today (44 CSS pixel targets, 16px body text at 320 and 820 widths).
   - Pixel lettering is never used for anything a child must read.
   - Reduced motion is respected, and frame-by-frame animation stops at its last frame.
-- **Spec 244's layers hold.** Pixel art may change the **frame**, which covers art, palette, motif and celebration motion. It never changes the story, task or record layers. A pixel picture never answers a question on its screen. A missing pixel variant falls back to Storybook.
+- **Spec 244's layers hold.** Pixel art may change the **frame**, which covers art, palette, motif and celebration motion. It never changes the story, task or record layers. Decorative pixel art must not reveal an answer or a recommended move. Task-bearing pixel art preserves the task’s visible game state, including seed counts and board positions, without adding clues or changing the rules. A missing pixel variant falls back to Storybook.
 
 ## Phase 1: one Games Table game drawn in pixel art
 
