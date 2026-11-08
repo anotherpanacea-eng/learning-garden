@@ -59,8 +59,6 @@ def run(base, browser):
         ok('A tall grey heron came off the coast boat today.' in text and '"Hollis!" says Nuria.' in text and 'They stay for supper.' in text, "Léon's letter, Hollis home, supper")
         ok(p.evaluate("document.activeElement&&document.activeElement.id==='a6h-home'"), 'focus moves to the homecoming')
         layout(p, 'after sending')
-        p.locator('[data-a6h-pack-clear]').tap(); p.locator('[data-a6h-home]').wait_for()
-        ok(p.evaluate("getComputedStyle(document.querySelector('.a6h-walk')).animationName") == 'none', 'unpacking afterwards does not replay the walk')
         p.reload(wait_until='networkidle'); p.locator('[data-a6h-home]').wait_for(); ok(p.locator('[data-a6h-send]').count() == 0, 'the journey survives a reload')
         c.close()
     sent = seed("import {sendFirstParcel} from './dist/act-six-core.mjs';import {canExport} from './test/act-two-checks.mjs';sendFirstParcel(s,{canExport});")
@@ -76,6 +74,9 @@ def run(base, browser):
         ok(len(anim) == 1, 'the heron walks')
         if still: ok(anim[0]['name'] == 'none', 'reduced motion: the heron is already at the post')
         else: ok(anim[0]['name'] != 'none' and anim[0]['count'] != 'infinite' and anim[0]['delay'] + anim[0]['dur'] <= 5, 'motion: the heron walks once and stops within five seconds')
+        if not still:
+            p.locator('[data-a6h-pack-clear]').tap(); p.locator('[data-a6h-home]').wait_for()
+            ok(p.evaluate("getComputedStyle(document.querySelector('.a6h-walk')).animationName") == 'none', 'motion: unpacking afterwards does not replay the walk')
         c.close()
     ok(not errors, 'no page errors ' + str(errors))
 
