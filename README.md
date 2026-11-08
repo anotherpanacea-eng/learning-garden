@@ -661,3 +661,9 @@ Checks: `node test/missing-ribbon-checks.mjs` and `python3 test/missing-ribbon-b
 Open `#loft/mirrors`, or use **Mirror Bench: turn a light path** from Shadow Theater or Story Loft. Propose an outgoing ray, compare it with a flat-mirror reference, and revise. Six cards, a separate five-picture example and whole-picture quarter turns connect geometry with reflection; touch aiming has exact native button alternatives. Work is temporary and does not add Notes or assessment records.
 
 Checks: `node test/mirror-paths-checks.mjs` and `python3 test/mirror-paths-browser.py`, plus existing Shadow Theater and new-room discovery checks for the links/registry. The [specification](docs/specs/427-turn-the-light.md) records physics sources and the broader162/236 gaps.
+
+### The Line Table428
+
+Open The Line Table from Story Loft, or `#loft/lines`. Keep four supplied poems’ words and punctuation while changing their line endings and planning pauses. Compare possible arrangements, work through a separate teaching example, and download your current layout as a text file. Pauses remain human reading plans; device speech reads the flat words and punctuation. This is layout revision, not an original-writing or performance assessment; work stays temporary in this visit.
+
+Design and current release status: [spec428](docs/specs/428-poem-lines.md), [PR511](https://github.com/anotherpanacea-eng/learning-garden/pull/511). Focused checks: `node test/poem-lines-checks.mjs` and `python3 test/poem-lines-browser.py` (Chromium).
