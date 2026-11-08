@@ -1,6 +1,6 @@
 # 429 · Spring Bench
 
-Status: proposed; independent review precedes code. Baseline main `dacc094ee4a29569bc032acfcf21fe727d03ca2b`. Existing LG-1 / LG-G1; operational Fleet1634; branch `build/spring-bench`. A bounded235(e) operation inside Motion and Evidence, not a new hub or full forces investigation course.
+Status: independently BUILD-READY at `dca4bc4fc4f25af17dd830307938985d505bff50`, after six lenses and complete finite physics/math/copy repair closure; implementation in [PR512](https://github.com/anotherpanacea-eng/learning-garden/pull/512). Its canonical release record owns final implementation clearance and hosted status. Baseline main `dacc094ee4a29569bc032acfcf21fe727d03ca2b`. Existing LG-1 / LG-G1; operational Fleet1634; branch `build/spring-bench`. A bounded235(e) operation inside Motion and Evidence, not a new hub or full forces investigation course.
 
 ## Purpose, ownership and source boundary
 
