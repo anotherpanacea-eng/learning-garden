@@ -4,10 +4,15 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/grownup-atlas-ui.mjs',adultBlocks:[{start:'// Adult reference route.',end:'// End adult reference route.',reason:'All rendered copy belongs to the separate grown-up reference catalog, not a child activity.'}],quotations:[]},
+  {path:'dist/grownup-atlas-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/moonlight-content.mjs',adultBlocks:[{start:'  "grownup":',end:'  "orbitMotion":',reason:'Only shown in the folded grown-up interpretation.'}],quotations:[]},
   {path:'dist/depth-window-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/depth-window-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/depth-window-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/ribbon-orders-content.mjs',adultBlocks:[{start:' grownUp:',end:' frames:',reason:'Only shown in the folded grown-up explanation.'}],quotations:[]},
+  {path:'dist/ribbon-orders-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/ribbon-orders-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/whole-bundles-content.mjs',adultBlocks:[{start:' grownUp:',end:' frames:',reason:'Only shown in the folded grown-up explanation.'}],quotations:[]},
   {path:'dist/whole-bundles-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/whole-bundles-ui.mjs',adultBlocks:[],quotations:[]},
@@ -917,6 +922,9 @@ export const copyScopes = [
   {path:'dist/rehearsal-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-four-corner-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-four-meeting-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/guide-errands-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/guide-errands-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/guide-errands-ui.mjs',adultBlocks:[],quotations:[]},
 
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
