@@ -6,6 +6,7 @@ import {setActTwoFrameAmount} from './act-two-core.mjs';
 import {guides} from './companions.mjs';
 import {courierPresets,postCourierIdentity} from './post-office-content.mjs';
 import {hearButton,stopSpeech} from './play-media.mjs';
+import {actSixInvitation} from './act-six-ui.mjs';
 const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const rich=x=>esc(x).replace(/\*([^*]+)\*/g,'<em>$1</em>');
 const button=(attrs,label,primary=false)=>`<button type="button" class="${primary?'primary':'secondary'}" ${attrs}>${esc(label)}</button>`;
@@ -67,7 +68,7 @@ function ending(state,v){
  if(!v.ended)return `${heading(E.title)}<p>${esc(C.messages.endUnreached)}</p>${link('#almanac/own-question',C.ui.back)}`;
  const pr=v.keptKnown?v.projects[v.kept]:null,title=v.keptKnown?pathById(v.kept).title:E.earlierProject,limit=pr&&pr.limit?limitText(v.kept,pr.limit).replace(/\.$/,''):E.earlierLimit;
  const almanac=E.almanac.replace('{project}',title).replace('{limit}',limit);
- return `${heading(E.title)}${bindingScene(E.scene,E.caption,C.page.heading,v.season)}${amounts(v)}${reading(state,[...E[v.frameAmount],...(v.season?[E.seasons[v.season]]:[]),almanac,E.between])}${hear()}<div class="a5-controls">${link('#almanac/keepers',C.ui.keepers,true)}${link('#home',E.pause)}</div>`;
+ return `${heading(E.title)}${bindingScene(E.scene,E.caption,C.page.heading,v.season)}${amounts(v)}${reading(state,[...E[v.frameAmount],...(v.season?[E.seasons[v.season]]:[]),almanac,E.between])}${hear()}${actSixInvitation(state)}<div class="a5-controls">${link('#almanac/keepers',C.ui.keepers,true)}${link('#home',E.pause)}</div>`;
 }
 export function actFivePage(state,{part='hub',path:id=null,blocked=false}={}){
  const v=actFiveView(state);let body;
