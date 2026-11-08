@@ -161,6 +161,21 @@ export const actSixContent={
     home:{title:'Someone comes home',short:["A tall grey heron comes up the river path, stopping to look at the brook. \"Hollis!\" says Nuria."],longer:["On the way back from the landing, you see a tall grey heron coming slowly up the river path, stopping to look at the brook every few steps.", "\"Hollis!\" says Nuria.", "Hollis looks at the flood post for a long time. At the old marks, and the storm mark, and the new one: *Warned in time.* Then at the almanac. Then at you.", "\"I hear my parcel got a bit wet,\" they say."],supper:'They stay for supper.',
       scene:'The river path by the brook. A tall grey heron walks slowly up the path and stops beside the flood post, where the newest mark says Warned in time.',caption:'Someone comes home.'}
   },
+  ending:{
+    title:'The Opening of the Ways',
+    afterSupper:'Read Hollis\'s letter',
+    page:{title:'Page 6: Hollis\'s letter',reveal:'After supper, Hollis takes a folded letter from their coat and gives it to you.',lines:["To whoever is keeping the record,", "I addressed this parcel to the Keeper of the Ways because I didn't know your name. I still don't, and that is all right.", "For forty years I read the flood post and walked the Ways. I wrote down what the water did, and I kept the paths open between our towns, because the brook doesn't stop at the edge of Willowbank and neither should we.", "My legs prefer the seaside now. So I wrapped up my pages and sent them home for someone to carry on. Then the storm came, and I thought they were lost.", "They found you anyway. Perhaps you mended a bridge, or wrote in the almanac, or carried a letter upstream. Perhaps you argued about the wall. Then you had already started.", "Anyone can be the Keeper of the Ways. The job belongs to whoever keeps the record and keeps the ways open. It's yours for as long as you want it. When someone new arrives, show them the post.", "Hollis"],next:'Go down to the bridge'},
+    short:["Bramble ties a ribbon on each Way. Someone new is at the bridge with a parcel. Dot gets there first. Then she looks at you."],longer:["Bramble ties a ribbon on each Way: blue for the river path, gold for the bridge road, red for the high ford. \"So nobody gets lost,\" she says. \"And because I like the colors.\"", "Hollis watches her tie the knots. \"Your grandmother's,\" they say. Bramble goes pink and ties another one, faster.", "Down at the bridge, someone new is standing with an unfamiliar parcel, looking at the label like it might bite. Dot gets there first.", "\"I was new once,\" she says. \"Come and see the post. {guide} and I will show you. Well. Mostly the Keeper will.\"", "She looks at you."],
+    seasons:{spring:"Blossom on every ribbon post, and the brook high, loud and staying where it should.",summer:"The high ford is open, and Bramble's red ribbon flaps in the warm wind.",autumn:"The first weekly parcel up the river is all apples. The one coming down is all reed.",winter:"Snow on the ribbons, lanterns on the bridge, and the Ways open all the same."},
+    almanac:"*Act VI: The Opening of the Ways. The Ways are open. Hollis came home.*",
+    village:"*Willowbank, by Willow Brook. The Ways are open.*",
+    scene:'Three ribbon posts along the Ways: a blue ribbon on the river path, a gold one on the bridge road and a red one at the high ford. Bramble ties them one by one.',
+    caption:'A ribbon on each Way.',
+    reread:'Reread the ending',
+    rereadLetter:'Reread Hollis\'s letter',
+    unreached:'This page opens when the Ways are open.',
+    home:'Back to the garden'
+  },
   ui:{
     start:'Continue the story',
     short:'Short',
