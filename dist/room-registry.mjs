@@ -44,6 +44,7 @@ export const rooms=Object.freeze([
  {route:'#loft/printer',title:'Puppet Notice Printer',places:['#loft'],added:'2026-10-22'},
  {route:'#loft/shadows',title:'Shadow Theater',places:['#loft'],added:'2026-10-22'},
  {route:'#loft/mirrors',title:'Turn the Light',places:['#loft'],added:'2026-11-07'},
+ {route:'#loft/lines',title:'The Line Table',places:['#loft'],added:'2026-11-07'},
  {route:'#numbers/compare',title:'Comparing supply orders',places:['#numbers'],added:'2026-10-22'},
  {route:'#numbers/hundredths',title:'Hundredths Bridge',places:['#numbers'],added:'2026-10-22'},
  {route:'#numbers/join',title:'Joining Supply Orders',places:['#numbers'],added:'2026-10-22'},
