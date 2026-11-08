@@ -29,7 +29,7 @@ export const actFiveContent={
       {id:'change',name:'Change',does:'Change one thing, or keep it as it is and say why.',line:'{guide}: "Would you change anything? Keeping it the same is a choice too."'},
       {id:'keep',name:'Keep',does:'Write one thing the project can\'t tell us yet.',line:'{guide}: "What can\'t it tell us yet? Hollis always wrote that bit down."'}
     ],
-    switching:'You may change paths, shrink a path, or start a second one. Nothing is lost when you switch.'
+    switching:'You may change paths or make a path smaller. Nothing is lost when you switch.'
   },
   paths:[
     {id:'night-garden',title:'A night garden',invitation:'"Some flowers only open in the dark. Who visits them?"',
@@ -38,7 +38,7 @@ export const actFiveContent={
      keeperNote:'Some flowers open in the evening and are visited by moths and other night insects. Watching at night needs a dim red light, patience and a notebook.',
      jobs:[
       {tier:'Sprout',host:'Living Garden habitat trail',href:'#living',line:'{guide}: "Let\'s look at the hedge by day first. Where are the flowers that are closed?"'},
-      {tier:'Seedling',host:'Field Notebook',href:'#living/notebook',line:'The orchard keeper: "Keep notes on the flowers at dusk for a week. Open or shut? Any visitors?"'},
+      {tier:'Seedling',host:null,href:null,line:'The orchard keeper: "Keep notes on the flowers at dusk for a week. Open or shut? Any visitors?"'},
       {tier:'Sapling',host:'Plant investigation',href:'#living/plants',line:'{guide}: "Plan a fair way to find out whether the flowers open because it\'s dark or because it\'s cooler."'}
      ]},
     {id:'gazette',title:'The Willowbank Gazette',invitation:'"Willowbank has a lot of news and no proper newspaper."',
@@ -55,8 +55,8 @@ export const actFiveContent={
      longer:['Up in the library attic, under a sheet, under a box, under the miller\'s cat, there is a telescope. It has brass legs and a lens cap with a heron drawn on it. "Hollis\'s," says the librarian, quietly. "They used to watch the moon from the mill roof." Nobody has used it since. Pip wants to see the moon. Dot wants to see a planet. Ember wants to see a dragon-shaped star and is very sure there is one.'],
      keeperNote:'The Moon looks different from night to night because we see different amounts of its sunlit side. A planet looks like a steady bright star that moves slowly against the others over many nights.',
      jobs:[
-      {tier:'Sprout',host:'Field Notebook',href:'#living/notebook',line:'Pip: "Draw the Moon tonight, the shape it really is. Then draw it again in a few days."'},
-      {tier:'Sapling',host:'My Count Collection',href:'#living/collection',line:'{guide}: "Keep a chart of the Moon\'s shape every clear night for a month. What pattern do you see?"'}
+      {tier:'Sprout',host:'Sky notes',href:'#almanac/sky',line:'Pip: "Draw the Moon tonight, the shape it really is. Then draw it again in a few days."'},
+      {tier:'Sapling',host:'Sky notes',href:'#almanac/sky',line:'{guide}: "Keep a chart of the Moon\'s shape every clear night for a month. What pattern do you see?"'}
      ]},
     {id:'travelling-show',title:'A travelling show',invitation:'"Vadoalto has never seen a Willowbank show."',
      short:['Nuria says Vadoalto has never seen a puppet show. Could the Story Loft take one up the river?'],
@@ -65,7 +65,7 @@ export const actFiveContent={
      jobs:[
       {tier:'Sprout',host:'Story Loft',href:'#loft',line:'The librarian: "Make a short scene for the show. It has to fit in one box."'},
       {tier:'Seedling',host:'Equal Groups',href:'#post/groups',line:'Dot: "Eighteen puppets, three boxes. The same in each, so no box is too heavy."'},
-      {tier:'Sapling',host:'Sentence Bridges',href:'#loft/bridges',line:'The librarian: "Write the welcome for the start of the show, in English with a few Spanish words. Nuria will help with the Spanish."'}
+      {tier:'Sapling',host:null,href:null,line:'The librarian: "Write the welcome for the start of the show, in English with a few Spanish words. Nuria will help with the Spanish."'}
      ]},
     {id:'courier-route',title:'A new courier route',invitation:'"There must be a quicker way down to Les Saules."',
      short:['Letters to Léon take three days. {courier} thinks there\'s a quicker way. Where could it go?'],
@@ -82,7 +82,7 @@ export const actFiveContent={
      jobs:[
       {tier:'Sprout',host:'Living Garden habitat trail',href:'#living',line:'{guide}: "Count the frogs and herons at the low corner today. Then again next week."'},
       {tier:'Seedling',host:'My Count Collection',href:'#living/collection',line:'The orchard keeper: "Mark how far the reeds reach each month, by the fence posts."'},
-      {tier:'Sapling',host:'Field Notebook',href:'#living/notebook',line:'The miller: "Design a better flood post for the low corner, so we can read how wet it is after every rain."'}
+      {tier:'Sapling',host:null,href:null,line:'The miller: "Design a better flood post for the low corner, so we can read how wet it is after every rain."'}
      ]}
   ],
   chosen:{
@@ -91,7 +91,8 @@ export const actFiveContent={
     choose:'Choose this path',
     switchTo:'Choose this path instead',
     jobsTitle:'Jobs for this path',
-    jobsIntro:'Any job can make a first version. Every activity stays open, and you can do them in any order.',
+    jobsIntro:'Any job can make a first version. Some jobs have a place in the garden to practice in. Others happen away from the screen. Every activity stays open, and you can do them in any order.',
+    offScreen:'Away from the screen: on paper, outdoors or out loud, with someone to help.',
     ask:'Not sure what to find out first? The Question Bench helps you turn a wonder into a question.',
     askLabel:'Visit the Question Bench',
     askHref:'#workshop/fair'

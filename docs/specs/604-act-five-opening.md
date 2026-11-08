@@ -12,7 +12,7 @@ Proposed 2026-11-08 by Claude (OCA seat). Base inspected: `fbbc53df`, the head o
    - an animated stack of blank pages that lift apart one by one, then the heading writes itself across the first page. It settles within about three seconds; reduced motion shows it finished.
 3. **The Act V hub** at `#almanac/own-question`:
    - the carried question, the hook and the opening at both frame amounts, with read-aloud;
-   - the six project paths, each with its invitation;
+   - the six project paths, each with its invitation (one current path; a second project at once is out of scope, so the copy does not offer it);
    - spec 49's six project steps, with the script's shared guide lines.
 4. **A page for each path** at `#almanac/own-question/<path>`:
    - its invitation, its text at both frame amounts, and its Keeper's note;
@@ -57,7 +57,7 @@ Choosing a path is story progress, not a curriculum milestone or a learning meas
   - `recoveryFitsProgressLimits` and the export preflight run;
   - a refusal writes nothing;
   - choosing the current path again is a no-op.
-- **Shared preference.** The frame amount is `story.frameAmount`, shared with Acts II–IV.
+- **Shared preference.** The frame amount is `story.frameAmount`, shared with Acts II–IV. `setActTwoFrameAmount`'s eligibility adds a started Act V, read directly from the story, so the reading controls work even when an earlier act's record is absent or unreadable.
 
 ## Presentation
 
@@ -68,27 +68,28 @@ Choosing a path is story progress, not a curriculum milestone or a learning meas
   - `act-five-art.mjs` draws the blank pages;
   - `act-five.css` styles them.
 - **Changes to existing files:**
-  - `app.mjs` adds one route block, like Act IV's, and Act V routes in the film-blocking and explorer-destination checks;
+  - `app.mjs` adds one route block, like Act IV's, and adds Act V routes wherever Act IV's appear: deferred explorer initialization (so a story choice never normalizes unrelated saves), the automatic welcome-film exclusions, film blocking and explorer destination;
+  - `act-two-core.mjs` adds a started Act V to the frame-amount eligibility;
   - `bindActFive` runs wherever `bindActFour` does, so the invitation works under the Act IV ending and on the Keeper's Pages;
   - `act-four-ui.mjs` adds the invitation under the ending;
   - `keeper-story-ui.mjs` adds the invitation and the notes line;
   - `index.html` links the stylesheet.
 - **Names.** `{guide}` and `{courier}` resolve as in Act III: an unrecognized saved courier reads as *the courier*, capitalized at the start of a sentence.
-- **Job links** (each verified against `app.mjs` routing):
+- **Job links.** A job links only to an activity that can do something close to what it asks; the browser suite opens each one and checks its title. A job that no activity can do today is marked *away from the screen* (on paper, outdoors or out loud) with no link, and the path's intro says some jobs happen there:
 
 | Path | Jobs |
 | --- | --- |
-| A night garden | Living Garden habitat trail `#living` · Field Notebook `#living/notebook` · Plant investigation `#living/plants` |
+| A night garden | Living Garden habitat trail `#living` · dusk notes, away from the screen · Plant investigation `#living/plants` |
 | The Willowbank Gazette | Puppet Notice Printer `#loft/printer` · Messages for a Reader `#post/messages` · Water Evidence Shelf `#science/evidence` |
-| A sky-watching night | Field Notebook `#living/notebook` · My Count Collection `#living/collection` |
-| A travelling show | Story Loft `#loft` · Equal Groups `#post/groups` · Sentence Bridges `#loft/bridges` |
+| A sky-watching night | Sky notes `#almanac/sky`, for both Moon jobs: it records the Moon's shape night after night, which the script's Field Notebook and My Count Collection cannot |
+| A travelling show | Story Loft `#loft` · Equal Groups `#post/groups` · the welcome, away from the screen (said out loud; spec 277's rule that a child's own writing is spoken or on paper) |
 | A new courier route | Cartographer's Table `#workshop/maps` (the script's Map Reader Dispatcher is its clue-card view) · Same Route, Different Scale `#workshop/scale` |
-| The Sponge, again | Living Garden habitat trail `#living` · My Count Collection `#living/collection` · Field Notebook `#living/notebook` (the script offers Fair Test or Field Notebook, and `#workshop/fair` now opens the Question Bench) |
+| The Sponge, again | Living Garden habitat trail `#living` · My Count Collection `#living/collection` · the flood post, away from the screen |
 
 - **Accessibility.**
   - The scene is an `svg role="img"` with a description and a caption.
   - Targets are 44 px and text is 16 px, with visible focus.
-  - Read-aloud covers visible prose only, and focus moves to the choice after choosing.
+  - Read-aloud captures the visible prose when Hear is pressed, as in Act IV. Focus moves to the choice after choosing.
   - Checks run at 320 and 820.
 
 ## Upstream study and curriculum place
@@ -119,7 +120,7 @@ Before build: an independent spec review of this spec and its companion.
 - **Starting.** The start writes `{started:true}` and the page scene, leaves Act IV unchanged, and a repeat is a no-op.
 - **Page 5.** It has the described scene, the heading, the edge word and the guide line.
 - **The hub.** It links all six paths, shows the six steps, names the guide and leaves no placeholder.
-- **Path pages.** Their job links resolve to routed places. The courier falls back to *the courier*.
+- **Path pages.** Jobs no activity can do are marked away from the screen with no link, and both Moon jobs go to Sky notes. The courier falls back to *the courier*.
 - **Choosing.**
   - An unknown path is refused, and so is a refused export.
   - Choosing writes one code, and repeating the choice is a no-op.
@@ -135,6 +136,7 @@ Before build: an independent spec review of this spec and its companion.
 - Continue the story, under the Act IV ending, starts the act and opens Page 5. It writes the right story fields and leaves Act IV unchanged.
 - The scene is described, with the heading on the first page inside the picture, and the guide line names the guide.
 - The hub has six paths and six steps.
+- Every linked job opens a page with that activity's title. Hear speaks the visible prose. The frame controls work with only Act V readable.
 - A path page links its jobs and the Question Bench. Choosing keeps a code, moves focus, touches only the story and survives a reload. Switching keeps one path.
 - The Keeper's Pages link to Act V. Targets are 44 px and nothing overflows.
 - Motion is finite and settles within five seconds. Reduced motion shows the page still and finished.

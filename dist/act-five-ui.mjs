@@ -42,7 +42,7 @@ function page(state,v){
 }
 function path(state,v,id){
  const p=pathById(id),K=C.chosen,mine=v.path===id;
- const jobs=p.jobs.map(j=>`<li><span class="a5-tier">${esc(j.tier)}</span>${j.href?`<a href="${esc(j.href)}">${esc(j.host)}</a>`:`<strong>${esc(j.host)}</strong>`}${reading(state,[j.line])}</li>`).join('');
+ const jobs=p.jobs.map(j=>`<li><span class="a5-tier">${esc(j.tier)}</span>${j.href?`<a href="${esc(j.href)}">${esc(j.host)}</a>`:`<span data-a5-off-screen>${esc(K.offScreen)}</span>`}${reading(state,[j.line])}</li>`).join('');
  const choose=mine?`<p class="a5-current" data-a5-chosen>${esc(K.yours)}</p>${reading(state,[C.steps.list[0].line])}`:v.canChoose?button(`data-a5-choose="${id}"`,v.path?K.switchTo:K.choose,true):'';
  return `${link('#almanac/own-question',C.ui.back)}${heading(p.title)}<p class="a5-invite">${esc(p.invitation)}</p>${amounts(v)}${reading(state,p[v.frameAmount])}${hear()}<details class="a5-note"><summary>Keeper's note</summary><p data-act-five-read>${esc(p.keeperNote)}</p></details><section class="a5-choose" id="act-five-choose" tabindex="-1">${choose}</section><section aria-labelledby="a5-jobs-title"><h2 id="a5-jobs-title">${esc(K.jobsTitle)}</h2><p>${esc(K.jobsIntro)}</p><ul class="a5-jobs">${jobs}</ul></section><aside class="a5-ask">${reading(state,[C.steps.list[1].line])}<p>${esc(K.ask)}</p>${link(K.askHref,K.askLabel)}</aside><p>${esc(C.steps.switching)}</p>`;
 }
@@ -78,6 +78,8 @@ export function bindActFive(state,ctx){
   else{ctx.render();focus(next);}
  }
  const on=(selector,fn)=>document.querySelectorAll(selector).forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.stopImmediatePropagation();return;}fn(el);}));
+ // Read-aloud speaks the visible prose only, captured at the moment Hear is pressed, as in Act IV.
+ root.querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.preventDefault();e.stopImmediatePropagation();return;}el.dataset.speak=[...root.querySelectorAll('[data-act-five-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden').map(x=>x.innerText).join(' ');},{capture:true}));
  on('[data-a5-start]',()=>commit(()=>startActFive(state,options),'#almanac/next-keeper'));
  on('[data-a5-reveal]',()=>commit(()=>revealNextKeeperPage(state,options),'#almanac/next-keeper'));
  on('[data-a5-choose]',el=>commit(()=>chooseActFivePath(state,el.getAttribute('data-a5-choose'),options),null,'#act-five-choose'));

@@ -67,8 +67,8 @@ export function runChecks(){
  ok(path.includes('href="#workshop/maps"')&&path.includes('href="#workshop/scale"'),'the courier route links its jobs');
  ok(path.includes('The courier: ')&&!path.includes('{courier}'),'an unchosen courier reads as the courier');
  ok(path.includes('data-a5-choose="courier-route"')&&path.includes('href="#workshop/fair"'),'a choose button and the Question Bench for the Ask step');
- const appRoutes=readFileSync(new URL('../dist/app.mjs',import.meta.url),'utf8');
- for(const p of C.paths)for(const j of p.jobs){const [root,slug]=j.href.slice(1).split('/');ok(appRoutes.includes(`'${root}'`)||appRoutes.includes(`root==='${root}'`),`${p.id}: ${j.host} links to a routed place`);ok(!slug||appRoutes.includes(slug)||readFileSync(new URL('../dist/workshop-ui.mjs',import.meta.url),'utf8').includes(slug),`${p.id}: ${j.href} is handled`);}
+ ok(actFivePage(s,{part:'path',path:'sponge-again'}).includes(esc(C.chosen.offScreen))&&!actFivePage(s,{part:'path',path:'sponge-again'}).includes('href="#living/notebook"'),'a job no activity can do is marked as away from the screen, with no link');
+ ok(actFivePage(s,{part:'path',path:'sky-night'}).split('href="#almanac/sky"').length===3,'both Moon jobs go to Sky notes');
  unchanged(s,()=>eq(F.chooseActFivePath(s,'not-a-path',options),false,'an unknown path cannot be chosen'),'and writes nothing');
  unchanged(s,()=>eq(F.chooseActFivePath(s,'gazette',{canExport:()=>false}),false,'a refused choice writes nothing'),'refusal leaves it unchanged');
  ok(F.chooseActFivePath(s,'gazette',options),'choose the Gazette');
