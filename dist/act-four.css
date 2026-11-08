@@ -28,3 +28,11 @@
 .a4-bramble{border-left:4px solid var(--a4-ribbon);margin:1rem 0;padding:.3rem 1rem;font-style:italic;max-width:60ch}
 .a4-mind{background:#eef4f6;border-left:5px solid var(--a4-river);padding:.8rem 1.1rem;margin:1rem 0;max-width:60ch}
 @media (prefers-reduced-motion:reduce){.a4m-card,.a4m-glow,.a4m-stroke{animation:none}.a4m-stroke{stroke-dashoffset:0}.a4m-card{opacity:1}}
+/* Spec 603 · the Gazette front page. The page settles and the headlines appear within about three seconds; nothing loops. */
+.a4-gazette{margin:0 0 1rem;max-width:640px}.a4-gazette svg{width:100%;height:auto;display:block;border-radius:8px;border:1px solid #d9d2c2}.a4-gazette figcaption{font-size:.95rem;margin-top:.35rem;color:#5a5245}
+.a4g-paper{transform-box:fill-box;transform-origin:50% 50%;animation:a4g-settle .9s ease-out both}
+@keyframes a4g-settle{from{transform:translateY(-14px) rotate(-2deg);opacity:0}to{transform:none;opacity:1}}
+.a4g-head{animation:a4g-print .8s ease-out both;animation-delay:var(--d)}
+@keyframes a4g-print{from{opacity:0}to{opacity:1}}
+.a4g-copy{animation:a4g-print .8s ease-out 1.6s both}
+@media (prefers-reduced-motion:reduce){.a4g-paper,.a4g-head,.a4g-copy{animation:none}}

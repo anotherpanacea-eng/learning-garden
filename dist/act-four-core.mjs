@@ -5,11 +5,12 @@ import {seasonForMonth} from './act-two-core.mjs';
 import {actFourContent} from './act-four-content.mjs';
 import {ledgerView,validLedgerKeep} from './ledger-gauge-core.mjs';
 import {rainCaseById} from './rain-paths-content.mjs';
+import {ARCHIVE_PACK} from './travelers-archive-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 
 export const actFourChapters=Object.freeze(['account','orchard','gazette','meeting']);
-// Chapters with a reader in this version; gazette and meeting stay reserved for receipts. Chapter 4 keeps a plan instead (spec602).
-export const actFourLiveChapters=Object.freeze(['account','orchard']);
+// Chapters with a reader in this version (gazette: spec603). meeting stays reserved for receipts; chapter 4 keeps a plan instead (spec602).
+export const actFourLiveChapters=Object.freeze(['account','orchard','gazette']);
 // Spec 120 §12 fixes these three plan ids for Acts IV and VI.
 export const actFourPlans=Object.freeze(['wall','sponge','some-of-each']);
 const worryCode=x=>typeof x==='string'&&/^[a-z][a-z-]{0,39}$/.test(x);
@@ -22,10 +23,13 @@ const frame=x=>['short','longer'].includes(x),page=x=>['short','longer','origina
 function reference(r){return obj(r)&&visitId(r.visitId)&&['first','latest'].includes(r.edition)&&id(r.sourceId);}
 // A chapter 2 reference names the kept Rain Paths case only. It is shape-checked, never matched against today's cases.
 const rainReference=r=>obj(r)&&Object.keys(r).length===1&&id(r.caseId);
+// A chapter 3 reference names the kept Travelers' Archive pack only.
+const archiveReference=r=>obj(r)&&Object.keys(r).length===1&&id(r.packId);
 export function validActFourOffer(r,chapter=r?.chapter){
  if(!obj(r)||r.kind!=='act-four-offer'||r.version!==1||r.chapter!==chapter)return false;
  if(chapter==='account')return r.activity==='ledger-gauge'&&r.artifactKind==='evidence-note'&&reference(r.ref);
  if(chapter==='orchard')return r.activity==='rain-paths'&&r.artifactKind==='kept-result'&&rainReference(r.ref);
+ if(chapter==='gazette')return r.activity==='travelers-archive'&&r.artifactKind==='kept-reply'&&archiveReference(r.ref);
  return false;
 }
 // Spec601: a kept Rain Paths result is checked as a snapshot: its own structure, ids, bounded counts and internal
@@ -68,8 +72,29 @@ function rainSource(state){
  }
  return result;
 }
+// Spec603: the Travelers' Archive keeps one reply per root, replaced on each keep; the receipt names its pack, so a later
+// keep never changes what was offered. The kept reply is checked as a snapshot of its own structure and ids. Its free text
+// is never read, shown or copied, and nothing is compared with today's pack.
+function archiveSnapshot(kept){
+ return obj(kept)&&id(kept.packId)&&obj(kept.reply)&&Array.isArray(kept.sources)&&kept.sources.length>=1&&kept.sources.length<=40&&kept.sources.every(s=>obj(s)&&id(s.id))
+  &&obj(kept.support)&&typeof kept.familiar==='boolean'&&typeof kept.reading==='string'&&kept.reading.length<=40&&Array.isArray(kept.checks);
+}
+function archiveSource(state){
+ const result={status:'missing',retainedUnreadable:false,candidates:[]};
+ if(!obj(state)||!own(state,'travelersArchive'))return result;
+ const root=state.travelersArchive;
+ if(!obj(root)||root.version!==1||!own(root,'kept'))return {...result,status:'unreadable',retainedUnreadable:true};
+ result.status='ready';
+ if(root.kept===null)return result;
+ if(!archiveSnapshot(root.kept))return {...result,retainedUnreadable:true};
+ const packId=root.kept.packId;
+ // Today's pack only names the visit; a pack from another version is still offered, with a plain label.
+ result.candidates.push({key:JSON.stringify(['gazette',packId]),chapter:'gazette',activity:'travelers-archive',artifactKind:'kept-reply',ref:{packId},packLabel:packId===ARCHIVE_PACK.id?ARCHIVE_PACK.visit:null});
+ return result;
+}
 function sourceView(state,chapter){
  if(chapter==='orchard')return rainSource(state);
+ if(chapter==='gazette')return archiveSource(state);
  const result={status:'missing',retainedUnreadable:false,candidates:[]};
  if(chapter!=='account'||!obj(state)||!own(state,'ledgerGauge'))return result;
  const host=ledgerView(state);

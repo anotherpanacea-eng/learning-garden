@@ -58,6 +58,36 @@ export const actFourContent={
     "candidateEarlier": "Kept rain result from an earlier version",
     "unreadableWork": "Some earlier rain results cannot be read by this version. They stay in your notes. You can choose another."
   },
+  "gazette": {
+    "title": "The newspaper's two explanations, and what other places did",
+    "short": [
+      "The Gazette prints two headlines. They can't both be right. Or can they? The archive shows what other places did."
+    ],
+    "longer": [
+      "The *Willowbank Gazette* comes out with two headlines side by side, because the librarian, who edits it, could not decide between them: JUST A BAD STORM, SAYS MILLER and WE MADE IT WORSE, SAYS LIBRARIAN. Pip reads both twice. \"They can't both be right,\" he says. \"Maybe they can,\" says {guide}. \"A bit.\" Then the librarian opens the Travelers' Archive. \"Willowbank isn't the first town to have this argument,\" they say. \"Let's see what other places decided, and what happened after. Real places. Real floods.\""
+    ],
+    "keeperNote": "The archive's packs are real history, with sources. Paris measured its great flood of 1910 and studied it. Valencia moved its whole river after 1957. The Netherlands, famous for its dikes, chose in many places to give its rivers more room.",
+    "intro": "The Travelers' Archive holds a real photograph from Paris in 1910. Keep a reply there, then bring it to the library.",
+    "hostLabel": "Visit the Travelers' Archive",
+    "hostHref": "#archive",
+    "offer": "Offer this archive reply",
+    "kept": "What you saw goes in the almanac, next to the picture's real source.",
+    "guideChecking": [
+      "{guide} reads both headlines again, then the card on the library door. \"Paris measured its flood,\" says {guide}. \"I'd like to measure ours before I change a word.\""
+    ],
+    "headlines": [
+      "JUST A BAD STORM, SAYS MILLER",
+      "WE MADE IT WORSE, SAYS LIBRARIAN"
+    ],
+    "masthead": "The Willowbank Gazette",
+    "scene": "The front page of the Willowbank Gazette, with two headlines side by side: Just a bad storm, says miller, and We made it worse, says librarian.",
+    "caption": "This week's Gazette, with both stories on the front page.",
+    "noWork": "Nothing from the Travelers' Archive is ready to bring yet. Keep a reply there, and come back. Every activity is open.",
+    "offered": "Your archive reply is part of this story.",
+    "candidate": "Kept archive reply: {pack}",
+    "candidateEarlier": "Kept archive reply from an earlier version",
+    "unreadableWork": "Some earlier archive replies cannot be read by this version. They stay in your notes. You can choose another."
+  },
   "meeting": {
     "title": "The proposal for the low fields",
     "short": [

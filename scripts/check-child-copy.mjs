@@ -917,6 +917,7 @@ export const copyScopes = [
   {path:'dist/rehearsal-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-four-corner-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-four-meeting-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-four-gazette-art.mjs',adultBlocks:[],quotations:[]},
 
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];

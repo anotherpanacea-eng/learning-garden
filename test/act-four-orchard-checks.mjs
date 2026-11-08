@@ -22,9 +22,9 @@ export function runChecks(){
  let n=0;const eq=(a,b,m)=>{assert.deepEqual(a,b,m);n++;},ok=(v,m)=>{assert.ok(v,m);n++;};
  const unchanged=(s,fn,label)=>{const before=clone(s);fn();eq(s,before,label);};
 
- eq(A.actFourLiveChapters,['account','orchard'],'two chapters have readers; gazette and meeting stay reserved');
+ eq(A.actFourLiveChapters,['account','orchard','gazette'],'three chapters have readers (gazette from spec603); meeting keeps a plan');
  eq(actFourRoute('#almanac/two-stories/orchard'),{part:'chapter',chapter:'orchard'},'chapter 2 route');
- eq(actFourRoute('#almanac/two-stories/gazette'),{part:'hub'},'a reserved chapter still falls back to the hub');
+ eq(actFourRoute('#almanac/two-stories/elsewhere'),{part:'hub'},'an unknown chapter still falls back to the hub');
 
  // No Rain Paths root, or no kept result yet.
  const s=orchardSeed();
@@ -112,8 +112,8 @@ export function runChecks(){
  const good={kind:'act-four-offer',version:1,chapter:'orchard',activity:'rain-paths',artifactKind:'kept-result',ref:{caseId:'cover-12'}};
  ok(A.validActFourOffer(good),'a well-formed receipt');
  ok(A.validActFourOffer({...good,ref:{caseId:'a-future-case'}}),'a case id from a later version is still a readable receipt');
- for(const [label,bad] of [['activity',{...good,activity:'ledger-gauge'}],['kind',{...good,artifactKind:'evidence-note'}],['extra ref key',{...good,ref:{caseId:'cover-12',x:1}}],['empty id',{...good,ref:{caseId:''}}],['version',{...good,version:2}],['chapter mismatch',{...good,chapter:'gazette'}]])ok(!A.validActFourOffer(bad),'rejects '+label);
- eq(A.offerActFour(t,'gazette','x',options),false,'a reserved chapter cannot be offered');
+ for(const [label,bad] of [['activity',{...good,activity:'ledger-gauge'}],['kind',{...good,artifactKind:'evidence-note'}],['extra ref key',{...good,ref:{caseId:'cover-12',x:1}}],['empty id',{...good,ref:{caseId:''}}],['version',{...good,version:2}],['chapter mismatch',{...good,chapter:'meeting'}]])ok(!A.validActFourOffer(bad),'rejects '+label);
+ eq(A.offerActFour(t,'meeting','x',options),false,'chapter 4 keeps a plan, not an offer');
 
  // Before Act IV starts, nothing can be offered.
  const early=actFourHosts();keepRain(early,'cover-12');
