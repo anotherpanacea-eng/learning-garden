@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Ribbon Orders433 · opening a whole to fill an order
 
-[433](specs/433-ribbon-orders.md) proposes the next LG-G1 M3-III step under197: separate a requested amount from mixed ribbon stock, opening a whole into unchanged unit pieces when needed. Undo keeps different routes explorable; the order tray and remaining rack make subtraction visible. Independent specification and finite mathematics/content review must clear before code. This extends the existing Join the Pieces table; unlike denominators, unsupplied written calculation and frozen cross-game transfer remain open.
+[433](specs/433-ribbon-orders.md) proposes the next LG-G1 M3-III step under197: separate a requested amount from mixed ribbon stock, opening a whole into unchanged unit pieces when needed. Undo keeps different routes explorable; the order tray and remaining rack make subtraction visible. Six independent design lenses and complete Claude finite mathematics/content repair closure cleared the specification at2d1e4454 before code. The bounded implementation is in [PR516](https://github.com/anotherpanacea-eng/learning-garden/pull/516); its [canonical qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/516#issuecomment-6716609196) owns final implementation and hosted acceptance. This extends the existing Join the Pieces table; unlike denominators, unsupplied written calculation and frozen cross-game transfer remain open.
 
 ## Depth Window432 · depth, waterline and relative pressure
 
