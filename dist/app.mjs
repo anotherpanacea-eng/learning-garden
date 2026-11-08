@@ -911,7 +911,7 @@ function render(){
   else if(root==='field')html=fieldKitPage(state,slug,explorerStore.active.id)+weatherEntry('field');
   else if(bellBench)html=bellStudioPage(state)+rhythmEntry();
   else if(labelBench)html=labelPage(state,detail,explorerStore.active.id);
-  else if(archiveBench)html=travelersArchivePage(state)+labelEntry();
+  else if(archiveBench)html=travelersArchivePage(state)+actFourReturn(state,'gazette')+labelEntry();
   else if(root==='town'&&slug==='remembers'){const pairs=townDisplayedFactPairs(state,detail);if(pairs.length){exposeStoryFacts({facts:pairs});save();}html=townPage(state,detail);}
   else if(bundleBench){const view=renderBundleExchange(state);html=view.html;const live=activity?.mode.startsWith('broad-')?{question:activity.q,active}:null;const changed=noteBundleDisplay(state,view.examples,live);exposeStoryFacts({facts:view.facts});if(changed||view.facts.length)save();}
   else if(remainsBench){const v=prepareRemainsPage(state,explorerStore.active.id,candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok);html=v.html;if(v.changed)save();if(v.refused)queueMicrotask(()=>{if(location.hash==='#numbers/return/ledger')focusElement('#remains-status');});}

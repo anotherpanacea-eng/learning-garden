@@ -132,7 +132,8 @@ export function runChecks(){
    for(const frameAmount of ['short','longer']){s.story.frameAmount=frameAmount;const raw=clone(s);const html=actFourPage(s);ok(html.includes(name+' writes on a card'));ok(html.includes('Mostly the rain'));eq(s,raw,'guide rendering is pure');}
    s.story.frameAmount=before.story.frameAmount;eq(s.garden,at.garden);
   }
-  eq(actFourRoute('#almanac/two-stories/gazette'),{part:'hub'},'uncommissioned chapter falls back');
+  eq(actFourRoute('#almanac/two-stories/gazette'),{part:'chapter',chapter:'gazette'},'chapter 3 is commissioned by spec603');
+  eq(actFourRoute('#almanac/two-stories/elsewhere'),{part:'hub'},'an unknown chapter segment falls back');
   eq(actFourRoute('#almanac/two-stories/meeting'),{part:'chapter',chapter:'meeting'},'chapter 4 is commissioned by spec602');
   eq(actFourRoute('#almanac/fine-harvest'),{part:'page'});
   s.ledgerGauge.visits['ledger-1'].kept.writing={private:'SYNTHETIC_PRIVATE_PROSE'};
@@ -142,7 +143,7 @@ export function runChecks(){
  }
  {
   // The finite-text contract comes from the reviewed authoring documents, not today's saved answer keys.
-  const files=['../docs/content/352-act-four-opening-text.md','../docs/content/120-story/act-4.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/specs/366-guide-changes-their-mind.md','../docs/content/601-act-four-orchard-text.md','../docs/content/602-act-four-meeting-text.md'];
+  const files=['../docs/content/352-act-four-opening-text.md','../docs/content/120-story/act-4.md','../docs/content/120-keeper-of-the-ways-text.md','../docs/specs/366-guide-changes-their-mind.md','../docs/content/601-act-four-orchard-text.md','../docs/content/602-act-four-meeting-text.md','../docs/content/603-act-four-gazette-text.md'];
   const plain=x=>x.replace(/\*/g,'');
   const sources=plain(files.map(p=>readFileSync(new URL(p,import.meta.url),'utf8')).join('\n')).replaceAll("My hat and my boots both got wet that year too. That doesn't mean my hat did it.","My hat and my boots both got wet that year too, and I'll keep saying it: that doesn't mean my hat did it.");
   const leafs=x=>Array.isArray(x)?x.flatMap(leafs):x&&typeof x==='object'?Object.values(x).flatMap(leafs):typeof x==='string'?[x]:[];
