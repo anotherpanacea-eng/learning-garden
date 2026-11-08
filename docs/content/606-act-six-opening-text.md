@@ -55,6 +55,7 @@ The three Ways are taken from Dot's words in the chapter text:
 - That could not be saved. Nothing has changed.
 - An earlier reading preference can't be read, so it stays as it was.
 - Your exchange plan comes from an earlier version. Keep a plan here to carry on.
+- An earlier exchange plan can't be read by this version. It stays in your notes, unchanged, and everything else is still open.
 
 ## Grown-up notes
 

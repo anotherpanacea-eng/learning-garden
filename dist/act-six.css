@@ -16,6 +16,8 @@
 .a6-way[stroke-dasharray]{opacity:0;animation:a6-fade .9s ease-out both;animation-delay:var(--d)}
 @keyframes a6-draw{to{stroke-dashoffset:0}}
 @keyframes a6-fade{to{opacity:1}}
+/* After the first render in a visit the map stays settled, so choosing a Way does not redraw it. */
+.a6-settled .a6-paper,.a6-settled .a6-jar,.a6-settled .a6-way:not([stroke-dasharray]),.a6-settled .a6-way[stroke-dasharray]{animation:none}.a6-settled .a6-way:not([stroke-dasharray]){stroke-dashoffset:0}.a6-settled .a6-way[stroke-dasharray]{opacity:1}
 @media (prefers-reduced-motion:reduce){.a6-paper,.a6-jar,.a6-way:not([stroke-dasharray]),.a6-way[stroke-dasharray]{animation:none}.a6-way:not([stroke-dasharray]){stroke-dashoffset:0}.a6-way[stroke-dasharray]{opacity:1}}
 .a6-sort,.a6-ways,.a6-keep{border:2px solid #d9c9a8;border-radius:10px;padding:1rem;margin:1rem 0;background:#fffdf6}
 .a6-good{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:.5rem 0;padding:.5rem 0;border-top:1px solid #ece2cc}

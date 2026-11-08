@@ -20,9 +20,10 @@ function named(state,line){
 const reading=(state,lines)=>`<div class="a6-reading" data-act-six-read>${lines.map(x=>`<p>${rich(named(state,x))}</p>`).join('')}</div>`;
 const hear=()=>hearButton('',C.ui.hear,'en');
 // This visit's play: the sorting piles and the chosen Way. Never saved; a new explorer or a reset starts fresh.
-let visit={owner:undefined,sort:{},checked:false,way:null,notice:'',route:null};
-export function resetActSixView(){visit={owner:undefined,sort:{},checked:false,way:null,notice:'',route:null};}
-const play=owner=>{if(visit.owner!==owner)visit={owner,sort:{},checked:false,way:null,notice:'',route:null};return visit;};
+const fresh=owner=>({owner,sort:{},checked:false,way:null,notice:'',route:null,mapShown:false});
+let visit=fresh(undefined);
+export function resetActSixView(){visit=fresh(undefined);}
+const play=owner=>{if(visit.owner!==owner)visit=fresh(owner);return visit;};
 
 export function actSixRoute(hash){
  if(hash==='#almanac/opening-ways'||hash.startsWith('#almanac/opening-ways/')){const id=hash.split('/')[2];return actSixChapters.includes(id)?{part:'chapter',chapter:id}:{part:'hub'};}
@@ -38,16 +39,16 @@ function hub(state,v){
 }
 function exchange(state,v,p){
  const X=C.exchange,S=X.sort,solved=p.checked&&S.items.every(i=>p.sort[i.id]===i.way);
- const goods=S.items.map(i=>{const wrong=p.checked&&p.sort[i.id]!==i.way;return `<div class="a6-good" data-a6-good="${i.id}"><strong>${esc(i.label)}</strong>${['up','down'].map(w=>button(`data-a6-sort="${i.id}:${w}" aria-pressed="${p.sort[i.id]===w}"`,S[w],p.sort[i.id]===w)).join('')}${wrong?`<p class="a6-hint" data-act-six-read>${esc(i.hint)}</p>`:''}</div>`;}).join('');
+ const goods=S.items.map(i=>{const wrong=p.checked&&p.sort[i.id]!==i.way;return `<div class="a6-good" data-a6-good="${i.id}" role="group" aria-labelledby="a6-good-${i.id}"><strong id="a6-good-${i.id}">${esc(i.label)}</strong>${['up','down'].map(w=>button(`data-a6-sort="${i.id}:${w}" aria-pressed="${p.sort[i.id]===w}"`,S[w],p.sort[i.id]===w)).join('')}${wrong?`<p class="a6-hint" data-act-six-read>${esc(i.hint)}</p>`:''}</div>`;}).join('');
  const result=solved?`<p class="a6-kept" data-act-six-read>${esc(S.kept)}</p>`:p.checked?`<p data-act-six-read>${esc(S.notYet)}</p>`:'';
  return `${link('#almanac/opening-ways',C.ui.back)}${heading(X.title)}${amounts(v)}${reading(state,X[v.frameAmount])}${hear()}${note(X.keeperNote)}<section class="a6-sort" id="a6-sort" tabindex="-1" aria-labelledby="a6-sort-title"><h2 id="a6-sort-title">${esc(S.title)}</h2><p class="a6-tier">Sprout</p>${reading(state,[S.prompt])}${goods}${button('data-a6-sort-check',C.ui.check,true)}<div id="a6-sort-result" tabindex="-1">${result}</div></section>${jobs(state,X.jobs)}`;
 }
 function routes(state,v,p){
  const R=C.routes,K=R.keep,way=R.ways.find(w=>w.id===p.way);
  const result=way?`<p class="${way.feedback?'':'a6-kept'}" data-act-six-read>${esc(way.feedback||R.puzzle.kept)}</p>`:'';
- const kept=v.plan?`<p class="a6-kept" data-act-six-read>${esc(v.plan==='small'?K.yoursSmall:K.yours)}</p>${v.plan==='small'?reading(state,[K.smaller]):''}${reading(state,[K.kept])}`:v.earlierPlan?`<p>${esc(C.messages.earlierPlan)}</p>`:p.notice==='later'?reading(state,[K.later]):'';
+ const kept=v.planStatus==='unreadable'?`<p data-a6-plan-unreadable>${esc(C.messages.unreadablePlan)}</p>`:v.plan?`<p class="a6-kept" data-act-six-read>${esc(v.plan==='small'?K.yoursSmall:K.yours)}</p>${v.plan==='small'?reading(state,[K.smaller]):''}${reading(state,[K.kept])}`:`${v.earlierPlan?`<p>${esc(C.messages.earlierPlan)}</p>`:''}${p.notice==='later'?reading(state,[K.later]):''}`;
  const keepButtons=v.canKeepPlan?`<div class="a6-controls">${button('data-a6-plan="full"',K.choices.keep,v.plan!=='full')}${button('data-a6-plan="small"',K.choices.smaller)}${v.plan?'':button('data-a6-plan="later"',K.choices.later)}</div>`:'';
- return `${link('#almanac/opening-ways',C.ui.back)}${heading(R.title)}${amounts(v)}${waysMap(R.scene,R.caption,{chosen:p.way})}${reading(state,R[v.frameAmount])}${hear()}${note(R.keeperNote)}<section class="a6-ways" id="a6-ways" tabindex="-1" aria-labelledby="a6-ways-title"><h2 id="a6-ways-title">${esc(R.puzzle.title)}</h2><p class="a6-tier">Sprout</p>${reading(state,[R.puzzle.prompt])}<ul>${R.ways.map(w=>`<li><button type="button" class="${p.way===w.id?'primary':'secondary'}" data-a6-way-choice="${w.id}" aria-pressed="${p.way===w.id}"><strong>${esc(w.label)}</strong><span>${esc(w.about)}</span></button></li>`).join('')}</ul><div id="a6-way-result" tabindex="-1">${result}</div></section>${jobs(state,R.jobs)}<section class="a6-keep" id="a6-keep" tabindex="-1" aria-labelledby="a6-keep-title"><h2 id="a6-keep-title">${esc(K.title)}</h2><p>${esc(K.prompt)}</p>${keepButtons}<div id="a6-keep-result" tabindex="-1">${kept}</div></section>`;
+ return `${link('#almanac/opening-ways',C.ui.back)}${heading(R.title)}${amounts(v)}${waysMap(R.scene,R.caption,{chosen:p.way,settled:p.mapShown})}${reading(state,R[v.frameAmount])}${hear()}${note(R.keeperNote)}<section class="a6-ways" id="a6-ways" tabindex="-1" aria-labelledby="a6-ways-title"><h2 id="a6-ways-title">${esc(R.puzzle.title)}</h2><p class="a6-tier">Sprout</p>${reading(state,[R.puzzle.prompt])}<ul>${R.ways.map(w=>`<li><button type="button" class="${p.way===w.id?'primary':'secondary'}" data-a6-way-choice="${w.id}" aria-pressed="${p.way===w.id}"><strong>${esc(w.label)}</strong><span>${esc(w.about)}</span></button></li>`).join('')}</ul><div id="a6-way-result" tabindex="-1">${result}</div></section>${jobs(state,R.jobs)}<section class="a6-keep" id="a6-keep" tabindex="-1" aria-labelledby="a6-keep-title"><h2 id="a6-keep-title">${esc(K.title)}</h2><p>${esc(K.prompt)}</p>${keepButtons}<div id="a6-keep-result" tabindex="-1">${kept}</div></section>`;
 }
 export function actSixPage(state,{part='hub',chapter:id=null,owner=null,blocked=false}={}){
  const v=actSixView(state),p=play(owner);let body;
@@ -66,7 +67,7 @@ export function actSixInvitation(state,{blocked=false}={}){
 export function actSixNotes(state){
  const v=actSixView(state);if(v.status==='missing'&&!v.canStart)return '';
  const bad=['unavailable','unreadable'].includes(v.status)||v.startedStatus==='unreadable';
- const text=!v.started?'not started':`started, ${v.plan==='full'?'an exchange plan kept':v.plan==='small'?'a smaller exchange plan kept':v.earlierPlan?'an exchange plan from an earlier version':'no exchange plan kept yet'}`;
+ const text=!v.started?'not started':`started, ${v.planStatus==='unreadable'?'an exchange plan this version cannot read':v.plan==='full'?'an exchange plan kept':v.plan==='small'?'a smaller exchange plan kept':v.earlierPlan?'an exchange plan from an earlier version':'no exchange plan kept yet'}`;
  return `<details class="panel" data-act-six-notes><summary>${esc(C.title)}</summary><p>${esc(bad?C.messages.unreadableAct:C.notes.line.replace('{state}',text))}</p><p>${esc(C.notes.details)}</p></details>`;
 }
 export function bindActSix(state,ctx){
@@ -87,6 +88,8 @@ export function bindActSix(state,ctx){
  const on=(selector,fn)=>root.querySelectorAll(selector).forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.stopImmediatePropagation();return;}fn(el);}));
  // Read-aloud speaks the visible prose only, captured when Hear is pressed, as in Acts IV and V.
  root.querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.preventDefault();e.stopImmediatePropagation();return;}el.dataset.speak=[...root.querySelectorAll('[data-act-six-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden'&&!x.closest('details:not([open])')).map(x=>x.innerText).join(' ');},{capture:true}));
+ // The map animates when the chapter is entered; later renders in this visit show it settled.
+ if(root.querySelector('[data-a6-map]'))p.mapShown=true;
  on('[data-a6-start]',()=>commit(()=>startActSix(state,options),'#almanac/opening-ways'));
  on('[data-a6-sort]',el=>{const [good,way]=el.getAttribute('data-a6-sort').split(':');p.sort[good]=way;p.checked=false;replay(`[data-a6-sort="${good}:${way}"]`);});
  on('[data-a6-sort-check]',()=>{p.checked=true;replay('#a6-sort-result');});

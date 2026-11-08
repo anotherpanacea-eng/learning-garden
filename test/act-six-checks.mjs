@@ -56,6 +56,7 @@ export function runChecks(){
  // Chapter 1: the scene, the sorting game, honest jobs.
  const ch1=actSixPage(s,{part:'chapter',chapter:'exchange'});
  ok(C.exchange.sort.items.every(i=>ch1.includes(`data-a6-sort="${i.id}:up"`)&&ch1.includes(`data-a6-sort="${i.id}:down"`)),'every good can go up or down');
+ ok(C.exchange.sort.items.every(i=>ch1.includes(`role="group" aria-labelledby="a6-good-${i.id}"><strong id="a6-good-${i.id}">`)),'each good labels its pair of buttons');
  eq([...new Set(C.exchange.sort.items.map(i=>i.way))].sort(),['down','up'],'both piles are needed');
  ok(ch1.includes('href="#post/messages"')&&ch1.includes(esc(C.ui.offScreen)),'the jobs link where they can and say when they can\'t');
  // Chapter 2: the map, the which-Way puzzle, the plan.
@@ -82,6 +83,9 @@ export function runChecks(){
  eq([S.actSixView(later).plan,S.actSixView(later).earlierPlan],[null,true],'a plan from another version reads as no plan');
  ok(actSixPage(later,{part:'chapter',chapter:'routes'}).includes(esc(C.messages.earlierPlan)),'and says so');
  const bad=clone(s);bad.story.acts.VI.plan=2;unchanged(bad,()=>eq(S.keepExchangePlan(bad,'small',options),false,'a malformed plan is not overwritten'),'and stays');
+ ok(actSixPage(bad,{part:'chapter',chapter:'routes'}).includes(esc(C.messages.unreadablePlan))&&!actSixPage(bad,{part:'chapter',chapter:'routes'}).includes('data-a6-plan='),'a malformed plan says so, with no controls');
+ ok(actSixNotes(bad).includes('cannot read'),'and Notes say so');
+ ok(actSixPage(bad,{part:'chapter',chapter:'exchange'}).includes('data-a6-sort-check'),'everything else stays open');
  const badAct=clone(s);badAct.story.acts.VI=['started'];eq(S.actSixView(badAct).status,'unreadable','a malformed act is unreadable');
  ok(actSixPage(badAct,{part:'hub'}).includes(esc(C.messages.unreadableAct)),'and says so');
  const noEnd=clone(boundSeed());noEnd.story.acts.V.ended=false;eq(S.actSixView(noEnd).canStart,false,'Act VI needs the Act V ending');

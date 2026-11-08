@@ -88,7 +88,8 @@ export const actSixContent={
     unreadableAct:'An earlier Act VI record can\'t be read by this version. It stays in your notes, unchanged.',
     refused:'That could not be saved. Nothing has changed.',
     badPreference:'An earlier reading preference can\'t be read, so it stays as it was.',
-    earlierPlan:'Your exchange plan comes from an earlier version. Keep a plan here to carry on.'
+    earlierPlan:'Your exchange plan comes from an earlier version. Keep a plan here to carry on.',
+    unreadablePlan:'An earlier exchange plan can\'t be read by this version. It stays in your notes, unchanged, and everything else is still open.'
   },
   notes:{line:'Act VI: {state}.',details:'Sorting goods, choosing a Way and keeping an exchange plan are story progress. They are not learning results.'}
 };

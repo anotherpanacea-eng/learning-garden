@@ -71,13 +71,41 @@ def run(base, browser):
     started = seed(True)
     kept = json.loads(json.dumps(started)); kept['garden'] = {'guide': 'a-future-guide', 'seen': ['future-story-node']}
     c, p = setup(browser, kept)
-    go(p, base, '#almanac/opening-ways/routes')
+    p.goto(base + '#almanac/opening-ways/routes', wait_until='networkidle'); p.locator('[data-act-six-root]').first.wait_for()
     eq(p.locator('dialog.welcome-film[open]').count(), 0, 'no welcome film opens on an Act VI page')
     p.locator('[data-a6-plan="full"]').tap(); p.wait_for_function("JSON.parse(localStorage.getItem('number-garden-v1:explorer-1')).story.acts.VI.plan==='full'")
     g = book(p)['garden']; eq([g.get('guide'), g.get('seen')], ['a-future-guide', ['future-story-node']], 'keeping a plan leaves unrelated saves as they were')
     p.locator('.act-six-page [data-speak]').first.dispatch_event('click')
     spoken = p.locator('.act-six-page [data-speak]').first.get_attribute('data-speak') or ''
     ok('Three Ways' in spoken and 'half a plan' not in spoken, 'Hear speaks visible prose and skips the closed note')
+    c.close()
+    # Play is for this visit and this explorer: switching explorers and back starts the piles fresh.
+    two = browser.new_context(viewport={'width': 820, 'height': 1000}, has_touch=True, reduced_motion='reduce')
+    reg2 = {'version': 1, 'activeId': 'explorer-1', 'explorers': [{'id': x, 'avatar': 'sky', 'color': 'blue', 'symbol': 'leaf', 'createdAt': '2026-11-03T12:00:00Z'} for x in ('explorer-1', 'explorer-2')]}
+    two.add_init_script("(d=>{if(!localStorage.getItem('a6-two')){localStorage.setItem('learning-garden-explorers',JSON.stringify(d.r));localStorage.setItem('number-garden-v1:explorer-1',JSON.stringify(d.s));localStorage.setItem('number-garden-v1:explorer-2',JSON.stringify(d.s));localStorage.setItem('a6-two','1');}})(" + json.dumps({'r': reg2, 's': started}) + ")")
+    p = two.new_page(); p.set_default_timeout(15000); p.on('pageerror', lambda e: errors.append(str(e)))
+    p.goto(base + '#almanac/opening-ways/exchange', wait_until='networkidle')
+    if p.locator('[data-select-explorer="explorer-1"]').count(): p.locator('[data-select-explorer="explorer-1"]').tap()
+    go(p, base, '#almanac/opening-ways/exchange'); p.locator('[data-a6-sort="apples:up"]').tap()
+    eq(p.locator('[data-a6-sort="apples:up"]').get_attribute('aria-pressed'), 'true', 'a pile is chosen')
+    for who in ('explorer-2', 'explorer-1'):
+        p.goto(base + '#home', wait_until='networkidle'); p.evaluate("document.querySelectorAll('dialog[open]').forEach(d=>d.close())")
+        p.locator('#explorer-switch').tap(); p.locator(f'[data-select-explorer="{who}"]').tap(); p.locator('#explorer-switch').wait_for()
+    go(p, base, '#almanac/opening-ways/exchange')
+    eq(p.locator('[data-a6-sort="apples:up"]').get_attribute('aria-pressed'), 'false', 'switching explorers and back starts the piles fresh')
+    two.close()
+    # The map animates on entry only; choosing a Way does not redraw it.
+    c, p = setup(browser, started, 820, 'no-preference')
+    go(p, base, '#almanac/opening-ways/routes'); p.locator('[data-a6-map]').wait_for()
+    p.locator('[data-a6-way-choice="river"]').tap(); p.locator('#a6-way-result p').wait_for()
+    ok(p.evaluate("getComputedStyle(document.querySelector('.a6-paper')).animationName")=='none', 'choosing a Way leaves the map settled')
+    c.close()
+    # An earlier-version plan still answers Not yet.
+    fut = json.loads(json.dumps(started)); fut['story']['acts']['VI']['plan'] = 'a-future-plan'
+    c, p = setup(browser, fut)
+    go(p, base, '#almanac/opening-ways/routes'); p.locator('[data-a6-plan="later"]').tap()
+    t = p.locator('#a6-keep-result').inner_text()
+    ok('earlier version' in t and 'The map stays on the table.' in t, 'Not yet answers beside the earlier-version note')
     c.close()
     measure = '''sel=>[...document.querySelectorAll(sel)].map(e=>{const s=getComputedStyle(e);return {name:s.animationName,count:s.animationIterationCount,dur:parseFloat(s.animationDuration),delay:parseFloat(s.animationDelay)};})'''
     for motion, still in (('reduce', True), ('no-preference', False)):
