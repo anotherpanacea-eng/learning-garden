@@ -240,7 +240,9 @@ The [352 opening and first chapter](specs/352-act-four-opening.md), with [366's 
 
 [The Act V project page and ending605](specs/605-act-five-projects.md) are proposed in a stacked Claude draft PR. The chosen path's project runs Make, the path's Show line, Change, and Keep with one of its three limit cards, all as codes. Binding a complete project ends Act V with an animated binding scene, the season line and an almanac line naming the project and its limit. Act VI's opening follows in 606.
 
-[Act VI's opening606](specs/606-act-six-opening.md) is proposed in a stacked Claude draft PR: Continue the story after the Act V ending, Nuria's letter 6 (English), chapter 1 with a goods-sorting game, chapter 2 with an animated map of the three Ways, a which-Way puzzle and keeping the exchange plan as a code. The long rain, the first journey, Hollis's return and the ending remain separate commissions.
+[Act VI's opening606](specs/606-act-six-opening.md) is proposed in a stacked Claude draft PR: Continue the story after the Act V ending, Nuria's letter 6 (English), chapter 1 with a goods-sorting game, chapter 2 with an animated map of the three Ways, a which-Way puzzle and keeping the exchange plan as a code. The long rain follows in 607; the first journey, Hollis's return and the ending remain separate commissions.
+
+[The long rain607](specs/607-act-six-rain.md) is proposed in a Claude draft PR. It adds the rain and the runner's card, a shelf game, the French warning card at three depths (choose or build, then Send; French reviewed by the three-model panel), and the water arriving by the kept Act IV plan or spec 120 §12's missing-plan fallback, with an animated flood post: *Warned in time*.
 
 ## Reviewed release · October 31
 
