@@ -8,7 +8,7 @@ The existing activity clarity and save-preservation sweep, together with the rev
 
 ## Wholes and Pieces431 · bundles and loose unit pieces
 
-[431](specs/431-wholes-and-pieces.md) commissions the next LG-G1 M3-III bridge under197: bundle a denominator-sized collection as one whole, then open it back into the same pieces. Eight finite stocks start in either direction and include11/4,3 2/5, eighths, exact wholes, a proper fraction and zero. This becomes a third mode beside Join the Pieces and Find the Other Length, preserving their models and work. Independent design and complete finite mathematics/content review precede implementation. Mixed-number arithmetic, trading for subtraction, unsupplied conversion fluency and frozen cross-game transfer remain open; no topic/mastery claim follows the tool.
+[431](specs/431-wholes-and-pieces.md) commissions the next LG-G1 M3-III bridge under197: bundle a denominator-sized collection as one whole, then open it back into the same pieces. Eight finite stocks start in either direction and include11/4,3 2/5, eighths, exact wholes, a proper fraction and zero. This becomes a third mode beside Join the Pieces and Find the Other Length, preserving their models and work. Six independent design lenses and complete Claude finite mathematics/content repair closure cleared the specification at bc8be3e9 before code; implementation is underway in [PR514](https://github.com/anotherpanacea-eng/learning-garden/pull/514). Mixed-number arithmetic, trading for subtraction, unsupplied conversion fluency and frozen cross-game transfer remain open; no topic/mastery claim follows the tool.
 
 ## Group Pieces430 · fewer pieces, unchanged amount
 
