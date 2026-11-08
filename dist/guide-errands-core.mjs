@@ -4,12 +4,13 @@ import {actTwoView} from './act-two-core.mjs';
 import {actThreeView} from './act-three-core.mjs';
 import {actFourView} from './act-four-core.mjs';
 
-// The furthest act this explorer has started. An unreadable story reads as Act I, so only act-agnostic lines show.
+// The furthest act this explorer's story has reached: an act they started, or Act II inherited by arriving with the
+// upstream letter (spec 249). An unreadable story reads as Act I, so only act-agnostic lines show.
 export function actReached(state){
- const started=view=>{try{return view(state)?.started===true;}catch{return false;}};
- if(started(actFourView))return 4;
- if(started(actThreeView))return 3;
- if(started(actTwoView))return 2;
+ const read=(view,key)=>{try{return view(state)?.[key]===true;}catch{return false;}};
+ if(read(actFourView,'started'))return 4;
+ if(read(actThreeView,'started'))return 3;
+ if(read(actTwoView,'started')||read(actTwoView,'inheritedActII'))return 2;
  return 1;
 }
 

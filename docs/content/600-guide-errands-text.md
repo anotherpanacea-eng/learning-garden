@@ -4,12 +4,12 @@ Companion to [spec 600](../specs/600-guide-errands.md). Every child-facing strin
 
 ## Strip copy
 
-| Where | Summary (closed) | Lead | Footer |
-|---|---|---|---|
-| Room | Where next? {guide} has an idea. | Someone in town could use the same idea in a new way. | Every place stays open. Go anywhere you like. |
-| Place page | Who needs a hand here? | {guide} heard a few requests around town. | These are ideas, not jobs. Every place stays open. |
+| Where | Summary (closed) | Lead | Hear button | Footer |
+|---|---|---|---|---|
+| Room | Where next? {guide} has an idea. | Someone in town could use the same idea in a new way. | Hear these ideas | Every place stays open. Go anywhere you like. |
+| Place page | Who needs a hand here? | {guide} heard a few requests around town. | Hear the requests | These are ideas, not jobs. Every place stays open. |
 
-Region label: Ideas from your guide.
+Region label: Ideas from your guide. The Hear button reads the lead, then each shown line, with the guide named.
 
 ## Onward errands on rooms
 
@@ -32,7 +32,7 @@ Region label: Ideas from your guide.
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
 | from the start | Change the ribbon cuts | The workshop keeps a ribbon with a brass flag on it. {guide} wants to know what happens when every piece is split in two, but the flag stays put. | Ribbon Recut Table `#workshop/recut` |
-| Act II on | Plan Ember’s birthday tray | Ember’s birthday is coming, and the café is planning trays for the gathering. One recipe feeds two; how many whole batches for a party? | Whole batches for a gathering `#cafe/batches` |
+| Act II on | Plan a party tray | The café still makes trays like the ones for Ember’s birthday. One recipe feeds two, so how many whole batches does a party need? | Whole batches for a gathering `#cafe/batches` |
 | from the start | Plan a supper tray | Four puppeteers need supper between scenes. One recipe feeds two, so {guide} wonders how many whole batches it takes. | Whole batches for a gathering `#cafe/batches` |
 
 ### Whole batches for a gathering · `#cafe/batches`
@@ -54,7 +54,7 @@ Region label: Ideas from your guide.
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
-| from the start | Choose welcome supplies | The welcome table needs place cards, signs and path markers, all inside one spending limit. {guide} says more than one basket might work. | Gathering Budget `#workshop/budget` |
+| from the start | Choose welcome supplies | The welcome table needs place cards and signs, all inside one spending limit. {guide} says more than one basket might work. | Gathering Budget `#workshop/budget` |
 | from the start | Set the welcome tables | Pip is still planning the welcome-back tables. Counting coins by fives and tens is close to counting bites in equal groups. | The serving bench `#cafe/groups` |
 
 ### Water Evidence Shelf · `#science/evidence`
@@ -62,7 +62,7 @@ Region label: Ideas from your guide.
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
 | Act IV on | Test the wet corner | The orchard keeper’s low corner is always wet now. Before the town argues about why, {guide} wants to see where rain goes when ground is full. | Rain Paths `#science/rain` |
-| from the start | Follow pretend rain | A picture showed water where it was not before. {guide} wants to move rain tokens and watch where the water goes when the ground is full. | Rain Paths `#science/rain` |
+| from the start | Follow pretend rain | A picture showed a smaller puddle. {guide} wants to move rain tokens and watch where the water goes when the ground is full. | Rain Paths `#science/rain` |
 | from the start | Look at the seedlings | The storm damaged the growing shelf. The same careful habit helps there: say what you see before you say why it happened. | Seedlings after the storm `#living/plants` |
 
 ### Rain Paths · `#science/rain`
@@ -70,7 +70,7 @@ Region label: Ideas from your guide.
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
 | from the start | Chart a rain result | Once a rain run is finished, the Field Notebook can turn it into a chart. {guide} says it is the same result, seen a new way. | Rain charts `#living/notebook/rain` |
-| from the start | Look at the water clues | Three made-up pictures show a puddle, a patch of soil and a dish. Which careful explanation fits what each picture actually shows? | Water Evidence Shelf `#science/evidence` |
+| from the start | Look at the water clues | Three made-up before-and-after pictures show changing water clues: a puddle, a patch of soil and a dish. Which careful explanation fits what each one actually shows? | Water Evidence Shelf `#science/evidence` |
 | Act IV on | Read about room for a river | The town is arguing about the low fields. Another country once gave its rivers more room. What did they do, and what could Willowbank learn? | Room for the River `#learn/history/river-room` |
 
 ### Rain charts · `#living/notebook/rain`
@@ -79,14 +79,14 @@ Region label: Ideas from your guide.
 |---|---|---|---|
 | Act IV on | Read Wren’s flood ledger | Wren has set out a flood ledger and a rain tally at the Keeper’s Desk. Charts like yours can help, and so can asking what a record cannot show. | The ledger and the rain gauge `#learn/science/ledger` |
 | from the start | Make a count collection | The mending table is getting ready for the lantern walk. Make a pretend button collection and leave a chart another helper can read. | My Count Collection `#living/collection` |
-| from the start | Add to Dot’s weather notes | Dot keeps a note of what stands out in the weather each day. {guide} says a few days of notes can become a chart of your own. | Dot’s weather notes `#almanac/weather` |
+| from the start | Add to Dot’s weather notes | Dot keeps a note of what stands out in the weather each day. {guide} says a few days of notes can be counted up in a tally. | Dot’s weather notes `#almanac/weather` |
 
 ### Seedlings after the storm · `#living/plants`
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
 | from the start | Try two real pots | The garden keeper would like to know if real cress does what the made-up seedlings did. Two pots, one bright and one dim, can tell you. | Two pots, two kinds of light `#field/cress` |
-| from the start | Look at the water clues | The Water Lab has three made-up pictures of water. {guide} wants to practice the same habit: what does the picture show, and what might explain it? | Water Evidence Shelf `#science/evidence` |
+| from the start | Look at the water clues | The Water Lab has three made-up before-and-after pictures of water clues. {guide} wants to practice the same habit: what does the picture show, and what might explain it? | Water Evidence Shelf `#science/evidence` |
 
 ### Two pots, two kinds of light · `#field/cress`
 
@@ -113,7 +113,7 @@ Region label: Ideas from your guide.
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
-| from the start | Print a puppet notice | The puppets need notices before the rehearsal. Moving one word or changing the end mark can turn a telling sentence into a question. | Puppet Notice Printer `#loft/printer` |
+| from the start | Print a puppet notice | The puppets need notices before the rehearsal. Moving a word and choosing a question mark can turn a telling sentence into a question. | Puppet Notice Printer `#loft/printer` |
 | from the start | Mend a letter | Neighbors are sending requests while they mend the town, and some are unclear. Which blanket? Which place? A reader needs to know. | The letter-mending desk `#post/messages` |
 
 ### Puppet Notice Printer · `#loft/printer`
@@ -127,7 +127,7 @@ Region label: Ideas from your guide.
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
-| Act III on | Write two thank-you letters | Reed seeds have arrived from Vadoalto. Nuria gets a friendly note, and the council gets a formal one. Same thanks, different words. | Two Letters `#post/register` |
+| Act III on | Write two thank-you letters | Reed seeds have arrived from Vadoalto. Nuria gets a friendly note, and the council gets a formal one, each written for its own reader. | Two Letters `#post/register` |
 | from the start | Help with Dot’s report | Dot’s report is getting long. At the Keeper’s Desk, paragraphs and linking words can lead a reader through it in the right order. | The Writing Table `#desk/writing` |
 | from the start | Print a puppet notice | The puppet show needs notices too. Word order and the end mark change what a short sentence asks or tells. | Puppet Notice Printer `#loft/printer` |
 
@@ -135,7 +135,7 @@ Region label: Ideas from your guide.
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
-| Act III on | Write two thank-you letters | Nuria’s reed seeds need thanking. One friendly note, one formal letter: the request stays the same, but the words change for the reader. | Two Letters `#post/register` |
+| Act III on | Write two thank-you letters | Nuria’s reed seeds need thanking. One friendly note and one formal letter, each written for its own reader. | Two Letters `#post/register` |
 | from the start | Mend a letter | Back at the Post Office, short notes still go astray. {guide} says the same question helps: what does this reader need to know? | The letter-mending desk `#post/messages` |
 | from the start | Write directions for a reader | A reader who does exactly what the words say is a good test of order. Rabbit’s invitation is waiting at the Post Office. | Instructions for a reader `#post/instructions` |
 
@@ -206,13 +206,13 @@ Region label: Ideas from your guide.
 
 ## Errands on place pages
 
-At most three are shown, later acts first.
+At most three are shown, later acts first, one per destination.
 
 ### `#cafe`
 
 | Shows | Button | Line | Goes to |
 |---|---|---|---|
-| Act II on | Plan Ember’s birthday tray | Ember’s birthday is coming. The café wants trays for the gathering, planned in whole batches. | Whole batches for a gathering `#cafe/batches` |
+| Act II on | Plan a party tray | The café still makes trays like the ones for Ember’s birthday, planned in whole batches. | Whole batches for a gathering `#cafe/batches` |
 | Act II on | Price a market stall | The weekly market is back. A stall keeper wants prices she can make with more than one handful of coins. | The Coin Counter `#workshop/coins` |
 | from the start | Set the welcome tables | Pip is planning the welcome-back tables: how many plates, and how many bites on each? | The serving bench `#cafe/groups` |
 | from the start | Pack picnic parcels | The neighbors who helped after the storm are owed a picnic, cut into fair shares. | The Sharing Counter `#cafe/sharing` |
@@ -224,7 +224,7 @@ At most three are shown, later acts first.
 |---|---|---|---|
 | Act IV on | Test the wet corner | The orchard keeper’s low corner is always wet now. Where does rain go when the ground is full? | Rain Paths `#science/rain` |
 | from the start | Follow pretend rain | Rain keeps finding the low path. Move rain tokens and see where the water goes. | Rain Paths `#science/rain` |
-| from the start | Look at the water clues | Three made-up pictures show water where it was not before. What does each one really show? | Water Evidence Shelf `#science/evidence` |
+| from the start | Look at the water clues | Three made-up before-and-after pictures show changing water clues. What does each one really show? | Water Evidence Shelf `#science/evidence` |
 | from the start | Look at a cold window | The baker’s window fogs up on cold mornings. Where do those drops come from? | Cold Window, Same Water `#science/window` |
 
 ### `#workshop`

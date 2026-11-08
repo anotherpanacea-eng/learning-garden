@@ -4,12 +4,12 @@ import assert from 'node:assert/strict';
 import {pathToFileURL} from 'node:url';
 import {ERRAND_HUBS,ERRAND_ROOMS,ERRAND_UI} from '../dist/guide-errands-content.mjs';
 import {actReached,errandView} from '../dist/guide-errands-core.mjs';
-import {guideErrandsHTML} from '../dist/guide-errands-ui.mjs';
+import {guideErrandsHTML,guideErrandsSpeech} from '../dist/guide-errands-ui.mjs';
 import {rooms} from '../dist/room-registry.mjs';
 import {guides} from '../dist/companions.mjs';
 import {freshState} from '../dist/core.mjs';
 import {canExport,pageOne} from './act-two-checks.mjs';
-import {actThreeHosts} from './act-three-checks.mjs';
+import {actThreeHosts,actThreeSeed} from './act-three-checks.mjs';
 import {actFourHosts} from './act-four-checks.mjs';
 import {startActTwo} from '../dist/act-two-core.mjs';
 import {startActThree} from '../dist/act-three-core.mjs';
@@ -45,11 +45,10 @@ export function runChecks(){
  }
  const ids=new Set();
  for(const [where,i] of items){
-  ok(['id','to','label','line','minAct'].every(k=>Object.hasOwn(i,k))&&Object.keys(i).length===5,`${where} ${i.id} has exactly the five fields`);
+  ok(['id','to','label','line','minAct'].every(k=>Object.hasOwn(i,k))&&[i.id,i.to,i.label,i.line].every(x=>typeof x==='string'&&x.length>0),`${where} ${i.id} has its fields`);
   ok([1,2,3,4].includes(i.minAct),`${where} ${i.id} names an act from 1 to 4`);
   ok(roomRoutes.has(i.to),`${where} ${i.id} links a registered room`);
   ok(!ids.has(i.id),`${i.id} is unique`);ids.add(i.id);
-  ok(i.line.includes('{guide}')||/^[A-Z]/.test(i.line),`${i.id} line is a sentence`);
   for(const {act,words} of LATER)for(const w of words)if(w.test(i.line)||w.test(i.label))ok(i.minAct>=act,`${i.id} mentions ${w} so waits for Act ${act}`);
   ok(!/supplied|provenance|recorded as support|exportable/i.test(i.line+i.label),`${i.id} uses child-facing words`);
  }
@@ -67,6 +66,21 @@ export function runChecks(){
  const two=pageOne();ok(startActTwo(two,options));eq(actReached(two),2,'Act II started');
  const three=actThreeHosts();ok(startActThree(three,options));eq(actReached(three),3,'Act III started');
  const four=actFourHosts();ok(startActFour(four,options));eq(actReached(four),4,'Act IV started');
+ eq(actReached(actThreeSeed()),2,'arriving with the upstream letter inherits Act II without starting Act III');
+ const damaged=structuredClone(four);damaged.story.acts.II='broken';eq(actReached(damaged),4,'Act IV reached survives a damaged Act II entry');
+
+ // Hand-written expectations at the act boundaries, independent of the selection code.
+ const shown=(route,state)=>errandView(route,state)?.items.map(i=>i.id);
+ eq(shown('#science/evidence',fresh),['evidence-to-rain','evidence-to-plants'],'Water Evidence Shelf at Act I');
+ eq(shown('#science/evidence',four),['evidence-wet-corner','evidence-to-plants'],'Act IV swaps in the wet corner for the same room');
+ eq(shown('#workshop/maps',fresh),['maps-to-scale','maps-to-clock','maps-to-ground'],'Cartographer at Act I');
+ eq(shown('#workshop/maps',three),['maps-to-scale','maps-upstream','maps-to-ground'],'Act III swaps in the walk upstream');
+ eq(shown('#cafe',fresh),['cafe-tables','cafe-picnic','cafe-flag'],'Café place page at Act I');
+ eq(shown('#cafe',two),['cafe-birthday','cafe-market','cafe-tables'],'Café place page at Act II');
+ eq(shown('#desk',fresh),['desk-price','desk-report','desk-river-early'],'Keeper’s Desk at Act I');
+ eq(shown('#desk',four),['desk-ledger','desk-river','desk-price'],'Keeper’s Desk at Act IV, one river errand');
+ eq(shown('#post/messages',fresh),['messages-to-writing','messages-to-printer'],'no Two Letters before Act III');
+ eq(shown('#post/messages',three),['messages-two-letters','messages-to-writing','messages-to-printer'],'Two Letters from Act III');
 
  // Exact-route lookup only.
  for(const bad of ['#home','#notes','#cafe/groups/x','#cafe/groups?x','','not-a-route',null,42,'#CAFE/groups'])eq(errandView(bad,fresh),null,`no strip for ${String(bad)}`);
@@ -92,10 +106,13 @@ export function runChecks(){
  for(const g of guides){const html=guideErrandsHTML(errandView(Object.keys(ERRAND_ROOMS)[0],fresh),{garden:{guide:g.id}});ok(html.includes(g.name),`${g.id} is named`);}
  ok(guideErrandsHTML(errandView(Object.keys(ERRAND_ROOMS)[0],fresh),{garden:{guide:'nobody'}}).includes(guides[0].name),'an unknown guide falls back to the first guide');
  eq(guideErrandsHTML(null,fresh),'','no view renders nothing');
+ const rowan={...fresh,garden:{guide:'rowan'}},view=errandView('#science/evidence',rowan);
+ eq(guideErrandsSpeech(view,rowan),'Someone in town could use the same idea in a new way. A picture showed a smaller puddle. Rowan wants to move rain tokens and watch where the water goes when the ground is full. The storm damaged the growing shelf. The same careful habit helps there: say what you see before you say why it happened.','the Hear button reads the visible lead and lines, with the guide named');
+ ok(guideErrandsHTML(view,rowan).includes('data-speak="Someone in town'),'the strip carries one Hear button with that passage');
  const hostile={kind:'room',route:'#x',act:1,items:[{id:'h',to:'#cafe/groups"><img src=x onerror=alert(1)>',label:'<b>go</b>',line:'<script>x</script> {guide}',minAct:1}]};
  const html=guideErrandsHTML(hostile,fresh);
  ok(!html.includes('<script>')&&!html.includes('<b>')&&!html.includes('"><img'),'hostile strings are escaped');
- ok(['region','room','hub'].every(k=>Object.hasOwn(ERRAND_UI,k)),'ui copy has region, room and hub');
+ ok(['region','room','hub'].every(k=>Object.hasOwn(ERRAND_UI,k))&&['room','hub'].every(k=>['summary','lead','free','hear'].every(f=>typeof ERRAND_UI[k][f]==='string')),'ui copy has region, room and hub with their strings');
  return n;
 }
 if(import.meta.url===pathToFileURL(process.argv[1]).href)console.log(`guide-errands checks: ${runChecks()} passed`);

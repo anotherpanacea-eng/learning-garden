@@ -94,6 +94,8 @@ def journey(browser, base, books, data):
         before = p.evaluate("localStorage.length ? JSON.stringify(Object.fromEntries(Object.entries(localStorage))) : ''")
         summary.click()
         cards = strip(p).locator('.ge-card')
+        hear = strip(p).locator('[data-speak]')
+        h.ok(hear.count() == 1 and 'Rowan' in (hear.get_attribute('data-speak') or ''), 'one Hear button reads the errands with the guide named')
         expected = [i for i in data['rooms'][room]['onward'] if i['minAct'] == 1]
         h.ok(cards.count() == len(expected), f'{room} shows {len(expected)} errands at Act I')
         for k, item in enumerate(expected):
@@ -124,6 +126,27 @@ def journey(browser, base, books, data):
         strip(p).locator('summary').focus(); p.keyboard.press('Enter')
         h.ok(p.evaluate("document.querySelector('#guide-errands details').open"), 'Enter opens the errands')
         p.close()
+
+
+def chooser(browser, base, books, data):
+    room = next(iter(data['rooms']))
+    p = open_page(browser, base, books['fresh'], 820, 'chooser')
+    p.goto(base + 'index.html' + room); p.wait_for_selector('#guide-errands summary'); settle(p)
+    h.ok(not strip(p).is_hidden(), 'strip shows for the active explorer')
+    p.locator('#explorer-switch').click(); p.wait_for_selector('[data-select-explorer]')
+    p.wait_for_timeout(50)
+    h.ok(strip(p).is_hidden(), 'the explorer chooser hides the strip without a hash change')
+    p.locator('[data-select-explorer="explorer-1"]').click(); p.wait_for_timeout(150); settle(p)
+    now = p.evaluate('location.hash')
+    authored = now in data['rooms'] or now in data['hubs']
+    h.ok(strip(p).is_hidden() != authored, f'after choosing an explorer the strip matches the route it lands on ({now})')
+    # A same-route switch: return to the room, open the chooser again and pick the explorer while the hash stays put.
+    p.evaluate(f"location.hash={json.dumps(room)}"); p.wait_for_timeout(120); settle(p)
+    p.locator('#explorer-switch').click(); p.wait_for_selector('[data-select-explorer]')
+    p.locator('[data-select-explorer="explorer-1"]').click(); p.wait_for_timeout(150); settle(p)
+    now = p.evaluate('location.hash')
+    h.ok(strip(p).is_hidden() != (now in data['rooms'] or now in data['hubs']), f'a second explorer choice also leaves the strip matching {now}')
+    p.close()
 
 
 def acts(browser, base, books, data):
@@ -171,7 +194,7 @@ def main():
     with sync_playwright() as pw:
         b = pw.chromium.launch(headless=True, executable_path=os.environ.get('CHROME_PATH', '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'), args=['--disable-quic'])
         try:
-            suites = {'journey': journey, 'acts': acts, 'reduced': reduced_motion}
+            suites = {'journey': journey, 'chooser': chooser, 'acts': acts, 'reduced': reduced_motion}
             for name, run in suites.items():
                 if os.environ.get('GUIDE_ERRANDS_CASE', name) == name:
                     print('Running ' + name, flush=True); run(b, base, books, data)

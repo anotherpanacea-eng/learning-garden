@@ -5,8 +5,8 @@ const freeze=x=>Object.freeze(x);
 
 export const ERRAND_UI=freeze({
  region:'Ideas from your guide',
- room:freeze({summary:'Where next? {guide} has an idea.',lead:'Someone in town could use the same idea in a new way.',free:'Every place stays open. Go anywhere you like.'}),
- hub:freeze({summary:'Who needs a hand here?',lead:'{guide} heard a few requests around town.',free:'These are ideas, not jobs. Every place stays open.'}),
+ room:freeze({summary:'Where next? {guide} has an idea.',lead:'Someone in town could use the same idea in a new way.',free:'Every place stays open. Go anywhere you like.',hear:'Hear these ideas'}),
+ hub:freeze({summary:'Who needs a hand here?',lead:'{guide} heard a few requests around town.',free:'These are ideas, not jobs. Every place stays open.',hear:'Hear the requests'}),
 });
 
 export const ERRAND_ROOMS=freeze({
@@ -21,7 +21,7 @@ export const ERRAND_ROOMS=freeze({
  ])}),
  '#cafe/fractions':freeze({onward:freeze([
   e('trail-to-recut','#workshop/recut','Change the ribbon cuts','The workshop keeps a ribbon with a brass flag on it. {guide} wants to know what happens when every piece is split in two, but the flag stays put.'),
-  e('trail-birthday','#cafe/batches','Plan Ember’s birthday tray','Ember’s birthday is coming, and the café is planning trays for the gathering. One recipe feeds two; how many whole batches for a party?',2),
+  e('trail-birthday','#cafe/batches','Plan a party tray','The café still makes trays like the ones for Ember’s birthday. One recipe feeds two, so how many whole batches does a party need?',2),
   e('trail-to-batches','#cafe/batches','Plan a supper tray','Four puppeteers need supper between scenes. One recipe feeds two, so {guide} wonders how many whole batches it takes.'),
  ])}),
  '#cafe/batches':freeze({onward:freeze([
@@ -34,29 +34,29 @@ export const ERRAND_ROOMS=freeze({
   e('budget-to-price','#desk/linear','Make Pip a price card','Pip needs a price card for a delivery. A price that grows with distance and also has a starting charge is a new kind of puzzle for the Keeper’s Desk.'),
  ])}),
  '#workshop/coins':freeze({onward:freeze([
-  e('coins-to-budget','#workshop/budget','Choose welcome supplies','The welcome table needs place cards, signs and path markers, all inside one spending limit. {guide} says more than one basket might work.'),
+  e('coins-to-budget','#workshop/budget','Choose welcome supplies','The welcome table needs place cards and signs, all inside one spending limit. {guide} says more than one basket might work.'),
   e('coins-to-groups','#cafe/groups','Set the welcome tables','Pip is still planning the welcome-back tables. Counting coins by fives and tens is close to counting bites in equal groups.'),
  ])}),
 
  // Thread 2 · where the water goes.
  '#science/evidence':freeze({onward:freeze([
   e('evidence-wet-corner','#science/rain','Test the wet corner','The orchard keeper’s low corner is always wet now. Before the town argues about why, {guide} wants to see where rain goes when ground is full.',4),
-  e('evidence-to-rain','#science/rain','Follow pretend rain','A picture showed water where it was not before. {guide} wants to move rain tokens and watch where the water goes when the ground is full.'),
+  e('evidence-to-rain','#science/rain','Follow pretend rain','A picture showed a smaller puddle. {guide} wants to move rain tokens and watch where the water goes when the ground is full.'),
   e('evidence-to-plants','#living/plants','Look at the seedlings','The storm damaged the growing shelf. The same careful habit helps there: say what you see before you say why it happened.'),
  ])}),
  '#science/rain':freeze({onward:freeze([
   e('rain-to-chart','#living/notebook/rain','Chart a rain result','Once a rain run is finished, the Field Notebook can turn it into a chart. {guide} says it is the same result, seen a new way.'),
-  e('rain-to-evidence','#science/evidence','Look at the water clues','Three made-up pictures show a puddle, a patch of soil and a dish. Which careful explanation fits what each picture actually shows?'),
+  e('rain-to-evidence','#science/evidence','Look at the water clues','Three made-up before-and-after pictures show changing water clues: a puddle, a patch of soil and a dish. Which careful explanation fits what each one actually shows?'),
   e('rain-to-room','#learn/history/river-room','Read about room for a river','The town is arguing about the low fields. Another country once gave its rivers more room. What did they do, and what could Willowbank learn?',4),
  ])}),
  '#living/notebook/rain':freeze({onward:freeze([
   e('chart-to-ledger','#learn/science/ledger','Read Wren’s flood ledger','Wren has set out a flood ledger and a rain tally at the Keeper’s Desk. Charts like yours can help, and so can asking what a record cannot show.',4),
   e('chart-to-collection','#living/collection','Make a count collection','The mending table is getting ready for the lantern walk. Make a pretend button collection and leave a chart another helper can read.'),
-  e('chart-to-weather','#almanac/weather','Add to Dot’s weather notes','Dot keeps a note of what stands out in the weather each day. {guide} says a few days of notes can become a chart of your own.'),
+  e('chart-to-weather','#almanac/weather','Add to Dot’s weather notes','Dot keeps a note of what stands out in the weather each day. {guide} says a few days of notes can be counted up in a tally.'),
  ])}),
  '#living/plants':freeze({onward:freeze([
   e('plants-to-cress','#field/cress','Try two real pots','The garden keeper would like to know if real cress does what the made-up seedlings did. Two pots, one bright and one dim, can tell you.'),
-  e('plants-to-evidence','#science/evidence','Look at the water clues','The Water Lab has three made-up pictures of water. {guide} wants to practice the same habit: what does the picture show, and what might explain it?'),
+  e('plants-to-evidence','#science/evidence','Look at the water clues','The Water Lab has three made-up before-and-after pictures of water clues. {guide} wants to practice the same habit: what does the picture show, and what might explain it?'),
  ])}),
  '#field/cress':freeze({onward:freeze([
   e('cress-to-plants','#living/plants','Look at the seedlings','The made-up seedlings on the growing shelf change over six days. Compare them with what your real pots are doing.'),
@@ -73,7 +73,7 @@ export const ERRAND_ROOMS=freeze({
 
  // Thread 3 · words that reach a reader.
  '#post/instructions':freeze({onward:freeze([
-  e('instructions-to-printer','#loft/printer','Print a puppet notice','The puppets need notices before the rehearsal. Moving one word or changing the end mark can turn a telling sentence into a question.'),
+  e('instructions-to-printer','#loft/printer','Print a puppet notice','The puppets need notices before the rehearsal. Moving a word and choosing a question mark can turn a telling sentence into a question.'),
   e('instructions-to-messages','#post/messages','Mend a letter','Neighbors are sending requests while they mend the town, and some are unclear. Which blanket? Which place? A reader needs to know.'),
  ])}),
  '#loft/printer':freeze({onward:freeze([
@@ -81,12 +81,12 @@ export const ERRAND_ROOMS=freeze({
   e('printer-to-instructions','#post/instructions','Write directions for a reader','Rabbit has asked Dot to seal an invitation in an envelope. Steps in the wrong order can go very wrong for a reader who does exactly what you say.'),
  ])}),
  '#post/messages':freeze({onward:freeze([
-  e('messages-two-letters','#post/register','Write two thank-you letters','Reed seeds have arrived from Vadoalto. Nuria gets a friendly note, and the council gets a formal one. Same thanks, different words.',3),
+  e('messages-two-letters','#post/register','Write two thank-you letters','Reed seeds have arrived from Vadoalto. Nuria gets a friendly note, and the council gets a formal one, each written for its own reader.',3),
   e('messages-to-writing','#desk/writing','Help with Dot’s report','Dot’s report is getting long. At the Keeper’s Desk, paragraphs and linking words can lead a reader through it in the right order.'),
   e('messages-to-printer','#loft/printer','Print a puppet notice','The puppet show needs notices too. Word order and the end mark change what a short sentence asks or tells.'),
  ])}),
  '#desk/writing':freeze({onward:freeze([
-  e('writing-two-letters','#post/register','Write two thank-you letters','Nuria’s reed seeds need thanking. One friendly note, one formal letter: the request stays the same, but the words change for the reader.',3),
+  e('writing-two-letters','#post/register','Write two thank-you letters','Nuria’s reed seeds need thanking. One friendly note and one formal letter, each written for its own reader.',3),
   e('writing-to-messages','#post/messages','Mend a letter','Back at the Post Office, short notes still go astray. {guide} says the same question helps: what does this reader need to know?'),
   e('writing-to-instructions','#post/instructions','Write directions for a reader','A reader who does exactly what the words say is a good test of order. Rabbit’s invitation is waiting at the Post Office.'),
  ])}),
@@ -137,7 +137,7 @@ export const ERRAND_ROOMS=freeze({
 // Place pages: later acts first, so an explorer further on sees those before the lines that fit from the start.
 export const ERRAND_HUBS=freeze({
  '#cafe':freeze([
-  e('cafe-birthday','#cafe/batches','Plan Ember’s birthday tray','Ember’s birthday is coming. The café wants trays for the gathering, planned in whole batches.',2),
+  e('cafe-birthday','#cafe/batches','Plan a party tray','The café still makes trays like the ones for Ember’s birthday, planned in whole batches.',2),
   e('cafe-market','#workshop/coins','Price a market stall','The weekly market is back. A stall keeper wants prices she can make with more than one handful of coins.',2),
   e('cafe-tables','#cafe/groups','Set the welcome tables','Pip is planning the welcome-back tables: how many plates, and how many bites on each?'),
   e('cafe-picnic','#cafe/sharing','Pack picnic parcels','The neighbors who helped after the storm are owed a picnic, cut into fair shares.'),
@@ -146,7 +146,7 @@ export const ERRAND_HUBS=freeze({
  '#science':freeze([
   e('science-wet-corner','#science/rain','Test the wet corner','The orchard keeper’s low corner is always wet now. Where does rain go when the ground is full?',4),
   e('science-rain','#science/rain','Follow pretend rain','Rain keeps finding the low path. Move rain tokens and see where the water goes.'),
-  e('science-clues','#science/evidence','Look at the water clues','Three made-up pictures show water where it was not before. What does each one really show?'),
+  e('science-clues','#science/evidence','Look at the water clues','Three made-up before-and-after pictures show changing water clues. What does each one really show?'),
   e('science-window','#science/window','Look at a cold window','The baker’s window fogs up on cold mornings. Where do those drops come from?'),
  ]),
  '#workshop':freeze([
