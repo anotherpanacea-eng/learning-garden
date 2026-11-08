@@ -175,7 +175,7 @@ Arrives on the explorer's next visit after the long rain ([letters.md](letters.m
 **Jobs** (the first journey; any one makes it)
 
 **Sprout · [Parcel packing]** Dot: "Pack the first parcel. Apples at the bottom, drawings on top, so nothing gets squashed."
-Kept: "Packed, labelled and tied with one of Bramble's ribbons. It looks very official."
+Kept: "Packed, labeled and tied with one of Bramble's ribbons. It looks very official."
 
 **Seedling · [Map Reader Dispatcher]** {courier}: "Take me up the Way we planned for this season."
 Kept: "Up and back, the way the plan said. The plan works. Dot is unbearable about it for a day."
