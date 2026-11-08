@@ -44,6 +44,9 @@ export function runChecks(){
  ok(!JSON.stringify(s.story).includes(SECRET),'no reply text reaches the story');
  eq(s.travelersArchive,archive,'offering leaves the archive unchanged');
  ok(A.offerActFour(s,'gazette',c[0].key,options),'offering again reports done');
+ const first=clone(s.story.acts.IV.contributions.gazette),other=clone(s);other.travelersArchive.kept.packId='valencia-1957-v1';
+ ok(A.offerActFour(other,'gazette',A.actFourCandidates(other,'gazette')[0].key,options),'offering another pack after a receipt reports done');
+ eq(other.story.acts.IV.contributions.gazette,first,'and the first receipt stays exactly as it was');
  // A later keep replaces the archive's reply; the receipt still names the same pack and is never revoked.
  setArchiveReplyText(s,'A changed reply');keepArchiveReply(s);eq(A.actFourView(s).chapterStatus.gazette,'ready','a later keep never revokes the receipt');
  const gone=clone(s);delete gone.travelersArchive;eq(A.actFourView(gone).chapterStatus.gazette,'ready','removing the archive keeps the receipt');
@@ -53,7 +56,8 @@ export function runChecks(){
  const later=clone(h);later.travelersArchive.kept.packId='valencia-1957-v2';
  eq(A.actFourCandidates(later,'gazette').map(x=>[x.ref.packId,x.packLabel]),[['valencia-1957-v2',null]],'a pack from another version is offered with a plain label');
  ok(actFourPage(later,{part:'chapter',chapter:'gazette'}).includes(esc(C.gazette.candidateEarlier)),'and named plainly');
- for(const [label,make] of [['no pack id',x=>{delete x.kept.packId;}],['reply that is not an object',x=>{x.kept.reply='text';}],['no sources',x=>{x.kept.sources=[];}],['a source with no id',x=>{x.kept.sources=[{}];}],['familiar not a flag',x=>{x.kept.familiar='yes';}]]){
+ const none=clone(h);none.travelersArchive.kept.sources=[];eq(A.actFourCandidates(none,'gazette').length,1,'a reply kept with no sources is still offered');
+ for(const [label,make] of [['no pack id',x=>{delete x.kept.packId;}],['reply that is not an object',x=>{x.kept.reply='text';}],['empty reply',x=>{x.kept.reply={};}],['a coded field that is a number',x=>{x.kept.reply.claim=42;}],['reply text that is not a string',x=>{x.kept.reply.text=7;}],['a source with no id',x=>{x.kept.sources=[{}];}],['a duplicated source id',x=>{x.kept.sources=[x.kept.sources[0],x.kept.sources[0]];}]]){
   const y=clone(h);make(y.travelersArchive);eq(A.actFourCandidates(y,'gazette'),[],'not offered: '+label);ok(A.actFourView(y).sources.gazette.retainedUnreadable,'reported: '+label);
  }
  const root=clone(h);root.travelersArchive.version=2;eq(A.actFourView(root).sources.gazette.status,'unreadable','an unsupported root reads as unreadable');

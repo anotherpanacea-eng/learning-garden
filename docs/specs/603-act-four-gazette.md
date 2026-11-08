@@ -20,13 +20,12 @@ Offering a reply is story progress, not a curriculum milestone or a learning mea
 
 - **Artifact.** `travelersArchive.kept`, written by `keepArchiveReply` as `{packId, reply, sources, support, reading, familiar, checks, notice}`. Each keep replaces it. The receipt names only the pack, so a later keep never changes what was offered.
 - **Identity.** The pack id. The archive keeps one reply per root, so `{packId}` names it.
-- **Validator.** A snapshot check in `act-four-core.mjs` of the kept reply's own structure and ids:
+- **Validator.** A snapshot check in `act-four-core.mjs` that mirrors the archive's own catalog-free checks, for the fields the story needs:
   - a pack id;
-  - an object reply;
-  - one to forty source snapshots, each with an id;
-  - support as an object, a familiarity flag, a short reading code, and checks as an array.
-  
-  The reply's free text is **never read, shown or copied**: not in a label, a receipt, a render or Notes. Nothing is compared with today's pack, sources or answers.
+  - a reply with exactly its three coded fields (each empty or a saved id) and a text field that is a string;
+  - at most sixteen source snapshots with unique saved ids. None is fine: the archive allows it.
+
+  Fields the story never uses (support, reading, familiarity, checks) are not gates. The reply's free text is **never read, shown or copied**: not in a label, a receipt, a render or Notes. Nothing is compared with today's pack, sources or answers.
 - **Reading.** The reader is pure and reads `state.travelersArchive` directly. A root that is not a version-1 object with a `kept` field is unreadable and offers nothing. `kept:null` means nothing is kept yet. A kept reply that fails its snapshot check is reported as retained-unreadable and left exactly as saved.
 - **Candidate.** One at most, key `JSON.stringify(['gazette',packId])`. It is labelled *Kept archive reply: {pack}* with today's visit label for a known pack (*Paris, 1910*), or *Kept archive reply from an earlier version* for a pack today's archive doesn't know.
 
@@ -49,12 +48,12 @@ As in 352 and 601. A chapter 3 receipt is `{kind:'act-four-offer', version:1, ch
 
 **Jane**, refreshed at `c681f6bf2f2adf2aa032f765983a4691774cfba5`, studied only, as in 352, 601 and 602. No Jane code, prose or assets.
 
-**Marble**, refreshed at `04962c78ccb8bd52b236512d3362405bace98d2a`; the repository pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d` is unchanged. Candidates only; no atlas mapping and no claim. The Travelers' Archive owns its declarations.
+**Marble**, refreshed at `04962c78ccb8bd52b236512d3362405bace98d2a`; the repository pin `96a7933754af672e1bfdbf7ecb05c325860c6e0d` is unchanged. Candidates only; no atlas mapping and no claim. Strands come from `curriculum/six-act-topic-plan.csv` ([six-act strands](../six-act-strands.md)); both sit in S1, scientific inquiry, and the chapter touches its Act IV family S1-IV (alternative explanations; revise claims). The Travelers' Archive owns its declarations.
 
-| Topic | Why it is near |
-| --- | --- |
-| Could there be another explanation? `mt_QrVF5n7vci` | Two headlines, two explanations; the guide's "Maybe they can. A bit." Not yet mapped. |
-| Observation vs Interpretation `mt_Hw70LI5xza` | The Sprout job: what can you see in the 1910 photograph? Already declared by Rain Paths and the plant study. |
+| Topic | Strand | Why it is near |
+| --- | --- | --- |
+| Could there be another explanation? `mt_QrVF5n7vci` | S1 | Two headlines, two explanations; the guide's "Maybe they can. A bit." Not yet mapped. |
+| Observation vs Interpretation `mt_Hw70LI5xza` | S1 | The Sprout job: what can you see in the 1910 photograph? Already declared by Rain Paths and the plant study. |
 
 **Spec 49.** Act IV, evidence and disagreement. Chapter 3 adds no lesson; the Travelers' Archive owns the teaching. This chapter is the purposeful revisit (§5 step 6) that brings a kept reply into the town's argument. No free text is read (step 7).
 
@@ -72,9 +71,9 @@ Pure checks (`test/act-four-gazette-checks.mjs`, fixtures from the real Act IV a
 - No root, or nothing kept, offers nothing, and the page says so.
 - A kept reply gives one candidate, named by its pack and labelled by the visit.
 - The reply text never reaches a candidate, page or receipt. Reads and renders write nothing.
-- A refused export writes nothing. An offer writes the pack-id receipt and leaves the archive unchanged; a repeat is a no-op.
+- A refused export writes nothing. An offer writes the pack-id receipt and leaves the archive unchanged; a repeat, or offering another pack later, leaves the first receipt exactly as it was.
 - A later keep or removing the archive never revokes the receipt.
-- A pack from another version is offered with the plain label. Five malformed snapshots are not offered and are reported. An unsupported root is unreadable.
+- A pack from another version, and a reply kept with no sources, are offered. Seven malformed snapshots are not offered and are reported (no pack id, a non-object or empty reply, a numeric coded field, non-string text, a source with no id, a duplicated source id). An unsupported root is unreadable.
 - Receipt validation is shape only; nothing can be offered before Act IV starts.
 - Chapters 1 and 3 with a plan can end the meeting, and with no chapter 2 rain result Pip changes his mind.
 - Rendering: the hub links all four chapters. The Gazette is described with both headlines. The chapter links the archive and shows the kept line and the named guide line. Notes name chapter 3, and the archive offers the way back.

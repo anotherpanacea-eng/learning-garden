@@ -75,9 +75,13 @@ function rainSource(state){
 // Spec603: the Travelers' Archive keeps one reply per root, replaced on each keep; the receipt names its pack, so a later
 // keep never changes what was offered. The kept reply is checked as a snapshot of its own structure and ids. Its free text
 // is never read, shown or copied, and nothing is compared with today's pack.
+// The checks mirror the archive's own catalog-free ones: the reply's three coded fields, a text field that is a string
+// (never read), and up to sixteen sources with unique saved ids (none is fine). Fields the story never uses are not gates.
+const savedCode=x=>typeof x==='string'&&/^[a-z][a-z0-9-]{0,95}$/.test(x);
 function archiveSnapshot(kept){
- return obj(kept)&&id(kept.packId)&&obj(kept.reply)&&Array.isArray(kept.sources)&&kept.sources.length>=1&&kept.sources.length<=40&&kept.sources.every(s=>obj(s)&&id(s.id))
-  &&obj(kept.support)&&typeof kept.familiar==='boolean'&&typeof kept.reading==='string'&&kept.reading.length<=40&&Array.isArray(kept.checks);
+ const r=kept?.reply,ids=Array.isArray(kept?.sources)?kept.sources.map(s=>obj(s)?s.id:null):null;
+ return obj(kept)&&id(kept.packId)&&obj(r)&&Object.keys(r).length===4&&['claim','evidence','limit'].every(k=>own(r,k)&&(r[k]===null||savedCode(r[k])))&&typeof r.text==='string'
+  &&ids!==null&&ids.length<=16&&ids.every(savedCode)&&new Set(ids).size===ids.length;
 }
 function archiveSource(state){
  const result={status:'missing',retainedUnreadable:false,candidates:[]};
