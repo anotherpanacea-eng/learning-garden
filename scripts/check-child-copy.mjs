@@ -4,6 +4,8 @@ import {fileURLToPath} from 'node:url';
 import {resolve} from 'node:path';
 
 export const copyScopes = [
+  {path:'dist/grownup-atlas-ui.mjs',adultBlocks:[{start:'// Adult reference route.',end:'// End adult reference route.',reason:'All rendered copy belongs to the separate grown-up reference catalog, not a child activity.'}],quotations:[]},
+  {path:'dist/grownup-atlas-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/moonlight-content.mjs',adultBlocks:[{start:'  "grownup":',end:'  "orbitMotion":',reason:'Only shown in the folded grown-up interpretation.'}],quotations:[]},
   {path:'dist/depth-window-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/depth-window-core.mjs',adultBlocks:[],quotations:[]},
