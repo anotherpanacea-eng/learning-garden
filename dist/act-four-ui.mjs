@@ -1,6 +1,7 @@
 import {actFourContent as C} from './act-four-content.mjs';
 import {actFourView,actFourCandidates,startActFour,revealHarvestPage,offerActFour,keepActFourPlan,endActFour,actFourMindChange} from './act-four-core.mjs';
 import {setActTwoFrameAmount,setActTwoPageAmount} from './act-two-core.mjs';
+import {actFiveInvitation} from './act-five-ui.mjs';
 import {guides} from './companions.mjs';
 import {hearButton,stopSpeech} from './play-media.mjs';
 import {cornerScene} from './act-four-corner-art.mjs';
@@ -84,7 +85,7 @@ function ending(state,v){
  // Only a recognized saved guide gets a personal tail; the shared-name fallback gets none (366).
  const who=E.mind[actFourMindChange(v)],g=guides.find(x=>x.id===state.garden?.guide)?.id;
  const almanac=E.almanac.replace('{plan}',planName(v.plan)||C.meeting.earlierPlan);
- return `${heading(E.title)}${meetingScene(E.scene,E.caption,{penciled:true,season:v.season})}${amounts(v,'frame')}<section class="a4-mind" aria-label="${esc(E.mindHeading)}"><h2>${esc(E.mindHeading)}</h2><p data-act-four-read><strong>${esc(who.speaker)}:</strong> “${esc(who.line)}”</p></section><aside class="a4-guess">${reading(state,[...E.guide,...(g?[E.tails[g]]:[])])}</aside>${reading(state,[...E[v.frameAmount],...(v.season?[E.seasons[v.season]]:[]),E.almanac.includes('{plan}')?almanac:E.almanac,E.between])}${hear()}<div class="a4-controls">${link('#almanac/keepers',C.ui.keepers,true)}${link('#home',E.pause)}</div>`;
+ return `${heading(E.title)}${meetingScene(E.scene,E.caption,{penciled:true,season:v.season})}${amounts(v,'frame')}<section class="a4-mind" aria-label="${esc(E.mindHeading)}"><h2>${esc(E.mindHeading)}</h2><p data-act-four-read><strong>${esc(who.speaker)}:</strong> “${esc(who.line)}”</p></section><aside class="a4-guess">${reading(state,[...E.guide,...(g?[E.tails[g]]:[])])}</aside>${reading(state,[...E[v.frameAmount],...(v.season?[E.seasons[v.season]]:[]),E.almanac.includes('{plan}')?almanac:E.almanac,E.between])}${hear()}${actFiveInvitation(state)}<div class="a4-controls">${link('#almanac/keepers',C.ui.keepers,true)}${link('#home',E.pause)}</div>`;
 }
 export function actFourPage(state,{part='hub',chapter:id='account',owner=null,blocked=false}={}){
  const v=actFourView(state),s=visit(state,owner);let body;

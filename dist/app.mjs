@@ -73,6 +73,7 @@ import {arrivalSkipsWelcome} from './story-arrivals-core.mjs';
 import {arrivalPage,arrivalInvitation,bindArrival,resetArrivalVisit} from './story-arrivals-ui.mjs';
 import {actTwoPage,actTwoReturn,bindActTwo} from './act-two-ui.mjs';
 import {actFourRoute,actFourPage,bindActFour,actFourReturn,resetActFourView} from './act-four-ui.mjs';
+import {actFiveRoute,actFivePage,bindActFive,resetActFiveView} from './act-five-ui.mjs';
 import {actThreeRoute,actThreePage,bindActThree,actThreeInvitation,actThreeReturn,resetActThreeView} from './act-three-ui.mjs';
 import {deskPage,deskEntry,bindDesk} from './keepers-desk-ui.mjs';
 import {rowsPage,rowsNotes,bindRows,resetRowsVisit} from './ribbon-rows-ui.mjs';
@@ -492,17 +493,23 @@ function render(){
   const fossilBench=root==='living'&&slug==='fossils',portionsBench=root==='cafe'&&slug==='portions',fractionBench=root==='cafe'&&slug==='fractions',bundleBench=root==='numbers'&&slug==='exchange',returnBench=root==='numbers'&&slug==='return'&&!remainsBench,joiningBench=root==='numbers'&&slug==='join'&&detail!=='ledger',joiningLedgerBench=root==='numbers'&&slug==='join'&&detail==='ledger',comparisonBench=root==='numbers'&&slug==='compare',tenthsBench=root==='numbers'&&slug==='tenths',hundredthsBench=root==='numbers'&&slug==='hundredths',seedBench=root==='numbers'&&slug==='seeds';
   const clockWalkBench=root==='post'&&slug==='clock-walk',pavingBench=root==='numbers'&&slug==='paving';
   const collectionBench=root==='living'&&slug==='collection',lanternBench=root==='numbers'&&slug==='lanterns',noticeBench=root==='loft'&&slug==='printer';
+  const fifthRoute=actFiveRoute(hash);
+  if(fifthRoute){
+    routeHeader('#storm');if(choosingExplorer)resetActFiveView();
+    main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):actFivePage(state,{...fifthRoute,blocked:keeperFilmBlocked()});updateStorageNotice();
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindActFive(state,actFourContext());bindSpeech();}return;
+  }
   const fourthRoute=actFourRoute(hash);
   if(fourthRoute){
     routeHeader('#storm');if(choosingExplorer)resetActFourView();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):actFourPage(state,{...fourthRoute,owner:explorerStore.active.id,blocked:keeperFilmBlocked()});updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindActFour(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindActFour(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindActFive(state,actFourContext());bindSpeech();}return;
   }
   const thirdRoute=actThreeRoute(hash);
   if(thirdRoute){
     routeHeader('#storm');if(choosingExplorer)resetActThreeView();
     main.innerHTML=choosingExplorer?explorerPicker(explorerStore,explorerDraft,creatingExplorer):actThreePage(state,{...thirdRoute,owner:explorerStore.active.id,blocked:keeperFilmBlocked()});updateStorageNotice();
-    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindActFour(state,actFourContext());bindActThree(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
+    if(choosingExplorer)bindExplorers();else{$('#explorer-switch')?.addEventListener('click',()=>chooseExplorer());bindActFour(state,actFourContext());bindActFive(state,actFourContext());bindActThree(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok});bindSpeech();}return;
   }
   if(hash==='#desk/writing'){
     routeHeader();
@@ -1080,7 +1087,7 @@ function bindExplorers(){
  $('#explorer-new')?.addEventListener('click',()=>{explorerDraft=freshExplorerChoice();creatingExplorer=true;render();});
  $('#explorer-back')?.addEventListener('click',()=>{creatingExplorer=false;render();});
  $('#explorer-cancel')?.addEventListener('click',e=>{e.preventDefault();choosingExplorer=false;creatingExplorer=false;noteInstructionArrival();render();});
- const explorerDestination=()=>['#post/messages/own','#post/messages/carry'].includes(location.hash)||actThreeRoute(location.hash)||actFourRoute(location.hash)?location.hash:['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/fair','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#science/lens','#living/layers','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#workshop/join-pieces','#loft/mirrors','#loft/lines','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
+ const explorerDestination=()=>['#post/messages/own','#post/messages/carry'].includes(location.hash)||actThreeRoute(location.hash)||actFourRoute(location.hash)||actFiveRoute(location.hash)?location.hash:['#post/lost-and-found','#bac','#mercado','#almanac/sky','#library/beat','#library/long-words','#library/word-list','#library/copy','#library/endings','#library/spellings','#desk/writing','#desk/exchange','#words/endings','#words/props','#words/letterpress','#words/signs','#mill/energy','#workshop/fair','#workshop/lift','#studio/sound-window','#workshop/switch-table','#science/ice','#science/lens','#living/layers','#post/ferry','#workshop/hinge','#workshop/old-map','#workshop/copy-frame','#workshop/ribbon-measures','#workshop/design','#workshop/mending','#workshop/same-ground','#workshop/common-cuts','#workshop/join-pieces','#loft/mirrors','#loft/lines','#almanac/upstream-reply','#studio/field-strips','#desk/gaps','#desk/rods','#studio/mixing/bars','#studio/mixing','#post/codes','#post/descriptions','#post/register','#post/manifest','#living/who-eats','#science/water-shares','#arrive','#studio/rhythm','#almanac/weather','#almanac/tallies'].includes(location.hash)?location.hash:['pathways','learn','journeys'].includes(location.hash.slice(1).split('/')[0])?location.hash:'#home';
  document.querySelectorAll('[data-select-explorer]').forEach(b=>b.onclick=()=>useExplorer(explorerStore.select(b.dataset.selectExplorer,state),explorerDestination()));
  for(const field of ['avatar','color','symbol'])document.querySelectorAll(`[data-explorer-${field}]`).forEach(b=>b.onclick=()=>{explorerDraft[field]=b.dataset[`explorer${field[0].toUpperCase()+field.slice(1)}`];render();$(`[data-explorer-${field}="${explorerDraft[field]}"]`)?.focus();});
  $('#explorer-create')?.addEventListener('click',()=>useExplorer(explorerStore.add(explorerDraft,state),explorerDestination()));
@@ -1109,10 +1116,10 @@ function bindBroadExtras(){
 }
 function priceOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
 function pavingOptions(){return {canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,exposeFacts:(pairs,target)=>exposeStoryFacts({facts:pairs},null,target,true)};}
-function keeperFilmBlocked(){if(actThreeRoute(location.hash)||actFourRoute(location.hash))return !!document.querySelector('dialog.welcome-film[open]');const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
+function keeperFilmBlocked(){if(actThreeRoute(location.hash)||actFourRoute(location.hash)||actFiveRoute(location.hash))return !!document.querySelector('dialog.welcome-film[open]');const [place,part]=(location.hash||'#home').slice(1).split('/');return !!document.querySelector('dialog.welcome-film[open]')||(['home','almanac'].includes(place)&&!arrivalSkipsWelcome(state)&&state.garden?.welcomeFilmSeen!==true)||(place==='cafe'&&!part&&state.cafe?.supper?.round===1&&cafeSupper(state.cafe).complete&&state.garden?.filmsSeen?.cafe!==true);}
 function actFourContext(){return {notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer,save:()=>{save();return {enabled:persist,ok:storageOK,message:savingStatus()};},render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok};}
 function bind(){
- bindActFour(state,actFourContext());
+ bindActFour(state,actFourContext());bindActFive(state,actFourContext());
  bindHomeEntry(state,{notebook:()=>state,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
  $('[data-map-refresh]')?.addEventListener('click',()=>{if(graph){render();main.focus();}else void loadCurriculumMap();});
  bindActTwo(state,{save,render,focus:focusElement,canExport:candidate=>prepareProgressImport(JSON.stringify(notesReport(candidate),null,2)).ok,explorerId:()=>explorerStore.active.id,isActive:()=>!choosingExplorer});
