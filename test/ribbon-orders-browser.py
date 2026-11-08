@@ -152,12 +152,14 @@ def state(p,ident,actions):
     m=material(p);ok(m['case']==ident and m['rack']==sum(bundles,[])+loose and m['sent']==sent,'selected material independently replayed '+ident)
     for name,enabled in {'open':bool(bundles) and s<t,'whole':bool(bundles) and t-s>=d,'piece':bool(loose) and s<t,'undo':bool(actions)}.items():
         ok(p.locator(VIEW+' [data-ro-action='+name+']').is_enabled()==enabled,'action availability '+name+' '+ident)
-    text=p.locator(VIEW).inner_text()
+    text=p.locator(VIEW).inner_text();pieces=lambda k:f'{k} piece'+('' if k==1 else 's');rack=f'{pieces(r)} '+('stays' if r==1 else 'stay')+' on the rack.'
+    ok(f'{pieces(r)} on the rack.' in p.locator(VIEW+' .ro-rack').inner_text(),'rack count uses exact singular/plural material')
+    ok(f'{pieces(t-s)} still requested.' in p.locator(VIEW+' .ro-order').inner_text(),'order count uses exact singular/plural request')
     if t==0:
         ok(f'This order needs no ribbon. All {n} pieces stay on the rack.' in text,'zero order readout')
         ok('Sent 0 of' not in text and 'The order is filled.' not in text,'zero order excludes ordinary progress/completion')
-    elif s==t:ok(f'The order is filled. {r} pieces stay on the rack.' in text,'exact completed remainder')
-    else:ok(f'Sent {s} of the {t} pieces requested. {r} pieces stay on the rack.' in text,'unfinished current material readout')
+    elif s==t:ok(f'The order is filled. {rack}' in text,'exact completed remainder')
+    else:ok(f'Sent {s} of the {pieces(t)} requested. {rack}' in text,'unfinished current material readout')
 
     guidance=p.locator(VIEW+' .ro-guidance').inner_text()
     if t==0:ok(guidance=='Choose another order.','zero order offers only another order')
@@ -229,7 +231,7 @@ def journey(browser,base):
         ok(p.locator('[data-ro-case] option').evaluate_all('xs=>xs.map(e=>e.value)')==list(CASES),'all seven finite choices open')
         ok(p.locator('[data-join-root]').inner_text().count('this work is not saved in Notes')==1,'one child-owned visit footer')
         state(p,'quarters-gathering',[]);p.locator('[data-ro-case]').focus();p.keyboard.press('s');state(p,'sixths-path',[]);focus(p,'[data-ro-case]');choose(p,'quarters-gathering');state(p,'quarters-gathering',[]);explanation(p,'quarters-gathering',[])
-        paths={'quarters-gathering':['open','whole','piece','piece','piece'],'sixths-path':['whole','open']+['piece']*5,'quarters-without-trade':['whole']*3+['piece']*3,'fifths-crossing':['piece','piece','open','piece','piece'],'whole-stock':['open']+['piece']*3,'all-ribbon':['piece','whole'],'no-order':[]}
+        paths={'quarters-gathering':['open','whole','piece','piece','piece'],'sixths-path':['whole','open']+['piece']*5,'quarters-without-trade':['whole']*3+['piece']*3,'fifths-crossing':['piece','piece','open','piece','piece'],'whole-stock':['open']+['piece']*3,'all-ribbon':['whole','piece'],'no-order':[]}
         for ident,path in paths.items():
             choose(p,ident);history=[];state(p,ident,history)
             for i,move in enumerate(path):
@@ -298,7 +300,10 @@ def lifecycle(browser,base):
             stale(p,handles,'restored '+kind)
         for boundary in ['case','history','view','frame','mode','root']:
             fresh(p,base)
-            if boundary=='frame':action(p,'example');handles=[p.locator('[data-ro-action=next]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()];action(p,'next')
+            if boundary=='frame':
+                action(p,'example');handles=[p.locator('[data-ro-action=next]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()]
+                # The old frame-zero Next would return to frame one if accepted.
+                action(p,'next');action(p,'next');ok(material(p)['frame']=='2','stale Next probe starts two frames beyond its captured callback')
             else:
                 handles=[p.locator('[data-ro-action=open]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()]
                 if boundary=='case':choose(p,'sixths-path')
@@ -338,7 +343,8 @@ def responsive(browser,base):
     for width in [320,1024]:
         c,p=setup(browser,base,width)
         try:
-            baseline=snapshot(p);mode(p);choose(p,'sixths-path');state(p,'sixths-path',[]);layout(p,'maxrows-'+str(width));voice_panel(p,'sixths-'+str(width))
+            baseline=snapshot(p);mode(p);choose(p,'quarters-without-trade');state(p,'quarters-without-trade',[]);layout(p,'maxrows-'+str(width))
+            choose(p,'sixths-path');state(p,'sixths-path',[]);voice_panel(p,'sixths-'+str(width))
             action(p,'example')
             for _ in range(5):action(p,'next')
             geometry(p,9,4,['open','piece','piece','piece']);claim_geometry(p);layout(p,'claim-'+str(width));ok(snapshot(p)==baseline,'bounded responsive samples preserve memory/storage')

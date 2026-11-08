@@ -42,7 +42,7 @@ Action guidance is state-specific, close to the four native buttons. Zero order 
 
 Separate optional **Explain this subtraction** page shows the original stock name minus original order name, corresponding exact N/d−T/d=(N−T)/d, and canonical final remaining finalWhole wholes andfinalRemainder/d (zero/proper/positive-whole/mixed exclusive branches). The actual currently sentS and rackR are still labeled as current material, including unfinished work; do not pretend asking for explanation completes the order. Explain **Opening a whole changes its grouping, not the amount. The denominator stays {d} because every piece is still1/{d} of the same whole. Sending ribbon separates the stock into the order and what stays.** Add **The order takes {T} pieces of size1/{d} from {N}. The final remainder is {N−T} such pieces.** No claim of simplest form when sixths leave15/6; show2 wholes and3/6, link to Common Cuts if desired without changing case. **Back to my order** restores work and launcher. No independent answer field/grade.
 
-Six separate manual **Show a quarter order** frames, immutable stock9,d4,T3, no live caseID. Each has explicit state `(packed,loose,sent)` and original fixed IDs as replayed actions:
+Six separate manual **Show me with quarters** frames, immutable stock9,d4,T3, no live caseID. Each has explicit state `(packed,loose,sent)` and original fixed IDs as replayed actions:
 1. (2,1,0), []: **Two wholes and one quarter are ready. The order needs three quarters. There is only one loose quarter.**
 2. (1,5,0), [open]: **Open one whole into four quarters. There are now five loose quarters. The total amount has not changed.**
 3. (1,4,1), [open,piece]: **Send one quarter. Four loose quarters stay beside the whole.**
