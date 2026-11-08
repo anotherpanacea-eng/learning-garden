@@ -280,6 +280,8 @@ Films stay attached to built endings: the mill film in PR254 (released; see the 
 
 **Illustrated instructions:** Rhythm Studio, Mixing Table, Equal Blocks, Field Strips and Ribbon Measures now offer optional drawn how-tos ([release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/322#issuecomment-6545596524)). Play them or move one step at a time; reduced motion shows complete still steps with captions. Watching changes no notebook work. The [repaired guide audit](reviews/drawn-howto-check-2026-10-31.md) identifies the selected follow-up guides, now delivered in the release above. Additional guides need their own bounded commission. These are instructions for existing games, not new curriculum coverage.
 
+
+**Story between games (owner request, 2026-11-07):** [Guide errands600](specs/600-guide-errands.md) gives the guide a voice between activities: onward errands on 26 rooms and errands on six place pages, following the explorer's act. Proposed in a Claude draft PR; spec and build review, landing and owner observation are pending. Lane B step 1's board-intro reasons remain separate.
 ## Course completion and audience plan
 
 The [two course routes](course-routes.md) turn the activity catalog into a first-year framework: **Make, notice and explain** and **Model, interpret and make a case**. Each has six blocks, first-block teaching order, all 26 strand endpoints, explicit missing bridges and human/off-screen work, plus an independently chosen French strand. They are mixable subject routes, not age placements, finished lessons or a promise to finish six story acts in one year. No personal learner information is part of the public plan.
