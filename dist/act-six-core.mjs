@@ -5,7 +5,7 @@ import {storyView} from './keeper-story-core.mjs';
 import {actFiveView} from './act-five-core.mjs';
 import {actFourPlans} from './act-four-core.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
-export const actSixChapters=Object.freeze(['exchange','routes','long-rain']);
+export const actSixChapters=Object.freeze(['exchange','routes','long-rain','journey']);
 export const actSixPlans=Object.freeze(['full','small']);
 const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),own=(x,k)=>Object.hasOwn(x,k);
 const field=(o,k,test)=>!own(o,k)?'missing':test(o[k])?'ready':'unreadable';
@@ -35,7 +35,10 @@ export function storyPlanKind(story){
 function rainView(story,act,started,writable,planStatus,plan){
  const warnedStatus=act?field(act,'warned',x=>x===true):'missing',warned=started&&warnedStatus==='ready',storyPlan=storyPlanKind(story);
  const rainOpen=started&&plan!==null;
- return {warnedStatus,warned,storyPlan,rainOpen,canWarn:writable&&rainOpen&&!warned&&warnedStatus!=='unreadable',canChooseStoryPlan:writable&&warned&&storyPlan.kind==='absent'};
+ // Spec608 · the first journey opens once the warning is sent; sending the first parcel (acts.VI.journey) is its one write.
+ const journeyStatus=act?field(act,'journey',x=>x===true):'missing',journey=warned&&journeyStatus==='ready';
+ return {warnedStatus,warned,storyPlan,rainOpen,canWarn:writable&&rainOpen&&!warned&&warnedStatus!=='unreadable',canChooseStoryPlan:writable&&warned&&storyPlan.kind==='absent',
+  journeyStatus,journey,canSendParcel:writable&&warned&&!journey&&journeyStatus!=='unreadable'};
 }
 function mutate(state,options,change){
  if(storyView(state).status!=='ready'||typeof options?.canExport!=='function')return false;
@@ -68,4 +71,10 @@ export function sendWarning(state,options={}){
 export function chooseRainPlan(state,plan,options={}){
  if(!actFourPlans.includes(plan))return false;const v=actSixView(state);if(!v.canChooseStoryPlan)return false;
  return mutate(state,options,story=>{if(own(story,'plan'))return false;story.plan=plan;});
+}
+
+// Send the first parcel under the kept exchange plan. Any depth's job, or none, may come first; the story never checks them.
+export function sendFirstParcel(state,options={}){
+ const v=actSixView(state);if(v.journey)return true;if(!v.canSendParcel)return false;
+ return mutate(state,options,story=>{story.acts.VI.journey=true;});
 }

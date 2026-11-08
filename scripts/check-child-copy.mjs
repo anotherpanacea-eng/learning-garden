@@ -932,6 +932,7 @@ export const copyScopes = [
   {path:'dist/act-six-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-six-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-six-rain-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-six-home-art.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/guide-errands-content.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/guide-errands-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/guide-errands-ui.mjs',adultBlocks:[],quotations:[]},

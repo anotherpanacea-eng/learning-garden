@@ -55,3 +55,12 @@
 .a6r-plan h3{margin:.1rem 0 .3rem;font-size:1.1rem}
 .a6r-plan dt{font-weight:600}
 .a6r-plan dd{margin:0 0 .4rem}
+/* Spec 608 · the first journey and someone coming home. */
+.a6h-home{margin:1rem 0}
+.a6h-home svg{width:100%;height:auto;display:block;border-radius:6px}
+.a6h-home figcaption{font-size:1rem;color:#5b5045;margin-top:.25rem}
+.a6h-walk{animation:a6h-walk 3.6s ease-in-out both}
+@keyframes a6h-walk{0%{transform:translate(-290px,14px)}45%{transform:translate(-130px,6px)}60%{transform:translate(-130px,6px)}100%{transform:none}}
+/* After the first render in a visit the heron stays at the post, so packing again does not replay the walk. */
+.a6h-settled .a6h-walk{animation:none}
+@media (prefers-reduced-motion:reduce){.a6h-walk{animation:none}}

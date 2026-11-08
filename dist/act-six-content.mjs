@@ -134,6 +134,33 @@ export const actSixContent={
       caption:'Warned in time.'
     }
   },
+  journey:{
+    title:'The first journey, and someone new',
+    gate:'The first journey comes after the warning is sent.',
+    gateLink:'Pass the warning on',
+    short:["The rain passes. The first weekly parcel goes up the river under your plan. On the way back, someone tall and grey is walking up the path."],longer:["The rain passes. The brook goes back to being a brook. The first regular parcel goes up the river under your plan: apples, two of Pip's drawings and a honey-cake recipe that Vadoalto says it will improve. {courier} comes back the next evening with reed bundles and a note: *Same time next week?*"],
+    pack:{
+      title:'Pack the first parcel',
+      prompt:"Dot: \"Pack the first parcel. Apples at the bottom, drawings on top, so nothing gets squashed.\"",
+      items:[{id:'apples',label:'Apples'},{id:'recipe',label:'A honey-cake recipe'},{id:'drawings',label:'Two of Pip\'s drawings'}],
+      parcel:'In the parcel, bottom first',
+      empty:'Tap a good to put it in the parcel.',
+      notFull:'Put all three goods in first.',
+      check:'Tie it up',
+      clear:'Unpack',
+      bottom:'Apples go at the bottom, so nothing gets squashed.',
+      top:'The drawings go on top, so nothing gets squashed.',
+      kept:"Packed, labeled and tied with one of Bramble's ribbons. It looks very official."
+    },
+    jobs:[
+      {tier:'Seedling',host:null,href:null,line:"{courier}: \"Take me up the Way we planned for this season.\""},
+      {tier:'Sapling',host:'Messages for a Reader',href:'#post/messages',line:"Dot: \"Write the note that goes with the first parcel. What's in it, and when the next one comes.\""}
+    ],
+    send:'Send the first parcel',
+    letter:{title:'A letter from Léon',lines:["A tall grey heron came off the coast boat today. They asked about the brook, then walked up the river path. I think they're coming to you! Léon"]},
+    home:{title:'Someone comes home',short:["A tall grey heron comes up the river path, stopping to look at the brook. \"Hollis!\" says Nuria."],longer:["On the way back from the landing, you see a tall grey heron coming slowly up the river path, stopping to look at the brook every few steps.", "\"Hollis!\" says Nuria.", "Hollis looks at the flood post for a long time. At the old marks, and the storm mark, and the new one: *Warned in time.* Then at the almanac. Then at you.", "\"I hear my parcel got a bit wet,\" they say."],supper:'They stay for supper.',
+      scene:'The river path by the brook. A tall grey heron walks slowly up the path and stops beside the flood post, where the newest mark says Warned in time.',caption:'Someone comes home.'}
+  },
   ui:{
     start:'Continue the story',
     short:'Short',

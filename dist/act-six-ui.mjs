@@ -1,7 +1,8 @@
 // Spec 606 · Act VI opening: Nuria's letter, the exchange (chapter 1, with a sorting game) and the three Ways (chapter 2,
 // with a which-Way puzzle and keeping the exchange plan). The games are play for this visit only; only the plan is saved.
 import {actSixContent as C} from './act-six-content.mjs';
-import {actSixChapters,actSixView,startActSix,keepExchangePlan,sendWarning,chooseRainPlan} from './act-six-core.mjs';
+import {actSixChapters,actSixView,startActSix,keepExchangePlan,sendWarning,chooseRainPlan,sendFirstParcel} from './act-six-core.mjs';
+import {heronScene} from './act-six-home-art.mjs';
 import {waysMap} from './act-six-art.mjs';
 import {floodPostScene} from './act-six-rain-art.mjs';
 import {actFourContent} from './act-four-content.mjs';
@@ -24,7 +25,7 @@ function named(state,line){
 const reading=(state,lines)=>`<div class="a6-reading" data-act-six-read>${lines.map(x=>`<p>${rich(named(state,x))}</p>`).join('')}</div>`;
 const hear=()=>hearButton('',C.ui.hear,'en');
 // This visit's play: the sorting piles and the chosen Way. Never saved; a new explorer or a reset starts fresh.
-const fresh=owner=>({owner,sort:{},checked:false,way:null,notice:'',route:null,mapShown:false,shelf:{},shelfChecked:false,choice:null,built:[],builtChecked:false,letCome:false,pinned:false});
+const fresh=owner=>({owner,sort:{},checked:false,way:null,notice:'',route:null,mapShown:false,shelf:{},shelfChecked:false,choice:null,built:[],builtChecked:false,letCome:false,pinned:false,packed:[],packChecked:false,homeShown:false});
 let visit=fresh(undefined);
 export function resetActSixView(){visit=fresh(undefined);}
 const play=owner=>{if(visit.owner!==owner)visit=fresh(owner);return visit;};
@@ -39,7 +40,7 @@ const jobs=(state,list,extra='')=>`<section aria-labelledby="a6-jobs-title"><h2 
 const note=text=>`<details class="a6-note"><summary>Keeper's note</summary><p data-act-six-read>${esc(text)}</p></details>`;
 function hub(state,v){
  if(!v.started)return `${heading(C.title)}<p>${esc(C.messages.unreached)}</p>${v.canStart?button('data-a6-start',C.ui.start,true):''}`;
- return `${heading(C.title)}<p class="a6-question">${esc(C.question)}</p>${amounts(v)}<section class="a6-letter" aria-labelledby="a6-letter-title"><h2 id="a6-letter-title">${esc(C.letter.title)}</h2>${reading(state,C.letter[v.frameAmount])}</section>${reading(state,[C.hook,...C.opening[v.frameAmount]])}${hear()}<nav aria-label="${esc(C.ui.chapters)}" class="a6-controls">${link('#almanac/opening-ways/exchange',C.exchange.title,true)}${link('#almanac/opening-ways/routes',C.routes.title,true)}${link('#almanac/opening-ways/long-rain',C.rain.title,true)}</nav>${v.plan?`<p class="a6-kept">${esc(v.plan==='small'?C.routes.keep.yoursSmall:C.routes.keep.yours)}</p>`:''}`;
+ return `${heading(C.title)}<p class="a6-question">${esc(C.question)}</p>${amounts(v)}<section class="a6-letter" aria-labelledby="a6-letter-title"><h2 id="a6-letter-title">${esc(C.letter.title)}</h2>${reading(state,C.letter[v.frameAmount])}</section>${reading(state,[C.hook,...C.opening[v.frameAmount]])}${hear()}<nav aria-label="${esc(C.ui.chapters)}" class="a6-controls">${link('#almanac/opening-ways/exchange',C.exchange.title,true)}${link('#almanac/opening-ways/routes',C.routes.title,true)}${link('#almanac/opening-ways/long-rain',C.rain.title,true)}${link('#almanac/opening-ways/journey',C.journey.title,true)}</nav>${v.plan?`<p class="a6-kept">${esc(v.plan==='small'?C.routes.keep.yoursSmall:C.routes.keep.yours)}</p>`:''}`;
 }
 function exchange(state,v,p){
  const X=C.exchange,S=X.sort,solved=p.checked&&S.items.every(i=>p.sort[i.id]===i.way);
@@ -75,12 +76,24 @@ function longRain(state,v,p){
  }
  return `${link('#almanac/opening-ways',C.ui.back)}${heading(R.title)}${amounts(v)}<section aria-labelledby="a6r-start-title"><h2 id="a6r-start-title">${esc(R.start.title)}</h2>${v.warned?'':floodPostScene(R.start.scene,R.start.caption)}${reading(state,R.start[v.frameAmount])}<p class="a6r-card" data-act-six-read>${esc(R.start.runnerCard)}</p>${note(R.start.keeperNote)}</section><section aria-labelledby="a6r-prep-title"><h2 id="a6r-prep-title">${esc(R.prep.title)}</h2>${shelf}${jobs(state,R.prep.jobs)}</section><section aria-labelledby="a6r-warn-title" id="a6r-warn" tabindex="-1"><h2 id="a6r-warn-title">${esc(W.title)}</h2>${reading(state,W[v.frameAmount])}<h3>${esc(W.card.title)}</h3>${card}${choose}${build}<div class="a6-controls" id="a6r-send">${send}</div></section>${water}${hear()}`;
 }
+// Spec608 · chapter 4. Packing is play for this visit; Send the first parcel is the one write. Then Léon's letter and Hollis.
+function journey(state,v,p){
+ const J=C.journey,P=J.pack;
+ if(!v.warned)return `${link('#almanac/opening-ways',C.ui.back)}${heading(J.title)}<p>${esc(J.gate)}</p>${link('#almanac/opening-ways/long-rain',J.gateLink,true)}`;
+ const packed=p.packed.map(id=>P.items.find(i=>i.id===id)).filter(Boolean),full=p.packed.length===P.items.length;
+ const result=!p.packChecked?'':!full?P.notFull:p.packed[0]!=='apples'?P.bottom:p.packed[p.packed.length-1]!=='drawings'?P.top:P.kept;
+ const pack=`<section class="a6-sort" id="a6h-pack" tabindex="-1" aria-labelledby="a6h-pack-title"><h2 id="a6h-pack-title">${esc(P.title)}</h2><p class="a6-tier">Sprout</p>${reading(state,[P.prompt])}<p>${esc(P.parcel)}:</p><ol class="a6r-built" id="a6h-parcel" tabindex="-1" aria-live="polite">${packed.length?packed.map(i=>`<li>${esc(i.label)}</li>`).join(''):`<li class="a6h-empty">${esc(P.empty)}</li>`}</ol><div class="a6r-cards">${P.items.map(i=>`<button type="button" class="secondary" data-a6h-pack="${i.id}"${p.packed.includes(i.id)?' disabled':''}>${esc(i.label)}</button>`).join('')}</div><div class="a6-controls">${button('data-a6h-pack-check',P.check,true)}${button('data-a6h-pack-clear',P.clear)}</div><div id="a6h-pack-result" tabindex="-1">${result?`<p class="${result===P.kept?'a6-kept':''}" data-act-six-read>${esc(result)}</p>`:''}</div></section>`;
+ const send=v.journey?'':v.canSendParcel?`<div class="a6-controls">${button('data-a6h-send',J.send,true)}</div>`:'';
+ const home=v.journey?`<section class="a6-letter" aria-labelledby="a6h-letter-title"><h2 id="a6h-letter-title">${esc(J.letter.title)}</h2>${reading(state,J.letter.lines)}</section><section id="a6h-home" tabindex="-1" aria-labelledby="a6h-home-title"><h2 id="a6h-home-title">${esc(J.home.title)}</h2>${heronScene(J.home.scene,J.home.caption,{settled:p.homeShown})}${reading(state,[...J.home[v.frameAmount],J.home.supper])}</section>`:'';
+ return `${link('#almanac/opening-ways',C.ui.back)}${heading(J.title)}${amounts(v)}${reading(state,J[v.frameAmount])}${pack}${jobs(state,J.jobs)}${send}${home}${hear()}`;
+}
 export function actSixPage(state,{part='hub',chapter:id=null,owner=null,blocked=false}={}){
  const v=actSixView(state),p=play(owner);let body;
  if(['unavailable','unreadable'].includes(v.status)||!v.started&&v.startedStatus==='unreadable')body=`${heading(C.title)}<p>${esc(C.messages.unreadableAct)}</p>`;
  else if(part==='chapter'&&v.started&&id==='exchange')body=exchange(state,v,p);
  else if(part==='chapter'&&v.started&&id==='routes')body=routes(state,v,p);
  else if(part==='chapter'&&v.started&&id==='long-rain')body=longRain(state,v,p);
+ else if(part==='chapter'&&v.started&&id==='journey')body=journey(state,v,p);
  else body=hub(state,v);
  const here=typeof location==='undefined'?null:location.hash;
  return `<div class="act-six-page" data-act-six-root data-keeper-story lang="en"${blocked?' hidden':''}>${status(p.route===here?p.notice==='later'?'':p.notice:'')}${body}<footer class="a6-controls">${link('#almanac/keepers',C.ui.keepers)}${link('#explore',C.ui.explore)}</footer></div>`;
@@ -93,7 +106,7 @@ export function actSixInvitation(state,{blocked=false}={}){
 export function actSixNotes(state){
  const v=actSixView(state);if(v.status==='missing'&&!v.canStart)return '';
  const bad=['unavailable','unreadable'].includes(v.status)||v.startedStatus==='unreadable';
- const text=!v.started?'not started':`started, ${v.warned?'the warning sent, ':''}${v.planStatus==='unreadable'?'an exchange plan this version cannot read':v.plan==='full'?'an exchange plan kept':v.plan==='small'?'a smaller exchange plan kept':v.earlierPlan?'an exchange plan from an earlier version':'no exchange plan kept yet'}`;
+ const text=!v.started?'not started':`started, ${v.warned?'the warning sent, ':''}${v.journey?'the first parcel sent and Hollis home, ':''}${v.planStatus==='unreadable'?'an exchange plan this version cannot read':v.plan==='full'?'an exchange plan kept':v.plan==='small'?'a smaller exchange plan kept':v.earlierPlan?'an exchange plan from an earlier version':'no exchange plan kept yet'}`;
  return `<details class="panel" data-act-six-notes><summary>${esc(C.title)}</summary><p>${esc(bad?C.messages.unreadableAct:C.notes.line.replace('{state}',text))}</p><p>${esc(C.notes.details)}</p>${v.storyPlan.kind==='malformed'?`<p>${esc(C.messages.badStoryPlan)}</p>`:''}</details>`;
 }
 export function bindActSix(state,ctx){
@@ -116,6 +129,7 @@ export function bindActSix(state,ctx){
  root.querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.preventDefault();e.stopImmediatePropagation();return;}el.dataset.speak=[...root.querySelectorAll('[data-act-six-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden'&&!x.closest('details:not([open])')).map(x=>x.innerText).join(' ');},{capture:true}));
  // The map animates when the chapter is entered; later renders in this visit show it settled.
  if(root.querySelector('[data-a6-map]'))p.mapShown=true;
+ if(root.querySelector('[data-a6h-home]'))p.homeShown=true;
  on('[data-a6-start]',()=>commit(()=>startActSix(state,options),'#almanac/opening-ways'));
  on('[data-a6-sort]',el=>{const [good,way]=el.getAttribute('data-a6-sort').split(':');p.sort[good]=way;p.checked=false;replay(`[data-a6-sort="${good}:${way}"]`);});
  on('[data-a6-sort-check]',()=>{p.checked=true;replay('#a6-sort-result');});
@@ -129,5 +143,9 @@ export function bindActSix(state,ctx){
  on('[data-a6r-build-check]',()=>{p.builtChecked=true;replay('#a6r-build-result');});
  on('[data-a6r-send]',()=>commit(()=>sendWarning(state,options),null,'#a6r-water'));
  on('[data-a6r-plan]',el=>{const plan=el.getAttribute('data-a6r-plan');if(plan==='none'){p.letCome=true;return replay('#a6r-water');}commit(()=>{const ok=chooseRainPlan(state,plan,options);if(ok)p.pinned=true;return ok;},null,'#a6r-water');});
+ on('[data-a6h-pack]',el=>{const id=el.getAttribute('data-a6h-pack');if(!p.packed.includes(id))p.packed.push(id);p.packChecked=false;replay('#a6h-parcel');});
+ on('[data-a6h-pack-clear]',()=>{p.packed=[];p.packChecked=false;replay('[data-a6h-pack]');});
+ on('[data-a6h-pack-check]',()=>{p.packChecked=true;replay('#a6h-pack-result');});
+ on('[data-a6h-send]',()=>commit(()=>sendFirstParcel(state,options),null,'#a6h-home'));
  on('[data-a6-frame-amount]',el=>{const value=el.getAttribute('data-a6-frame-amount');commit(()=>setActTwoFrameAmount(state,value,options),null,`[data-a6-frame-amount="${value}"]`);});
 }
