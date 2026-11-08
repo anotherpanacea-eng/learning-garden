@@ -3,3 +3,5 @@ body:has([data-wb-root]) .speech-controls{background:#f8f5e7;color:#183f39;borde
 @media(min-width:760px){.wb-workbench{grid-template-columns:minmax(0,1.65fr) minmax(210px,1fr);align-items:start}.wb-tools .wb-actions{display:grid}}@media(max-width:430px){.wb-actions button{flex:1 1 100%}.wb-page h2{font-size:1.4rem}.wb-rack{padding:8px 0}.wb-page [data-wb-view=names]>.wb-rack,.wb-page [data-wb-view=example]>.wb-rack,.wb-page .wb-claim{padding:8px 0}}@media(prefers-reduced-motion:reduce){.wb-page *{animation:none!important;transition:none!important}}
 
 .wb-row-labels{display:none}@media(max-width:430px){.wb-row-labels{display:block;font-size:16px;border-top:1px solid #8d9e8d}}
+
+.wb-page [hidden]{display:none!important}.wb-actions>.speech-controls{flex:1 1 100%;min-width:0}.wb-actions:has(>.speech-controls){align-items:flex-start}

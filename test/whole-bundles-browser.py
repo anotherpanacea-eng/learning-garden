@@ -110,7 +110,7 @@ def hear(p):
     words=p.evaluate('joinSpeech.words.at(-1)')
     ok(p.evaluate('joinSpeech.words.length')==count+1,'actual speech binder requests exactly one utterance')
     ok(words and not re.search(r'\d+\s*/\s*\d+',words),'final utterance expands fractions')
-    ok(not re.search(r'\b\d+\s+\d+\s+(thirds|quarters|fifths|eighths)\b',words),'mixed numeral never becomes adjacent spoken numbers')
+    ok(not re.search(r'\b\d+\s+\d+\s+(?:third|quarter|fifth|eighth)s?\b',words),'mixed numeral never becomes adjacent spoken numbers')
     ok('Reading voice' not in words and 'Reading speed' not in words,'voice settings excluded from final utterance')
     return words
 
@@ -133,6 +133,7 @@ def voice_panel(p,label):
             controls.locator('.voice-settings>summary').click()
             ok(controls.locator('.voice-settings').evaluate('e=>e.open'),'voice settings actually open')
             hear(p)
+        ok(controls.evaluate('e=>e.classList.contains("speech-playing")')==(phase!='stopped'),'actual voice panel state '+phase)
         pairs=controls.evaluate('''root=>[...root.querySelectorAll('button,summary,label,select,[data-speech-status]')].filter(e=>e.checkVisibility()).map(e=>{let q=e,b;while(q){b=getComputedStyle(q).backgroundColor;if(b!=='rgba(0, 0, 0, 0)'&&b!=='transparent')break;q=q.parentElement;}return {fg:getComputedStyle(e).color,bg:b};})''')
         def lum(css):
             c=[float(x)/255 for x in re.findall(r'[\d.]+',css)[:3]]
@@ -147,23 +148,50 @@ def state_check(p,n,d,packed):
     geometry(p,n,d,packed)
     ok(p.locator('[data-wb-action=bundle]').is_enabled()==(n-packed*d>=d),'bundle boundary')
     ok(p.locator('[data-wb-action=open]').is_enabled()==(packed>0),'open boundary')
-    text=p.locator(VIEW).inner_text();loose=n-packed*d
-    if n==0:ok('Zero stays zero' in text,'zero refusal explains unchanged zero')
-    elif loose==0:ok('No loose pieces' in text and 'Open one' in text,'exact-whole boundary explains opening')
-    elif loose<d:ok(f'A whole needs {d} pieces' in text and ('There is 1 loose piece' if loose==1 else f'There are {loose} loose pieces') in text,'proper remainder refusal explains exact loose count')
-    else:ok(('another whole' if packed else 'a whole') in text,'enough pieces explanation agrees with existing bundles')
-    if packed==0:ok('There is no whole bundle to open' in text,'open refusal remains visible')
+    tools=p.locator(VIEW+' .wb-tools').inner_text()
+    counts=p.locator(VIEW+' .wb-counts').inner_text();loose=n-packed*d
+    if n==0:
+        ok('Zero stays zero' in counts,'zero readout explains unchanged zero')
+        ok(not re.search(r'\b\d+ (?:whole bundles?|loose pieces?|pieces of size)\b',counts) and 'Each loose piece' not in counts and 'No loose pieces' not in counts,'zero excludes ordinary current material readouts')
+        ok(not re.search(r'A whole needs|enough loose pieces|All this ribbon|There (?:is|are) \d+ loose pieces?',tools),'zero excludes ordinary bundle boundary reasons')
+    else:
+        bundle_unit='whole bundle' if packed==1 else 'whole bundles'
+        loose_unit='loose piece' if loose==1 else 'loose pieces'
+        ok(re.match(rf'^{packed} {bundle_unit}, {loose} {loose_unit}\.',counts),'current readout has exact counts and singular/plural units')
+        if loose==0:
+            ok('No loose pieces.' in counts and 'Each loose piece' not in counts,'no loose pieces omits the loose-unit sentence')
+            ok('All this ribbon is in whole bundles.' in tools and 'Open one' in tools,'exact-whole boundary explains opening')
+        elif loose<d:
+            ok(f'A whole needs {d} pieces.' in tools and (f'There is 1 loose piece;' if loose==1 else f'There are {loose} loose pieces;') in tools,'proper remainder refusal explains exact loose count and number agreement')
+            ok('enough loose pieces' not in tools,'proper remainder never offers enough pieces')
+        else:
+            expected='another whole' if packed else 'a whole'
+            rejected='a whole' if packed else 'another whole'
+            ok(f'There are enough loose pieces to bundle {expected}.' in tools and f'to bundle {rejected}.' not in tools,'enough-pieces explanation distinguishes first and subsequent bundles')
+        if loose:
+            ok(f'Each loose piece is 1/{d} of a whole.' in counts,'current readout names unchanged loose unit')
+        if packed==0:
+            ok(f'{loose} pieces of size 1/{d}: {loose}/{d}.' in counts,'unpacked readout supplies exact fraction')
+    if packed==0:ok('There is no whole bundle to open.' in tools,'open refusal remains visible beside controls')
 
 
 def names(p,n,d,packed):
     before=work(p);action(p,'names');p.locator('[data-wb-view=names]').wait_for()
-    text=p.locator(VIEW).inner_text();q,r=divmod(n,d)
-    ok(f'{packed} × {d} + {n-packed*d} = {n}' in text,'actual decomposition is distinct from canonical name')
-    ok(f'numerator {n}' in text and f'denominator {d}' in text and f'{n}/{d}' in text,'numerator and denominator have exact supplied counts')
-    if n==0:ok(f'0/{d} = 0' in text and 'There is no ribbon' in text,'zero name')
-    elif q==0:ok('less than one whole' in text and 'needs no whole-number part' in text,'proper fraction needs no mixed part')
-    elif r==0:ok(f'{n}/{d} = {q} whole' in text,'integer amount uses whole name')
-    else:ok(f'{q} {r}/{d}' in text and f'{q} whole' in text and f'{r}/{d}' in text,'written canonical mixed numeral and exact parts visible')
+    text=p.locator(VIEW+' .wb-explanation [data-wb-read]').inner_text();q,r=divmod(n,d)
+    equation=f'{packed} × {d} + {n-packed*d} = {n} pieces of size 1/{d}.'
+    ok(text.startswith(equation+' '),'explanation shows independently computed actual decomposition')
+    ok(f'numerator {n} counts the pieces' in text and f'denominator {d} tells how many equal pieces make one whole' in text,'explanation defines exact numerator and denominator')
+    if n==0:canonical=f'0/{d} = 0'
+    elif q==0:canonical=f'{n}/{d}'
+    elif r==0:canonical=f'{n}/{d} = {q} '+('whole' if q==1 else 'wholes')
+    else:canonical=f'{q} '+('whole' if q==1 else 'wholes')+f' and {r}/{d} = {n}/{d}'
+    canonical_text=text[len(equation)+1:]
+    ok(canonical_text.split('. ',1)[0]==canonical,'explanation itself gives exact canonical mathematical name and whole/wholes agreement')
+    ok(('This amount is less than one whole; it needs no whole-number part.' in canonical_text)==(n>0 and q==0),'proper-fraction explanation belongs exclusively to proper amount')
+    ok(('There is no ribbon.' in canonical_text)==(n==0),'zero explanation belongs exclusively to zero amount')
+    if q and r:
+        ok(f'Each whole accounts for {d} pieces.' in canonical_text,'mixed name accounts for the unchanged denominator')
+        ok(f'{q} {r}/{d}' in p.locator(VIEW+' .wb-written').inner_text(),'separate written canonical mixed numeral remains visible')
     words=hear(p)
     ok('plus' in words and 'times' in words,'final decomposition utterance retains addition meaning')
     if q and r:
@@ -204,6 +232,9 @@ def journey(browser,base):
             unchanged(p,before,'all arithmetic '+ident)
         choose(p,'eleven-quarters');action(p,'bundle');state_check(p,11,4,1);names(p,11,4,1)
         ok('incorrect' not in p.locator(VIEW).inner_text().lower(),'valid noncanonical one whole plus seven quarters is not rejected')
+        choose(p,'seven-quarters');action(p,'bundle');choose(p,'eleven-quarters');state_check(p,11,4,1)
+        choose(p,'seven-quarters');state_check(p,7,4,1);choose(p,'eleven-quarters')
+        action(p,'names');names_work=work(p);action(p,'example');action(p,'next');action(p,'back');focus(p,'[data-wb-action=example]');ok(work(p)==names_work,'example launched from names restores names and case');action(p,'back');focus(p,'[data-wb-action=names]')
         saved=work(p);action(p,'example')
         for frame,packed in enumerate([0,1,2,1,0,2]):
             p.locator('[data-wb-view=example]').wait_for();widths=geometry(p,7,3,packed);words=hear(p)
@@ -212,6 +243,7 @@ def journey(browser,base):
             if frame==5:
                 widths+=geometry(p,3,3,0,True)
                 ok(max(widths)-min(widths)<.3,'claim and reference actual rendered whole widths equal')
+                ok('as though two plus one equals three thirds' in words.lower(),'final false-claim utterance expands the precise invalid unit-count addition')
                 ok('different' in words.lower() and 'one whole' in words.lower() and 'seven thirds' in words.lower(),'false claim final words explain different units/amount')
             if frame<5:
                 action(p,'next');ok(p.evaluate('document.activeElement.matches("[data-wb-action=previous],[data-wb-action=next]")&&!document.activeElement.disabled'),'enabled example navigation focus')
@@ -234,19 +266,20 @@ def stale(p,handles,label):
 def lifecycle(browser,base):
     c,p=setup(browser,base)
     try:
-        for target in [VIEW,'[data-wb-action=bundle]']:
+        for target in [VIEW,'[data-wb-action=bundle]',VIEW+' [data-speak]']:
             for kind in ['hidden','inert','aria','style','class','reparent','reinsert']:
-                host.go(p,base);mode(p)
+                p.reload(wait_until="networkidle");host.go(p,base);mode(p)
                 handles=[p.locator('[data-wb-action=bundle]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()]
+                if target!=VIEW:handles=[p.locator(target).element_handle()]
                 ok(handles[0].is_enabled(),'hostile probe begins with enabled action')
                 p.locator(target).evaluate('''(e,k)=>{window.__held=e;window.__parent=e.parentElement;window.__next=e.nextSibling;if(k==='hidden')e.hidden=true;if(k==='inert')e.inert=true;if(k==='aria')e.setAttribute('aria-hidden','true');if(k==='style')e.style.display='none';if(k==='class')e.classList.add('wb-hostile');if(k==='reparent')document.body.append(e);if(k==='reinsert'){e.remove();window.__detached=!e.isConnected;__parent.insertBefore(e,__next);}}''',kind)
-                condition=p.locator(target).evaluate('''(e,k)=>({hidden:e.hidden&&!e.checkVisibility(),inert:e.inert&&e.hasAttribute('inert'),aria:e.getAttribute('aria-hidden')==='true',style:getComputedStyle(e).display==='none',class:e.classList.contains('wb-hostile'),reparent:e.parentElement===document.body&&e.parentElement!==__parent,reinsert:window.__detached&&e.isConnected&&e.parentElement===__parent})[k]''',kind)
+                condition=p.evaluate('''k=>{const e=__held;return ({hidden:e.hidden&&!e.checkVisibility(),inert:e.inert&&e.hasAttribute('inert'),aria:e.getAttribute('aria-hidden')==='true',style:getComputedStyle(e).display==='none',class:e.classList.contains('wb-hostile'),reparent:e.parentElement===document.body&&e.parentElement!==__parent,reinsert:window.__detached&&e.isConnected&&e.parentElement===__parent})[k];}''',kind)
                 ok(condition,'actual hostile precondition '+target+' '+kind)
                 stale(p,handles,target+' '+kind)
                 p.evaluate('''()=>{const e=__held;e.hidden=false;e.inert=false;e.removeAttribute('aria-hidden');e.style.removeProperty('display');e.classList.remove('wb-hostile');if(e.parentElement!==__parent)__parent.insertBefore(e,__next);}''')
                 stale(p,handles,'restored '+target+' '+kind)
         for boundary in ['case','work','view','frame','mode']:
-            host.go(p,base);mode(p)
+            p.reload(wait_until="networkidle");host.go(p,base);mode(p)
             if boundary=='frame':action(p,'example');handles=[p.locator('[data-wb-action=next]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()];action(p,'next')
             else:
                 handles=[p.locator('[data-wb-action=bundle]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()]
@@ -256,7 +289,7 @@ def lifecycle(browser,base):
                 else:mode(p,'join');mode(p)
             stale(p,handles,boundary)
         for operation in ['route','picker','owner','import','reset','reload']:
-            host.go(p,base);mode(p);choose(p,'three-and-two-fifths');action(p,'open')
+            p.reload(wait_until='networkidle');host.go(p,base);mode(p);choose(p,'three-and-two-fifths');action(p,'open')
             handles=[p.locator('[data-wb-action=open]').element_handle(),p.locator(VIEW+' [data-speak]').element_handle()]
             if operation=='route':
                 saved=host.snapshot(p);voice=p.evaluate('joinSpeech.words.slice()')

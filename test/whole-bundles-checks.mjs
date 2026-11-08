@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {spoken} from '../dist/play-media.mjs';
 import {wholeCases,wholeCopy} from '../dist/whole-bundles-content.mjs';
 import {wholeCase,createWhole,wholeModel,changeWhole,wholeNames,wholeExample} from '../dist/whole-bundles-core.mjs';
 
@@ -64,9 +65,17 @@ for(const [id,n,d,initial,q,r] of stock){
   assert.ok(names.text.includes(`${p} × ${d} + ${n-p*d} = ${n}`),'current decomposition is distinct from canonical q/r');
   assert.match(names.spokenText,/plus/,'finite equation has authored operator speech');
   assert.doesNotMatch(names.spokenText,/\d+ \d+\/\d+/,'mixed numeral is not read as adjacent numbers');
-  if(n===0){assert.match(names.text,/0\/4 = 0/);assert.equal(names.mixedLabel,null);}
-  if(q===0&&r>0){assert.match(names.text,/less than one whole/);assert.equal(names.mixedLabel,null);}
-  if(n>0&&r===0){assert.ok(names.text.includes(`${n}/${d} = ${q}`));assert.equal(names.mixedLabel,null);}
+  // Check the mathematical name clause, not a numeral elsewhere in the explanation.
+  const canonical=n===0?`0/${d} = 0. There is no ribbon.`:
+   q===0?`${n}/${d}. This amount is less than one whole; it needs no whole-number part.`:
+   r===0?`${n}/${d} = ${q} ${q===1?'whole':'wholes'}.`:
+   `${q} ${q===1?'whole':'wholes'} and ${r}/${d} = ${n}/${d}.`;
+  assert.ok(names.text.includes(canonical),'canonical arithmetic and whole/wholes agree with independent stock');
+  if(q>0&&r>0){assert.doesNotMatch(names.text,/less than one whole|There is no ribbon/);}
+  else{assert.equal(names.mixedLabel,null);assert.ok(!names.text.includes(` and ${r}/${d} = `),'nonmixed branch has no invented mixed tail');}
+  if(n===0)assert.doesNotMatch(names.text,/= 0 wholes?\./,'zero uses its own name before the exact-whole branch');
+  const finalWords=spoken(names.spokenText);
+  assert.doesNotMatch(finalWords,/\b\d+\s+\d+\s+(?:third|quarter|fifth|eighth)s?\b/,'singular and plural mixed-numeral garble are both absent');
   for(const [action,delta,inverse] of [['bundle',1,'open'],['open',-1,'bundle']]){
    const changed=changeWhole(work,action),next=p+delta;
    if(next<0||next>q)assert.equal(changed,null);
@@ -101,6 +110,9 @@ const malformed=[null,undefined,{},[],['seven-quarters',0],'seven-quarters',1,
  {caseId:'unknown',packed:0},{caseId:'seven-quarters'},
  ...[-1,2,0.5,'0',null,undefined,NaN,Infinity,-Infinity].map(packed=>({caseId:'seven-quarters',packed})),
  {caseId:'zero-quarters',packed:1},{caseId:'two-thirds',packed:1},wholeExample(0)];
+// These reproduce the two singular forms the earlier speech assertion missed.
+for(const badNumeral of ['Written 2 1/3','Written 2 1/8'])
+ assert.match(spoken(badNumeral),/\b\d+\s+\d+\s+(?:third|quarter|fifth|eighth)s?\b/,'speech guard actually catches the known singular failures');
 for(const bad of malformed){
  assert.equal(wholeModel(bad),null);assert.equal(wholeNames(bad),null);
  for(const action of ['bundle','open','bad'])assert.equal(changeWhole(bad,action),null);
