@@ -61,11 +61,13 @@ export function runChecks(){
  unchanged(s,()=>{eq(F.endActFive(s,'sponge-again',0,options),false,'a second bind is refused');eq(F.chooseActFivePath(s,'sky-night',options),false,'no new path after the ending');eq(F.keepActFiveLimit(s,'gazette','news-after',options),false,'no project edits after the ending');},'after the ending nothing changes');
  const end=actFivePage({...s,garden:{guide:'ari'}},{part:'ending'});
  ok(end.includes('data-a5-binding')&&end.includes('data-a5-season="summer"')&&end.includes(`aria-label="${esc(C.ending.scene)}"`),'the described binding scene wears its season');
- ok(end.includes(esc(C.ending.seasons.summer))&&end.includes('Our project: The Willowbank Gazette. What it can&#39;t tell us yet: We only asked a few people.'),'the season line and the almanac line');
+ ok(end.includes(esc(C.ending.seasons.summer)),'the season line');
+ ok(end.includes('<p><em>Act V: A Question of Your Own. Our project: The Willowbank Gazette. What it can&#39;t tell us yet: We only asked a few people.</em></p>'),'the whole almanac line, in italics');
  ok(end.includes(esc(C.ending.short[0]).slice(0,40)),'the ending text');
  ok(actFivePage(s,{part:'hub'}).includes('href="#almanac/question-of-our-own"'),'the hub links the ending');
  page=actFivePage(s,{part:'path',path:'gazette'});
- ok(page.includes(esc(C.project.bound))&&!page.includes('data-a5-end')&&!page.includes('data-a5-limit-save')&&page.includes('disabled'),'the project page is a record now');
+ ok(page.includes(esc(C.project.bound))&&!page.includes('data-a5-end')&&!page.includes('data-a5-limit-save'),'the project page is a record now');
+ ok((page.match(/<input type="radio"[^>]*>/g)||[]).length===5&&(page.match(/<input type="radio"[^>]*>/g)||[]).every(x=>x.includes(' disabled')),'every project radio is disabled');
  ok(actFiveNotes(s).includes('1 project kept with a limit, a project is bound'),'Notes');
 
  // Saved shapes are read, never repaired.
