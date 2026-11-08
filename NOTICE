@@ -7,13 +7,15 @@ Pinned source: 96a7933754af672e1bfdbf7ecb05c325860c6e0d
 
 The database, the subset in dist/marble-map.json, the complete original files
 in curriculum/marble/, and the source-derived mapping database in
-curriculum/atlas.json and curriculum/topic-coverage.csv are licensed under the
+curriculum/atlas.json, curriculum/topic-coverage.csv and dist/grownup-atlas.json
+are licensed under the
 Open Database License (ODbL) 1.0:
 https://opendatacommons.org/licenses/odbl/1-0/
 
 Marble-authored content, including topic names, descriptions, evidence and
 prerequisite reasons, and source-derived text/tables in curriculum/atlas.json,
-curriculum/topic-coverage.csv and docs/learning-atlas.md are licensed under
+curriculum/topic-coverage.csv, docs/learning-atlas.md and the source-derived topic
+names in dist/grownup-atlas.json are licensed under
 Creative Commons Attribution-ShareAlike
 4.0 International:
 https://creativecommons.org/licenses/by-sa/4.0/
