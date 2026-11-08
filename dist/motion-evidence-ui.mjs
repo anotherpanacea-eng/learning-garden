@@ -24,7 +24,7 @@ export function bindMotion(state,{save,render,focus,canExport,explorerId,isActiv
  const draftText=e=>motionView(state).work?.drafts?.[e.dataset.motionField]??'';
  for(const e of writing){fieldViews.set(e,{draft:draftText(e),value:e.value});e.addEventListener('compositionstart',()=>{if(live(e))composing.add(e);});e.addEventListener('compositionend',()=>{if(live(e))composing.delete(e);});}
  const textMatches=()=>writing.every(e=>{const seen=fieldViews.get(e);return e.isConnected&&root.contains(e)&&seen.draft===draftText(e)&&seen.value===e.value;});
- const entryContext={...ctx,isActive:()=>live(root),canEnter:()=>live(root)&&!dirtyFields.size&&!composing.size&&textMatches(),refuse:()=>{if(!live(root))return;if(composing.size||!textMatches())say('Finish typing here before opening a bench. Your words stay on this page.');else fail();}};
+ const entryContext={...ctx,isActive:()=>live(root),canEnter:()=>live(root)&&!dirtyFields.size&&!composing.size&&textMatches(),refuse:()=>{if(!live(root))return;if(dirtyFields.size)return fail();if(composing.size||!textMatches())say('Finish typing here before opening a bench. Your words stay on this page.');else fail();}};
  bindForceSketchEntry(state,entryContext);
  bindPushEntry(state,entryContext);
  bindSpringBenchEntry(state,entryContext);

@@ -54,7 +54,10 @@ def setup(browser,base,width=820,height=1000,extra=''):
 def hear(p):
  p.locator('[data-sb-root] [data-speak]').click()
  ok(p.evaluate('fsSpeech.speak')>0,'actual local speech invoked')
- return p.evaluate('fsSpeech.texts.at(-1)')
+ spoken=p.evaluate('fsSpeech.texts.at(-1)')
+ ok(not re.search(r'(?<![\d.])1 (?:centimeters|newtons)\b',spoken),'singular one uses centimeter or newton')
+ ok(not re.search(r'\d(?:minus|equals)\d',spoken),'spoken arithmetic separates numbers and operations')
+ return spoken
 
 def line(p,kind,expected):
  q=p.locator(sel('bracket',kind))
@@ -116,8 +119,11 @@ def rejected(p,handle,label):
 def parent_guards(p):
  field=p.locator('[data-motion-field="explanation"]');root=p.locator('[data-motion-root]').element_handle();saved=book(p)
  field.evaluate("e=>{e.value='x'.repeat(1201);e.dispatchEvent(new Event('input',{bubbles:true}));}")
- p.locator(sel('entry')).click()
- ok(not p.locator(sel('root')).count() and len(field.input_value())==1201 and book(p)==saved,'dirty-field refusal preserves notebook and words')
+ for entry in ['[data-sb-entry]','[data-fs-entry]','[data-motion-push-drift]']:
+  p.locator(entry).click()
+  ok(not p.locator('[data-sb-root],[data-fs-root],[data-pd-root]').count() and len(field.input_value())==1201 and book(p)==saved,'dirty-field refusal preserves notebook and words')
+  status=p.locator('#motion-status').inner_text().lower()
+  ok('not be saved' in status and 'copy' in status,'failed-save refusal explains unsaved words and copying for each child')
  field.fill('A fictional waiting explanation.')
  for intermediate in [False,True]:
   field.dispatch_event('compositionstart')
@@ -127,10 +133,14 @@ def parent_guards(p):
    p.locator(entry).click()
    ok(not p.locator('[data-sb-root],[data-fs-root],[data-pd-root]').count() and field.input_value()==value and book(p)==before,'composition blocks each native child entry without losing words')
    ok(p.locator('[data-motion-root]').evaluate('(e,r)=>e===r',root),'refusal retains exact parent root')
+   ok('Finish typing' in p.locator('#motion-status').inner_text(),'composing refusal explains finishing current typing')
   field.dispatch_event('compositionend');field.fill('A fictional waiting explanation.')
   enter(p);parent(p);field=p.locator('[data-motion-field="explanation"]');root=p.locator('[data-motion-root]').element_handle()
- saved=book(p);field.evaluate("e=>{e.value='An unsaved final composition value.';}");p.locator(sel('entry')).click()
- ok(not p.locator(sel('root')).count() and field.input_value()=='An unsaved final composition value.' and book(p)==saved,'DOM text mismatch blocks entry without adopting words')
+ saved=book(p);field.evaluate("e=>{e.value='An unsaved final composition value.';}")
+ for entry in ['[data-sb-entry]','[data-fs-entry]','[data-motion-push-drift]']:
+  p.locator(entry).click()
+  ok(not p.locator('[data-sb-root],[data-fs-root],[data-pd-root]').count() and field.input_value()=='An unsaved final composition value.' and book(p)==saved,'DOM text mismatch blocks entry without adopting words')
+  ok('Finish typing' in p.locator('#motion-status').inner_text(),'unaccepted text refusal explains finishing current typing')
  field.fill('A fictional waiting explanation.')
 
 def journey(browser,base):
@@ -144,6 +154,8 @@ def journey(browser,base):
   old_parent=p.locator('[data-motion-root]').element_handle();old_push=p.locator('[data-motion-push-drift]').element_handle()
   enter(p);layout(p);diagram(p,6,6)
   speech=hear(p)
+  case_title=p.locator('[data-sb-case] option:checked').inner_text().split('·')[-1].strip()
+  ok(case_title in speech and 'Test pull: 1 newton' in speech,'trial narration identifies selected model and chosen one-newton test')
   ok('Reference extension' not in speech and 'Each extra newton' not in speech and '7−5' not in speech,'closed trial narration has no hidden reference or example answers')
   p.evaluate('(e)=>document.querySelector("main").append(e)',old_parent);rejected(p,old_push,'retained parent child launcher');old_parent.evaluate('e=>e.remove()')
   p.locator(sel('action','add')).focus();p.keyboard.press('Enter');focus(p,sel('action','increase'));diagram(p,6,6,0)
@@ -180,6 +192,11 @@ def journey(browser,base):
     p.locator('[data-sb-root] details').filter(has=p.locator('summary',has_text='Numbers and units')).locator('summary').click()
     spoken=hear(p)
     ok('newtons per centimeter' in spoken and 'centimeters per newton' in spoken and 'times' in spoken and 'equals' in spoken,'opened unit relationships speak units and mathematical operations meaningfully')
+    ok('1 newton per centimeter' in spoken and '1 centimeter per newton' in spoken,'opened units speak singular reciprocal units')
+    ok(not any(symbol in spoken for symbol in ['●','□','▲']),'plot narration uses shape names without reading decorative glyphs')
+    p.mouse.move(0,0)
+    appearances=p.locator('[data-sb-axis]').evaluate_all('xs=>xs.map(e=>{const s=getComputedStyle(e);return [s.backgroundColor,s.color,s.borderWidth,s.fontWeight]})')
+    ok(appearances[0]!=appearances[1],'selected vertical axis has a visible style difference')
     ok('N/cm' not in spoken and 'cm/N' not in spoken,'unit narration does not leave slash abbreviations')
    p.locator(sel('axis','length')).click();plot(p,case,'length',mark=.5,current=force)
    p.locator(sel('axis','extension')).click();action(p,'trial');focus(p,sel('action','plots'))
@@ -187,7 +204,9 @@ def journey(browser,base):
    ok(p.locator(sel('reference')).count()==0,'release hides requested comparison')
    action(p,'compare');diagram(p,released,l0,.5,True)
    if case=='C':ok('permanent' in text(p).lower(),'nonlinear elastic comparison is available')
-   if case=='D':ok('1 cm' in text(p) and '7 cm' in text(p),'retained extension compares with original six-centimeter reference')
+   if case=='D':
+    ok('1 cm' in text(p) and '7 cm' in text(p),'retained extension compares with original six-centimeter reference')
+    ok('1 centimeter of extra length' in hear(p),'retained extension narration uses one centimeter')
    action(p,'plots');plot(p,case,released=released,mark=.5)
    if case=='D':p.screenshot(path=str(OUT/'released-d-plots-820.png'),full_page=True)
    action(p,'trial');action(p,'hide')
@@ -198,6 +217,7 @@ def journey(browser,base):
   for index,(length,mark,ref) in enumerate([(5,None,False),(7,None,False),(7,7,False),(7,2,True),(5,None,True)]):
    diagram(p,length,5,mark,ref);spoken=hear(p)
    ok(str(length) in spoken,'current example frame is narrated')
+   if index==3:ok('7 minus 5 equals 2' in spoken,'fourth example speaks the extension subtraction clearly')
    if index<4:action(p,'next')
   ok(p.locator(sel('action','next')).is_disabled(),'fifth example frame ends manual sequence')
   action(p,'back');focus(p,sel('action','example'));plot(p,'D','length',released=7,mark=.5)
