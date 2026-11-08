@@ -1,6 +1,6 @@
 # 430 · Group Pieces
 
-Status: proposed; independent specification and complete finite mathematics/content review precede implementation. Baseline main `d2a609b972b5a13cbf10aec041f1a3e37e424af1`. Existing LG-1 / LG-G1, operational Fleet1635, branch `build/group-pieces`. This commissions the common-factor grouping operation under [197](197-joining-fractions.md), inside Common Cuts292.
+Status: independently BUILD-READY at `a9f1460403600c50880332f40a884ac4d08f0c58`, after six design lenses and Claude complete finite mathematics/content repair closure. Implementation in [PR513](https://github.com/anotherpanacea-eng/learning-garden/pull/513); its canonical release record will own final implementation and publication acceptance. Baseline main `d2a609b972b5a13cbf10aec041f1a3e37e424af1`. Existing LG-1 / LG-G1, operational Fleet1635, branch `build/group-pieces`. This commissions the common-factor grouping operation under [197](197-joining-fractions.md), inside Common Cuts292.
 
 ## Missing operation, story and sources
 

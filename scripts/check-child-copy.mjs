@@ -5,6 +5,9 @@ import {resolve} from 'node:path';
 
 export const copyScopes = [
   {path:'dist/moonlight-content.mjs',adultBlocks:[{start:'  "grownup":',end:'  "orbitMotion":',reason:'Only shown in the folded grown-up interpretation.'}],quotations:[]},
+  {path:'dist/group-pieces-content.mjs',adultBlocks:[{start:' grownUp:',end:' frames:',reason:'Only shown in the folded grown-up explanation.'}],quotations:[]},
+  {path:'dist/group-pieces-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/group-pieces-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/spring-bench-content.mjs',adultBlocks:[{start:' grownUp:',end:' plotGuide:',reason:'Only shown in the folded grown-up explanation.'}],quotations:[]},
   {path:'dist/spring-bench-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/spring-bench-ui.mjs',adultBlocks:[],quotations:[]},
