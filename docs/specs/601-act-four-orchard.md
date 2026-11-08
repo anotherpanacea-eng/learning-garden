@@ -27,9 +27,9 @@ Reaching the chapter or offering a result is story progress. It is not a curricu
 
 - **Artifact.** A Rain Paths case's `keptResult`. `keepRainResult` writes it only while it is `null`, so the first keep is frozen; a later run and keep leave it unchanged (checked).
 - **Identity.** The case id. Rain Paths keeps one result per case, so `{caseId}` names one kept result. The reference holds that id and nothing else: no rows, outcome, support or familiarity.
-- **Validator.** The exported `rainResultSourceValid`, the same check Rain charts already uses for a carried result. A kept result also has to carry its own case id.
-- **Reading.** The reader is pure and reads `state.rainPaths` directly, not through `rainPaths(state)`, because that view returns nothing when any one case is unreadable. A root that is not a version-1 object with a `cases` object reads as unreadable and offers nothing. Within a readable root, each case is read on its own. An unknown case id, a non-object entry, a missing `keptResult` field, a failing kept result or one filed under the wrong case is omitted, reported as retained-unreadable and left exactly as saved. `null` simply means nothing is kept yet.
-- **Candidates.** One per readable kept case, key `JSON.stringify(['orchard',caseId])`, labelled *Kept rain result: {case}* with the case's own label (for example *Cover · 12 new tokens per tray*), never an outcome.
+- **Validator.** A snapshot check in `act-four-core.mjs`, following AGENTS.md: the kept result's own structure, ids, bounded counts and internal consistency. It must carry its own case id; its model capacity is a positive count; each row's remaining, surface, stored and runoff tokens add up to its new rain, and its prior, newly stored and empty slots add up to the saved capacity. It is **never** compared with today's cases, model or recomputed rows (Rain Paths' own `rainResultSourceValid` does that, so it is not used here), so a later rule or case change cannot strand a kept result.
+- **Reading.** The reader is pure and reads `state.rainPaths` directly, not through `rainPaths(state)`, because that view returns nothing when any one case is unreadable. A root that is not a version-1 object with a `cases` object reads as unreadable and offers nothing. Within a readable root, each case is read on its own. A non-object entry, a missing `keptResult` field, a failing snapshot or one filed under the wrong case is omitted, reported as retained-unreadable and left exactly as saved. A case id from another version is read like any other. `null` simply means nothing is kept yet.
+- **Candidates.** One per readable kept case, key `JSON.stringify(['orchard',caseId])`, labelled *Kept rain result: {case}* with today's label for a known case id (for example *Cover · 12 new tokens per tray*), or *Kept rain result from an earlier version* for an id today's list does not know. The label never shows an outcome. Each chapter keeps its own selected work for the visit, so moving between chapters never changes the other chapter's choice, and a notice stays on the chapter that raised it.
 
 ## State
 
@@ -42,7 +42,7 @@ As in 352: the first valid receipt for a chapter counts once and a repeat offer 
 - `act-four-content.mjs` gains an `orchard` block; `act-four-core.mjs` gains the reader and `actFourLiveChapters`; `act-four-ui.mjs` renders either chapter from its own copy; `act-four-corner-art.mjs` draws the scene; `act-four.css` animates it.
 - Chapter 1's page, copy and receipt are unchanged; an unknown chapter id still renders chapter 1, as before.
 - `app.mjs` changes one line: the Rain Paths render appends `actFourReturn(state,'orchard')`, which is empty until Act IV starts.
-- The scene is an `svg role="img"` with a one-sentence description and a caption. The rain runs five short cycles and stops; the reeds rise once; the puddle and its glints shimmer gently. Under reduced motion none of it moves and no rain shows. 44 px targets, 16 px text, visible focus, read-aloud of visible prose only, checks at 320 and 820.
+- The scene is an `svg role="img"` with a one-sentence description and a caption. Everything moves once and settles within about four seconds, with nothing looping: the rain falls in two short waves, the reeds rise once, and the puddle and its glints shimmer briefly. Under reduced motion none of it moves and no rain shows. 44 px targets, 16 px text, visible focus, read-aloud of visible prose only, checks at 320 and 820.
 
 ## Upstream study and curriculum place
 
@@ -71,12 +71,13 @@ Before build: an independent spec review of this spec and its companion.
 
 Pure checks (`test/act-four-orchard-checks.mjs`, fixtures from the real Act IV and Rain Paths APIs):
 - No root, or an unfinished, unkept run, offers nothing, and the page says so.
-- Real keeps give one candidate per kept case, with deterministic keys and case labels; a later keep leaves the frozen result unchanged.
+- Real keeps give one candidate per kept case, with deterministic keys and case labels; a restarted, genuinely different run kept again leaves the frozen result unchanged.
+- A case from another version and a kept result made under different rules are both still offered; an unknown case gets the plain label; a snapshot whose own counts disagree is not offered, and the chapter says so.
 - Reads and renders write nothing.
 - A refused export writes nothing; an unknown key is refused; an offer writes one id-only receipt; a repeat keeps the first; chapter 1 is untouched and still offerable afterwards.
 - Removing or breaking Rain Paths never revokes the receipt.
 - Unreadable, unknown and wrongly filed cases are omitted, reported and left exactly as saved; an unsupported root offers nothing.
-- Receipt validation is shape only, accepts a future case id, and rejects the wrong activity, kind, extra keys, empty ids, versions and chapters; a reserved chapter cannot be offered; nothing can be offered before Act IV starts.
+- Receipt validation is shape only, accepts a future case id, and rejects the wrong activity, kind, extra ref keys, empty ids, versions and chapters; a reserved chapter cannot be offered; nothing can be offered before Act IV starts.
 - Rendering: the hub links both chapters; chapter 2 shows the described scene, the Rain Paths link, the kept line and the guide line with the chosen guide named, and not chapter 1's guide line; Notes name chapter 2; the Rain Paths return link appears only once Act IV has started.
 
 The existing `test/act-four-checks.mjs` still passes, with this companion added to its reviewed-source list.
@@ -85,7 +86,8 @@ Browser journey (`test/act-four-orchard-browser.py`), at 820 and 320:
 - The hub links chapter 2 and writes nothing; the chapter shows its heading, the described scene, the Rain Paths link and case-labelled candidates; 44 px targets and no overflow.
 - Offering writes the id-only receipt, moves focus to the offer section, shows the guide line, leaves Rain Paths unchanged and survives a reload.
 - Rain Paths shows the way back to chapter 2; chapter 1 still opens.
-- Reduced motion shows still reeds and no rain; otherwise the reeds grow and the rain falls.
+- A chapter's choice survives a visit to the other chapter.
+- Reduced motion: nothing in the scene moves and no rain shows. Otherwise each animated part runs its own animation, none loops, and all settle within five seconds.
 - With no kept result, the chapter says so and shows no offer button.
 
 Physical iPad, Safari, VoiceOver and learning effects remain unqualified. This is followed by an exact-head implementation review and the repository's landing procedure.

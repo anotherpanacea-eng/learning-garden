@@ -2,7 +2,6 @@
 import {storyView} from './keeper-story-core.mjs';
 import {actThreeView} from './act-three-core.mjs';
 import {ledgerView,validLedgerKeep} from './ledger-gauge-core.mjs';
-import {rainResultSourceValid} from './rain-paths-core.mjs';
 import {rainCaseById} from './rain-paths-content.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
 
@@ -23,8 +22,17 @@ export function validActFourOffer(r,chapter=r?.chapter){
  if(chapter==='orchard')return r.activity==='rain-paths'&&r.artifactKind==='kept-result'&&rainReference(r.ref);
  return false;
 }
-// Spec601: Rain Paths keeps one result per case, frozen at its first keep. Each case's keptResult is read on its own,
-// with the exported validator, so one unreadable case never hides another.
+// Spec601: a kept Rain Paths result is checked as a snapshot: its own structure, ids, bounded counts and internal
+// consistency. It is never compared with today's cases, model or recomputed rows, so a later rule change cannot strand it.
+const count=(n,max=1000)=>Number.isSafeInteger(n)&&n>=0&&n<=max;
+function rainSnapshot(kept,caseId){
+ if(!obj(kept)||kept.caseId!==caseId||!obj(kept.model)||!count(kept.model.capacity)||kept.model.capacity<1||!obj(kept.config)||!Array.isArray(kept.rows)||kept.rows.length<1||kept.rows.length>8||!obj(kept.support)||typeof kept.familiar!=='boolean')return false;
+ const cap=kept.model.capacity,ids=new Set();
+ return kept.rows.every(r=>obj(r)&&id(r.id)&&!ids.has(r.id)&&ids.add(r.id)&&['priorStored','newRainTotal','cloudRemaining','surfaceNew','storedNew','runoffNew','emptySlots'].every(k=>count(r[k]))
+  &&r.cloudRemaining+r.surfaceNew+r.storedNew+r.runoffNew===r.newRainTotal&&r.priorStored+r.storedNew+r.emptySlots===cap);
+}
+// Rain Paths keeps one result per case, frozen at its first keep. Each case's keptResult is read on its own,
+// so one unreadable case never hides another.
 function rainSource(state){
  const result={status:'missing',retainedUnreadable:false,candidates:[]};
  if(!obj(state)||!own(state,'rainPaths'))return result;
@@ -32,12 +40,12 @@ function rainSource(state){
  if(!obj(root)||root.version!==1||!obj(root.cases))return {...result,status:'unreadable',retainedUnreadable:true};
  result.status='ready';
  for(const [caseId,work] of Object.entries(root.cases)){
-  const known=rainCaseById(caseId);
-  if(!known||!obj(work)||!own(work,'keptResult')){result.retainedUnreadable=true;continue;}
+  if(!id(caseId)||!obj(work)||!own(work,'keptResult')){result.retainedUnreadable=true;continue;}
   const kept=work.keptResult;
   if(kept===null)continue;
-  if(!rainResultSourceValid(kept)||kept.caseId!==caseId){result.retainedUnreadable=true;continue;}
-  result.candidates.push({key:JSON.stringify(['orchard',caseId]),chapter:'orchard',activity:'rain-paths',artifactKind:'kept-result',ref:{caseId},caseLabel:known.label});
+  if(!rainSnapshot(kept,caseId)){result.retainedUnreadable=true;continue;}
+  // Today's case list only names the case; an id from another version is still offered, with a plain label.
+  result.candidates.push({key:JSON.stringify(['orchard',caseId]),chapter:'orchard',activity:'rain-paths',artifactKind:'kept-result',ref:{caseId},caseLabel:rainCaseById(caseId)?.label??null});
  }
  return result;
 }

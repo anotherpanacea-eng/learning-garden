@@ -6,7 +6,7 @@ import {canExport} from './act-two-checks.mjs';
 import * as A from '../dist/act-four-core.mjs';
 import {actFourPage,actFourNotes,actFourReturn,actFourRoute} from '../dist/act-four-ui.mjs';
 import {actFourContent as C} from '../dist/act-four-content.mjs';
-import {ensureRainPaths,chooseRainCase,nextRainPhase,keepRainResult} from '../dist/rain-paths-core.mjs';
+import {ensureRainPaths,chooseRainCase,nextRainPhase,keepRainResult,restartRainCase,useRainSupport,rainResult} from '../dist/rain-paths-core.mjs';
 import {rainCaseById} from '../dist/rain-paths-content.mjs';
 import {guides} from '../dist/companions.mjs';
 
@@ -41,8 +41,11 @@ export function runChecks(){
  eq(cands[0].caseLabel,rainCaseById('cover-12').label,'labelled by the case');
  unchanged(s,()=>{A.actFourView(s);A.actFourCandidates(s,'orchard');actFourPage(s,{part:'chapter',chapter:'orchard'});actFourNotes(s);},'reads and renders write nothing');
 
- // Keeping again after another run does not change the frozen kept result, so the candidate stays the same.
- const before=clone(s.rainPaths.cases['cover-12'].keptResult);keepRain(s,'cover-12');
+ // A genuinely different later run, kept again, leaves the first kept result as it was.
+ const before=clone(s.rainPaths.cases['cover-12'].keptResult);
+ ok(chooseRainCase(s,'cover-12')&&restartRainCase(s),'restart the kept case');useRainSupport(s,'example','global');while(nextRainPhase(s));
+ ok(JSON.stringify(rainResult(s,'cover-12'))!==JSON.stringify(before),'the new run would make a different result');
+ ok(keepRainResult(s),'keep again');
  eq(s.rainPaths.cases['cover-12'].keptResult,before,'the kept result is frozen at its first keep');
 
  // Offering: atomic refusal, one receipt, a repeat is a no-op, chapter 1 untouched.
@@ -76,6 +79,20 @@ export function runChecks(){
  eq(t.rainPaths,rawBefore,'unreadable entries stay exactly as saved');
  const u=clone(t);u.rainPaths.version=2;eq(A.actFourView(u).sources.orchard.status,'unreadable','an unsupported root reads as unreadable');eq(A.actFourCandidates(u,'orchard'),[],'and offers nothing');
  const w=clone(t);w.rainPaths.cases['cover-12'].keptResult={...w.rainPaths.cases['cover-12'].keptResult,caseId:'space-12'};eq(A.actFourCandidates(w,'orchard').length,0,'a kept result filed under the wrong case is not offered');
+
+ // Saved snapshots are judged on their own terms, never against today's cases or rules.
+ const h=orchardSeed();keepRain(h,'cover-12');
+ const snap=clone(h.rainPaths.cases['cover-12'].keptResult);
+ h.rainPaths.cases['flood-99']={keptResult:{...clone(snap),caseId:'flood-99'}};
+ const changed=clone(snap);changed.model={...changed.model,capacity:16};changed.rows=changed.rows.map(r=>({...r,emptySlots:r.emptySlots+4}));changed.config={...changed.config,newRainTotal:99};
+ h.rainPaths.cases['cover-12'].keptResult=changed;
+ const hc=A.actFourCandidates(h,'orchard');
+ eq(hc.map(c=>c.ref.caseId),['cover-12','flood-99'],'a case from another version and a changed rule are both still offered');
+ eq(hc.map(c=>c.caseLabel),[rainCaseById('cover-12').label,null],'today’s case list only names a known case');
+ ok(actFourPage(h,{part:'chapter',chapter:'orchard'}).includes(C.orchard.candidateEarlier),'an unknown case gets a plain label');
+ const bad=clone(snap);bad.rows=bad.rows.map(r=>({...r,runoffNew:r.runoffNew+1}));h.rainPaths.cases['cover-12'].keptResult=bad;
+ eq(A.actFourCandidates(h,'orchard').map(c=>c.ref.caseId),['flood-99'],'a snapshot whose own counts disagree is not offered');
+ ok(actFourPage(h,{part:'chapter',chapter:'orchard'}).includes(C.orchard.unreadableWork),'and the chapter says some rain results cannot be read');
 
  // Receipt validation is shape only.
  const good={kind:'act-four-offer',version:1,chapter:'orchard',activity:'rain-paths',artifactKind:'kept-result',ref:{caseId:'cover-12'}};

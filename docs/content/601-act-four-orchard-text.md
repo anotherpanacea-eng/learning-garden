@@ -25,6 +25,8 @@ Companion to [spec 601](../specs/601-act-four-orchard.md). Every new child-facin
 | noWork | Nothing from Rain Paths is ready to bring yet. Finish a rain run, keep the result, and come back. Every activity is open. |
 | offered | Your rain result is part of this story. |
 | candidate | Kept rain result: {case} |
+| candidateEarlier | Kept rain result from an earlier version |
+| unreadableWork | Some earlier rain results cannot be read by this version. They stay in your notes. You can choose another. |
 
 **After an offer, the guide** (a step in spec 366's arc: the guess stays pinned and is still being checked; the change of mind belongs to the ending):
 

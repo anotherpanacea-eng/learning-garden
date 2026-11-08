@@ -68,7 +68,11 @@ def run(base, browser):
         layout(p, f'{width} chapter')
         eq(book(p), seed, f'{width}: reading the chapter writes nothing')
         if width == 820:
+            # A choice made in one chapter survives a visit to the other chapter.
             p.locator('[data-a4-candidate]').select_option(index=1)
+            go(p, base, '#almanac/two-stories/account'); p.locator('#act-four-heading').wait_for()
+            go(p, base, '#almanac/two-stories/orchard'); p.locator('[data-a4-candidate]').wait_for()
+            eq(p.locator('[data-a4-candidate]').input_value(), '["orchard","space-24"]', 'chapter 2 keeps its choice after visiting chapter 1')
             p.locator('[data-a4-offer]').tap(); p.locator('.a4-kept').wait_for()
             receipt = book(p)['story']['acts']['IV']['contributions']['orchard']
             eq(receipt, {'kind': 'act-four-offer', 'version': 1, 'chapter': 'orchard', 'activity': 'rain-paths', 'artifactKind': 'kept-result', 'ref': {'caseId': 'space-24'}}, 'the offer writes one id-only receipt')
@@ -87,12 +91,15 @@ def run(base, browser):
     for motion, still in (('reduce', True), ('no-preference', False)):
         c, p = setup(browser, base, seed, 820, motion)
         go(p, base, '#almanac/two-stories/orchard'); p.locator('[data-a4-corner]').wait_for()
-        reeds = p.locator('.a4c-reed').evaluate_all('els=>els.map(e=>getComputedStyle(e).animationName)')
+        anim = p.evaluate('''()=>Object.fromEntries(['a4c-drop','a4c-reed','a4c-puddle','a4c-glint'].map(k=>[k,[...document.querySelectorAll('.'+k)].map(e=>{const s=getComputedStyle(e);return {name:s.animationName,count:s.animationIterationCount,dur:parseFloat(s.animationDuration),delay:parseFloat(s.animationDelay)};})]))''')
         rain = p.locator('.a4c-rain').evaluate('e=>getComputedStyle(e).display')
         if still:
-            ok(all(r == 'none' for r in reeds) and rain == 'none', 'reduced motion: still reeds and no rain')
+            ok(all(a['name'] == 'none' for v in anim.values() for a in v) and rain == 'none', 'reduced motion: nothing in the scene moves and no rain shows')
         else:
-            ok(all(r == 'a4c-grow' for r in reeds) and rain != 'none', 'motion: the reeds grow and the rain falls')
+            expect = {'a4c-drop': 'a4c-fall', 'a4c-reed': 'a4c-grow', 'a4c-puddle': 'a4c-shimmer', 'a4c-glint': 'a4c-glint'}
+            ok(all(a['name'] == expect[k] for k, v in anim.items() for a in v) and rain != 'none', 'motion: rain falls, reeds grow, the puddle and glints shimmer')
+            ends = [a['delay'] + a['dur'] * float(a['count']) for v in anim.values() for a in v]
+            ok(all(a['count'] != 'infinite' for v in anim.values() for a in v) and max(ends) <= 5, f'every animation settles within five seconds (latest {max(ends):.1f}s)')
         c.close()
     # No kept result yet: the chapter says so and offers the way to Rain Paths.
     c, p = setup(browser, base, fixture('none'))

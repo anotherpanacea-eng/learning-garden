@@ -54,7 +54,9 @@ export const actFourContent={
     "caption": "The low corner, after the rain.",
     "noWork": "Nothing from Rain Paths is ready to bring yet. Finish a rain run, keep the result, and come back. Every activity is open.",
     "offered": "Your rain result is part of this story.",
-    "candidate": "Kept rain result: {case}"
+    "candidate": "Kept rain result: {case}",
+    "candidateEarlier": "Kept rain result from an earlier version",
+    "unreadableWork": "Some earlier rain results cannot be read by this version. They stay in your notes. You can choose another."
   },
   "page": {
     "title": "The year of the fine harvest",
