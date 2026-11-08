@@ -1,7 +1,8 @@
 // Spec 606 · Act VI opening: Nuria's letter, the exchange (chapter 1, with a sorting game) and the three Ways (chapter 2,
 // with a which-Way puzzle and keeping the exchange plan). The games are play for this visit only; only the plan is saved.
 import {actSixContent as C} from './act-six-content.mjs';
-import {actSixChapters,actSixView,startActSix,keepExchangePlan,sendWarning,chooseRainPlan,sendFirstParcel} from './act-six-core.mjs';
+import {actSixChapters,actSixView,startActSix,keepExchangePlan,sendWarning,chooseRainPlan,sendFirstParcel,endActSix} from './act-six-core.mjs';
+import {waysOpenScene} from './act-six-ending-art.mjs';
 import {heronScene} from './act-six-home-art.mjs';
 import {waysMap} from './act-six-art.mjs';
 import {floodPostScene} from './act-six-rain-art.mjs';
@@ -31,6 +32,8 @@ export function resetActSixView(){visit=fresh(undefined);}
 const play=owner=>{if(visit.owner!==owner)visit=fresh(owner);return visit;};
 
 export function actSixRoute(hash){
+ if(hash==='#almanac/hollis-letter')return {part:'letter'};
+ if(hash==='#almanac/ways-open')return {part:'ending'};
  if(hash==='#almanac/opening-ways'||hash.startsWith('#almanac/opening-ways/')){const id=hash.split('/')[2];return actSixChapters.includes(id)?{part:'chapter',chapter:id}:{part:'hub'};}
  return null;
 }
@@ -40,7 +43,7 @@ const jobs=(state,list,extra='')=>`<section aria-labelledby="a6-jobs-title"><h2 
 const note=text=>`<details class="a6-note"><summary>Keeper's note</summary><p data-act-six-read>${esc(text)}</p></details>`;
 function hub(state,v){
  if(!v.started)return `${heading(C.title)}<p>${esc(C.messages.unreached)}</p>${v.canStart?button('data-a6-start',C.ui.start,true):''}`;
- return `${heading(C.title)}<p class="a6-question">${esc(C.question)}</p>${amounts(v)}<section class="a6-letter" aria-labelledby="a6-letter-title"><h2 id="a6-letter-title">${esc(C.letter.title)}</h2>${reading(state,C.letter[v.frameAmount])}</section>${reading(state,[C.hook,...C.opening[v.frameAmount]])}${hear()}<nav aria-label="${esc(C.ui.chapters)}" class="a6-controls">${link('#almanac/opening-ways/exchange',C.exchange.title,true)}${link('#almanac/opening-ways/routes',C.routes.title,true)}${link('#almanac/opening-ways/long-rain',C.rain.title,true)}${link('#almanac/opening-ways/journey',C.journey.title,true)}</nav>${v.plan?`<p class="a6-kept">${esc(v.plan==='small'?C.routes.keep.yoursSmall:C.routes.keep.yours)}</p>`:''}`;
+ return `${heading(C.title)}<p class="a6-question">${esc(C.question)}</p>${amounts(v)}<section class="a6-letter" aria-labelledby="a6-letter-title"><h2 id="a6-letter-title">${esc(C.letter.title)}</h2>${reading(state,C.letter[v.frameAmount])}</section>${reading(state,[C.hook,...C.opening[v.frameAmount]])}${hear()}<nav aria-label="${esc(C.ui.chapters)}" class="a6-controls">${link('#almanac/opening-ways/exchange',C.exchange.title,true)}${link('#almanac/opening-ways/routes',C.routes.title,true)}${link('#almanac/opening-ways/long-rain',C.rain.title,true)}${link('#almanac/opening-ways/journey',C.journey.title,true)}</nav>${v.plan?`<p class="a6-kept">${esc(v.plan==='small'?C.routes.keep.yoursSmall:C.routes.keep.yours)}</p>`:''}${v.ended?`<div class="a6-controls">${link('#almanac/ways-open',C.ending.reread,true)}${link('#almanac/hollis-letter',C.ending.rereadLetter)}</div>`:''}`;
 }
 function exchange(state,v,p){
  const X=C.exchange,S=X.sort,solved=p.checked&&S.items.every(i=>p.sort[i.id]===i.way);
@@ -84,12 +87,25 @@ function journey(state,v,p){
  const result=!p.packChecked?'':!full?P.notFull:p.packed[0]!=='apples'?P.bottom:p.packed[p.packed.length-1]!=='drawings'?P.top:P.kept;
  const pack=`<section class="a6-sort" id="a6h-pack" tabindex="-1" aria-labelledby="a6h-pack-title"><h2 id="a6h-pack-title">${esc(P.title)}</h2><p class="a6-tier">Sprout</p>${reading(state,[P.prompt])}<p>${esc(P.parcel)}:</p><ol class="a6r-built" id="a6h-parcel" tabindex="-1" aria-live="polite">${packed.length?packed.map(i=>`<li>${esc(i.label)}</li>`).join(''):`<li class="a6h-empty">${esc(P.empty)}</li>`}</ol><div class="a6r-cards">${P.items.map(i=>`<button type="button" class="secondary" data-a6h-pack="${i.id}"${p.packed.includes(i.id)?' disabled':''}>${esc(i.label)}</button>`).join('')}</div><div class="a6-controls">${button('data-a6h-pack-check',P.check,true)}${button('data-a6h-pack-clear',P.clear)}</div><div id="a6h-pack-result" tabindex="-1">${result?`<p class="${result===P.kept?'a6-kept':''}" data-act-six-read>${esc(result)}</p>`:''}</div></section>`;
  const send=v.journey?'':v.canSendParcel?`<div class="a6-controls">${button('data-a6h-send',J.send,true)}</div>`:'';
- const home=v.journey?`<section class="a6-letter" aria-labelledby="a6h-letter-title"><h2 id="a6h-letter-title">${esc(J.letter.title)}</h2>${reading(state,J.letter.lines)}</section><section id="a6h-home" tabindex="-1" aria-labelledby="a6h-home-title"><h2 id="a6h-home-title">${esc(J.home.title)}</h2>${heronScene(J.home.scene,J.home.caption,{settled:p.homeShown})}${reading(state,[...J.home[v.frameAmount],J.home.supper])}</section>`:'';
+ const home=v.journey?`<section class="a6-letter" aria-labelledby="a6h-letter-title"><h2 id="a6h-letter-title">${esc(J.letter.title)}</h2>${reading(state,J.letter.lines)}</section><section id="a6h-home" tabindex="-1" aria-labelledby="a6h-home-title"><h2 id="a6h-home-title">${esc(J.home.title)}</h2>${heronScene(J.home.scene,J.home.caption,{settled:p.homeShown})}${reading(state,[...J.home[v.frameAmount],J.home.supper])}${v.ended?`<div class="a6-controls">${link('#almanac/hollis-letter',C.ending.rereadLetter,true)}</div>`:v.canEnd?`<div class="a6-controls">${button('data-a6e-end',C.ending.afterSupper,true)}</div>`:''}</section>`:'';
  return `${link('#almanac/opening-ways',C.ui.back)}${heading(J.title)}${amounts(v)}${reading(state,J[v.frameAmount])}${pack}${jobs(state,J.jobs)}${send}${home}${hear()}`;
+}
+// Spec609 · page 6 and the ending. Both open once the act has ended; reading them writes nothing.
+function letterPage(state,v){
+ const E=C.ending,P=E.page;
+ if(!v.ended)return `${heading(P.title)}<p>${esc(E.unreached)}</p>${link('#almanac/opening-ways/journey',C.journey.title)}`;
+ return `${heading(P.title)}${reading(state,[P.reveal])}<article class="a6e-letter" data-act-six-read>${P.lines.map(l=>`<p>${esc(l)}</p>`).join('')}</article>${hear()}<div class="a6-controls">${link('#almanac/ways-open',P.next,true)}</div>`;
+}
+function endingPage(state,v){
+ const E=C.ending;
+ if(!v.ended)return `${heading(E.title)}<p>${esc(E.unreached)}</p>${link('#almanac/opening-ways',C.ui.back)}`;
+ return `${heading(E.title)}${waysOpenScene(E.scene,E.caption,v.season)}${amounts(v)}${reading(state,[...E[v.frameAmount],...(v.season?[E.seasons[v.season]]:[]),E.almanac])}<p class="a6e-village" data-act-six-read>${rich(E.village)}</p>${hear()}<div class="a6-controls">${link('#almanac/hollis-letter',E.rereadLetter)}${link('#almanac/keepers',C.ui.keepers,true)}${link('#home',E.home)}</div>`;
 }
 export function actSixPage(state,{part='hub',chapter:id=null,owner=null,blocked=false}={}){
  const v=actSixView(state),p=play(owner);let body;
  if(['unavailable','unreadable'].includes(v.status)||!v.started&&v.startedStatus==='unreadable')body=`${heading(C.title)}<p>${esc(C.messages.unreadableAct)}</p>`;
+ else if(part==='letter')body=letterPage(state,v);
+ else if(part==='ending')body=endingPage(state,v);
  else if(part==='chapter'&&v.started&&id==='exchange')body=exchange(state,v,p);
  else if(part==='chapter'&&v.started&&id==='routes')body=routes(state,v,p);
  else if(part==='chapter'&&v.started&&id==='long-rain')body=longRain(state,v,p);
@@ -101,12 +117,12 @@ export function actSixPage(state,{part='hub',chapter:id=null,owner=null,blocked=
 // Continue the story: under the Act V ending and on the Keeper's Pages, once a project is bound.
 export function actSixInvitation(state,{blocked=false}={}){
  const v=actSixView(state);if(!v.canStart&&!v.started)return '';
- return `<aside class="a6-invitation" data-act-six-root data-keeper-story lang="en"${blocked?' hidden':''}>${status('')}<div class="a6-controls">${v.started?link('#almanac/opening-ways',C.ui.start,true):button('data-a6-start',C.ui.start,true)}</div></aside>`;
+ return `<aside class="a6-invitation" data-act-six-root data-keeper-story lang="en"${blocked?' hidden':''}>${status('')}${v.ended?`<p class="a6e-village">${rich(C.ending.village)}</p>`:''}<div class="a6-controls">${v.ended?link('#almanac/ways-open',C.ending.reread,true):v.started?link('#almanac/opening-ways',C.ui.start,true):button('data-a6-start',C.ui.start,true)}</div></aside>`;
 }
 export function actSixNotes(state){
  const v=actSixView(state);if(v.status==='missing'&&!v.canStart)return '';
  const bad=['unavailable','unreadable'].includes(v.status)||v.startedStatus==='unreadable';
- const text=!v.started?'not started':`started, ${v.warned?'the warning sent, ':''}${v.journey?'the first parcel sent and Hollis home, ':''}${v.planStatus==='unreadable'?'an exchange plan this version cannot read':v.plan==='full'?'an exchange plan kept':v.plan==='small'?'a smaller exchange plan kept':v.earlierPlan?'an exchange plan from an earlier version':'no exchange plan kept yet'}`;
+ const text=!v.started?'not started':`started, ${v.warned?'the warning sent, ':''}${v.journey?'the first parcel sent and Hollis home, ':''}${v.ended?'the Ways are open, ':''}${v.planStatus==='unreadable'?'an exchange plan this version cannot read':v.plan==='full'?'an exchange plan kept':v.plan==='small'?'a smaller exchange plan kept':v.earlierPlan?'an exchange plan from an earlier version':'no exchange plan kept yet'}`;
  return `<details class="panel" data-act-six-notes><summary>${esc(C.title)}</summary><p>${esc(bad?C.messages.unreadableAct:C.notes.line.replace('{state}',text))}</p><p>${esc(C.notes.details)}</p>${v.storyPlan.kind==='malformed'?`<p>${esc(C.messages.badStoryPlan)}</p>`:''}</details>`;
 }
 export function bindActSix(state,ctx){
@@ -147,5 +163,6 @@ export function bindActSix(state,ctx){
  on('[data-a6h-pack-clear]',()=>{p.packed=[];p.packChecked=false;replay('[data-a6h-pack]');});
  on('[data-a6h-pack-check]',()=>{p.packChecked=true;replay('#a6h-pack-result');});
  on('[data-a6h-send]',()=>commit(()=>sendFirstParcel(state,options),null,'#a6h-home'));
+ on('[data-a6e-end]',()=>{if(!actSixView(state).canEnd)return;commit(()=>endActSix(state,new Date().getMonth(),options),'#almanac/hollis-letter');});
  on('[data-a6-frame-amount]',el=>{const value=el.getAttribute('data-a6-frame-amount');commit(()=>setActTwoFrameAmount(state,value,options),null,`[data-a6-frame-amount="${value}"]`);});
 }

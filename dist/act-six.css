@@ -64,3 +64,12 @@
 /* After the first render in a visit the heron stays at the post, so packing again does not replay the walk. */
 .a6h-settled .a6h-walk{animation:none}
 @media (prefers-reduced-motion:reduce){.a6h-walk{animation:none}}
+/* Spec 609 · Hollis's letter and the Ways open. */
+.a6e-ways{margin:1rem 0}
+.a6e-ways svg{width:100%;height:auto;display:block;border-radius:6px}
+.a6e-ways figcaption{font-size:1rem;color:#5b5045;margin-top:.25rem}
+.a6e-ribbon{transform-box:fill-box;transform-origin:0 50%;animation:a6e-tie 1.4s ease-out both;animation-delay:var(--d)}
+@keyframes a6e-tie{0%{transform:scale(0) rotate(-30deg);opacity:0}50%{transform:scale(1.05) rotate(6deg);opacity:1}75%{transform:rotate(-4deg)}100%{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.a6e-ribbon{animation:none}}
+.a6e-letter{background:#fffdf6;border:1px solid #d9c9a8;border-radius:6px;padding:1rem 1.2rem;font-family:Georgia,"Times New Roman",serif}
+.a6e-village{font-style:italic;font-weight:600;color:#3f5a26}

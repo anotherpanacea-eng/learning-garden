@@ -5,6 +5,7 @@ import {storyView} from './keeper-story-core.mjs';
 import {actFiveView} from './act-five-core.mjs';
 import {actFourPlans} from './act-four-core.mjs';
 import {recoveryFitsProgressLimits} from './progress-limits.mjs';
+import {seasonForMonth} from './act-two-core.mjs';
 export const actSixChapters=Object.freeze(['exchange','routes','long-rain','journey']);
 export const actSixPlans=Object.freeze(['full','small']);
 const obj=x=>x!==null&&typeof x==='object'&&!Array.isArray(x),own=(x,k)=>Object.hasOwn(x,k);
@@ -38,7 +39,16 @@ function rainView(story,act,started,writable,planStatus,plan){
  // Spec608 · the first journey opens once the warning is sent; sending the first parcel (acts.VI.journey) is its one write.
  const journeyStatus=act?field(act,'journey',x=>x===true):'missing',journey=warned&&journeyStatus==='ready';
  return {warnedStatus,warned,storyPlan,rainOpen,canWarn:writable&&rainOpen&&!warned&&warnedStatus!=='unreadable',canChooseStoryPlan:writable&&warned&&storyPlan.kind==='absent',
-  journeyStatus,journey,canSendParcel:writable&&warned&&!journey&&journeyStatus!=='unreadable'};
+  journeyStatus,journey,canSendParcel:writable&&warned&&!journey&&journeyStatus!=='unreadable',...endingView(act,started,writable,plan,warned,journey)};
+}
+// Spec609 · the ending opens when an exchange plan is kept, the long rain has played and the first journey is made (120 §6).
+// Reading Hollis's letter after supper ends the act; it wears the season it ended in, and a saved season is never replaced.
+const season=x=>['spring','summer','autumn','winter'].includes(x);
+function endingView(act,started,writable,plan,warned,journey){
+ const endedStatus=act?field(act,'ended',x=>typeof x==='boolean'):'missing',ended=started&&endedStatus==='ready'&&act.ended===true;
+ const seasonStatus=act?field(act,'season',season):'missing';
+ return {endedStatus,ended,season:seasonStatus==='ready'?act.season:null,seasonStatus,
+  canEnd:writable&&started&&!ended&&endedStatus!=='unreadable'&&seasonStatus!=='unreadable'&&plan!==null&&warned&&journey};
 }
 function mutate(state,options,change){
  if(storyView(state).status!=='ready'||typeof options?.canExport!=='function')return false;
@@ -77,4 +87,9 @@ export function chooseRainPlan(state,plan,options={}){
 export function sendFirstParcel(state,options={}){
  const v=actSixView(state);if(v.journey)return true;if(!v.canSendParcel)return false;
  return mutate(state,options,story=>{story.acts.VI.journey=true;});
+}
+
+export function endActSix(state,month,options={}){
+ const v=actSixView(state);if(v.ended)return true;const selected=seasonForMonth(month);if(!v.canEnd||!selected)return false;
+ return mutate(state,options,story=>{const a=story.acts.VI;a.ended=true;if(!own(a,'season'))a.season=selected;if(!story.seenScenes.includes('ways-open'))story.seenScenes.push('ways-open');});
 }
