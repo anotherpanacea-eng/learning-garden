@@ -101,11 +101,17 @@ def layout(p,label):
 
 def hear(p):
     read=p.locator(VIEW+' [data-speak]');ok(read.count()==1,'one current visible read-aloud action')
-    script=read.get_attribute('data-speak');count=p.evaluate('gpSpeech.words.length');read.click()
+    count=p.evaluate('gpSpeech.words.length');read.click();script=read.get_attribute('data-speak')
     ok(p.evaluate('gpSpeech.words.length')==count+1,'visible narration reaches actual speech binder once')
     words=p.evaluate('gpSpeech.words.at(-1)')
     ok(words and not re.search(r'\d(?:equals|divided|over)\d',words),'final speech contains separated mathematical words')
     ok(not re.search(r'\b1 (?:groups|pieces)\b',words),'final speech number agreement')
+    n,d=current(p)
+    names={2:('half','halves'),3:('third','thirds'),4:('quarter','quarters'),6:('sixth','sixths'),8:('eighth','eighths'),12:('twelfth','twelfths')}
+    fraction=f'{n} '+(names[d][0 if n==1 else 1] if d in names else f'over {d}')
+    ok(fraction in words,'final device request narrates independently expected current fraction '+fraction)
+    if p.locator('[data-gp-view=work]').count():
+        ok('Picture ' not in script and 'simplest whole-number name' not in script,'closed teaching pages stay out of current speech')
     return script,words
 
 
@@ -158,7 +164,9 @@ def journey(browser,base,seed):
                         action(p,'back');focus(p,'[data-gp-action=names]')
                 for _ in path:action(p,'undo')
                 ok(current(p)==(n,d),'repeated Undo returns to exact original')
-        elif ident=='fourteen-twentyfirsts':apply(p,7,(2,3));geometry(p,(n,d),(2,3))
+        elif ident=='fourteen-twentyfirsts':
+            preview(p,7);p.locator('[data-gp-action=apply]').focus();p.keyboard.press('Space')
+            ok(current(p)==(2,3),'Space applies factor7');geometry(p,(n,d),(2,3))
         elif ident in ['zero-twelfths','whole-twelfths']:
             apply(p,12,(n//12,1));geometry(p,(n,d),(n//12,1))
             ok(not p.locator('[data-gp-factor] option').evaluate_all('xs=>xs.filter(e=>Number(e.value)>=2).length'),'one whole piece offers no group sizes')
@@ -198,16 +206,18 @@ def lifecycle(browser,base,seed):
     # Hidden/reparented/reinserted roots and controls are permanently stale.
     for target in [VIEW,'[data-gp-action=apply]']:
         for kind in ['hidden','inert','aria','style','class','reparent','reinsert']:
-            common.go(p,base);mode(p,'groups');preview(p,2)
+            p.reload();common.go(p,base);mode(p,'groups');preview(p,2)
             h=p.locator('[data-gp-action=apply]').element_handle()
-            p.locator(target).evaluate('''(e,k)=>{window.__gpHeld=e;window.__gpParent=e.parentElement;window.__gpNext=e.nextSibling;if(k==='hidden')e.hidden=true;if(k==='inert')e.inert=true;if(k==='aria')e.setAttribute('aria-hidden','true');if(k==='style')e.style.display='none';if(k==='class')e.classList.add('hidden');if(k==='reparent')document.body.append(e);if(k==='reinsert'){e.remove();__gpParent.insertBefore(e,__gpNext);}}''',kind)
+            p.locator(target).evaluate('''(e,k)=>{window.__gpHeld=e;window.__gpParent=e.parentElement;window.__gpNext=e.nextSibling;if(k==='hidden')e.hidden=true;if(k==='inert')e.inert=true;if(k==='aria')e.setAttribute('aria-hidden','true');if(k==='style')e.style.display='none';if(k==='class')e.classList.add('hidden');if(k==='reparent')document.body.append(e);if(k==='reinsert'){e.remove();window.__gpDetached=!e.isConnected;__gpParent.insertBefore(e,__gpNext);}}''',kind)
+            condition=p.locator(target).evaluate('''(e,k)=>({hidden:e.hasAttribute('hidden')&&e.hidden&&!e.checkVisibility(),inert:e.inert&&e.hasAttribute('inert'),aria:e.getAttribute('aria-hidden')==='true',style:getComputedStyle(e).display==='none',class:e.classList.contains('hidden'),reparent:e.parentElement===document.body&&e.parentElement!==__gpParent,reinsert:window.__gpDetached&&e.isConnected&&e.parentElement===__gpParent})[k]''',kind)
+            ok(condition,'mutation precondition '+target+' '+kind)
             # Capture after the hostile mutation, before event dispatch.
-            before=snapshot(p);h.evaluate('e=>e.click()');unchanged(p,before,'guard '+target+' '+kind)
+            before=snapshot(p);h.evaluate('e=>e.click()');unchanged(p,before,'guard '+target+' '+('class attribute change' if kind=='class' else kind))
             if p.locator(VIEW+' [data-gp-model]').count():ok(current(p)==(6,8),'blocked control cannot group hidden/reparented material')
             p.evaluate('''()=>{const e=__gpHeld;e.hidden=false;e.inert=false;e.removeAttribute('aria-hidden');e.style.removeProperty('display');e.classList.remove('hidden');if(e.parentElement!==__gpParent)__gpParent.insertBefore(e,__gpNext);}''')
             old=current(p);h.evaluate('e=>e.click()');ok(current(p)==old,'restored lookalike does not revive invalidated callback')
     for boundary in ['preview','case','work','view','frame','mode']:
-        common.go(p,base);mode(p,'groups');preview(p,2)
+        p.reload();common.go(p,base);mode(p,'groups');preview(p,2)
         if boundary=='frame':action(p,'example');h=p.locator('[data-gp-action=next]').element_handle();action(p,'next')
         else:
             h=p.locator('[data-gp-action=apply]').element_handle()
@@ -221,9 +231,9 @@ def lifecycle(browser,base,seed):
     p.evaluate('location.hash="#notes"');p.locator('#download').wait_for();before=snapshot(p);h.evaluate('e=>e.click()');unchanged(p,before,'route departure')
     report=common.download(p,base,'lifecycle');common.bring(p,base,report)
     common.go(p,base);mode(p,'groups');ok(current(p)==(6,8),'import starts a fresh temporary ribbon')
-    apply(p,2,(3,4));p.reload();p.locator('[data-common-root]').wait_for();mode(p,'groups');ok(current(p)==(6,8),'reload resets temporary material')
-    apply(p,2,(3,4));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator('[data-common-root]').wait_for();mode(p,'groups');ok(current(p)==(6,8),'different explorer never inherits ribbon')
-    apply(p,2,(3,4));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();p.locator('[data-common-root]').wait_for();mode(p,'groups');ok(current(p)==(6,8),'opening picker clears visit even choosing same explorer')
+    apply(p,2,(3,4));p.reload();common.go(p,base);mode(p,'groups');ok(current(p)==(6,8),'reload resets temporary material')
+    apply(p,2,(3,4));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();common.go(p,base);mode(p,'groups');ok(current(p)==(6,8),'different explorer never inherits ribbon')
+    apply(p,2,(3,4));p.locator('#explorer-switch').click();p.locator('[data-select-explorer="explorer-2"]').click();common.go(p,base);mode(p,'groups');ok(current(p)==(6,8),'opening picker clears visit even choosing same explorer')
     p.locator('a[href="#notes"]').first.click();p.locator('#reset').click();p.locator('#confirm-reset').click();p.wait_for_function('location.hash==="#home"')
     film=p.locator('dialog.welcome-film[open]');film.wait_for();film.locator('[data-film-skip]').click();common.go(p,base);mode(p,'groups');ok(current(p)==(6,8),'reset creates fresh ribbon');p.context.close()
 
