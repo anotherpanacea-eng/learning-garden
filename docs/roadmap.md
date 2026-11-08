@@ -226,7 +226,9 @@ The [352 opening and first chapter](specs/352-act-four-opening.md), with [366's 
 
 [Act V's opening604](specs/604-act-five-opening.md) is proposed in a stacked Claude draft PR. **Continue the story** after the Act IV ending frees Page 5, *For the next Keeper*, shown as an animated stack of blank pages. A hub then lists the six project paths and the six project steps. The explorer can choose a path, kept as a code, and switch at any time. Each path links its jobs to activities that exist today, and the Ask step links to the Question Bench. The project page and the ending follow in 605.
 
-[The Act V project page and ending605](specs/605-act-five-projects.md) are proposed in a stacked Claude draft PR. The chosen path's project runs Make, the path's Show line, Change, and Keep with one of its three limit cards, all as codes. Binding a complete project ends Act V with an animated binding scene, the season line and an almanac line naming the project and its limit. Act VI remains a separate commission.
+[The Act V project page and ending605](specs/605-act-five-projects.md) are proposed in a stacked Claude draft PR. The chosen path's project runs Make, the path's Show line, Change, and Keep with one of its three limit cards, all as codes. Binding a complete project ends Act V with an animated binding scene, the season line and an almanac line naming the project and its limit. Act VI's opening follows in 606.
+
+[Act VI's opening606](specs/606-act-six-opening.md) is proposed in a stacked Claude draft PR: Continue the story after the Act V ending, Nuria's letter 6 (English), chapter 1 with a goods-sorting game, chapter 2 with an animated map of the three Ways, a which-Way puzzle and keeping the exchange plan as a code. The long rain, the first journey, Hollis's return and the ending remain separate commissions.
 
 ## Reviewed release · October 31
 

@@ -1,0 +1,30 @@
+/* Spec 606 · Act VI opening: the exchange, the three Ways and the plan. */
+.act-six-page{max-width:46rem;margin:0 auto;padding:1rem}
+.act-six-page h1{font-size:1.6rem}
+.a6-question{font-style:italic}
+.a6-controls{display:flex;flex-wrap:wrap;gap:.5rem;margin:.75rem 0}
+.a6-controls a,.a6-controls button,.a6-sort button,.a6-ways button,.act-six-page .a6-jobs a{min-height:44px;display:inline-flex;align-items:center}
+.a6-letter{background:#fffdf6;border:1px solid #d9c9a8;border-radius:6px;padding:1rem;font-style:italic}
+.a6-map{margin:1rem 0}
+.a6-map svg{width:100%;height:auto;display:block;border-radius:6px}
+.a6-map figcaption{font-size:1rem;color:#5b5045;margin-top:.25rem}
+.a6-paper{transform-box:fill-box;transform-origin:50% 0;animation:a6-unroll .9s ease-out both}
+@keyframes a6-unroll{from{transform:scaleY(.08);opacity:.4}to{transform:none;opacity:1}}
+.a6-jar{animation:a6-drop .4s ease-out both;animation-delay:var(--d)}
+@keyframes a6-drop{from{transform:translateY(-14px);opacity:0}to{transform:none;opacity:1}}
+.a6-way:not([stroke-dasharray]){stroke-dasharray:1;stroke-dashoffset:1;animation:a6-draw .9s ease-out both;animation-delay:var(--d)}
+.a6-way[stroke-dasharray]{opacity:0;animation:a6-fade .9s ease-out both;animation-delay:var(--d)}
+@keyframes a6-draw{to{stroke-dashoffset:0}}
+@keyframes a6-fade{to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.a6-paper,.a6-jar,.a6-way:not([stroke-dasharray]),.a6-way[stroke-dasharray]{animation:none}.a6-way:not([stroke-dasharray]){stroke-dashoffset:0}.a6-way[stroke-dasharray]{opacity:1}}
+.a6-sort,.a6-ways,.a6-keep{border:2px solid #d9c9a8;border-radius:10px;padding:1rem;margin:1rem 0;background:#fffdf6}
+.a6-good{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem;margin:.5rem 0;padding:.5rem 0;border-top:1px solid #ece2cc}
+.a6-good strong{min-width:9rem}
+.a6-hint{flex-basis:100%;margin:.2rem 0 0;color:#6b4a32}
+.a6-ways ul{list-style:none;padding:0;display:grid;gap:.5rem;grid-template-columns:repeat(auto-fill,minmax(12rem,1fr))}
+.a6-ways li button{width:100%;flex-direction:column;align-items:flex-start;text-align:left;padding:.5rem .75rem}
+.a6-kept{font-weight:600;color:#3f5a26}
+.a6-jobs{list-style:none;padding:0}
+.a6-jobs li{border-left:4px solid #c9b48e;padding:.4rem .6rem;margin:.5rem 0}
+.a6-tier{display:inline-block;font-size:.95rem;font-weight:600;margin-right:.4rem}
+.a6-status:empty{display:none}

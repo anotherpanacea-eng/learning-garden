@@ -922,6 +922,10 @@ export const copyScopes = [
   {path:'dist/act-five-core.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-five-ui.mjs',adultBlocks:[],quotations:[]},
   {path:'dist/act-five-art.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-six-content.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-six-core.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-six-ui.mjs',adultBlocks:[],quotations:[]},
+  {path:'dist/act-six-art.mjs',adultBlocks:[],quotations:[]},
 
 ];
 const terms = ['supplied','provenance','recorded as support','supported practice','supported spelling practice','exportable'];
