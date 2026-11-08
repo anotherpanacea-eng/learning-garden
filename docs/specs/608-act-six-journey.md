@@ -14,7 +14,7 @@ Chapter 4 is at `#almanac/opening-ways/journey`. It opens once the warning is se
    - An unfinished parcel says so. Apples not at the bottom, or drawings not on top, gets its reason.
    - The right order gets the script's kept line.
 3. **Jobs.**
-   - Seedling links to Cartographer's Table, whose clue-card view is the script's Map Reader Dispatcher.
+   - Seedling (follow the planned Way for the season) is marked away from the screen, because no activity knows the seasonal Ways or the kept plan.
    - Sapling links to Messages for a Reader.
 4. **Send the first parcel.** This is the chapter's one write, open at any depth, with or without a job first.
 5. **After sending:**
@@ -54,7 +54,7 @@ Packing is play for this visit only. It is not saved, it resets with explorer sw
   - Focus moves to each result, and to the homecoming after sending.
   - Targets are 44 px. Read-aloud covers visible prose only.
   - The scene is an `svg role="img"` with a description.
-  - The heron walks once and stops within five seconds; reduced motion shows it already at the post.
+  - The heron walks once and stops within five seconds. Later renders in the same visit show it settled, so packing again doesn't replay the walk. Reduced motion shows it already at the post.
 
 ## Upstream study and curriculum place
 
@@ -76,7 +76,7 @@ Before build: an independent spec review of this spec and its companion.
 
 **Pure checks** (`test/act-six-journey-checks.mjs`):
 - **The gate.** The chapter waits for the warning, and no parcel can be sent before it.
-- **Before sending.** The chapter text and the parcel appear, the jobs link to their places, and Léon and Hollis wait. No placeholder is left.
+- **Before sending.** The chapter text and the parcel appear. The Way job is marked away from the screen, the note job links to its place, and Léon and Hollis wait. No placeholder is left.
 - **Sending.**
   - Reads write nothing, and a refused export writes nothing.
   - Send writes only `journey`, and a repeat is a no-op.
@@ -85,7 +85,7 @@ Before build: an independent spec review of this spec and its companion.
 - **Text tracing.** Every content string traces to act-6.md, letters.md, or the 606–608 companions (`test/act-six-checks.mjs`).
 
 **Browser journey** (`test/act-six-journey-browser.py`), at 820 and 320:
-- **Packing.** An unfinished parcel says so. A wrong order gets its reason. The right order gets the kept line, and focus moves to the result. Packing writes nothing.
+- **Packing.** An unfinished parcel says so. Each wrong order gets its own reason: apples not at the bottom, and drawings not on top. The right order gets the kept line, and focus moves to the result. Packing writes nothing.
 - **Sending.** Send records only the journey. Léon's letter, Hollis and supper appear, focus moves to the homecoming, and the result survives a reload.
 - **Layout.** Targets are 44 px, with no overflow, before and after sending.
 - **Motion.** The heron walks once and stops within five seconds; reduced motion is still.

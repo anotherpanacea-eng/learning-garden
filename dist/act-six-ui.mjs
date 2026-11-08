@@ -25,7 +25,7 @@ function named(state,line){
 const reading=(state,lines)=>`<div class="a6-reading" data-act-six-read>${lines.map(x=>`<p>${rich(named(state,x))}</p>`).join('')}</div>`;
 const hear=()=>hearButton('',C.ui.hear,'en');
 // This visit's play: the sorting piles and the chosen Way. Never saved; a new explorer or a reset starts fresh.
-const fresh=owner=>({owner,sort:{},checked:false,way:null,notice:'',route:null,mapShown:false,shelf:{},shelfChecked:false,choice:null,built:[],builtChecked:false,letCome:false,pinned:false,packed:[],packChecked:false});
+const fresh=owner=>({owner,sort:{},checked:false,way:null,notice:'',route:null,mapShown:false,shelf:{},shelfChecked:false,choice:null,built:[],builtChecked:false,letCome:false,pinned:false,packed:[],packChecked:false,homeShown:false});
 let visit=fresh(undefined);
 export function resetActSixView(){visit=fresh(undefined);}
 const play=owner=>{if(visit.owner!==owner)visit=fresh(owner);return visit;};
@@ -84,7 +84,7 @@ function journey(state,v,p){
  const result=!p.packChecked?'':!full?P.notFull:p.packed[0]!=='apples'?P.bottom:p.packed[p.packed.length-1]!=='drawings'?P.top:P.kept;
  const pack=`<section class="a6-sort" id="a6h-pack" tabindex="-1" aria-labelledby="a6h-pack-title"><h2 id="a6h-pack-title">${esc(P.title)}</h2><p class="a6-tier">Sprout</p>${reading(state,[P.prompt])}<p>${esc(P.parcel)}:</p><ol class="a6r-built" id="a6h-parcel" tabindex="-1" aria-live="polite">${packed.length?packed.map(i=>`<li>${esc(i.label)}</li>`).join(''):`<li class="a6h-empty">${esc(P.empty)}</li>`}</ol><div class="a6r-cards">${P.items.map(i=>`<button type="button" class="secondary" data-a6h-pack="${i.id}"${p.packed.includes(i.id)?' disabled':''}>${esc(i.label)}</button>`).join('')}</div><div class="a6-controls">${button('data-a6h-pack-check',P.check,true)}${button('data-a6h-pack-clear',P.clear)}</div><div id="a6h-pack-result" tabindex="-1">${result?`<p class="${result===P.kept?'a6-kept':''}" data-act-six-read>${esc(result)}</p>`:''}</div></section>`;
  const send=v.journey?'':v.canSendParcel?`<div class="a6-controls">${button('data-a6h-send',J.send,true)}</div>`:'';
- const home=v.journey?`<section class="a6-letter" aria-labelledby="a6h-letter-title"><h2 id="a6h-letter-title">${esc(J.letter.title)}</h2>${reading(state,J.letter.lines)}</section><section id="a6h-home" tabindex="-1" aria-labelledby="a6h-home-title"><h2 id="a6h-home-title">${esc(J.home.title)}</h2>${heronScene(J.home.scene,J.home.caption)}${reading(state,[...J.home[v.frameAmount],J.home.supper])}</section>`:'';
+ const home=v.journey?`<section class="a6-letter" aria-labelledby="a6h-letter-title"><h2 id="a6h-letter-title">${esc(J.letter.title)}</h2>${reading(state,J.letter.lines)}</section><section id="a6h-home" tabindex="-1" aria-labelledby="a6h-home-title"><h2 id="a6h-home-title">${esc(J.home.title)}</h2>${heronScene(J.home.scene,J.home.caption,{settled:p.homeShown})}${reading(state,[...J.home[v.frameAmount],J.home.supper])}</section>`:'';
  return `${link('#almanac/opening-ways',C.ui.back)}${heading(J.title)}${amounts(v)}${reading(state,J[v.frameAmount])}${pack}${jobs(state,J.jobs)}${send}${home}${hear()}`;
 }
 export function actSixPage(state,{part='hub',chapter:id=null,owner=null,blocked=false}={}){
@@ -129,6 +129,7 @@ export function bindActSix(state,ctx){
  root.querySelectorAll('[data-speak]').forEach(el=>el.addEventListener('click',e=>{if(!live(el)){e.preventDefault();e.stopImmediatePropagation();return;}el.dataset.speak=[...root.querySelectorAll('[data-act-six-read]')].filter(x=>x.getClientRects().length&&getComputedStyle(x).visibility!=='hidden'&&!x.closest('details:not([open])')).map(x=>x.innerText).join(' ');},{capture:true}));
  // The map animates when the chapter is entered; later renders in this visit show it settled.
  if(root.querySelector('[data-a6-map]'))p.mapShown=true;
+ if(root.querySelector('[data-a6h-home]'))p.homeShown=true;
  on('[data-a6-start]',()=>commit(()=>startActSix(state,options),'#almanac/opening-ways'));
  on('[data-a6-sort]',el=>{const [good,way]=el.getAttribute('data-a6-sort').split(':');p.sort[good]=way;p.checked=false;replay(`[data-a6-sort="${good}:${way}"]`);});
  on('[data-a6-sort-check]',()=>{p.checked=true;replay('#a6-sort-result');});

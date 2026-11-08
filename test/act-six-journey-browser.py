@@ -41,6 +41,11 @@ def run(base, browser):
         p.locator('[data-a6h-pack-check]').tap()
         ok('Apples go at the bottom' in p.locator('#a6h-pack-result').inner_text(), 'apples on top of the recipe get the bottom hint')
         p.locator('[data-a6h-pack-clear]').tap()
+        for item in ('apples', 'drawings', 'recipe'):
+            p.locator(f'[data-a6h-pack="{item}"]').tap()
+        p.locator('[data-a6h-pack-check]').tap()
+        ok('The drawings go on top' in p.locator('#a6h-pack-result').inner_text(), 'drawings under the recipe get the top hint')
+        p.locator('[data-a6h-pack-clear]').tap()
         for item in ('apples', 'recipe', 'drawings'):
             p.locator(f'[data-a6h-pack="{item}"]').tap()
         p.locator('[data-a6h-pack-check]').tap()
@@ -54,6 +59,8 @@ def run(base, browser):
         ok('A tall grey heron came off the coast boat today.' in text and '"Hollis!" says Nuria.' in text and 'They stay for supper.' in text, "Léon's letter, Hollis home, supper")
         ok(p.evaluate("document.activeElement&&document.activeElement.id==='a6h-home'"), 'focus moves to the homecoming')
         layout(p, 'after sending')
+        p.locator('[data-a6h-pack-clear]').tap(); p.locator('[data-a6h-home]').wait_for()
+        ok(p.evaluate("getComputedStyle(document.querySelector('.a6h-walk')).animationName") == 'none', 'unpacking afterwards does not replay the walk')
         p.reload(wait_until='networkidle'); p.locator('[data-a6h-home]').wait_for(); ok(p.locator('[data-a6h-send]').count() == 0, 'the journey survives a reload')
         c.close()
     sent = seed("import {sendFirstParcel} from './dist/act-six-core.mjs';import {canExport} from './test/act-two-checks.mjs';sendFirstParcel(s,{canExport});")

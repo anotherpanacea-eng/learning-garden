@@ -27,7 +27,7 @@ export function runChecks(){
  const s=journeySeed();
  const p=page({...s,garden:{guide:'ari'}});
  ok(p.includes(esc(C.journey.short[0]))&&C.journey.pack.items.every(i=>p.includes(`data-a6h-pack="${i.id}"`)),'the chapter and the parcel');
- ok(p.includes('href="#workshop/maps"')&&p.includes('href="#post/messages"'),'the jobs link to their places');
+ ok(!p.includes('href="#workshop/maps"')&&p.includes(esc(C.ui.offScreen))&&p.includes('href="#post/messages"'),'the Way job is away from the screen; the note job links to its place');
  ok(p.includes('data-a6h-send')&&!p.includes('data-a6h-home')&&!p.includes(esc(C.journey.letter.title)),'Send, and Léon and Hollis wait');
  ok(!p.includes('{courier}')&&!p.includes('{guide}'),'no placeholder is left');
 

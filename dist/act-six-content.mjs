@@ -153,7 +153,7 @@ export const actSixContent={
       kept:"Packed, labeled and tied with one of Bramble's ribbons. It looks very official."
     },
     jobs:[
-      {tier:'Seedling',host:'Cartographer\'s Table',href:'#workshop/maps',line:"{courier}: \"Take me up the Way we planned for this season.\""},
+      {tier:'Seedling',host:null,href:null,line:"{courier}: \"Take me up the Way we planned for this season.\""},
       {tier:'Sapling',host:'Messages for a Reader',href:'#post/messages',line:"Dot: \"Write the note that goes with the first parcel. What's in it, and when the next one comes.\""}
     ],
     send:'Send the first parcel',
