@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play tally sheet</title>
+<!-- Printable fridge sheet for the free-choice fortnight (fleet cards LG-80 and
+     LG-81). Print one per explorer, landscape. This file stays blank: filled
+     sheets and notes about an explorer are kept at home, never in the
+     repository, an issue or a pull request. -->
+<style>
+  @page { size: landscape; margin: 12mm; }
+  body { font: 15px/1.35 system-ui, sans-serif; color: #111; margin: 24px auto; max-width: 1040px; }
+  h1 { font-size: 26px; margin: 0; }
+  .top { display: flex; align-items: baseline; gap: 32px; margin-bottom: 10px; }
+  .blank { display: inline-block; border-bottom: 1.5px solid #111; min-width: 220px; height: 1.2em; }
+  .blank.short { min-width: 48px; }
+  table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+  th, td { border: 1.5px solid #111; height: 44px; text-align: center; }
+  thead th { height: 28px; font-size: 14px; }
+  .toy { width: 24%; }
+  .start { width: 9%; font-size: 12px; }
+  p { margin: 8px 0; }
+  .more { display: flex; gap: 40px; margin-top: 10px; }
+  .more div { flex: 1; }
+  .small { font-size: 12px; color: #444; }
+  @media print { body { margin: 0; max-width: none; } }
+</style>
+<div class="top">
+  <h1>Play tally</h1>
+  <span>Explorer: <span class="blank"></span></span>
+  <span>Day 1 is: <span class="blank"></span></span>
+</div>
+<p><strong>Tick today's box only when this explorer asks for a toy, or opens it, during the free slot, without anyone suggesting it.</strong>
+One tick for each toy each day. Circle the tick for the toy they picked first. In the free slot, suggest nothing.
+A request at any other time gets no tick: note it on the back of the sheet.</p>
+<table>
+  <thead>
+    <tr>
+      <th class="toy">Toy (give the front door a row too)</th>
+      <th class="start">First day on offer</th>
+      <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th>
+      <th>8</th><th>9</th><th>10</th><th>11</th><th>12</th><th>13</th><th>14</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+  </tbody>
+</table>
+<div class="more">
+  <div>Talked about a toy away from the tablet (which toy, one mark each time):<br><br><span class="blank" style="min-width:100%"></span></div>
+  <div>Fetched someone to come and look (which toy, one mark each time):<br><br><span class="blank" style="min-width:100%"></span></div>
+  <div>Favourite put away on days <span class="blank short"></span> and <span class="blank short"></span><br><br>Asked where it went? <span class="blank short"></span></div>
+</div>
+<p class="small">One sheet for each explorer. Sheets are not compared with each other. Keep filled sheets at home.</p>
+</html>
