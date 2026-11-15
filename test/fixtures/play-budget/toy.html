@@ -6,7 +6,8 @@
 <!-- Test fixture for test/play-budget-browser.py. It is not a prototype for
      children and is not deployed: it lives outside dist/. The script's
      self-check also opens it with one fault switched on by the query string:
-     ?intro opens with a sentence that leaves after 2 s, ?hush sounds only on
+     ?intro opens with a sentence that leaves after 2 s, ?wait brings the
+     sentence in while the first berry is still loading, ?hush sounds only on
      the first touch, ?late answers a wrong ring after 1.2 s. -->
 <style>
   body { margin: 0; height: 100vh; overflow: hidden; font: 32px system-ui, sans-serif; touch-action: none; user-select: none; }
@@ -17,6 +18,7 @@
   #guest.puzzled { background: #c9682c; transform: rotate(-12deg); }
   #bell { position: absolute; left: 100px; top: 440px; width: 160px; height: 120px; border-radius: 24px; font: inherit; }
   #thanks { position: absolute; left: 600px; top: 560px; font-size: 56px; }
+  #spoken { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 </style>
 <div id="guest">3</div>
 <div class="berry" id="berry-1" style="left: 60px"><i></i></div>
@@ -25,6 +27,7 @@
 <div id="plate"></div>
 <button id="bell">Ring</button>
 <div id="thanks" hidden>Yum!</div>
+<p id="spoken">The guest would like three berries on the plate before you ring the bell.</p>
 <script>
   // The guest wants three berries. Drag berries onto the plate, then ring.
   // Ringing with the wrong number tips the guest sideways at once; nothing is
@@ -42,10 +45,17 @@
     tone.stop(audio.currentTime + 0.12);
   }
   const guest = document.getElementById('guest'), plate = document.getElementById('plate');
-  if (fault === 'intro') {
-    const intro = document.body.appendChild(document.createElement('p'));
+  if (fault === 'intro' || fault === 'wait') {
+    const intro = document.createElement('p'), berry = document.getElementById('berry-1');
     intro.textContent = 'Welcome! Please drag exactly three berries onto the plate, then ring the bell to serve.';
-    setTimeout(() => intro.remove(), 2000);
+    if (fault === 'intro') {
+      document.body.append(intro);
+      setTimeout(() => intro.remove(), 2000);
+    } else {
+      berry.hidden = true;
+      setTimeout(() => document.body.append(intro), 3100);
+      setTimeout(() => { berry.hidden = false; }, 3200);
+    }
   }
   for (const berry of document.querySelectorAll('.berry')) {
     let grip = null;

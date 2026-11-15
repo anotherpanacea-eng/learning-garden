@@ -60,9 +60,13 @@ LIMITS = """What this run cannot tell you:
     first thing once. A pass means the thing followed the finger for at least
     half the drag, no later than 5 s after opening. It does not mean a child
     finds what to touch.
-  - Words: it counts the most visible words at any look during those 3 s,
-    looking ten times a second. Words in a picture, a canvas, a form field or
-    CSS-generated content are missed.
+  - Words: it counts the most visible words at any look from opening to the
+    first touch, looking ten times a second and once more at the touch. Words
+    in a picture, a canvas, a form field or CSS-generated content are missed.
+  - On screen: for words, selects and the elements the walk names, on screen
+    means rendered, not transparent, more than 1 px each way and at least
+    partly inside the window. Something cut off only by a clipping or
+    scrolling parent still counts as on screen.
   - Selects: it fails on a select element that is showing just before the
     first touch or after any step of the walk. A hidden select is reported
     but does not fail; one that only a step outside the walk would reveal is
@@ -95,7 +99,12 @@ window.__play = {sounds: [], first: null, lift: 0, words: 0};
     spy(window[name] && window[name].prototype, 'start');
   spy(window.HTMLMediaElement && HTMLMediaElement.prototype, 'play');
   spy(window.SpeechSynthesis && SpeechSynthesis.prototype, 'speak');
-  const showing = element => element.checkVisibility({checkOpacity: true, checkVisibilityCSS: true});
+  // On screen: rendered, not transparent, more than a 1 px screen-reader box, and inside the window.
+  const showing = element => {
+    if (!element.checkVisibility({checkOpacity: true, checkVisibilityCSS: true})) return false;
+    const box = element.getBoundingClientRect();
+    return box.width > 1 && box.height > 1 && box.right > 0 && box.bottom > 0 && box.left < innerWidth && box.top < innerHeight;
+  };
   // How many elements matching the selector are showing.
   play.showing = selector => [...document.querySelectorAll(selector)].filter(showing).length;
   // Counts the words on screen now. Returns the most seen at any look so far.
@@ -110,7 +119,12 @@ window.__play = {sounds: [], first: null, lift: 0, words: 0};
     return play.words = Math.max(play.words, words);
   };
   const looking = setInterval(play.look, 100);
-  addEventListener('touchstart', () => { play.first ??= performance.now(); clearInterval(looking); }, true);
+  addEventListener('touchstart', () => {
+    if (play.first !== null) return;
+    play.look();
+    clearInterval(looking);
+    play.first = performance.now();
+  }, true);
   for (const type of ['touchend', 'touchcancel'])
     addEventListener(type, () => { play.lift = performance.now(); }, true);
 })();
@@ -258,8 +272,6 @@ def check(walk, base, browser):
             sys.exit(f"{walk['page']} did not load (HTTP {response.status})")
         page.wait_for_timeout(max(0, 3000 - page.evaluate('performance.now()')))
         look_for_selects()
-        words = page.evaluate('window.__play.look()')
-        results[1] = ('PASS' if words <= 12 else 'FAIL', f'up to {words} words on screen before the first touch')
         if first:
             try:
                 play()
@@ -267,6 +279,8 @@ def check(walk, base, browser):
                 stopped = str(stop)
                 if not actions:
                     results[0] = ('FAIL', f'nothing could be dragged: {stopped}')
+        words = page.evaluate('window.__play.first === null ? window.__play.look() : window.__play.words')
+        results[1] = ('PASS' if words <= 12 else 'FAIL', f'up to {words} words on screen before the first touch')
         if silent:
             results[3] = ('FAIL', 'no sound after: ' + ', '.join(silent))
         elif actions and not stopped:
@@ -316,6 +330,8 @@ def main():
                     ('workbook', json.loads((FIXTURES / 'workbook.walk.json').read_text()), 'FFFFFN'),
                     ('toy, 40 px drag only', {'page': toy['page'], 'first': {'drag': '#berry-1', 'to': '#berry-1 i'}}, 'PPPPNN'),
                     ('toy?intro (a sentence that leaves after 2 s)', {**toy, 'page': toy['page'] + '?intro'}, 'PFPPPP'),
+                    ('toy?wait (a sentence arrives while the first berry is still loading)',
+                     {**toy, 'page': toy['page'] + '?wait'}, 'PFPPPP'),
                     ('toy?hush (only the first touch sounds)', {**toy, 'page': toy['page'] + '?hush'}, 'PPPFPP'),
                     ('toy?late (the wrong ring is answered after 1.2 s)', {**toy, 'page': toy['page'] + '?late'}, 'PPPPFP'),
                 ]
