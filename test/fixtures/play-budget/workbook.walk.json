@@ -1,0 +1,5 @@
+{
+  "page": "test/fixtures/play-budget/workbook.html",
+  "first": {"drag": "#card", "to": "#check"},
+  "wrong": {"steps": [{"tap": "#check"}], "shows": "#reply"}
+}
