@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play budget fixture: a form that breaks the budget</title>
+<!-- Test fixture for test/play-budget-browser.py. It breaks budget lines 1 to 5
+     on purpose: nothing drags, the page opens with a paragraph and a select,
+     nothing makes a sound, and the reply to a wrong answer lands below the
+     bottom of the screen. It is not deployed: it lives outside dist/. -->
+<style>
+  body { font: 20px system-ui, sans-serif; margin: 40px; }
+  #card { width: 120px; padding: 20px; border: 2px solid #777; }
+</style>
+<p>Read these instructions carefully before you begin, then choose the number of berries from the list and press Check.</p>
+<div id="card">Berry</div>
+<p><select id="count"><option>1</option><option>2</option><option>3</option></select>
+<button id="check">Check</button></p>
+<p id="reply" hidden style="margin-top: 2000px">That number does not fit. Try again.</p>
+<script>
+  document.getElementById('check').addEventListener('click', () => {
+    document.getElementById('reply').hidden = false;
+  });
+</script>
+</html>

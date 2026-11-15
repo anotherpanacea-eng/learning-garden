@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Play budget fixture: a toy that meets the budget</title>
+<!-- Test fixture for test/play-budget-browser.py. It is not a prototype for
+     children and is not deployed: it lives outside dist/. The script's
+     self-check also opens it with one fault switched on by the query string:
+     ?intro opens with a sentence that leaves after 2 s, ?wait brings the
+     sentence in while the first berry is still loading, ?hush sounds only on
+     the first touch, ?late answers a wrong ring after 1.2 s. -->
+<style>
+  body { margin: 0; height: 100vh; overflow: hidden; font: 32px system-ui, sans-serif; touch-action: none; user-select: none; }
+  .berry { position: absolute; top: 80px; width: 80px; height: 80px; border-radius: 50%; background: #b3204f; touch-action: none; }
+  .berry i { position: absolute; left: 34px; top: -8px; width: 12px; height: 16px; border-radius: 4px; background: #3f6b2f; }
+  #plate { position: absolute; left: 560px; top: 300px; width: 320px; height: 220px; border-radius: 50%; background: #f3f0e6; border: 4px solid #8a8577; }
+  #guest { position: absolute; left: 640px; top: 60px; width: 160px; height: 160px; border-radius: 50%; background: #3f8f5b; color: #fff; display: grid; place-items: center; font-size: 64px; }
+  #guest.puzzled { background: #c9682c; transform: rotate(-12deg); }
+  #bell { position: absolute; left: 100px; top: 440px; width: 160px; height: 120px; border-radius: 24px; font: inherit; }
+  #thanks { position: absolute; left: 600px; top: 560px; font-size: 56px; }
+  #spoken { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+</style>
+<div id="guest">3</div>
+<div class="berry" id="berry-1" style="left: 60px"><i></i></div>
+<div class="berry" id="berry-2" style="left: 180px"><i></i></div>
+<div class="berry" id="berry-3" style="left: 300px"><i></i></div>
+<div id="plate"></div>
+<button id="bell">Ring</button>
+<div id="thanks" hidden>Yum!</div>
+<p id="spoken">The guest would like three berries on the plate before you ring the bell.</p>
+<script>
+  // The guest wants three berries. Drag berries onto the plate, then ring.
+  // Ringing with the wrong number tips the guest sideways at once; nothing is
+  // lost and the next touch sets it straight.
+  const fault = location.search.slice(1);
+  let audio, beeps = 0;
+  function beep(hertz) {
+    if (fault === 'hush' && beeps++) return;
+    audio ??= new AudioContext();
+    const tone = audio.createOscillator(), volume = audio.createGain();
+    tone.frequency.value = hertz;
+    volume.gain.value = 0.1;
+    tone.connect(volume).connect(audio.destination);
+    tone.start();
+    tone.stop(audio.currentTime + 0.12);
+  }
+  const guest = document.getElementById('guest'), plate = document.getElementById('plate');
+  if (fault === 'intro' || fault === 'wait') {
+    const intro = document.createElement('p'), berry = document.getElementById('berry-1');
+    intro.textContent = 'Welcome! Please drag exactly three berries onto the plate, then ring the bell to serve.';
+    if (fault === 'intro') {
+      document.body.append(intro);
+      setTimeout(() => intro.remove(), 2000);
+    } else {
+      berry.hidden = true;
+      setTimeout(() => document.body.append(intro), 3100);
+      setTimeout(() => { berry.hidden = false; }, 3200);
+    }
+  }
+  for (const berry of document.querySelectorAll('.berry')) {
+    let grip = null;
+    berry.addEventListener('pointerdown', event => {
+      berry.setPointerCapture(event.pointerId);
+      const box = berry.getBoundingClientRect();
+      grip = {x: event.clientX - box.left, y: event.clientY - box.top};
+      guest.classList.remove('puzzled');
+      beep(520);
+    });
+    berry.addEventListener('pointermove', event => {
+      if (!grip) return;
+      berry.style.left = event.clientX - grip.x + 'px';
+      berry.style.top = event.clientY - grip.y + 'px';
+    });
+    berry.addEventListener('pointerup', event => {
+      if (!grip) return;
+      grip = null;
+      const box = plate.getBoundingClientRect();
+      berry.classList.toggle('served', event.clientX > box.left && event.clientX < box.right &&
+        event.clientY > box.top && event.clientY < box.bottom);
+    });
+  }
+  document.getElementById('bell').addEventListener('click', () => {
+    const right = document.querySelectorAll('.berry.served').length === 3;
+    beep(right ? 880 : 180);
+    if (fault === 'late' && !right) for (const until = performance.now() + 1200; performance.now() < until;);
+    guest.classList.toggle('puzzled', !right);
+    document.getElementById('thanks').hidden = !right;
+  });
+</script>
+</html>

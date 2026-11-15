@@ -1,0 +1,9 @@
+{
+  "page": "test/fixtures/play-budget/toy.html",
+  "first": {"drag": "#berry-1", "to": "#plate"},
+  "wrong": {"steps": [{"tap": "#bell"}], "shows": "#guest.puzzled"},
+  "round": {
+    "steps": [{"drag": "#berry-2", "to": "#plate"}, {"drag": "#berry-3", "to": "#plate"}, {"tap": "#bell"}],
+    "ends": "#thanks"
+  }
+}
