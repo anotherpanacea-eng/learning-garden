@@ -68,9 +68,9 @@ LIMITS = """What this run cannot tell you:
     partly inside the window. Something cut off only by a clipping or
     scrolling parent still counts as on screen.
   - Selects: it fails on a select element that is showing just before the
-    first touch or after any step of the walk. A hidden select is reported
-    but does not fail; one that only a step outside the walk would reveal is
-    missed. Other dropdown-like controls are not detected.
+    first touch or after any step of the walk. One that is hidden, or that
+    only a step outside the walk would reveal, is missed. Other dropdown-like
+    controls are not detected.
   - Sound: it sees the page ask the browser to start a sound (Web Audio, an
     audio or video element, or speech) no later than 1 s after the finger
     lifts. The 1 s is this script's choice; the budget line names no time. It
@@ -119,7 +119,8 @@ window.__play = {sounds: [], first: null, lift: 0, words: 0};
     return play.words = Math.max(play.words, words);
   };
   const looking = setInterval(play.look, 100);
-  addEventListener('touchstart', () => {
+  // pointerdown, because a page's own pointerdown handlers run before touchstart.
+  addEventListener('pointerdown', () => {
     if (play.first !== null) return;
     play.look();
     clearInterval(looking);
@@ -129,8 +130,6 @@ window.__play = {sounds: [], first: null, lift: 0, words: 0};
     addEventListener(type, () => { play.lift = performance.now(); }, true);
 })();
 """
-
-COUNT_SELECTS = "[window.__play.showing('select'), document.querySelectorAll('select').length]"
 
 # Resolves with the ms from `since` to the moment the selector was seen showing,
 # however late that is, or with null once `limit` ms have passed without it.
@@ -200,10 +199,10 @@ def check(walk, base, browser):
     results = [('NOT CHECKED', 'the walk has no steps for this line')] * 6
     context = browser.new_context(viewport={'width': 1024, 'height': 768}, has_touch=True)
     context.add_init_script(SPY)
-    silent, actions, selects, stopped = [], [], [0, 0], None
+    silent, actions, selects, stopped = [], [], [], None
 
     def look_for_selects():
-        selects[:] = map(max, selects, page.evaluate(COUNT_SELECTS))
+        selects.append(page.evaluate("window.__play.showing('select')"))
 
     def act(step, during=None):
         """Do a step. Returns how many sounds had started before it."""
@@ -288,7 +287,7 @@ def check(walk, base, browser):
         if stopped:
             results = [('NOT CHECKED', f'the walk stopped first: {stopped}') if status == 'NOT CHECKED' else (status, detail)
                        for status, detail in results]
-        results[2] = ('FAIL' if selects[0] else 'PASS', f'{selects[0]} showing, {selects[1] - selects[0]} hidden in the page')
+        results[2] = ('FAIL' if max(selects) else 'PASS', f'{max(selects)} showing')
     finally:
         context.close()
     return results
