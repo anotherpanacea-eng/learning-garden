@@ -4,7 +4,59 @@ The later module-registration gap is closed by [batch 22’s qualification and r
 
 The existing activity clarity and save-preservation sweep, together with the reviewed child-copy registration batches, is consolidated in [PR467’s qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/467#issuecomment-6658570541). That record owns landing and hosted acceptance. Registration covers its pinned source cohort, not every later module or whole-app readability. The separate French story-text repair has its supplied Argon findings resolved; [PR462’s qualification and release record](https://github.com/anotherpanacea-eng/learning-garden/pull/462#issuecomment-6706865241) owns the final panel, acceptance and publication status. The original review, prompt and finding-by-finding resolution are in [462-french-panel](reviews/462-french-panel/resolution.md).
 
-**Current priorities, decisions and release status, 2026-10-31.** Start with the [consolidation priorities](#consolidation-priorities--current-order); the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
+**Current priorities, 2026-11-15.** Start with the [play-first plan](#play-first-plan--2026-11-09--current). The [consolidation priorities](#consolidation-priorities--current-order) and the queues after them are paused; the rest of this page is the release queue and the record of what is built. The [pre-merge snapshot](roadmap-2026-10-22-pre-merge.md), [strand map](strand-map.md), [curriculum spirals](curriculum-spirals.md), [gap proposals](curriculum-gaps.md) and [dated handoffs](handoffs/) preserve design history. Their earlier “next” and publication statements are snapshots. The [six-act programme](specs/49-six-act-curriculum.md) and [26 strand pathways](six-act-strands.md) describe the teaching and story horizon, not a release schedule or completed course.
+
+## Play-first plan · 2026-11-09 · current
+
+The owner set this plan on 2026-11-09 after a review of how the game plays, and admitted it to the fleet backlog on 2026-11-10 as cards LG-75 to LG-88 (lane `play-first`). It decides what is built next. The earlier queues on this page are paused and kept as a record.
+
+This section is written from the fleet cards and from the review answer the plan came from. The plan document itself was not available to the session that wrote it, so the cards are the authority where this text and a card differ.
+
+**What changes.** Work starts from play that explorers choose. A *round* is the unit of play: somebody asks, the explorer makes it by hand, and the world reacts. A *toy* is one screen that is played round after round. Toys begin as throwaway prototypes with no spec and no saved state. A toy earns a spec only after explorers have asked for it again at home. Content for a chosen toy arrives as *packs*, and packs keep spec, review and receipt. The existing bounded activities are called *benches* here.
+
+### Moratorium
+
+No new benches and no new specs of the earlier kind until one toy has passed the home test in Phase 1 (card LG-81). That covers the consolidation priorities, the consolidation lanes, the earlier build queue, the owner priority order and the next build queue below. The moratorium names new benches and new specs. Bug fixes, review repairs and publication in the [release and maintenance queue](#release-and-maintenance-queue) are not named by it.
+
+### Phases and gates
+
+Each phase waits on the gate in its last column. Cards marked *owner* are done at home by the owner; their notes and tallies stay private and out of this repository.
+
+| Phase | Card | Work | Who | Gate |
+| --- | --- | --- | --- | --- |
+| 0 · Groundwork | LG-75 | Record this plan here and pause the earlier queues. | Claude | None. |
+| 0 | LG-76 | Favourites audit: what each explorer already asks to do again. One watched session per explorer on the physical iPad, which doubles as the outstanding physical iPad check. | Owner | None. |
+| 0 | LG-77 | Kitchen-table paper tests, each for up to three days: fussy dragon, shoebox post, fridge map, daily strip. Anything asked for again goes forward to a prototype. | Owner | None. |
+| 0 | LG-78 | Four to six throwaway one-screen toy prototypes that meet the play budget, plus a rotating five-tile front door of existing activities as the control. Reachable on the iPad, no specs, no saved state, removable after Phase 1. Candidates on the card: a drag-to-count café with a scoop tool, fail-funny plates, a captain-and-pilot card, an overnight visitor rule, a plank bridge. | Codex | Owner decides where prototypes live. The card recommends a separate `#play` area on the same site, outside the spec rule, removed after Phase 1. |
+| 0 | LG-79 | The play budget as an automated check for prototype pages. | Claude | None. |
+| 0 | LG-80 | A play receipt template, a printable tally sheet for each explorer, and the Phase 1 decision rules. | Claude | The owner approves the decision rules before Phase 1 starts. |
+| 1 · Free-choice fortnight | LG-81 | Fourteen days with a fixed free slot in which nobody suggests anything. The tally is kept, the favourite is put away for two days near the end, and the survivor is decided by the written rules. Days 1 to 3 measure novelty; read days 4 to 10. | Owner | LG-78 and LG-80. |
+| 2 · Build around the survivor | LG-82 | Rebuild the surviving toy under a reviewed spec with saved state, sound, an accessible button path and offline play. | Codex | LG-81. |
+| 2 | LG-83 | The day loop around that toy: open, a few rounds, place what was made in the town, a short story strip, sleep. One week of home tally afterwards. Story becomes the source of requests and a short closing strip. | Claude | LG-81. |
+| 2 | LG-84 | A content pack format for the toy and a first pack. Misconceptions from card LG-63 become funny consequences inside the fiction. | Codex | LG-81. |
+| 3 · Widen | LG-85 | A spec for sending made things between two explorers' towns on one device, with private records and nothing comparable across explorers. | Claude | Owner decides whether towns may trade, which changes [spec 120](specs/120-keeper-of-the-ways.md)'s single-player, separate-towns rule. The shoebox post in LG-77 is tried first. |
+| 3 | LG-86 | A daily page chosen by the device date: a pre-authored visitor, a dare from Bramble and a story strip. Nothing is lost by missing a day. | Claude | LG-83. |
+| 3 | LG-87 | The benches move behind a grown-up library door for a short parent-led slot. Home shows the toys. | Codex | LG-81. |
+| 3 | LG-88 | A second toy, picked only from what explorers asked for, then run through the same prototype and tally test. | Claude | LG-83. |
+
+Card LG-81 proposed 14 to 27 November for Phase 1. Phase 0 was still open on 2026-11-15, so those dates will move.
+
+### Play budget
+
+Every prototype meets these six lines (cards LG-78 and LG-79):
+
+1. Something moves under a finger within 5 seconds of opening.
+2. At most 12 words are on screen before the first touch.
+3. No select elements are on a child's screen.
+4. Every action makes a sound.
+5. A wrong move shows a consequence within 1 second.
+6. A round ends within 2 minutes.
+
+The check script for these lines is proposed in [PR530](https://github.com/anotherpanacea-eng/learning-garden/pull/530). It reports what it cannot tell: it does not hear the sound and it does not measure how long a child takes.
+
+### Play receipt and decision rules
+
+A play receipt sits beside the release receipt and says what an explorer does with the thing that was built. The template, the tally sheet and the Phase 1 keep or drop rules are proposed in [PR529](https://github.com/anotherpanacea-eng/learning-garden/pull/529). The rules are a proposal until the owner approves them.
 
 ## Guide errands and story chapters · November 8 release
 
@@ -265,6 +317,8 @@ The bounded Field Journal P1 comparison is now merged and live through its [rele
 
 ## Consolidation priorities · current order
 
+> **Paused by the [play-first plan](#play-first-plan--2026-11-09--current) of 2026-11-09.** This section is kept as the record of the earlier order. Start no new work from it while the moratorium holds. The physical iPad check in row 1 continues through card LG-76.
+
 Owner-approved order after the 2026-10-29 app review. This section supersedes the older “next” ordering below for the next bounded work. On 2026-10-30 the owner lifted PR255’s hold and authorized current-main integration, review repairs, merge and deployment, then resumed building through November 2. Release verification remains required; this authorization is not a release receipt. [PR254](https://github.com/anotherpanacea-eng/learning-garden/pull/254), the whole mill film, has its hold lifted. It is now merged and live; the release record above owns acceptance.
 
 | Order | Deliverable | Acceptance and limits | Status |
@@ -278,6 +332,8 @@ Owner-approved order after the 2026-10-29 app review. This section supersedes th
 **Save repair contract:** compare the saved notebook/settings with the exact copy this tab observed before replacing or deleting them. A detected change pauses writes in this tab, keeps its work in memory and offers Notes download before reload. No automatic merge, new save schema or cross-device sync. These optimistic checks address already-stale tabs; localStorage is not an atomic cross-tab transaction, so keep one tab open per explorer. A future requirement for guaranteed simultaneous writes needs a separate storage design. Review this boundary alongside the regression evidence before landing.
 
 ### Next consolidation lanes · 2026-10-30
+
+> **Paused by the [play-first plan](#play-first-plan--2026-11-09--current) of 2026-11-09.** This section is kept as the record of the earlier order. Start no new work from it while the moratorium holds.
 
 Owner-approved on 2026-10-30 after a whole-app coherence review. Rows 1–3 above are delivered or ongoing (physical iPad checks continue). These four lanes order the next bounded work under rows 4 and 5. Lanes A–C can run in parallel; each step still needs its own spec or review, custody and release receipt. Linear work in 312/313 and the plural-label slice in 314 already serve row 4.
 
@@ -305,6 +361,8 @@ The [audience proposal](audience-presentation.md) separates Storybook/Field Jour
 **Current delivery:** [PR174](https://github.com/anotherpanacea-eng/learning-garden/pull/174) delivered independent subject entry and20 connected lessons, with [its release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/174#issuecomment-6402259709) recording538 matching assets and1,118 hosted Chrome assertions. [PR183](https://github.com/anotherpanacea-eng/learning-garden/pull/183) merged and deployed [222](specs/222-revisiting-subject-units.md)–[226](specs/226-changing-french-errands.md): fresh, responsive returns within all four units. Its [release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/183#issuecomment-6404734381) records542 matching assets,174 source suites and1,558 hosted browser assertions, with the English test’s explorer-chooser wait correction stated explicitly. They use local subject-specific practice evidence and open alternatives; they do not place a learner or certify mastery. Count Collection, Sentence Bridges and Cartographer’s Table remain later candidates, chosen for a named course need. Act II and optional later arrivals are delivered; the next act needs its own bounded commission. [237](specs/237-storm-source-pair.md), the fictional storm-record pair, is delivered through PR184; [238](specs/238-lantern-codes.md), Lantern Codes, is delivered through PR185. [239](specs/239-which-hat.md), the six-hat description/revision loop, is delivered through [PR187](https://github.com/anotherpanacea-eng/learning-garden/pull/187). [Hundred Cups (spec240)](specs/240-hundred-cups.md) is delivered through [PR188](https://github.com/anotherpanacea-eng/learning-garden/pull/188), with [its release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/188#issuecomment-6407955726) recording555 matching assets and6,135 affected hosted assertions. Its water-share diagrams distinguish the all-water whole from a freshwater-only whole. [Equality Desk (spec241)](specs/241-equality-desk.md) is delivered through [PR189](https://github.com/anotherpanacea-eng/learning-garden/pull/189), with [its release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/189#issuecomment-6408475705) recording559 matching assets and1,881 affected hosted assertions. The next bounded case is [The Town Record (spec242)](specs/242-town-record.md): choose measurement methods, collect simulated time samples, distinguish zero/missing and write a record protocol. It is delivered through [PR190](https://github.com/anotherpanacea-eng/learning-garden/pull/190); [its release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/190#issuecomment-6409743735) records563 matching assets and1,230 affected hosted assertions, including the corrected Desk-test readiness wait. [The Borrowed Sorting Machine (spec243)](specs/243-borrowed-sorter.md) is delivered through [PR193](https://github.com/anotherpanacea-eng/learning-garden/pull/193); [its release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/193#issuecomment-6411339393) records 567 matching hosted assets and 1,224 affected hosted assertions. Its sixteen finite profiles contrast feature/example choices without claiming unseen-data performance. [Room for the River (spec245)](specs/245-room-for-river.md) is delivered through [PR199](https://github.com/anotherpanacea-eng/learning-garden/pull/199), separating documented Dutch history from invented geometry. [The ledger and the rain gauge (spec246)](specs/246-ledger-gauge.md) is delivered through [PR200](https://github.com/anotherpanacea-eng/learning-garden/pull/200#issuecomment-6415649110), with 575 matching assets, 183 source suites and 2,000 affected hosted browser assertions. [The message and the water (spec247)](specs/247-message-and-water.md) is delivered through [PR204](https://github.com/anotherpanacea-eng/learning-garden/pull/204#issuecomment-6455250707), connecting clock/day labels, constant-rate journeys, selected records and a revisable note. Its release records 579 matching assets, 184 source suites and 3,458 affected hosted browser assertions. [A Town of Our Own (spec248)](specs/248-a-town-of-our-own.md) is delivered through [PR206](https://github.com/anotherpanacea-eng/learning-garden/pull/206#issuecomment-6459722064), connecting explicit story offers from four existing activities to a celebration, Page2 and an English upstream letter. Its release records583 matching assets,185 source suites and1,037 affected hosted assertions. The larger draft packs remain authoring proposals; additional cases do not complete the course.
 
 ## Earlier build queue · 2026-10-29
+
+> **Paused by the [play-first plan](#play-first-plan--2026-11-09--current) of 2026-11-09.** This section is kept as the record of the earlier order. Start no new work from it while the moratorium holds.
 
 **Owner steering: use the existing films and animations.** [299 · Town film](specs/299-town-film.md) adds optional native video at the delivered ActII celebration through [PR240](https://github.com/anotherpanacea-eng/learning-garden/pull/240); [PR241](https://github.com/anotherpanacea-eng/learning-garden/pull/241) addresses hosted seeking with an explicit bounded download and local media source. Their release receipts own canonical acceptance, separately from implementation. **Delivered through PR252/253: [308 · The Mill’s Energy Book](specs/308-mill-energy-book.md)**, a controllable single-batch energy-transfer loop. Its separate whole-film integration PR254 is released in the reviewed batch above; its former hold is lifted. 305/306operations and the full corrected307lifting film are live through PR249–251; the307[release receipt](https://github.com/anotherpanacea-eng/learning-garden/pull/251#issuecomment-6507775311) records691matching hosted files before519native assertions. Rhythm300 and finite science integrations301–304 have delivery receipts below. The broader eighth-note composer remains a separate later extension. Next are the bounded science pairings below. Then use finite science integrations/extensions in Water Lab, Lantern Circuit and Bell Studio, and build the simple-machines/energy operations the ramp/lever and mill films need. Later story films remain attached to actual chapter endings, with reveals preserved. The [media integration order](motion-film-integration.md#owner-requested-media-integration-turn--2026-10-29) separates assets already made from teaching and runtime work still needed. This bounded owner-requested turn takes precedence over another unrelated bench; it does not clear whole proposed packs or replace the long-term priorities.
 
@@ -341,6 +399,8 @@ The following table records the earlier execution order and delivery history; us
 The dated pause handoff below remains historical. This queue supersedes its stop instruction, not its preservation, privacy or review requirements. Existing draft packs are not bulk-merged or treated as playable because they appear in the queue.
 
 ## Owner priorities, in order
+
+> **Paused by the [play-first plan](#play-first-plan--2026-11-09--current) of 2026-11-09.** This section is kept as the record of the earlier order. Start no new work from it while the moratorium holds. AGENTS.md sends agents here to choose what goes next; while the pause holds, the play-first cards go next.
 
 Set by the owner on 2026-10-24, with the explicit subject-pathway build commissioned on 2026-10-25 taking precedence over the earlier bench order. **When choosing what to work on next, take the lowest-numbered priority below that has work ready, that is, work not waiting on review or an owner answer.** A later-numbered priority does not wait for an earlier one to be finished; it waits only while the earlier one has ready work. Bug fixes, review repairs and publication (the [release and maintenance queue](#release-and-maintenance-queue)) are never blocked by this order.
 
@@ -404,6 +464,8 @@ The first selected slice, delivered through [PR184](https://github.com/anotherpa
 The next bounded commission is [Hundred Cups (spec240)](specs/240-hundred-cups.md), adapted from [draft PR178](https://github.com/anotherpanacea-eng/learning-garden/pull/178)'s water-distribution model. Children build diagrams for changing reader requests and compare two nested wholes; the rounded models close internally, without adding a tiny river/lake share on top of an already complete total. Six independent spec lenses and primary science/model checks are clear; the bounded runtime is implemented. The owning PR records exact-head Claude clearance and verified publication. This is partial science/data/share work, not the whole Water and Air pack, a practical water test or a pie-chart construction course. Diet sorting and Branching Tree remain additional focused candidates; Act II and optional later arrivals are delivered; the next act needs its own bounded commission.
 
 ### Next build queue
+
+> **Paused by the [play-first plan](#play-first-plan--2026-11-09--current) of 2026-11-09.** This section is kept as the record of the earlier order. Start no new work from it while the moratorium holds.
 
 The next candidate for each priority is below. Take the earliest **ready** priority; a blocked slice yields as described above. Each row’s finite contract is reviewed before it is built.
 
