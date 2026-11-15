@@ -35,6 +35,15 @@ The roadmap's goal IDs, LG-G1 to LG-G5 in
 D of the next consolidation lanes serve LG-G3, LG-G2, LG-G1 and LG-G4. A new
 card names its goal; a card without one is maintenance.
 
+While the [play-first plan](docs/roadmap.md#play-first-plan--2026-11-09--current)
+is current, its cards (LG-75 to LG-88) come first and the roadmap marks the
+goal order above as paused. The throwaway toy prototypes of fleet card LG-78
+are exempt from the spec-before-code rule under "Specs and review": the card,
+admitted by the owner, says "no specs, no saved state, removable after
+Phase 1". Fleet custody, the independent review of each build, the privacy
+rules and the landing procedure still apply to them. Where the prototypes live
+is LG-78's open gate, for the owner to answer.
+
 ## Who does what
 
 Codex, on the owner's machine, lands work here: it merges and deploys. Claude
