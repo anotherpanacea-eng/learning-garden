@@ -1,6 +1,6 @@
 """Play budget check for a one-screen toy prototype (fleet card LG-79).
 
-    python3 test/play-budget-browser.py                    # self-check on the two fixtures
+    python3 test/play-budget-browser.py                    # self-check on the fixtures
     python3 test/play-budget-browser.py path/to/walk.json  # check one page
 
 The six budget lines:
@@ -20,13 +20,15 @@ JSON file naming the first thing to drag, one wrong move and one whole round.
      "round": {"steps": [{"drag": "#berry-2", "to": "#plate"}, {"tap": "#bell"}],
                "ends": "#thanks"}}
 
-"page" is a path from the repository root (a "#route" may follow it). A step is
-{"tap": selector} or {"drag": selector, "to": selector}, with CSS selectors.
-"first" must be a drag. Steps run in the order first, wrong, round, with touch
-input in headless Chrome at 1024 by 768.
+"page" is a path from the repository root (a "?query" or "#route" may follow
+it). A step is {"tap": selector} or {"drag": selector, "to": selector}, with
+CSS selectors. "first" must be a drag. The page is left untouched for 3 s while
+its words are counted. Then the steps run once each, in the order first, wrong,
+round, with touch input in headless Chrome at 1024 by 768.
 
 A line the walk gives no steps for is reported NOT CHECKED. The run passes only
-when all six lines pass.
+when all six lines pass. A pass means these automated checks passed; the output
+ends with what they cannot tell.
 
 Uses Python Playwright with CHROME_PATH, installed Chrome on macOS, or
 Playwright's Chromium, like the other browser suites.
@@ -54,16 +56,17 @@ LINES = ['Something moves under a finger within 5 s',
          'A round ends within 2 min']
 
 LIMITS = """What this run cannot tell you:
-  - First touch: the script drags the first thing as soon as it is on screen,
-    and again until it follows the finger or 5 s have passed. A pass means the
-    page can be moved inside 5 s, not that a child finds what to touch.
-  - Words: it counts visible text after the page has sat untouched for 5 s.
-    Words in a picture, a canvas, a form field or CSS-generated content are
-    missed.
-  - Selects: it fails on a select element that is showing on the untouched
-    page or after any step of the walk. A hidden select is reported but does
-    not fail; one that only a step outside the walk would reveal is missed.
-    Other dropdown-like controls are not detected.
+  - First touch: the script leaves the page alone for 3 s, then drags the
+    first thing once. A pass means the thing followed the finger for at least
+    half the drag, no later than 5 s after opening. It does not mean a child
+    finds what to touch.
+  - Words: it counts the most visible words at any look during those 3 s,
+    looking ten times a second. Words in a picture, a canvas, a form field or
+    CSS-generated content are missed.
+  - Selects: it fails on a select element that is showing just before the
+    first touch or after any step of the walk. A hidden select is reported
+    but does not fail; one that only a step outside the walk would reveal is
+    missed. Other dropdown-like controls are not detected.
   - Sound: it sees the page ask the browser to start a sound (Web Audio, an
     audio or video element, or speech) no later than 1 s after the finger
     lifts. The 1 s is this script's choice; the budget line names no time. It
@@ -77,63 +80,55 @@ LIMITS = """What this run cannot tell you:
     inside 2 min, including the page's own waits. A child's time is not measured."""
 
 # Runs before the page's own scripts. Notes, on the page's clock, each request
-# to start a sound, the first touch and the latest moment a finger lifted.
-SPY = """
-window.__play = {sounds: [], first: null, lift: 0};
+# to start a sound, the first touch and the latest moment a finger lifted, and
+# keeps the most words seen on screen before the first touch.
+SPY = r"""
+window.__play = {sounds: [], first: null, lift: 0, words: 0};
 (() => {
+  const play = window.__play;
   const spy = (proto, method) => {
     if (!proto || !Object.hasOwn(proto, method)) return;
     const original = proto[method];
-    proto[method] = function (...args) { window.__play.sounds.push(performance.now()); return original.apply(this, args); };
+    proto[method] = function (...args) { play.sounds.push(performance.now()); return original.apply(this, args); };
   };
   for (const name of ['AudioScheduledSourceNode', 'AudioBufferSourceNode', 'OscillatorNode', 'ConstantSourceNode'])
     spy(window[name] && window[name].prototype, 'start');
   spy(window.HTMLMediaElement && HTMLMediaElement.prototype, 'play');
   spy(window.SpeechSynthesis && SpeechSynthesis.prototype, 'speak');
-  addEventListener('touchstart', () => { window.__play.first ??= performance.now(); }, true);
+  const showing = element => element.checkVisibility({checkOpacity: true, checkVisibilityCSS: true});
+  // How many elements matching the selector are showing.
+  play.showing = selector => [...document.querySelectorAll(selector)].filter(showing).length;
+  // Counts the words on screen now. Returns the most seen at any look so far.
+  play.look = () => {
+    const walker = document.body && document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+    let words = 0;
+    for (let node; walker && (node = walker.nextNode());) {
+      const parent = node.parentElement;
+      if (!parent || parent.closest('script,style,noscript,template') || !showing(parent)) continue;
+      words += (node.textContent.match(/[\p{L}\p{N}]+(?:['’-][\p{L}\p{N}]+)*/gu) || []).length;
+    }
+    return play.words = Math.max(play.words, words);
+  };
+  const looking = setInterval(play.look, 100);
+  addEventListener('touchstart', () => { play.first ??= performance.now(); clearInterval(looking); }, true);
   for (const type of ['touchend', 'touchcancel'])
-    addEventListener(type, () => { window.__play.lift = performance.now(); }, true);
+    addEventListener(type, () => { play.lift = performance.now(); }, true);
 })();
 """
 
-SHOWING = "element => element.checkVisibility({checkOpacity: true, checkVisibilityCSS: true})"
+COUNT_SELECTS = "[window.__play.showing('select'), document.querySelectorAll('select').length]"
 
-COUNT_WORDS = """() => {
-  const showing = %s;
-  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
-  let words = 0;
-  for (let node; (node = walker.nextNode());) {
-    const parent = node.parentElement;
-    if (!parent || parent.closest('script,style,noscript,template') || !showing(parent)) continue;
-    words += (node.textContent.match(/[\\p{L}\\p{N}]+(?:['’-][\\p{L}\\p{N}]+)*/gu) || []).length;
-  }
-  return words;
-}""" % SHOWING
-
-COUNT_SELECTS = """() => {
-  const showing = %s;
-  const all = [...document.querySelectorAll('select')];
-  return [all.filter(showing).length, all.length];
-}""" % SHOWING
-
-IS_SHOWING = """selector => {
-  const showing = %s;
-  const element = document.querySelector(selector);
-  return !!element && showing(element);
-}""" % SHOWING
-
-# Resolves with the ms from `since` to the moment the selector showed, or null
-# once `limit` ms have passed.
+# Resolves with the ms from `since` to the moment the selector was seen showing,
+# however late that is, or with null once `limit` ms have passed without it.
 WHEN_SHOWN = """([selector, since, limit]) => new Promise(resolve => {
-  const showing = %s;
   const look = () => {
-    const element = document.querySelector(selector), now = performance.now();
-    if (element && showing(element)) resolve(now - since);
+    const now = performance.now();
+    if (window.__play.showing(selector)) resolve(now - since);
     else if (now > since + limit) resolve(null);
     else setTimeout(look, 10);
   };
   look();
-})""" % SHOWING
+})"""
 
 # Resolves true when a sound started after sound number `from` and no later
 # than 1 s after the finger lifted.
@@ -183,29 +178,25 @@ def name_of(step):
     return f"tap {step['tap']}" if 'tap' in step else f"drag {step['drag']}"
 
 
-def check(walk_path, base, browser):
+def check(walk, base, browser):
     """Play one walk. Returns six (status, detail) pairs in the order of LINES."""
-    walk = json.loads(Path(walk_path).read_text())
     first = walk.get('first')
     if first and not ('drag' in first and 'to' in first):
-        sys.exit(f'{walk_path}: "first" must be {{"drag": selector, "to": selector}}')
+        sys.exit(f'{walk["page"]}: "first" must be {{"drag": selector, "to": selector}}')
     results = [('NOT CHECKED', 'the walk has no steps for this line')] * 6
     context = browser.new_context(viewport={'width': 1024, 'height': 768}, has_touch=True)
     context.add_init_script(SPY)
-    silent, actions = [], []
-    selects = {'showing': 0, 'all': 0}
+    silent, actions, selects, stopped = [], [], [0, 0], None
 
-    def look_for_selects(page):
-        showing, found = page.evaluate(COUNT_SELECTS)
-        selects['showing'] = max(selects['showing'], showing)
-        selects['all'] = max(selects['all'], found)
+    def look_for_selects():
+        selects[:] = map(max, selects, page.evaluate(COUNT_SELECTS))
 
-    def act(step):
+    def act(step, during=None):
         """Do a step. Returns how many sounds had started before it."""
         before = page.evaluate('window.__play.sounds.length')
-        do_step(page, cdp, step)
+        do_step(page, cdp, step, during)
         actions.append(step)
-        look_for_selects(page)
+        look_for_selects()
         return before
 
     def listen(step, before):
@@ -213,86 +204,69 @@ def check(walk_path, base, browser):
         if not page.evaluate(HEARD, before):
             silent.append(name_of(step))
 
-    def first_drag():
-        """Drag the first thing until it follows the finger or 5 s have passed since opening."""
-        before = page.evaluate('window.__play.sounds.length')
-        mover = page.locator(first['drag']).first
-        seen = {}
+    def timed(selector, since, limit, what):
+        """Pass when the selector showed no later than `limit` seconds after `since`."""
+        took = page.evaluate(WHEN_SHOWN, [selector, since, limit * 1000])
+        if took is None:
+            return 'FAIL', f'{selector} did not show within {limit} s of {what}'
+        return 'PASS' if took <= limit * 1000 else 'FAIL', f'{selector} showed {max(0, took) / 1000:.2f} s after {what}'
+
+    def play():
+        mover, seen = page.locator(first['drag']).first, {}
 
         def measure(start, end):
             box = mover.bounding_box()
-            left = math.dist((box['x'] + box['width'] / 2, box['y'] + box['height'] / 2), end)
             seen['drag'] = math.dist(start, end)
-            seen['followed'] = seen['drag'] - left
+            seen['followed'] = seen['drag'] - math.dist((box['x'] + box['width'] / 2, box['y'] + box['height'] / 2), end)
             seen['at'] = page.evaluate('performance.now()') / 1000
 
-        while True:
-            do_step(page, cdp, first, measure)
-            if seen['drag'] < 50:
-                raise WalkStop(f"{first['drag']} is already at {first['to']}, so the drag is too short to judge")
-            if seen['followed'] >= seen['drag'] / 2 or seen['at'] > 5:
-                break
-            page.wait_for_timeout(250)
-        actions.append(first)
-        look_for_selects(page)
-        detail = f"it followed the finger {max(0, seen['followed']):.0f} of {seen['drag']:.0f} px, {seen['at']:.1f} s after opening"
-        results[0] = ('PASS' if seen['followed'] >= seen['drag'] / 2 and seen['at'] <= 5 else 'FAIL', detail)
+        before = act(first, measure)
+        # Half the finger's travel, and more than 3 px so that jitter is not movement.
+        moved = seen['followed'] >= max(seen['drag'] / 2, 3)
+        results[0] = ('PASS' if moved and seen['at'] <= 5 else 'FAIL',
+                      f"it followed the finger {max(0, seen['followed']):.0f} of {seen['drag']:.0f} px, "
+                      f"seen {seen['at']:.1f} s after opening")
         listen(first, before)
-
-    def play():
-        first_drag()
         wrong = walk.get('wrong')
         if wrong:
-            if page.evaluate(IS_SHOWING, wrong['shows']):
+            if page.evaluate('window.__play.showing', wrong['shows']):
                 results[4] = ('FAIL', f"{wrong['shows']} was already on screen before the wrong move")
             else:
                 for step in wrong['steps'][:-1]:
                     listen(step, act(step))
                 last = wrong['steps'][-1]
                 before = act(last)
-                took = page.evaluate(WHEN_SHOWN, [wrong['shows'], page.evaluate('window.__play.lift'), 1000])
-                results[4] = ('FAIL', f"{wrong['shows']} did not show within 1 s of the wrong move") if took is None else \
-                             ('PASS', f"{wrong['shows']} showed {max(0, took) / 1000:.2f} s after the wrong move")
+                results[4] = timed(wrong['shows'], page.evaluate('window.__play.lift'), 1, 'the wrong move')
                 listen(last, before)
         round_ = walk.get('round')
         if round_:
-            if page.evaluate(IS_SHOWING, round_['ends']):
+            if page.evaluate('window.__play.showing', round_['ends']):
                 results[5] = ('FAIL', f"{round_['ends']} was already on screen before the round was played")
             else:
                 for step in round_['steps']:
+                    if page.evaluate('performance.now() - window.__play.first') > 120000:
+                        break
                     listen(step, act(step))
-                took = page.evaluate(WHEN_SHOWN, [round_['ends'], page.evaluate('window.__play.first'), 120000])
-                results[5] = ('FAIL', f"{round_['ends']} did not show within 2 min of the first touch") if took is None else \
-                             ('PASS', f"{round_['ends']} showed {took / 1000:.1f} s after the first touch, "
-                                      f'{len(actions)} actions at machine speed')
+                status, detail = timed(round_['ends'], page.evaluate('window.__play.first'), 120, 'the first touch')
+                results[5] = (status, f'{detail}, {len(actions)} actions at machine speed')
 
     try:
-        # What the screen holds when nobody touches it for 5 s.
-        idle = context.new_page()
-        response = idle.goto(base + walk['page'])
+        page = context.new_page()
+        cdp = context.new_cdp_session(page)
+        response = page.goto(base + walk['page'])
         if not response.ok:
-            sys.exit(f"{walk_path}: {walk['page']} did not load (HTTP {response.status})")
-        idle.wait_for_timeout(5000)
-        words = idle.evaluate(COUNT_WORDS)
-        results[1] = ('PASS' if words <= 12 else 'FAIL', f'{words} words on screen')
-        look_for_selects(idle)
-        idle.close()
-
-        stopped = None
+            sys.exit(f"{walk['page']} did not load (HTTP {response.status})")
+        page.wait_for_timeout(max(0, 3000 - page.evaluate('performance.now()')))
+        look_for_selects()
+        words = page.evaluate('window.__play.look()')
+        results[1] = ('PASS' if words <= 12 else 'FAIL', f'up to {words} words on screen before the first touch')
         if first:
-            page = context.new_page()
-            cdp = context.new_cdp_session(page)
-            page.goto(base + walk['page'])
             try:
-                centre(page, first['drag'], int(5000 - page.evaluate('performance.now()')))
-            except WalkStop:
-                results[0] = ('FAIL', f"{first['drag']} was not on screen within 5 s of opening")
-                stopped = 'nothing was there to touch'
-            else:
-                try:
-                    play()
-                except WalkStop as stop:
-                    stopped = str(stop)
+                play()
+            except WalkStop as stop:
+                stopped = str(stop)
+                if not actions:
+                    results[0] = ('FAIL', f'nothing could be dragged: {stopped}')
         if silent:
             results[3] = ('FAIL', 'no sound after: ' + ', '.join(silent))
         elif actions and not stopped:
@@ -300,15 +274,14 @@ def check(walk_path, base, browser):
         if stopped:
             results = [('NOT CHECKED', f'the walk stopped first: {stopped}') if status == 'NOT CHECKED' else (status, detail)
                        for status, detail in results]
-        results[2] = ('FAIL' if selects['showing'] else 'PASS',
-                      f"{selects['showing']} showing, {selects['all'] - selects['showing']} hidden in the page")
+        results[2] = ('FAIL' if selects[0] else 'PASS', f'{selects[0]} showing, {selects[1] - selects[0]} hidden in the page')
     finally:
         context.close()
     return results
 
 
-def report(walk_path, results):
-    print(f'\nPlay budget: {walk_path}')
+def report(name, results):
+    print(f'\nPlay budget: {name}')
     for number, (line, (status, detail)) in enumerate(zip(LINES, results), 1):
         print(f'  {status:<11} {number}. {line}: {detail}')
 
@@ -328,22 +301,31 @@ def main():
         browser = pw.chromium.launch(**options)
         try:
             if len(sys.argv) > 1:
-                results = check(sys.argv[1], base, browser)
+                results = check(json.loads(Path(sys.argv[1]).read_text()), base, browser)
                 report(sys.argv[1], results)
                 passed = all(status == 'PASS' for status, _ in results)
                 print('\n' + LIMITS)
-                print('\nPlay budget met.' if passed else '\nPlay budget not met.')
+                print('\nAutomated checks passed.' if passed else '\nAutomated checks did not all pass.')
             else:
-                # Self-check: the toy fixture meets every line; the workbook fixture
-                # fails lines 1 to 5 and gives no round, so line 6 stays unchecked.
-                toy = check(FIXTURES / 'toy.walk.json', base, browser)
-                report('test/fixtures/play-budget/toy.walk.json', toy)
-                workbook = check(FIXTURES / 'workbook.walk.json', base, browser)
-                report('test/fixtures/play-budget/workbook.walk.json', workbook)
-                passed = [status for status, _ in toy] == ['PASS'] * 6 and \
-                    [status for status, _ in workbook] == ['FAIL'] * 5 + ['NOT CHECKED']
+                # Self-check. Each case names the result expected on lines 1 to 6:
+                # P for PASS, F for FAIL, N for NOT CHECKED. The toy takes one fault
+                # at a time from its query string.
+                toy = json.loads((FIXTURES / 'toy.walk.json').read_text())
+                cases = [
+                    ('toy', toy, 'PPPPPP'),
+                    ('workbook', json.loads((FIXTURES / 'workbook.walk.json').read_text()), 'FFFFFN'),
+                    ('toy, 40 px drag only', {'page': toy['page'], 'first': {'drag': '#berry-1', 'to': '#berry-1 i'}}, 'PPPPNN'),
+                    ('toy?intro (a sentence that leaves after 2 s)', {**toy, 'page': toy['page'] + '?intro'}, 'PFPPPP'),
+                    ('toy?hush (only the first touch sounds)', {**toy, 'page': toy['page'] + '?hush'}, 'PPPFPP'),
+                    ('toy?late (the wrong ring is answered after 1.2 s)', {**toy, 'page': toy['page'] + '?late'}, 'PPPPFP'),
+                ]
+                passed = True
+                for name, walk, expected in cases:
+                    results = check(walk, base, browser)
+                    report(f'{name}, expecting {expected}', results)
+                    passed = passed and ''.join(status[0] for status, _ in results) == expected
                 print('\n' + LIMITS)
-                print('\nSelf-check passed: the toy meets the budget and the workbook is caught on lines 1 to 5.'
+                print('\nSelf-check passed: every fixture case got the expected results.'
                       if passed else '\nSelf-check FAILED: the fixtures did not get the expected results.')
         finally:
             browser.close()
